@@ -25,7 +25,7 @@
 <style>/* ===== Red Sea Business Launch — core styles ===== */
 :root{
   --navy:#062B57; --navy-2:#033B76; --navy-3:#0E5AA5; --sky:#017CC9;
-  --coral:#D0202A; --coral-d:#AC1620;
+  --coral:#D0202A; --coral-d:#AC1620; --art-ac:#FF7A6E;
   --sand:#F7F3EC; --sand-2:#EFE7DA;
   --bg:#FFFFFF; --ink:#12212F; --muted:#5B6B7C; --line:#E3E8EE;
   --card:#FFFFFF; --shadow:0 1px 2px rgba(11,37,69,.06),0 8px 24px rgba(11,37,69,.07);
@@ -58,7 +58,7 @@
 :root[data-theme="dark"] input,:root[data-theme="dark"] select,
 :root[data-theme="dark"] textarea{background:#0D1B2E;border-color:var(--line);color:var(--ink)}
 :root[data-theme="dark"] .btn-out{border-color:#2A466B;color:var(--ink)}
-:root[data-theme="dark"] .form,:root[data-theme="dark"] .ph-lg,
+:root[data-theme="dark"] .form,
 :root[data-theme="dark"] .filters select,:root[data-theme="dark"] .deal{background:var(--card)}
 
 :root[data-theme="dark"] .tag{background:#1A3050;color:#BDD0E4}
@@ -623,15 +623,29 @@ td.num,th.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 14px)}
 .ph::after{content:"";position:absolute;right:-58px;bottom:-84px;width:210px;height:210px;
   border-radius:50%;border:1px solid rgba(255,255,255,.12);pointer-events:none}
-.ph>div{position:relative;z-index:1;max-width:88%}
-.ph .ico{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 12px;
-  border-radius:13px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.17)}
+.ph .art{position:absolute;inset-inline:0;top:6%;margin:0 auto;display:block;
+  width:76%;height:auto;z-index:1;overflow:visible;
+  transition:transform .6s cubic-bezier(.2,.72,.28,1)}
+.ph .art .ln,.ph .art .ac{fill:none;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke}
+.ph .art .ln{stroke:rgba(255,255,255,.50);stroke-width:2}
+.ph .art .ac{stroke:var(--art-ac);stroke-width:2.4}
+.ph .art .ac circle{fill:var(--art-ac);stroke:none}
+.ph .art .dt circle{fill:rgba(255,255,255,.5)}
+.ph-cap{position:absolute;inset-inline:0;bottom:15px;z-index:2;
+  width:88%;margin:0 auto;text-align:center}
+.deal:hover .ph .art,.ph-lg:hover .art{transform:translateY(-4px) scale(1.035)}
 .ph b{display:block;font-size:1.06rem;line-height:1.35}
-.ph .kicker{display:block;margin-top:7px;font-size:.68rem;opacity:.6;
+.ph .kicker{display:block;margin-top:6px;font-size:.68rem;opacity:.6;
   letter-spacing:.14em;font-weight:600}
 .ph-lg{aspect-ratio:4/3;border-radius:var(--r)}
+.ph-lg .art{width:66%;top:22%}
+.ph-lg .ph-cap{bottom:24px}
 .ph-lg b{font-size:1.35rem}
 .ph-lg .kicker{letter-spacing:0;font-size:.82rem;opacity:.7;font-weight:500}
+@media (prefers-reduced-motion:reduce){.ph .art{transition:none}
+  .deal:hover .ph .art,.ph-lg:hover .art{transform:none}}
+@media (max-width:560px){.ph .art,.ph-lg .art{width:64%}}
 .deal .body{padding:20px;display:flex;flex-direction:column;flex:1;gap:10px}
 .deal h3{margin:0;font-size:1.1rem}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -1306,12 +1320,23 @@ const TIERS = ()=>[["all",L("كل المستويات","All levels")],["starter",
 const MKTS  = ()=>[["all",L("كل الأسواق","All markets")],["sa",L("السعودية","Saudi Arabia")],["ae",L("الإمارات","UAE")],["om",L("عُمان","Oman")],["qa",L("قطر","Qatar")],["kw",L("الكويت","Kuwait")],["bh",L("البحرين","Bahrain")],["ye",L("اليمن","Yemen")]];
 const tierTag = t => ({starter:L("مبتدئ","Starter"),growth:L("نمو","Growth"),wholesale:L("جملة","Wholesale")}[t]);
 
-const CAT_ICON = {home:"home",phone:"phone",food:"cup",beauty:"scissors",stationery:"pencil",packaging:"box"};
+/* Hand-drawn line-art scene per category — original SVG, no stock imagery. */
+const ART = {
+  home:`<g class="ln"><path d="M96 150 L96 96 L146 74 L196 96 L196 150 Z"/><path d="M82 96 L146 66 L210 96"/><path d="M130 150 v-30 h32 v30"/><rect x="232" y="112" width="66" height="46" rx="4"/><path d="M232 126 h66"/><path d="M258 112 v-8 h14 v8"/><path d="M316 158 v-40"/><path d="M310 118 q6 -16 12 0"/><ellipse cx="316" cy="160" rx="12" ry="4"/></g><g class="ac"><path d="M232 176 h66"/><circle cx="316" cy="104" r="5"/></g><g class="dt"><circle cx="72" cy="76" r="3"/><circle cx="344" cy="90" r="3"/><circle cx="60" cy="170" r="3"/></g>`,
+  phone:`<g class="ln"><rect x="112" y="60" width="76" height="132" rx="12"/><path d="M138 72 h24"/><path d="M142 180 h16"/><path d="M124 92 h52 v70 h-52 z"/><path d="M236 96 c34 0 34 34 0 34 c-34 0 -34 34 0 34 c22 0 30 -12 30 -12"/><circle cx="308" cy="112" r="17"/><circle cx="308" cy="112" r="6"/><path d="M291 132 q17 26 34 0"/><rect x="286" y="150" width="44" height="22" rx="8"/></g><g class="ac"><path d="M124 92 h52"/><circle cx="266" cy="164" r="5"/></g><g class="dt"><circle cx="84" cy="84" r="3"/><circle cx="352" cy="72" r="3"/><circle cx="92" cy="176" r="3"/></g>`,
+  food:`<g class="ln"><path d="M96 104 h64 v34 a32 32 0 0 1 -64 0 z"/><path d="M160 110 h16 a14 14 0 0 1 0 28 h-16"/><path d="M86 176 h84"/><circle cx="238" cy="140" r="30"/><circle cx="238" cy="140" r="18"/><path d="M300 116 h56 l-8 60 h-40 z"/><path d="M300 130 h56"/><path d="M316 116 v-14 h24 v14"/></g><g class="ac"><path d="M112 78 q6 -14 0 -22"/><path d="M132 78 q6 -14 0 -22"/><circle cx="238" cy="140" r="5"/></g><g class="dt"><circle cx="72" cy="94" r="3"/><circle cx="368" cy="96" r="3"/><circle cx="200" cy="186" r="3"/></g>`,
+  beauty:`<g class="ln"><circle cx="112" cy="164" r="13"/><circle cx="112" cy="112" r="13"/><path d="M124 120 L196 166"/><path d="M196 110 L124 156"/><rect x="228" y="104" width="42" height="70" rx="8"/><path d="M240 104 v-12 h18 v12"/><path d="M228 126 h42"/><ellipse cx="326" cy="122" rx="26" ry="32"/><path d="M326 154 v26"/><path d="M310 180 h32"/></g><g class="ac"><path d="M228 126 h42"/><ellipse cx="326" cy="122" rx="14" ry="18"/></g><g class="dt"><circle cx="82" cy="78" r="3"/><circle cx="366" cy="168" r="3"/><circle cx="176" cy="188" r="3"/></g>`,
+  stationery:`<g class="ln"><path d="M96 96 h72 v84 h-72 z"/><path d="M112 96 v84"/><path d="M126 118 h30"/><path d="M126 134 h30"/><path d="M126 150 h20"/><path d="M212 180 l6 -22 l58 -58 a10 10 0 0 1 16 16 l-58 58 z"/><path d="M266 116 l16 16"/><path d="M312 96 v84"/><path d="M312 96 h26 v84 h-26"/><path d="M312 116 h10"/><path d="M312 136 h10"/><path d="M312 156 h10"/></g><g class="ac"><path d="M212 180 l6 -22 l10 12 z"/><path d="M96 96 h72"/></g><g class="dt"><circle cx="70" cy="112" r="3"/><circle cx="370" cy="104" r="3"/><circle cx="192" cy="88" r="3"/></g>`,
+  packaging:`<g class="ln"><path d="M92 118 l44 -22 l44 22 v50 l-44 22 l-44 -22 z"/><path d="M92 118 l44 22 l44 -22"/><path d="M136 140 v52"/><path d="M214 148 l34 -17 l34 17 v38 l-34 17 l-34 -17 z"/><path d="M214 148 l34 17 l34 -17"/><path d="M248 165 v40"/><circle cx="330" cy="128" r="26"/><circle cx="330" cy="128" r="10"/><path d="M304 128 h-14"/><path d="M356 128 h14"/></g><g class="ac"><path d="M116 108 l40 20"/><path d="M330 160 v22"/><path d="M316 182 h28"/></g><g class="dt"><circle cx="72" cy="92" r="3"/><circle cx="374" cy="180" r="3"/><circle cx="196" cy="94" r="3"/></g>`
+};
 const catName = c => (CATS().find(x=>x[0]===c)||["",""])[1];
+function artScene(cat){
+  const g = ART[cat] || ART.packaging;
+  return `<svg class="art" viewBox="52 48 330 164" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet">${g}</svg>`;
+}
 /* Branded visual used until real shipment photography is published. */
 function phBlock(d,title,sub,cls){
-  return `<div class="ph${cls?" "+cls:""}"><div>
-    <span class="ico">${ICON[CAT_ICON[d.cat]||"box"]}</span>
+  return `<div class="ph${cls?" "+cls:""}">${artScene(d.cat)}<div class="ph-cap">
     <b>${title}</b><span class="kicker">${sub}</span>
   </div></div>`;
 }
