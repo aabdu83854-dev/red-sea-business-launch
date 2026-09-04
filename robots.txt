@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://deals.redseaglobal.com/sitemap.xml
