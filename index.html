@@ -149,20 +149,20 @@ header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
   display:grid;place-items:center;flex:0 0 auto;overflow:hidden;padding:1px}
 .logo .mark img{width:100%;height:100%;object-fit:contain;display:block}
 .logo small{display:block;font-size:.68rem;font-weight:500;color:var(--muted);line-height:1.2}
-nav.main{display:flex;gap:4px;margin-inline-start:auto;align-items:center;flex-wrap:wrap}
-nav.main a{padding:8px 11px;border-radius:8px;font-size:.92rem;font-weight:500;color:#33465C}
+nav.main{display:flex;gap:2px;margin-inline-start:auto;align-items:center;flex-wrap:wrap}
+nav.main a{padding:8px 9px;border-radius:8px;font-size:.9rem;font-weight:500;color:#33465C;white-space:nowrap}
 nav.main a:hover{background:var(--sand);color:var(--navy)}
 nav.main a.on{color:var(--coral);font-weight:600}
 .hd-right{display:flex;gap:8px;align-items:center}
-@media(min-width:1025px){nav.main{margin-inline-end:12px}}
-@media(max-width:1024px){.hd-right{margin-inline-start:auto}}
+@media(min-width:1201px){nav.main{margin-inline-end:12px}}
+@media(max-width:1200px){.hd-right{margin-inline-start:auto}}
 nav.main .hd-cta{margin-inline-start:8px}
 .lang{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;
   font-size:.85rem;font-weight:600;cursor:pointer;color:var(--navy)}
 .lang:hover{border-color:var(--navy)}
 .burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;
   width:42px;height:38px;cursor:pointer;font-size:1.1rem}
-@media(max-width:1024px){
+@media(max-width:1200px){
   .burger{display:block}
   nav.main{display:none;position:absolute;inset-inline:0;top:70px;background:#fff;
     border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:10px 20px 18px;gap:2px;margin:0}
@@ -1115,10 +1115,10 @@ const DISCLAIM = () => `<div class="notice"><strong>${L("تنبيه:","Note:")}<
 
 const NAV = () => [
   ["#/",          L("الرئيسية","Home")],
-  ["#/deals",     L("الصفقات الجاهزة","Ready Deals")],
-  ["#/packages",  L("باقات الإطلاق","Launch Packages")],
-  ["#/calculator",L("حاسبة التكلفة","Cost Calculator")],
-  ["#/about",     L("من نحن","About")],
+  ["#/deals",     L("الصفقات الجاهزة","Deals")],
+  ["#/packages",  L("باقات الإطلاق","Packages")],
+  ["#/calculator",L("حاسبة التكلفة","Calculator")],
+  ["#/compliance",L("الامتثال","Compliance")],
   ["#/faq",       L("الأسئلة الشائعة","FAQ")],
   ["#/contact",   L("تواصل معنا","Contact")]
 ];
@@ -1156,6 +1156,7 @@ function footer(){
       <div><h4>${L("الخدمات","Services")}</h4><ul>
         <li><a href="#/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
         <li><a href="#/packages">${L("باقات الإطلاق","Launch packages")}</a></li>
+        <li><a href="#/compliance">${L("سابر والامتثال","SABER & compliance")}</a></li>
         <li><a href="#/consultation">${L("حجز استشارة","Book a consultation")}</a></li>
         <li><a href="#/qualify">${L("نموذج التأهيل","Qualification form")}</a></li>
       </ul></div>
@@ -1960,6 +1961,218 @@ function pageFaq(){
   </div></section>`;
 }
 
+/* ---------- COMPLIANCE ---------- */
+const CJUR = () => ({
+  sa:{n:L("السعودية","Saudi Arabia"),body:L("الهيئة السعودية للمواصفات والمقاييس والجودة (SASO) عبر منصة سابر","SASO via the SABER platform"),
+    req:[L("تسجيل المنتج في سابر وتحديد اللوائح الفنية المنطبقة","Register the product in SABER and identify the applicable technical regulations"),
+         L("شهادة مطابقة منتج من جهة تقييم معتمدة — صلاحية سنة. أو إقرار ذاتي إن كان المنتج غير خاضع للوائح فنية","A Product CoC from an accredited body — valid one year. Or a self-declaration if the product is not subject to technical regulations"),
+         L("شهادة مطابقة إرسالية لكل شحنة، قبل تقديم البيان الجمركي","A Shipment CoC for every shipment, before the customs declaration is submitted"),
+         L("ملصق عربي مطابق وشهادة منشأ مصدّقة","Compliant Arabic labelling and an attested certificate of origin")],
+    tax:L("جمارك 5% فأكثر على قيمة CIF، ثم ضريبة قيمة مضافة 15% على (CIF + الجمارك). رسوم خدمة جمركية 0.15% من القيمة، بحد أدنى 15 ريالًا وأقصى 500 ريال.","Duty of 5% or more on CIF, then 15% VAT on (CIF + duty). Customs service fee of 0.15% of value, minimum SAR 15 and maximum SAR 500."),
+    rf:L("الأجهزة اللاسلكية: موافقة هيئة الاتصالات والفضاء والتقنية (CST).","Wireless devices: approval from the Communications, Space & Technology Commission (CST).")},
+  ae:{n:L("الإمارات","UAE"),body:L("وزارة الصناعة والتكنولوجيا المتقدمة (MoIAT)","Ministry of Industry and Advanced Technology (MoIAT)"),
+    req:[L("شهادة ECAS للمنتجات المنظَّمة — إلزامية","An ECAS certificate for regulated products — mandatory"),
+         L("علامة الجودة الإماراتية EQM اختيارية وتُستخدم للتمييز التسويقي","The Emirates Quality Mark (EQM) is voluntary and used as a market differentiator"),
+         L("رمز المستورد الجمركي (Business Code) ساري ومطابق للرخصة التجارية","A valid customs Business Code matching the trade licence")],
+    tax:L("جمارك 5% على CIF، وضريبة قيمة مضافة 5%. اربط رقمك الضريبي برمز المستورد الجمركي، وإلا دفعت الضريبة نقدًا عند الإفراج ثم استرددتها لاحقًا.","Duty of 5% on CIF and 5% VAT. Link your TRN to the customs code, otherwise you pay the VAT in cash on release and recover it later."),
+    rf:L("الأجهزة اللاسلكية: موافقة هيئة تنظيم الاتصالات والحكومة الرقمية (TDRA).","Wireless devices: TDRA approval.")},
+  om:{n:L("عُمان","Oman"),body:L("وزارة التجارة والصناعة وترويج الاستثمار — المديرية العامة للمواصفات والمقاييس","MoCIIP — Directorate General for Standards and Metrology"),
+    req:[L("علامة الجودة العُمانية (OQM) — أصبحت إلزامية من 1 مارس 2026","The Omani Quality Mark (OQM) — mandatory since 1 March 2026"),
+         L("يشمل النطاق الأجهزة الكهربائية منخفضة الجهد ومستحضرات التجميل والأجهزة الغازية والأجهزة المستهلكة للطاقة","Scope covers low-voltage electrical appliances, cosmetics, gas appliances and energy-consuming devices"),
+         L("برامج تقييم المطابقة قبل الشحن (PCA) وبطاقة كفاءة الطاقة","Pre-shipment conformity assessment (PCA) programmes and energy-efficiency labelling")],
+    tax:L("جمارك 5% على CIF، وضريبة قيمة مضافة 5%.","Duty of 5% on CIF and 5% VAT."),
+    rf:L("الأجهزة اللاسلكية: هيئة تنظيم الاتصالات (TRA).","Wireless devices: TRA approval.")},
+  qa:{n:L("قطر","Qatar"),body:L("وزارة التجارة والصناعة والهيئة العامة القطرية للمواصفات والتقييس","Ministry of Commerce and Industry and QGOSM"),
+    req:[L("لا يوجد نظام مطابقة عام إلزامي شبيه بسابر","There is no general mandatory conformity scheme comparable to SABER"),
+         L("برنامج خاص بمنتجات محددة فقط — مثل الإطارات وأحزمة الأمان وجنوط العجلات ومكابح المركبات ومراوح الشفط والمكاوي ومجففات الشعر","A product-specific programme only — tyres, safety belts, wheel rims, brake pads, exhaust fans, irons and hair dryers"),
+         L("المستندات الأساسية: فاتورة تجارية وبوليصة شحن وشهادة منشأ","Core documents: commercial invoice, bill of lading and certificate of origin")],
+    tax:L("جمارك 5% على CIF، ولا توجد ضريبة قيمة مضافة حتى الآن.","Duty of 5% on CIF, and no VAT to date."),
+    rf:L("الأجهزة اللاسلكية: هيئة تنظيم الاتصالات (CRA).","Wireless devices: CRA approval.")},
+  kw:{n:L("الكويت","Kuwait"),body:L("الهيئة العامة للصناعة — نظام KUCAS","Public Authority for Industry — the KUCAS scheme"),
+    req:[L("تقرير الفحص الفني (TIR) — يؤكد استيفاء الإرسالية لشروط الاستيراد","A Technical Inspection Report (TIR) confirming the shipment meets import rules"),
+         L("تقرير التقييم الفني (TER) — يؤكد مطابقة المنتج للمواصفات الكويتية","A Technical Evaluation Report (TER) confirming the product meets Kuwaiti standards"),
+         L("التقريران مطلوبان معًا للتخليص، وقد تُسحب عينات عشوائية بعد الدخول","Both are required for clearance, and random samples may be taken after entry")],
+    tax:L("جمارك 5% على CIF، ولا توجد ضريبة قيمة مضافة حتى الآن.","Duty of 5% on CIF, and no VAT to date."),
+    rf:""},
+  bh:{n:L("البحرين","Bahrain"),body:L("مديرية المواصفات والمقاييس (BSMD)","Bahrain Standards and Metrology Directorate (BSMD)"),
+    req:[L("لا يوجد نظام تسجيل عام إلزامي قبل الشحن لمعظم المنتجات","There is no general pre-shipment registration scheme for most products"),
+         L("فحوصات عند المنافذ لفئات محددة مثل الإطارات والمركبات والأسمنت والألعاب ومستحضرات التجميل","Port checks apply to specific categories such as tyres, vehicles, cement, toys and cosmetics"),
+         L("المستندات الأساسية وشهادة المنشأ","Core documents and a certificate of origin")],
+    tax:L("جمارك 5% على CIF، وضريبة قيمة مضافة 10%.","Duty of 5% on CIF and 10% VAT."),
+    rf:""},
+  ye:{n:L("اليمن","Yemen"),body:L("لا توجد منصة مطابقة إلكترونية موحّدة","There is no single electronic conformity platform"),
+    req:[L("المستندات الأساسية: فاتورة تجارية، قائمة تعبئة، بوليصة شحن، شهادة منشأ، وشهادات المنتج للسلع المنظَّمة","Core documents: commercial invoice, packing list, bill of lading, certificate of origin, and product certificates for regulated goods"),
+         L("ميناء عدن للبضائع التجارية العامة، وميناء الحديدة عبر آلية التحقق والتفتيش الأممية","Aden port for general commercial cargo; Hodeidah port through the UN verification and inspection mechanism"),
+         L("مدة الشحن من الصين تتراوح غالبًا بين 28 و45 يومًا، والحديدة أطول من عدن","Transit from China is typically 28–45 days, with Hodeidah longer than Aden")],
+    tax:L("تختلف الرسوم بحسب جهة الاستيراد وسلطة الميناء.","Rates differ by the importing authority and port administration."),
+    rf:L("ثبّت مسار الدفع قبل الشحن. الاعتمادات المستندية شبه متعذّرة، والتحويل يمر غالبًا عبر شركات صرافة.","Fix the payment route before shipping. Letters of credit are largely unavailable and transfers usually pass through exchange companies.")}
+});
+
+const CCAT = () => ({
+  general:{n:L("عام — أدوات منزلية، قرطاسية، تغليف","General — housewares, stationery, packaging"),notes:[]},
+  ict:{n:L("إلكترونيات وأجهزة تقنية واتصالات","Electronics, IT and telecom devices"),notes:[
+    ["sa",L("مواصفة SASO 3114:2026 لأجهزة تقنية المعلومات والاتصالات: تنتهي الفترة الانتقالية في 31 أكتوبر 2026، وتصبح إلزامية من 1 نوفمبر 2026. الشهادات الصادرة وفق مواصفة CST رقم GEN-002 يتوقف العمل بها بحلول 31 مارس 2027.","SASO 3114:2026 for ICT equipment: the grace period ends 31 October 2026 and it becomes mandatory from 1 November 2026. Certificates issued under CST GEN-002 are discontinued by 31 March 2027.")],
+    ["om",L("الأجهزة الكهربائية منخفضة الجهد والأجهزة المستهلكة للطاقة ضمن نطاق علامة الجودة العُمانية الإلزامية.","Low-voltage electrical and energy-consuming devices fall within the mandatory Omani Quality Mark scope.")]]},
+  beauty:{n:L("مستحضرات تجميل وعناية","Cosmetics and personal care"),notes:[
+    ["om",L("مستحضرات التجميل ضمن نطاق علامة الجودة العُمانية الإلزامية منذ 1 مارس 2026.","Cosmetics fall within the mandatory Omani Quality Mark scope since 1 March 2026.")],
+    ["bh",L("مستحضرات التجميل من الفئات التي تخضع لفحص عند المنفذ.","Cosmetics are among the categories subject to port inspection.")]]},
+  food:{n:L("أغذية ومستلزمات مطاعم","Food and restaurant supplies"),notes:[
+    ["sa",L("الأغذية والمواد الملامسة للغذاء تخضع للهيئة العامة للغذاء والدواء (SFDA) بالإضافة إلى متطلبات سابر.","Food and food-contact materials fall under the SFDA in addition to the SABER requirements.")]]},
+  build:{n:L("مواد بناء ومعادن وحديد","Building materials, metals and steel"),notes:[
+    ["sa",L("تتطلب اعتماد نموذج إقرار المنتج أو المستورد من وزارة الصناعة والثروة المعدنية. لا تُصدر شهادة الإرسالية قبل إدراج الإقرار المعتمد في الملف الفني، والإقرار صالح 60 يومًا فقط من تاريخ إصداره.","These require an approved Producer/Importer Declaration form from the Ministry of Industry and Mineral Resources. The Shipment CoC is not issued until the approved declaration is in the technical file, and the declaration is valid for only 60 days from issue.")]]}
+});
+
+function pageCompliance(){
+  const J=CJUR(), C=CCAT();
+  const steps=[
+    [L("سجل تجاري يغطي الاستيراد","A commercial registration that covers importing"),
+     L("النشاط المسجّل يجب أن يشمل السلع التي تستوردها فعلًا. أكثر من مستورد اكتشف الخلل بعد وصول الشحنة.","The registered activity must cover the goods you actually import. More than one importer has discovered the mismatch after the shipment landed.")],
+    [L("حساب في منصة سابر — للمستورد وحده","A SABER account — for the importer alone"),
+     L("المصنع الصيني لا يحتاج حسابًا في سابر. المنصة للمستورد وجهات تقييم المطابقة والجمارك فقط. دور المصنع أن يزوّدك بالملف الفني: تقارير الاختبار والإقرارات والصور والملصقات.","Your Chinese factory does not need a SABER account. The platform is for importers, accredited conformity bodies and customs only. The factory's role is to supply the technical file: test reports, declarations, photos and labels.")],
+    [L("تسجيل المنتج وتحديد اللوائح","Register the product and identify the regulations"),
+     L("يُصنَّف المنتج إلى خاضع للوائح فنية أو غير خاضع، حسب البند الجمركي والمواصفة المنطبقة.","The product is classified as subject to a technical regulation or not, based on its HS code and the applicable standard.")],
+    [L("شهادة مطابقة منتج أو إقرار ذاتي","A Product CoC or a self-declaration"),
+     L("الخاضع للوائح: شهادة مطابقة منتج من جهة تقييم معتمدة، صلاحيتها سنة واحدة. غير الخاضع: إقرار ذاتي مع التعهد، ولا رسوم عليه للمنتجات المستوردة.","Subject to a regulation: a Product CoC from an accredited body, valid one year. Not subject: a self-declaration with an undertaking, free of charge for imported products.")],
+    [L("شهادة مطابقة إرسالية لكل شحنة","A Shipment CoC for every shipment"),
+     L("مطلوبة لكل شحنة بلا استثناء — حتى للمنتجات غير الخاضعة للوائح الفنية. ومنذ 1 أكتوبر 2025 صارت شرطًا أساسيًا قبل تقديم أي بيان جمركي.","Required for every shipment without exception — including products not subject to a technical regulation. Since 1 October 2025 it is a precondition for submitting any customs declaration.")],
+    [L("البيان الجمركي وسداد الرسوم","The customs declaration and payment")," "+
+     L("يُقدَّم عبر منصة فسح مع البيانات المسبقة للشحنة. الموانئ البحرية تتطلب تقديم البيان قبل الوصول منذ 29 أكتوبر 2025.","Filed through the FASAH platform with advance shipment data. Seaports have required the declaration before arrival since 29 October 2025.")]
+  ];
+  const dates=[
+    ["2024-10-06",L("6 أكتوبر 2024","6 Oct 2024"),L("رسوم الخدمة الجمركية السعودية: 0.15% من القيمة، بحد أدنى 15 ريالًا وأقصى 500 ريال، مع إلغاء رسوم التصدير.","Saudi customs service fee: 0.15% of value, minimum SAR 15 and maximum SAR 500, with export fees abolished.")],
+    ["2025-01-01",L("1 يناير 2025","1 Jan 2025"),L("بدء العمل بالتعرفة الجمركية الخليجية الموحّدة على مستوى 12 خانة.","The GCC integrated customs tariff comes into force at the 12-digit level.")],
+    ["2025-10-01",L("1 أكتوبر 2025","1 Oct 2025"),L("شهادة مطابقة الإرسالية تصبح شرطًا أساسيًا قبل تقديم أي بيان جمركي — لجميع المنتجات.","The Shipment CoC becomes a precondition for submitting any customs declaration — for all products.")],
+    ["2025-10-29",L("29 أكتوبر 2025","29 Oct 2025"),L("إلزام تقديم بيانات الشحنة والبيان الجمركي قبل الوصول في الموانئ البحرية السعودية.","Advance manifest and customs declaration become mandatory before arrival at Saudi seaports.")],
+    ["2026-01-01",L("1 يناير 2026","1 Jan 2026"),L("تحديث رموز التعرفة الجمركية داخل سابر. الشهادات القائمة تبقى سارية حتى انتهائها، لكن عدم تطابق الرمز مع بيانات المنتج يسبب تأخيرًا في التخليص.","Customs tariff codes are updated inside SABER. Existing certificates stay valid until expiry, but a code that does not match the product data delays clearance.")],
+    ["2026-03-01",L("1 مارس 2026","1 Mar 2026"),L("علامة الجودة العُمانية تصبح إلزامية، ويشمل نطاقها الأجهزة الكهربائية ومستحضرات التجميل والأجهزة المستهلكة للطاقة.","The Omani Quality Mark becomes mandatory, covering electrical appliances, cosmetics and energy-consuming devices.")],
+    ["2026-06",L("منتصف 2026","Mid-2026"),L("توسيع قائمة المنتجات التي تتطلب اعتماد نموذج إقرار المنتج أو المستورد من وزارة الصناعة — الحديد والصلب ومواد البناء وما يتصل بها. الإقرار المعتمد صالح 60 يومًا فقط.","The list of products requiring an approved Producer/Importer Declaration from the Ministry of Industry is expanded — iron, steel, building materials and related lines. The approved declaration is valid for only 60 days.")],
+    ["2026-11-01",L("1 نوفمبر 2026","1 Nov 2026"),L("مواصفة SASO 3114:2026 تصبح إلزامية لأجهزة تقنية المعلومات والاتصالات، بعد انتهاء الفترة الانتقالية في 31 أكتوبر 2026.","SASO 3114:2026 becomes mandatory for ICT equipment, after the grace period ends on 31 October 2026.")],
+    ["2027-03-31",L("31 مارس 2027","31 Mar 2027"),L("إيقاف العمل بالشهادات الصادرة وفق مواصفة CST رقم GEN-002.","Certificates issued under CST specification GEN-002 are discontinued.")]
+  ];
+  const rej=[
+    [L("عدم تطابق البند الجمركي","A mismatched HS code"),L("الرمز في شهادة المنتج وشهادة الإرسالية والبيان الجمركي يجب أن يكون واحدًا. هذا أكثر أسباب التعطيل شيوعًا، وخطره أعلى الآن بعد تحديث رموز التعرفة داخل سابر مطلع 2026.","The code on the Product CoC, the Shipment CoC and the customs declaration must be identical. This is the most common cause of delay, and the risk is higher now after the SABER tariff code update at the start of 2026.")],
+    [L("شهادة إرسالية بعد البيان لا قبله","A Shipment CoC issued after the declaration, not before"),L("الترتيب ملزم منذ 1 أكتوبر 2025: الشهادة أولًا، ثم البيان الجمركي.","The order has been binding since 1 October 2025: the certificate first, then the customs declaration.")],
+    [L("انتهاء إقرار المنتج","An expired Producer/Importer Declaration"),L("صلاحيته 60 يومًا من تاريخ الاعتماد، لا سنة. يُعاد تقديمه إن طالت مدة الإنتاج أو الشحن.","It is valid for 60 days from approval, not a year. It must be resubmitted if production or shipping runs long.")],
+    [L("ملصق عربي ناقص","Incomplete Arabic labelling"),L("بيانات المنتج والمنشأ والتحذيرات باللغة العربية شرط، وغيابها من أسهل أسباب الرفض تجنّبًا وأكثرها تكرارًا.","Product data, origin and warnings in Arabic are required, and their absence is among the easiest rejection causes to avoid and the most frequently repeated.")],
+    [L("شهادة منشأ غير مصدّقة","An unattested certificate of origin"),L("تحتاج تصديق الغرفة التجارية، وترجمة عربية عند الطلب.","It needs chamber of commerce attestation, and an Arabic translation on request.")],
+    [L("انتظار المصنع ليفتح حسابًا في سابر","Waiting for the factory to open a SABER account"),L("خرافة منتشرة على مواقع الشحن. المصنع لا يفتح حسابًا ولا يستطيع. الحساب للمستورد، وانتظار المصنع يضيّع أسابيع بلا سبب.","A myth repeated across forwarder blogs. The factory neither opens an account nor can it. The account belongs to the importer, and waiting on the factory loses weeks for nothing.")]
+  ];
+  const src=[
+    ["https://saber.sa","saber.sa",L("منصة سابر — الرسوم ومسار الشهادات","The SABER platform — fees and certificate paths")],
+    ["https://www.saso.gov.sa","saso.gov.sa",L("الهيئة السعودية للمواصفات والمقاييس والجودة","SASO")],
+    ["https://zatca.gov.sa","zatca.gov.sa",L("هيئة الزكاة والضريبة والجمارك — التعرفة المتكاملة","ZATCA — the integrated tariff")],
+    ["https://www.mim.gov.sa","mim.gov.sa",L("وزارة الصناعة والثروة المعدنية — اعتماد نموذج إقرار المنتج أو المستورد","Ministry of Industry — Producer/Importer Declaration approval")],
+    ["https://fasah.sa","fasah.sa",L("منصة فسح — البيان الجمركي","FASAH — the customs declaration")]
+  ];
+
+  return `<section class="sec tight sand"><div class="wrap">
+    <span class="eyebrow">${L("الامتثال والمطابقة","Compliance and conformity")}</span>
+    <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("الشحنة لا تُرفَض في الميناء","A shipment is not rejected at the port")}</h1>
+    <p class="lead">${L("تُرفَض قبل ذلك بأسابيع — بورقة ناقصة أو رمز جمركي غير مطابق أو شهادة صدرت بعد أوانها. هذه الصفحة تشرح ما تحتاجه شحنتك من الصين إلى السعودية ودول الخليج، بالتواريخ والرسوم الرسمية.","It is rejected weeks earlier — by a missing document, a mismatched HS code, or a certificate issued too late. This page sets out what your shipment needs, from China to Saudi Arabia and the Gulf, with the official dates and fees.")}</p>
+    <div class="info">${L("محدَّث في سبتمبر 2026 من المصادر الرسمية المذكورة في نهاية الصفحة. هذه معلومات عامة للتخطيط، ولا تُغني عن التأكد من جهة تقييم مطابقة معتمدة لمنتجك تحديدًا.","Updated September 2026 from the official sources listed at the foot of this page. This is general planning information and does not replace confirmation from an accredited conformity assessment body for your specific product.")}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("المسار","The path")}</span>
+      <h2>${L("مسار سابر — ست خطوات","The SABER path — six steps")}</h2>
+      <p class="lead" style="margin:0 auto">${L("من السجل التجاري حتى الإفراج، بالترتيب الملزم.","From the commercial registration to release, in the order that binds.")}</p></div>
+    <div class="steps rv" style="margin-top:36px">
+      ${steps.map((s,i)=>`<div class="step rv" data-i="${i+1}"><div class="n">${i+1}</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")}
+    </div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الرسوم","Fees")}</span>
+      <h2>${L("رسوم المنصة الرسمية","The official platform fees")}</h2></div>
+    <div class="tbl-wrap" style="margin-top:26px"><table><thead><tr>
+      <th>${L("البند","Item")}</th><th class="num">${L("بدون ضريبة","Excl. VAT")}</th><th class="num">${L("شامل الضريبة","Incl. VAT")}</th><th>${L("التكرار","Frequency")}</th>
+    </tr></thead><tbody>
+      <tr><td>${L("شهادة مطابقة منتج","Product CoC")}</td><td class="num">500 ${L("ريال","SAR")}</td><td class="num">575 ${L("ريال","SAR")}</td><td>${L("لكل منتج، سنويًا","Per product, yearly")}</td></tr>
+      <tr><td>${L("شهادة مطابقة إرسالية","Shipment CoC")}</td><td class="num">350 ${L("ريال","SAR")}</td><td class="num">402.50 ${L("ريال","SAR")}</td><td>${L("لكل شحنة","Per shipment")}</td></tr>
+      <tr><td>${L("إقرار ذاتي لمنتج مستورد غير خاضع للوائح","Self-declaration, imported non-regulated product")}</td><td class="num">${L("مجاني","Free")}</td><td class="num">${L("مجاني","Free")}</td><td>${L("لكل منتج","Per product")}</td></tr>
+    </tbody></table></div>
+    <div class="info" style="margin-top:18px">${L("هذه رسوم المنصة وحدها. أتعاب جهة تقييم المطابقة والاختبارات المخبرية وأي تدقيق مصنع منفصلة تمامًا وتختلف بحسب المنتج واللائحة المنطبقة. الرقمان 500 و575 ليسا سعرين مختلفين: الأول بدون ضريبة القيمة المضافة والثاني معها، وكذلك 350 و402.50.","These are the platform fees alone. The conformity body's own fees, lab testing and any factory audit are entirely separate and vary by product and applicable regulation. 500 and 575 are not two different prices: the first excludes VAT and the second includes it — likewise 350 and 402.50.")}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("أداة","Tool")}</span>
+      <h2>${L("ما الذي تحتاجه شحنتك؟","What does your shipment need?")}</h2>
+      <p class="lead" style="margin:0 auto">${L("اختر بلد الوصول وفئة المنتج، وستظهر لك المتطلبات والرسوم والتنبيهات السارية.","Pick the destination and the product family, and the requirements, taxes and live alerts appear.")}</p></div>
+    <div class="filters rv" style="justify-content:center;margin-top:26px">
+      <select id="cq_j" aria-label="${L("بلد الوصول","Destination")}">
+        ${Object.keys(J).map(k=>`<option value="${k}">${J[k].n}</option>`).join("")}
+      </select>
+      <select id="cq_c" aria-label="${L("فئة المنتج","Product family")}">
+        ${Object.keys(C).map(k=>`<option value="${k}">${C[k].n}</option>`).join("")}
+      </select>
+    </div>
+    <div id="cq_out" class="rv" style="margin-top:24px"></div>
+    ${DISCLAIM()}
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الجدول الزمني","Timeline")}</span>
+      <h2>${L("تواريخ تُعطّل الشحنات","Dates that stall shipments")}</h2>
+      <p class="lead" style="margin:0 auto">${L("كل تاريخ هنا غيّر شيئًا في إجراء قائم. المحتوى العربي المتداول ما زال يشرح الوضع القديم.","Every date here changed something in a live procedure. The Arabic content in circulation still describes the old position.")}</p></div>
+    <div class="steps rv" style="margin-top:36px">
+      ${dates.map((d,i)=>`<div class="step rv" data-i="${i+1}"><div class="n">${i+1}</div><h3>${d[1]}</h3><p>${d[2]}</p></div>`).join("")}
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("قبل أن يحدث","Before it happens")}</span>
+      <h2>${L("ستة أسباب تُرفض بها الشحنات","Six reasons shipments get rejected")}</h2></div>
+    <div class="acc rv" style="margin-top:26px">
+      ${rej.map(r=>`<details><summary>${r[0]}</summary><div class="a">${r[1]}</div></details>`).join("")}
+    </div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("دورنا","Our role")}</span>
+      <h2>${L("ما الذي نتولاه نحن","What we take on")}</h2></div>
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card rv"><h3>${L("قبل الإنتاج","Before production")}</h3><p>${L("نحدد اللائحة الفنية المنطبقة والبند الجمركي الصحيح، ونطلب من المصنع الملف الفني كاملًا قبل أن يبدأ الإنتاج — لا بعده.","We identify the applicable technical regulation and the correct HS code, and request the complete technical file from the factory before production starts — not after.")}</p></div>
+      <div class="card rv"><h3>${L("أثناء التجهيز","During preparation")}</h3><p>${L("نتابع الاختبارات المخبرية وإصدار شهادة مطابقة المنتج، ونجهّز الملصق العربي ونراجعه قبل الطباعة.","We follow the lab testing and the Product CoC issuance, and prepare and review the Arabic label before it is printed.")}</p></div>
+      <div class="card rv"><h3>${L("قبل الشحن","Before shipping")}</h3><p>${L("نصدر شهادة الإرسالية ونتأكد من تطابق البند الجمركي عبر الشهادات والفاتورة والبيان، قبل أن تغادر الحاوية.","We issue the Shipment CoC and confirm the HS code matches across the certificates, the invoice and the declaration, before the container leaves.")}</p></div>
+    </div>
+    <div class="center" style="margin-top:30px">
+      <a class="btn btn-primary" href="#/qualify?type=compliance">${L("راجع منتجك معنا","Have us review your product")}</a>
+      <a class="btn btn-out" href="#/calculator">${L("احسب التكلفة الكاملة","Work out the full cost")}</a>
+    </div>
+  </div></section>
+
+  <section class="sec tight"><div class="wrap">
+    <h2 style="font-size:1.25rem">${L("المصادر","Sources")}</h2>
+    <p class="muted" style="font-size:.9rem">${L("كل رقم وتاريخ في هذه الصفحة مأخوذ من المصادر التالية، وليس تقديرًا.","Every figure and date on this page comes from the sources below, not from an estimate.")}</p>
+    <ul style="font-size:.92rem;line-height:2">
+      ${src.map(x=>`<li><a href="${x[0]}" target="_blank" rel="noopener nofollow"><bdi dir="ltr">${x[1]}</bdi></a> — ${x[2]}</li>`).join("")}
+    </ul>
+  </div></section>`;
+}
+
+function bindCompliance(){
+  const J=CJUR(), C=CCAT();
+  const out=document.getElementById("cq_out");
+  const draw=()=>{
+    const jk=document.getElementById("cq_j").value, ck=document.getElementById("cq_c").value;
+    const j=J[jk], c=C[ck];
+    const notes=(c.notes||[]).filter(n=>n[0]===jk).map(n=>n[1]);
+    out.innerHTML=`<div class="card" style="max-width:820px;margin-inline:auto">
+      <span class="eyebrow" style="margin-bottom:6px">${j.n} · ${c.n}</span>
+      <h3 style="margin-top:0">${j.body}</h3>
+      <ul style="margin:14px 0 0;padding-inline-start:20px;display:grid;gap:8px;font-size:.94rem">
+        ${j.req.map(r=>`<li>${r}</li>`).join("")}
+      </ul>
+      <div class="info" style="margin-top:18px">${j.tax}</div>
+      ${j.rf?`<p class="muted" style="font-size:.9rem;margin-top:12px">${j.rf}</p>`:""}
+      ${notes.length?`<div class="notice" style="margin-top:14px"><strong>${L("تنبيه ساري:","Live alert:")}</strong> ${notes.join(" ")}</div>`:""}
+    </div>`;
+  };
+  document.getElementById("cq_j").addEventListener("change",draw);
+  document.getElementById("cq_c").addEventListener("change",draw);
+  draw();
+}
+
 /* ---------- CONTACT ---------- */
 function pageContact(){
   return `<section class="sec tight sand"><div class="wrap">
@@ -2030,6 +2243,8 @@ const META = {
                ["صفقات منتجات مدروسة، توريد موثوق من الصين، شحن وتخليص، متجر، تدريب ومتابعة — قسم تابع لـ Red Sea Global Trading Co. Ltd.","Studied product deals, reliable sourcing from China, shipping and clearance, a store, training and follow-up — a division of Red Sea Global Trading Co. Ltd."]],
   "/calculator":[["حاسبة تكلفة الاستيراد — Red Sea Business Launch","Import Cost Calculator — Red Sea Business Launch"],
                ["احسب تكلفة الوحدة النهائية بعد الشحن والجمارك والضريبة ورسوم الخدمة، وهامش ربحك ونقطة التعادل قبل أن تدفع.","Work out your final landed unit cost after freight, duty, VAT and service fees — plus margin and break-even — before you pay."]],
+  "/compliance":[["سابر والامتثال — متطلبات استيراد الصين إلى السعودية والخليج 2026","SABER & Compliance — importing from China to Saudi Arabia and the Gulf, 2026"],
+               ["مسار سابر خطوة بخطوة، رسوم شهادة المنتج والإرسالية، تواريخ 2025–2026 التي تُعطّل الشحنات، ومتطلبات المطابقة في السعودية والإمارات وعُمان وقطر والكويت والبحرين واليمن.","The SABER path step by step, Product and Shipment CoC fees, the 2025–2026 dates that stall shipments, and conformity requirements across Saudi Arabia, the UAE, Oman, Qatar, Kuwait, Bahrain and Yemen."]],
   "/deals":   [["الصفقات الجاهزة — Red Sea Business Launch","Ready Deals — Red Sea Business Launch"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
   "/deal":    [["تفاصيل الصفقة — Red Sea Business Launch","Deal details — Red Sea Business Launch"],["تفاصيل المنتجات والتكاليف والسيناريوهات المالية والمخاطر لهذه الصفقة.","Products, costs, financial scenarios and risks for this deal."]],
   "/packages":[["باقات الإطلاق — Red Sea Business Launch","Launch Packages — Red Sea Business Launch"],["Sourcing Only و Starter Launch و Full Launch واشتراك التشغيل الشهري — مقارنة كاملة ونطاقات أسعار تقديرية.","Sourcing Only, Starter Launch, Full Launch and the monthly operations subscription — a full comparison with estimated price ranges."]],
@@ -2075,6 +2290,7 @@ function render(){
   else if(base==="/consultation")      body=pageConsult();
   else if(base==="/about")             body=pageAbout();
   else if(base==="/faq")               body=pageFaq();
+  else if(base==="/compliance")        body=pageCompliance();
   else if(base==="/contact")           body=pageContact();
   else if(base==="/legal")             body=pageLegal();
   else if(base==="/thanks")            body=pageThanks();
@@ -2116,6 +2332,7 @@ function render(){
   if(base==="/qualify") bindQualify();
   if(base==="/faq")     bindFaq();
   if(base==="/calculator") bindCalc();
+  if(base==="/compliance") bindCompliance();
   if(base==="/consultation" && CFG.calendly){
     $("#calbox").outerHTML = `<iframe src="${CFG.calendly}" style="width:100%;height:640px;border:0;border-radius:10px" title="Booking calendar"></iframe>`;
   }
