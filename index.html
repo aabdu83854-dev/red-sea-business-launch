@@ -1296,6 +1296,28 @@ function pageHome(){
     </div>
   </div></section>
 
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("التوثيق","Documentation")}</span>
+      <h2>${L("كل شحنة تصلك بجواز","Every shipment arrives with a passport")}</h2>
+      <p class="lead" style="margin:0 auto">${L("مستند واحد يوثّق شحنتك بالصور من اعتماد العيّنة حتى التسليم — ثماني مراحل، بتاريخ كل مرحلة وصورها ومستنداتها.","One document that records your shipment in photographs from sample approval to delivery — eight stages, each with its date, its photographs and its papers.")}</p></div>
+    <div class="tline rv" aria-label="${L("مراحل جواز الشحنة","Shipment passport stages")}" style="margin-top:30px">
+      ${[[L("الاعتماد","Approval"),L("العيّنة","Sample")],
+         [L("المصنع","Factory"),L("الرخصة","Licence")],
+         [L("الإنتاج","Production"),L("أثناء التصنيع","In progress")],
+         [L("الفحص","Inspection"),L("AQL 2.5","AQL 2.5")],
+         [L("التغليف","Packing"),L("الملصق العربي","Arabic label")],
+         [L("التحميل","Loading"),L("رقم الختم","Seal no.")],
+         [L("المستندات","Documents"),L("البوليصة","B/L")],
+         [L("الوصول","Arrival"),L("التسليم","Delivery")]].map(x=>
+        `<div class="tstep"><span class="dot"></span><b>${x[0]}</b><small>${x[1]}</small></div>`).join("")}
+    </div>
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card rv"><h3>${L("صورة الختم إلزامية","The seal photograph is mandatory")}</h3><p>${L("رقم ختم الحاوية مصوَّرًا بعد الإغلاق. بها تعرف أن الحاوية لم تُفتح بين المصنع والميناء.","The container seal number photographed after closing. It is how you know the container was not opened between the factory and the port.")}</p></div>
+      <div class="card rv"><h3>${L("العيوب تُصوَّر ولا تُخفى","Defects are photographed, not hidden")}</h3><p>${L("إن وُجد عيب في الفحص فهو في الجواز بصورته. تقرير بلا عيب واحد أبدًا لا يستحق الثقة.","If the inspection finds a defect it appears in the passport with its photograph. A report that never shows a single defect does not deserve trust.")}</p></div>
+      <div class="card rv"><h3>${L("رابط تشاركه كما هو","A link you can pass on as it is")}</h3><p>${L("يصلك الجواز كصفحة أو ملف PDF، ترسله لشريكك أو لجهة تموّلك من غير شرح إضافي.","The passport reaches you as a page or a PDF that you can send to your partner or your financier with no further explanation.")}</p></div>
+    </div>
+  </div></section>
+
   <section class="sec navy"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("الفرق","The difference")}</span>
       <h2 style="color:#fff">${L("لماذا نحن","Why us")}</h2></div>
@@ -2173,6 +2195,310 @@ function bindCompliance(){
   draw();
 }
 
+
+/* ---------- SHIPMENT PASSPORT ---------- */
+const PP_CSS = `:root{--pnavy:#0B2545;--pnavy2:#14395F;--pnavy3:#1F5C8B;--pcoral:#D0202A;
+--psheet:#fff;--pink:#0F2136;--pink2:#3A5068;--pmuted:#6B8098;
+--pline:#D9E1E9;--pline2:#EDF2F6;--pok:#0B6B57;--pokb:#E4F2EE;
+--pwip:#8A6410;--pwipb:#F8EFDB;--pna:#5C6B7C;--pnab:#ECF0F4;
+--pfd:"Reem Kufi","IBM Plex Sans Arabic",system-ui,sans-serif;
+--pfb:"IBM Plex Sans Arabic",system-ui,"Segoe UI",sans-serif;
+--pfm:"IBM Plex Mono",ui-monospace,monospace}
+.ppdoc,.ppdoc *{box-sizing:border-box}
+.ppdoc{max-width:900px;margin:0 auto;background:var(--psheet);color:var(--pink);
+direction:rtl;text-align:right;font-family:var(--pfb);font-size:15px;line-height:1.7;
+border:1px solid var(--pline);border-radius:6px;overflow:hidden}
+.ppdoc [contenteditable]{outline:none;border-radius:3px;transition:background .12s}
+.ppdoc [contenteditable]:hover{background:#F1F6FA}
+.ppdoc [contenteditable]:focus{background:#EAF3FB;box-shadow:inset 0 0 0 1px var(--pnavy3)}
+.ppdoc [contenteditable]:empty::before{content:attr(data-ph);color:#A9B8C7;font-weight:400}
+.ppmast{background:var(--pnavy);color:#fff;padding:22px 34px 18px;display:flex;
+align-items:flex-start;gap:16px;position:relative;overflow:hidden}
+.ppmast::after{content:"";position:absolute;inset-inline-start:-70px;bottom:-110px;
+width:250px;height:250px;border-radius:50%;border:1px solid rgba(255,255,255,.13)}
+.ppmast img{width:44px;height:44px;flex:0 0 auto;border-radius:9px;background:#fff;padding:3px}
+.ppmast .w{flex:1 1 auto;min-width:0}
+.ppmast .w b{display:block;font-family:var(--pfd);font-weight:600;font-size:1rem;line-height:1.3}
+.ppmast .w span{display:block;font-size:.7rem;color:#9DBBD7}
+.ppmast .t{text-align:end;flex:0 0 auto;min-width:200px}
+.ppmast .t b{display:block;font-family:var(--pfd);font-weight:700;font-size:1.4rem;line-height:1.2}
+.ppmast .t span{display:block;font-family:var(--pfm);font-size:.6rem;font-weight:600;
+letter-spacing:.24em;color:#7FA8CC;direction:ltr}
+.ppmast .r{margin-top:8px;font-size:.78rem;color:#CFE0EF;white-space:nowrap;text-align:end}
+.ppmast .r span{font-family:var(--pfm);font-size:.74rem;min-width:82px;display:inline-block;
+text-align:center;direction:ltr;unicode-bidi:isolate}
+.ppmast [contenteditable]:hover{background:rgba(255,255,255,.1)}
+.ppmast [contenteditable]:focus{background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.ppmast [contenteditable]:empty::before{color:#7093B5}
+.pprule{height:4px;background:linear-gradient(90deg,var(--pcoral) 0 34%,var(--pnavy3) 34% 100%)}
+.ppsum{display:grid;grid-template-columns:repeat(4,1fr);margin:0;border-bottom:1px solid var(--pline)}
+.ppsum>div{padding:9px 12px;border-inline-start:1px solid var(--pline2);border-bottom:1px solid var(--pline2)}
+.ppsum>div:nth-child(4n){border-inline-start:0}
+.ppsum dt{margin:0;font-size:.66rem;font-weight:600;color:var(--pmuted);line-height:1.4}
+.ppsum dt i{display:block;font-style:normal;font-family:var(--pfm);font-size:.54rem;
+letter-spacing:.09em;color:#9CAFC1;direction:ltr;text-align:right}
+.ppsum dd{margin:2px 0 0;font-size:.9rem;font-weight:600;min-height:1.4em;font-variant-numeric:tabular-nums}
+.ppsum dd.m{font-family:var(--pfm);font-size:.83rem;direction:ltr;text-align:right;unicode-bidi:isolate}
+.pptrk{display:flex;padding:16px 34px 2px;flex-wrap:wrap}
+.pptrk div{flex:1 1 0;min-width:70px;text-align:center;position:relative;padding-bottom:12px}
+.pptrk div::before{content:"";position:absolute;top:9px;inset-inline:50% -50%;height:2px;background:var(--pline)}
+.pptrk div:last-child::before{display:none}
+.pptrk b{position:relative;z-index:1;display:block;width:20px;height:20px;margin:0 auto 6px;
+border-radius:50%;background:#fff;border:2px solid var(--pline);font-family:var(--pfm);
+font-size:.6rem;line-height:16px;color:var(--pmuted)}
+.pptrk span{font-size:.63rem;color:var(--pmuted);line-height:1.35;display:block}
+.pptrk div.d b{background:var(--pok);border-color:var(--pok);color:#fff}
+.pptrk div.d span{color:var(--pink2);font-weight:600}
+.pptrk div.w b{background:#fff;border-color:var(--pwip);color:var(--pwip)}
+.pptrk div.w span{color:var(--pwip);font-weight:600}
+.ppstg{padding:18px 34px;border-top:1px solid var(--pline2)}
+.ppsh{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.ppsh .n{font-family:var(--pfm);font-size:.8rem;font-weight:600;color:var(--pcoral);direction:ltr}
+.ppsh h3{margin:0;font-family:var(--pfd);font-weight:600;font-size:1.06rem;line-height:1.35}
+.ppsh h3 i{display:block;font-style:normal;font-family:var(--pfm);font-size:.56rem;
+font-weight:500;letter-spacing:.14em;color:#9CAFC1;direction:ltr;text-align:right}
+.ppsh .mt{margin-inline-start:auto;display:flex;align-items:center;gap:8px}
+.ppsh .dt{font-family:var(--pfm);font-size:.78rem;color:var(--pink2);min-width:86px;
+text-align:center;direction:ltr;border-bottom:1px dashed var(--pline);padding:1px 6px}
+.ppst{font-size:.71rem;font-weight:600;border-radius:99px;padding:3px 11px;cursor:pointer;
+border:1px solid transparent;font-family:var(--pfb);user-select:none}
+.ppst[data-s=done]{background:var(--pokb);color:var(--pok);border-color:#BFE0D7}
+.ppst[data-s=wip]{background:var(--pwipb);color:var(--pwip);border-color:#E7D3A3}
+.ppst[data-s=na]{background:var(--pnab);color:var(--pna);border-color:var(--pline)}
+.ppnote{margin:8px 0 0;font-size:.89rem;color:var(--pink2);min-height:1.5em}
+.pptip{margin:4px 0 0;font-size:.73rem;color:#93A6B8}
+.ppgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:11px}
+.ppslot{position:relative;display:block;border:1.5px dashed var(--pline);border-radius:6px;
+background:#F8FAFC;aspect-ratio:4/3;overflow:hidden;cursor:pointer}
+.ppslot:hover{border-color:var(--pnavy3);background:#F1F7FC}
+.ppslot input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.ppslot .p{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+padding:7px;font-size:.7rem;color:#94A8BB;line-height:1.5}
+.ppslot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.ppslot.has img{display:block}.ppslot.has .p{display:none}
+.ppslot .x{position:absolute;top:5px;inset-inline-end:5px;z-index:2;display:none;
+width:22px;height:22px;border-radius:50%;border:0;cursor:pointer;background:rgba(11,37,69,.78);
+color:#fff;font-size:.8rem;line-height:22px;padding:0}
+.ppslot.has .x{display:block}
+.ppcap{margin-top:4px;font-size:.71rem;color:var(--pmuted);min-height:1.3em;text-align:center}
+.ppadd{margin-top:8px;font:inherit;font-size:.77rem;font-weight:600;cursor:pointer;
+background:none;border:1px dashed var(--pline);border-radius:6px;padding:6px 12px;color:var(--pnavy3)}
+.ppfoot{background:#F7FAFC;border-top:2px solid var(--pnavy);padding:20px 34px 22px;
+display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+.ppfoot h4{margin:0 0 5px;font-family:var(--pfd);font-weight:600;font-size:.9rem}
+.ppfoot p{margin:0;font-size:.79rem;color:var(--pink2);line-height:1.75}
+.ppsig{border:1px solid var(--pline);border-radius:6px;background:#fff;padding:11px 13px;
+min-height:96px;display:flex;flex-direction:column;justify-content:space-between}
+.ppsig b{font-size:.71rem;color:var(--pmuted);font-weight:600}
+.ppsig .l{border-bottom:1px solid var(--pline);margin-top:auto}
+.pplegal{grid-column:1/-1;font-size:.71rem;color:var(--pmuted);border-top:1px solid var(--pline);
+padding-top:11px;line-height:1.7}
+@media screen and (max-width:760px){
+.ppmast,.ppstg,.ppfoot,.pptrk{padding-inline:18px}
+.ppsum{grid-template-columns:repeat(2,1fr)}
+.ppsum>div:nth-child(4n){border-inline-start:1px solid var(--pline2)}
+.ppsum>div:nth-child(2n){border-inline-start:0}
+.ppgrid{grid-template-columns:repeat(2,1fr)}
+.ppfoot{grid-template-columns:1fr}.ppmast{flex-wrap:wrap}}
+@media print{
+@page{size:A4;margin:0}
+body{background:#fff}
+.ppdoc{max-width:none;border:0;border-radius:0;padding:12mm 12mm 14mm;font-size:10.5pt}
+.ppmast{padding:14px 16px 12px}
+.ppstg,.ppfoot,.pptrk{padding-inline:0}
+.ppstg{break-inside:avoid;page-break-inside:avoid;padding-block:11px}
+.ppslot:not(.has){display:none}
+.ppadd,.ppslot .x,.pptip,.ppnoprint{display:none!important}
+.ppsum>div{padding:7px 10px}.ppsum dd{font-size:.86rem;min-height:1.2em}
+.ppgrid{grid-template-columns:repeat(4,1fr);gap:7px}
+.ppcap{font-size:.66rem}
+.ppdoc [contenteditable]:empty::before{content:""}
+.ppdoc [contenteditable]{background:none!important;box-shadow:none!important}
+.ppslot{border-style:solid;border-color:var(--pline)}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}`;
+const PP_SUM = ()=>[
+  ["العميل","CLIENT",0],["الوجهة والميناء","DESTINATION PORT",0],
+  ["شرط التسليم","INCOTERM",1],["وصف البضاعة","GOODS",0],
+  ["البند الجمركي","HS CODE",1],["عدد الكراتين","CARTONS",1],
+  ["الوزن الإجمالي (كجم)","GROSS WEIGHT KG",1],["الحجم (م³)","VOLUME CBM",1],
+  ["رقم الحاوية","CONTAINER NO.",1],["رقم الختم","SEAL NO.",1],
+  ["الباخرة والرحلة","VESSEL / VOYAGE",1],["رقم بوليصة الشحن","B/L NO.",1],
+  ["تاريخ الإبحار","ETD",1],["الوصول المتوقع","ETA",1],
+  ["شهادة الإرسالية","SABER SCoC",1],["مسؤول الملف","ACCOUNT MANAGER",0]];
+const PP_STG = ()=>[
+  ["اعتماد الطلب والعيّنة","ORDER &amp; SAMPLE APPROVAL",
+   "العيّنة المعتمدة من زوايا مختلفة، وورقة المواصفات الموقّعة، ومقارنة العيّنة بالمطلوب.",
+   ["العيّنة المعتمدة","ورقة المواصفات","تفصيلة قريبة","المقاس مع مسطرة"]],
+  ["المصنع والمورد","FACTORY &amp; SUPPLIER",
+   "واجهة المصنع بلافتته، وخط الإنتاج، ورخصة المصنع أو شهادة النظام إن وُجدت.",
+   ["واجهة المصنع","خط الإنتاج","المستودع","الرخصة أو الشهادة"]],
+  ["الإنتاج","PRODUCTION",
+   "صور أثناء التصنيع وليس بعده، وعيّنة من أول دفعة إنتاج مقارنة بالعيّنة المعتمدة.",
+   ["أثناء التصنيع","أول دفعة إنتاج","مقارنة بالعيّنة","الكمية قيد التجهيز"]],
+  ["فحص ما قبل الشحن","PRE-SHIPMENT INSPECTION",
+   "الفحص وفق AQL 2.5. صوّر السحب العشوائي والقياسات وأي عيوب وُجدت — العيوب أيضًا تُصوَّر.",
+   ["السحب العشوائي","القياس والاختبار","العيوب إن وُجدت","تقرير الفحص"]],
+  ["التغليف والملصق العربي","PACKING &amp; ARABIC LABELLING",
+   "الملصق العربي واضحًا ومقروءًا، وعلامات الكرتون، والترقيم، وطريقة التغليف الداخلي.",
+   ["الملصق العربي","علامات الكرتون","التغليف الداخلي","الكرتون مغلقًا"]],
+  ["التحميل وختم الحاوية","LOADING &amp; CONTAINER SEAL",
+   "الحاوية فارغة قبل التحميل، وأثناء الرص، وممتلئة، ثم رقم الختم واضحًا بعد الإغلاق.",
+   ["الحاوية فارغة","أثناء الرص","الحاوية ممتلئة","رقم الختم"]],
+  ["المستندات والشهادات","DOCUMENTS &amp; CERTIFICATES",
+   "بوليصة الشحن والفاتورة وقائمة التعبئة وشهادة المنشأ وشهادة مطابقة الإرسالية.",
+   ["بوليصة الشحن","الفاتورة وقائمة التعبئة","شهادة المنشأ","شهادة الإرسالية"]],
+  ["الإبحار والوصول","SAILING &amp; ARRIVAL",
+   "إيصال استلام الميناء، ولقطة من نظام التتبع، وإشعار الوصول، وصورة التسليم النهائي.",
+   ["إيصال الميناء","لقطة التتبع","إشعار الوصول","التسليم"]]];
+const PP_ST = {done:"تم", wip:"قيد التنفيذ", na:"غير مطلوب"};
+const PP_ORDER = ["wip","done","na"];
+
+function ppSlot(cap){
+  return `<div><label class="ppslot"><input type="file" accept="image/*">
+    <span class="p">${esc(cap)}<br>اضغط لإضافة صورة</span><img alt="${esc(cap)}" loading="lazy">
+    <button type="button" class="x" aria-label="حذف الصورة">&times;</button></label>
+    <div class="ppcap" contenteditable="true" data-ph="${esc(cap)}"></div></div>`;
+}
+function ppDoc(){
+  return `<article class="ppdoc" id="ppdoc">
+  <header class="ppmast">
+    <img src="${LOGO}" alt="Red Sea Global Trading">
+    <div class="w"><b>${CFG.brandAr}</b><span>قسم من <bdi dir="ltr">${CFG.parent}</bdi> — مكتب التشغيل: قوانغتشو، الصين</span></div>
+    <div class="t"><b>جواز الشحنة</b><span>SHIPMENT PASSPORT</span>
+      <div class="r">رقم <span contenteditable="true" data-ph="RSBL-0000"></span> · <span contenteditable="true" data-ph="التاريخ"></span></div>
+    </div>
+  </header>
+  <div class="pprule"></div>
+  <dl class="ppsum">${PP_SUM().map(f=>`<div><dt>${f[0]}<i>${f[1]}</i></dt><dd${f[2]?' class="m"':''} contenteditable="true" data-ph="—"></dd></div>`).join("")}</dl>
+  <div class="pptrk" id="pptrk">${PP_STG().map((s,i)=>`<div class="w" data-i="${i}"><b>${i+1}</b><span>${s[0]}</span></div>`).join("")}</div>
+  ${PP_STG().map((s,i)=>`<section class="ppstg" data-i="${i}">
+    <div class="ppsh"><span class="n">${String(i+1).padStart(2,"0")}</span>
+      <h3>${s[0]}<i>${s[1]}</i></h3>
+      <div class="mt"><span class="dt" contenteditable="true" data-ph="التاريخ"></span>
+        <button type="button" class="ppst" data-s="wip">${PP_ST.wip}</button></div></div>
+    <p class="ppnote" contenteditable="true" data-ph="اكتب ملاحظة هذه المرحلة للعميل…"></p>
+    <p class="pptip ppnoprint">ما يُصوَّر هنا: ${s[2]}</p>
+    <div class="ppgrid">${s[3].map(ppSlot).join("")}</div>
+    <button type="button" class="ppadd ppnoprint">+ خانة صورة إضافية</button>
+  </section>`).join("")}
+  <footer class="ppfoot">
+    <div><h4>عن هذا المستند</h4><p>يوثّق هذا الجواز مسار شحنتك من اعتماد الطلب حتى التسليم بالصور والمستندات. كل صورة التقطها فريقنا في الصين في التاريخ المذكور أمام مرحلتها.</p></div>
+    <div class="ppsig"><b>المسؤول عن الشحنة · التوقيع والختم</b><div class="l"></div></div>
+    <p class="pplegal">الصور والمستندات في هذا الجواز تخص هذه الشحنة وحدها. التواريخ التقديرية للإبحار والوصول تتغيّر بقرار خط الملاحة والميناء وسلطات التخليص. <span contenteditable="true" data-ph="ملاحظة إضافية…"></span></p>
+  </footer></article>`;
+}
+function pagePassport(){
+  return `<style>${PP_CSS}</style>
+  <section class="sec tight sand"><div class="wrap">
+    <span class="eyebrow">أداة داخلية</span>
+    <h1 style="font-size:clamp(1.5rem,3.6vw,2.1rem)">تعبئة جواز الشحنة</h1>
+    <p class="lead" style="max-width:64ch">اكتب فوق أي حقل، واضغط على مربّع الصورة لإضافتها. الخانات الفارغة لا تظهر في المخرجات.</p>
+    <div class="btns" style="margin-top:16px">
+      <button class="btn btn-primary" id="ppPdf" type="button">حفظ PDF</button>
+      <button class="btn btn-out" id="ppExp" type="button">تصدير صفحة الجواز (HTML)</button>
+      <button class="btn btn-out" id="ppNew" type="button">جواز جديد</button>
+    </div>
+    <div class="info" style="margin-top:16px">بعد التصدير، ارفع الملف داخل مجلد <bdi dir="ltr">p/</bdi> في المستودع، فيصبح رابط العميل: <bdi dir="ltr">${CFG.domain}/p/RSBL-0001.html</bdi></div>
+  </div></section>
+  <section class="sec"><div class="wrap">${ppDoc()}</div></section>`;
+}
+function bindPassport(){
+  const doc=document.getElementById("ppdoc");
+  const trk=document.getElementById("pptrk");
+  const sync=()=>document.querySelectorAll(".ppstg").forEach(st=>{
+    const s=st.querySelector(".ppst").dataset.s;
+    trk.children[+st.dataset.i].className = s==="done"?"d":(s==="na"?"":"w");
+  });
+  sync();
+  doc.addEventListener("click",e=>{
+    const x=e.target.closest(".x");
+    if(x){ e.preventDefault(); e.stopPropagation();
+      const l=x.closest(".ppslot"); l.classList.remove("has");
+      l.querySelector("img").removeAttribute("src"); l.querySelector("input").value=""; return; }
+    const b=e.target.closest(".ppst");
+    if(b){ const n=PP_ORDER[(PP_ORDER.indexOf(b.dataset.s)+1)%PP_ORDER.length];
+      b.dataset.s=n; b.textContent=PP_ST[n]; sync(); return; }
+    const a=e.target.closest(".ppadd");
+    if(a){ const g=a.previousElementSibling, d=document.createElement("div");
+      d.innerHTML=ppSlot("صورة إضافية"); g.appendChild(d.firstElementChild); }
+  });
+  doc.addEventListener("change",e=>{
+    const inp=e.target; if(!inp.matches(".ppslot input[type=file]")) return;
+    const f=inp.files&&inp.files[0]; if(!f) return;
+    if(f.type.indexOf("image/")!==0){ alert("الملف ليس صورة."); inp.value=""; return; }
+    const lab=inp.closest(".ppslot"), fr=new FileReader();
+    fr.onload=()=>{ const im=new Image();
+      im.onload=()=>{ const w=im.naturalWidth,h=im.naturalHeight,k=Math.min(1,1400/Math.max(w,h));
+        let src=fr.result;
+        if(k<1){ const c=document.createElement("canvas");
+          c.width=Math.round(w*k); c.height=Math.round(h*k);
+          c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+          try{ src=c.toDataURL("image/jpeg",.8); }catch(_){}}
+        lab.querySelector("img").src=src; lab.classList.add("has"); };
+      im.onerror=()=>{ lab.querySelector("img").src=fr.result; lab.classList.add("has"); };
+      im.src=fr.result; };
+    fr.onerror=()=>alert("تعذّر قراءة الصورة.");
+    fr.readAsDataURL(f);
+  });
+  doc.addEventListener("paste",e=>{
+    if(!e.target.isContentEditable) return;
+    e.preventDefault();
+    document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text/plain"));
+  });
+  doc.addEventListener("input",e=>{
+    const t=e.target; if(t.isContentEditable && !t.textContent.trim()) t.innerHTML="";
+  });
+  document.getElementById("ppPdf").addEventListener("click",()=>window.print());
+  document.getElementById("ppNew").addEventListener("click",()=>{ if(confirm("سيُمسح كل ما كتبته وكل الصور. متأكد؟")) render(); });
+  document.getElementById("ppExp").addEventListener("click",ppExport);
+}
+function ppExport(){
+  const src=document.getElementById("ppdoc");
+  const refEl=src.querySelector(".ppmast .r span");
+  const ref=(refEl&&refEl.textContent.trim())||"RSBL-0000";
+  const cliEl=src.querySelector(".ppsum dd");
+  const client=(cliEl&&cliEl.textContent.trim())||"";
+  const c=src.cloneNode(true);
+  c.removeAttribute("id");
+  c.querySelectorAll(".ppadd,.pptip,.x,.ppslot input,.ppslot:not(.has)").forEach(n=>{
+    const holder=n.classList.contains("ppslot")?n.parentNode:n; holder.remove(); });
+  c.querySelectorAll("[contenteditable]").forEach(n=>{
+    n.removeAttribute("contenteditable");
+    if(!n.textContent.trim() && n.dataset.ph==="—") n.textContent="—";
+    n.removeAttribute("data-ph");
+  });
+  c.querySelectorAll(".ppgrid").forEach(g=>{ if(!g.children.length) g.remove(); });
+  c.querySelectorAll(".dt,.ppnote,.ppcap,.pplegal span").forEach(n=>{ if(!n.textContent.trim()) n.remove(); });
+  const title="جواز الشحنة "+ref+(client?" — "+client:"");
+  const FONTS='https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap';
+  const ZJS='document.addEventListener("click",function(e){var z=document.getElementById("ppz");'+
+    'if(e.target.closest(".ppz")){z.classList.remove("on");return;}'+
+    'var i=e.target.closest(".ppdoc img");if(i&&i.src){z.querySelector("img").src=i.src;z.classList.add("on");}});'+
+    'document.addEventListener("keydown",function(e){if(e.key==="Escape")document.getElementById("ppz").classList.remove("on");});';
+  const html='<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">'+
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<meta name="robots" content="noindex,nofollow">'+
+    '<title>'+esc(title)+'</title>'+
+    '<link rel="icon" href="/assets/favicon.png">'+
+    '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'+
+    '<link rel="stylesheet" href="'+FONTS+'">'+
+    '<style>body{margin:0;padding:22px 14px 60px;background:#EEF2F6;'+
+    'font-family:"IBM Plex Sans Arabic",system-ui,sans-serif}'+
+    '@media print{body{padding:0;background:#fff}}'+PP_CSS+
+    '.ppz{position:fixed;inset:0;z-index:99;background:rgba(11,37,69,.92);display:none;'+
+    'place-items:center;padding:20px;cursor:zoom-out}.ppz img{max-width:100%;max-height:100%;'+
+    'border-radius:6px}.ppz.on{display:grid}.ppdoc img{cursor:zoom-in}'+
+    '@media print{.ppz{display:none!important}}</style></head><body>'+
+    c.outerHTML+'<div class="ppz" id="ppz"><img alt=""></div>'+
+    '<scr'+'ipt>'+ZJS+'</scr'+'ipt></body></html>';
+  const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=ref.replace(/[^A-Za-z0-9._-]+/g,"_")+".html";
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1500);
+}
+
 /* ---------- CONTACT ---------- */
 function pageContact(){
   return `<section class="sec tight sand"><div class="wrap">
@@ -2243,6 +2569,8 @@ const META = {
                ["صفقات منتجات مدروسة، توريد موثوق من الصين، شحن وتخليص، متجر، تدريب ومتابعة — قسم تابع لـ Red Sea Global Trading Co. Ltd.","Studied product deals, reliable sourcing from China, shipping and clearance, a store, training and follow-up — a division of Red Sea Global Trading Co. Ltd."]],
   "/calculator":[["حاسبة تكلفة الاستيراد — Red Sea Business Launch","Import Cost Calculator — Red Sea Business Launch"],
                ["احسب تكلفة الوحدة النهائية بعد الشحن والجمارك والضريبة ورسوم الخدمة، وهامش ربحك ونقطة التعادل قبل أن تدفع.","Work out your final landed unit cost after freight, duty, VAT and service fees — plus margin and break-even — before you pay."]],
+  "/passport":[["تعبئة جواز الشحنة — أداة داخلية","Shipment Passport builder — internal tool"],
+               ["أداة داخلية لتجهيز جواز الشحنة وتصديره كصفحة مستقلة للعميل.","Internal tool for preparing a shipment passport and exporting it as a standalone client page."]],
   "/compliance":[["سابر والامتثال — متطلبات استيراد الصين إلى السعودية والخليج 2026","SABER & Compliance — importing from China to Saudi Arabia and the Gulf, 2026"],
                ["مسار سابر خطوة بخطوة، رسوم شهادة المنتج والإرسالية، تواريخ 2025–2026 التي تُعطّل الشحنات، ومتطلبات المطابقة في السعودية والإمارات وعُمان وقطر والكويت والبحرين واليمن.","The SABER path step by step, Product and Shipment CoC fees, the 2025–2026 dates that stall shipments, and conformity requirements across Saudi Arabia, the UAE, Oman, Qatar, Kuwait, Bahrain and Yemen."]],
   "/deals":   [["الصفقات الجاهزة — Red Sea Business Launch","Ready Deals — Red Sea Business Launch"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
@@ -2291,6 +2619,7 @@ function render(){
   else if(base==="/about")             body=pageAbout();
   else if(base==="/faq")               body=pageFaq();
   else if(base==="/compliance")        body=pageCompliance();
+  else if(base==="/passport")          body=pagePassport();
   else if(base==="/contact")           body=pageContact();
   else if(base==="/legal")             body=pageLegal();
   else if(base==="/thanks")            body=pageThanks();
@@ -2333,6 +2662,7 @@ function render(){
   if(base==="/faq")     bindFaq();
   if(base==="/calculator") bindCalc();
   if(base==="/compliance") bindCompliance();
+  if(base==="/passport") bindPassport();
   if(base==="/consultation" && CFG.calendly){
     $("#calbox").outerHTML = `<iframe src="${CFG.calendly}" style="width:100%;height:640px;border:0;border-radius:10px" title="Booking calendar"></iframe>`;
   }
