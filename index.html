@@ -1126,7 +1126,7 @@ const NAV = () => [
   ["#/packages",  L("باقات الإطلاق","Packages")],
   ["#/calculator",L("حاسبة التكلفة","Calculator")],
   ["#/compliance",L("الامتثال","Compliance")],
-  ["#/faq",       L("الأسئلة الشائعة","FAQ")],
+  ["#/supplier-check",L("فحص المورد","Supplier check")],
   ["#/contact",   L("تواصل معنا","Contact")]
 ];
 
@@ -1164,6 +1164,7 @@ function footer(){
         <li><a href="#/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
         <li><a href="#/packages">${L("باقات الإطلاق","Launch packages")}</a></li>
         <li><a href="#/compliance">${L("سابر والامتثال","SABER & compliance")}</a></li>
+        <li><a href="#/supplier-check">${L("فحص المورد الصيني","Chinese supplier check")}</a></li>
         <li><a href="#/consultation">${L("حجز استشارة","Book a consultation")}</a></li>
         <li><a href="#/qualify">${L("نموذج التأهيل","Qualification form")}</a></li>
       </ul></div>
@@ -2579,6 +2580,119 @@ function ppExport(){
   setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1500);
 }
 
+/* ---------- VERIFY A CHINESE SUPPLIER ---------- */
+function pageVerify(){
+  const steps=[
+    [L("السجل الحكومي الصيني","The Chinese government registry"),"NATIONAL ENTERPRISE CREDIT REGISTRY",
+     L("منصة رسمية تابعة لهيئة تنظيم السوق الصينية، مجانية ومفتوحة للجميع، وفيها كل شركة مسجَّلة في الصين. الواجهة بالصينية فقط — لا توجد نسخة إنجليزية رسمية، وأي موقع يسمّي نفسه «GSXT بالإنجليزية» هو وسيط تجاري لا جهة حكومية.","An official platform of China's market regulator, free and open to anyone, covering every registered company in China. The interface is Chinese only — there is no official English version, and any site calling itself \"GSXT in English\" is a commercial reseller, not a government body."),
+     L("ابحث بالاسم الصيني للشركة أو برمز الائتمان الموحّد. اطلب من المورد اسمه الصيني كما هو في الرخصة — لا الاسم الإنجليزي التجاري.","Search by the company's Chinese name or its Unified Social Credit Code. Ask the supplier for the Chinese name exactly as it appears on the licence — not the English trading name.")],
+    [L("رمز الائتمان الاجتماعي الموحّد","The Unified Social Credit Code"),"18-CHARACTER USCC",
+     L("ثمانية عشر خانة من أرقام وحروف كبيرة، ولا تُستخدم فيها الحروف I و O و Z و S و V. الخانة الأولى تدل على جهة التسجيل، و«9» تعني هيئة تنظيم السوق. الخانات من الثالثة إلى الثامنة ترمز للمنطقة الإدارية.","Eighteen characters of digits and capital letters, never using I, O, Z, S or V. The first character is the registering authority, where 9 means the market regulator. Characters three to eight encode the administrative region."),
+     L("رمز يبدأ بـ 91 هو شركة عادية مسجَّلة لدى هيئة تنظيم السوق. وإن قال المورد إنه في شنتشن بينما ترمز خاناته إلى إقليم آخر، فاسأل عن السبب قبل أن تكمل.","A code starting 91 is an ordinary company registered with the market regulator. If the supplier says Shenzhen but the code encodes a different province, ask why before you go further.")],
+    [L("رخصة العمل — وامسح رمز QR","The business licence — and scan the QR code"),"BUSINESS LICENCE",
+     L("الرخصة النظامية تحمل: الاسم، رمز الائتمان الموحّد، نوع الكيان، رأس المال المسجَّل، المقر، الممثل القانوني، نطاق الأعمال، جهة التسجيل، وتاريخ التأسيس. والرخص الصادرة منذ مارس 2019 تحمل رمز QR يربط مباشرة بسجل الشركة في المنصة الحكومية.","A compliant licence carries: the name, the USCC, the entity type, registered capital, domicile, legal representative, business scope, registering authority and date of establishment. Licences issued since March 2019 carry a QR code linking directly to the company's record on the government platform."),
+     L("امسح رمز QR وقارن الاسم والرمز حرفًا بحرف مع المطبوع على الورقة — هذا أقوى فحص لديك ضد رخصة معدَّلة بالفوتوشوب. وملاحظة تمنع سوء الفهم: «مدة العمل» حُذفت من واجهة الرخص الصادرة بعد 1 سبتمبر 2022، فوجودها في رخصة لا يعني تزويرًا، بل يعني أنها رخصة أقدم.","Scan the QR code and compare the name and code character by character with what is printed on the page — this is your strongest check against a photoshopped licence. And a note that prevents a misunderstanding: the term of operation was removed from licences issued after 1 September 2022, so seeing it does not mean forgery, only that the licence is older.")],
+    [L("رأس المال: انظر المدفوع لا المسجَّل","Capital: read the paid-in figure, not the registered one"),"PAID-IN vs SUBSCRIBED",
+     L("منذ إصلاح 2014 صار رأس المال المسجَّل «مكتتبًا» لا «مدفوعًا» — أي وعد من الشركاء، لا مال موجود. فشركة برأس مال 50 مليون يوان قد لا يكون فيها شيء فعليًا.","Since the 2014 reform, registered capital is subscribed rather than paid in — a promise by the shareholders, not money that exists. A company showing RMB 50 million may have nothing actually paid."),
+     L("ومنذ يوليو 2024 صارت المنصة الحكومية تنشر المبلغ المدفوع فعليًا إلى جانب المكتتب. هذا هو الرقم الذي يعني شيئًا. وقانون الشركات الجديد النافذ في 1 يوليو 2024 يلزم بسداد رأس المال خلال خمس سنوات، والشركات القائمة قبله أمامها مهلة حتى 30 يونيو 2027 — فالمورد ذو الاكتتاب الضخم والسداد الصفري على ساعة تعدّ.","Since July 2024 the government platform publishes the amount actually paid in alongside the subscribed amount. That is the number that means something. The new Company Law, in force 1 July 2024, requires capital to be paid within five years, and companies formed earlier have until 30 June 2027 — so a supplier with a large subscription and nothing paid is on a clock.")],
+    [L("مصنع أم وسيط؟","Factory or trader?"),"MANUFACTURER OR MIDDLEMAN",
+     L("نطاق الأعمال إشارة تعمل في اتجاه واحد فقط: غياب أي ذكر للإنتاج أو التصنيع أو المعالجة يعني على الأرجح أنك أمام شركة تجارية. لكن وجود كلمات البيع والتجارة لا ينفي المصنع إطلاقًا — أغلب المصانع الحقيقية تسجّل التصنيع والبيع والاستيراد والتصدير معًا.","Business scope is a one-directional signal: the absence of any mention of production, manufacturing or processing usually means you are looking at a trading company. But the presence of sales and trading words does not rule out a factory at all — most real factories register manufacturing, sales and import-export together."),
+     L("إشارات أفضل من نطاق الأعمال: نوع العنوان المسجَّل (مجمع صناعي أم برج مكاتب أم شقة)، وعدد الموظفين في التقرير السنوي، واسم الجهة المدوَّن على شهادات المنتج. وانتبه: من الطبيعي أن يكون المصنع كيانًا وشركة التصدير كيانًا آخر برمز مختلف — الطبيعي أن تعرف أي كيان في العقد وأي كيان يستلم المال.","Better signals than business scope: the type of registered address (industrial park, office tower or apartment), the headcount in the annual report, and which entity's name appears on the product certificates. And note: it is normal for the factory and the exporting company to be two entities with different codes — what matters is knowing which one is on the contract and which one receives the money.")],
+    [L("حق التصدير — معلومة قديمة يجب تصحيحها","Export rights — an outdated instruction to unlearn"),"THE RIGHT TO EXPORT",
+     L("«تسجيل مشغّل التجارة الخارجية» الذي تطلبه أغلب الأدلة العربية أُلغي في 30 ديسمبر 2022 مع تعديل قانون التجارة الخارجية. فالشهادة القديمة إن وُجدت لدى المورد صارت وثيقة تاريخية لا تثبت شيئًا اليوم.","The foreign trade operator filing that most Arabic guides still ask for was abolished on 30 December 2022 with the amendment of the Foreign Trade Law. If a supplier still holds that old certificate, it is a historical document that proves nothing today."),
+     L("المطلوب في 2026: رخصة عمل سارية، وتسجيل لدى الجمارك الصينية كمرسِل للبضائع (سارٍ منذ 1 يناير 2022). ويمكنك التحقق من ذلك بنفسك على منصة الجمارك لنشر معلومات ائتمان الشركات — وهي فحص مستقل عن السجل التجاري: شركة قد تكون سليمة في السجل ولا تملك تسجيلًا جمركيًا، فلا تصلح أن تكون المصدِّر في مستنداتك.","What is required in 2026: a valid business licence, and a customs filing as a consignor of import-export goods (in force since 1 January 2022). You can check this yourself on the customs credit disclosure platform — a check separate from the business registry: a company can be perfectly valid on the registry and still have no customs filing, which means it cannot be the exporter on your documents.")],
+    [L("إن لم يكن للمورد حق تصدير","If the supplier has no export rights"),"WHO IS THE EXPORTER OF RECORD",
+     L("هذه حالة شائعة جدًا مع موردي المنصات المحلية الصينية. المسار السليم هو وكيل تصدير بعقد مكتوب، ويبقى المصنع هو المسؤول الأساسي، ويتحمل مقدّم الخدمة مسؤولية تضامنية.","This is very common with suppliers from China's domestic platforms. The sound route is an export agent under a written contract, where the manufacturer remains the primary responsible party and the service company carries joint liability."),
+     L("والمسار الرمادي هو «شراء بيان جمركي» باسم شركة لا علاقة لها بصفقتك. وضرره عليك ملموس: اسم المصدِّر في بوليصة الشحن وشهادة المنشأ لن يطابق اسم من تعاقدت معه، وهذا وحده يكسر الاعتماد المستندي ويعقّد التخليص في الخليج ويضعف أي مطالبة لاحقة. اسأل دائمًا: من المصدِّر المسجَّل؟ واطلبها مكتوبة، وافحص ذلك الكيان أيضًا.","The grey route is buying a declaration in the name of a company unrelated to your deal. The damage to you is concrete: the exporter's name on the bill of lading and the certificate of origin will not match the party you contracted with, and that alone breaks a letter of credit, complicates Gulf clearance and weakens any later claim. Always ask who the exporter of record is, get it in writing, and check that entity too.")]
+  ];
+  const badges=[
+    [L("Gold Supplier","Gold Supplier"),L("اشتراك سنوي مدفوع","A paid annual membership"),
+     L("التحقق المرافق له يؤكد شيئين فقط: أن الشركة مسجَّلة، وأن الشخص الذي يراسلك مخوَّل بتمثيلها. لا يقول شيئًا عن مصنع ولا طاقة إنتاجية ولا نزاهة.","The verification attached to it confirms two things only: that the company is registered, and that the person emailing you is authorised to represent it. It says nothing about a factory, capacity or honesty.")],
+    [L("Verified Supplier","Verified Supplier"),L("أعلى درجة من نفس الاشتراك المدفوع","The top tier of that same paid membership"),
+     L("الفحص الميداني حقيقي وتنفّذه جهات معروفة مثل SGS و TÜV Rheinland و Intertek — لكن المورد هو من طلبه ودفع ثمنه. الشارة ليست جائزة يفوز بها المورد الجيد، بل خدمة يشتريها.","The on-site audit is real and is carried out by well-known bodies such as SGS, TÜV Rheinland and Intertek — but the supplier commissioned it and paid for it. The badge is not a prize the good supplier wins; it is a service he buys.")],
+    [L("Trade Assurance","Trade Assurance"),L("حماية للطلب لا شهادة للمورد","Order protection, not a supplier credential"),
+     L("تحمي طلبك من عدم الشحن أو مخالفة المواصفات أو نقص الكمية — بشرط أن تدفع داخل المنصة. أشهر طريقة يخسر بها المستورد ماله: يتفق على طلب محمي ثم يحوّل على حساب وصله عبر واتساب. ذلك الطلب غير محمي إطلاقًا.","It protects your order against non-shipment, specification mismatch or short quantity — provided you pay inside the platform. The most common way an importer loses money: agreeing a protected order and then wiring to an account received over WhatsApp. That order carries no protection at all.")],
+    [L("عدد السنوات بجانب اسم المورد","The years figure beside the supplier"),L("سنوات العضوية لا عمر الشركة","Years of membership, not the company's age"),
+     L("قارنه بتاريخ التأسيس في السجل الحكومي. الفرق بين الرقمين يقول لك الكثير.","Compare it with the establishment date on the government registry. The gap between the two numbers tells you a lot.")]
+  ];
+  const flags=[
+    [L("تعذّر التواصل عبر العنوان المسجَّل","Not contactable at the registered address"),
+     L("أحد أربعة أسباب لإدراج الشركة في «قائمة التشغيل غير الطبيعي» على المنصة الحكومية، وأخطرها عليك: يعني أن جهة رسمية ذهبت إلى العنوان فلم تجد الشركة. والأسباب الثلاثة الأخرى: عدم نشر التقرير السنوي في موعده، وعدم نشر معلومات واجبة، وعدم تحديث تغيير الاسم.","One of four grounds for listing a company on the abnormal operations list on the government platform, and the most serious for you: it means an official went to the address and did not find the company. The other three: failing to publish the annual report on time, failing to publish required information, and failing to register a name change.")],
+    [L("اسم المستفيد لا يطابق العقد","The beneficiary name does not match the contract"),
+     L("هذه أخطر نقطة في الصفحة كلها. اسم المستفيد في التحويل يجب أن يطابق حرفًا بحرف اسم الشركة في العقد وفي الرخصة. لا حساب شخصي لمدير المبيعات، ولا شركة في هونغ كونغ باسم مشابه، ولا «شركة مالية» وسيطة. وإن قيل لك إن حساب الشركة «تحت التدقيق» أو «مجمّد» أو «قيد التغيير» أو إن الحساب الشخصي «يوفّر الضريبة» — عاملها كاحتيال حتى يثبت العكس.","This is the most serious point on this page. The beneficiary name on the transfer must match, character for character, the company name on the contract and on the licence. Not the sales manager's personal account, not a Hong Kong entity with a similar name, not an intermediary finance company. And if you are told the company account is under audit, frozen or being changed, or that a personal account avoids tax, treat it as fraud until proven otherwise.")],
+    [L("تغيير بيانات البنك في منتصف الطلب","Bank details changed mid-order"),
+     L("هذه بالضبط آلية أشهر جرائم الاحتيال في التجارة الدولية: يُخترق بريد المورد أو يُسجَّل نطاق شبيه، فتصلك بيانات بنكية «محدَّثة». مكتب التحقيقات الفيدرالي يوصي صراحة بالتحقق من أي تغيير في رقم الحساب أو إجراءات الدفع مع الشخص نفسه. تحقق بمكالمة صوتية على رقم كان لديك من قبل — لا رقم مكتوب في الرسالة الجديدة.","This is exactly the mechanism behind the best-known fraud in international trade: the supplier's mailbox is compromised or a lookalike domain is registered, and updated bank details arrive. The FBI recommends explicitly verifying any change of account number or payment procedure with the person making the request. Verify by voice call on a number you already had — never one written in the new message.")],
+    [L("فجوات في التقارير السنوية","Gaps in the annual filings"),
+     L("كل شركة صينية ملزمة بنشر تقريرها السنوي بين 1 يناير و30 يونيو من كل عام على المنصة الحكومية. غياب التقارير في حد ذاته إشارة.","Every Chinese company must publish its annual report between 1 January and 30 June each year on the government platform. Missing filings are a signal in themselves.")],
+    [L("رأس مال ضخم بلا سداد","Large subscription, nothing paid in"),
+     L("قارن المبلغ المكتتب بالمبلغ المدفوع فعليًا — كلاهما منشور منذ يوليو 2024. الفجوة الكبيرة ليست مخالفة، لكنها تقول لك إن الشركة ليست بحجم رقمها.","Compare the subscribed amount with the amount actually paid in — both have been published since July 2024. A wide gap is not a violation, but it tells you the company is not the size of its headline number.")]
+  ];
+  const src=[
+    ["https://www.gsxt.gov.cn","gsxt.gov.cn",L("النظام الوطني لنشر معلومات ائتمان الشركات — هيئة تنظيم السوق","The National Enterprise Credit Information Publicity System — SAMR")],
+    ["https://credit.customs.gov.cn","credit.customs.gov.cn",L("منصة الجمارك الصينية لنشر معلومات ائتمان شركات الاستيراد والتصدير","China Customs enterprise import-export credit disclosure platform")],
+    ["https://www.samr.gov.cn","samr.gov.cn",L("الهيئة الحكومية لتنظيم السوق — الأنظمة والقوائم","The State Administration for Market Regulation — regulations and lists")],
+    ["https://www.gov.cn","gov.cn",L("بوابة مجلس الدولة الصيني — نصوص الأنظمة والقرارات","The State Council portal — the texts of the regulations")]
+  ];
+  return `<section class="sec tight sand"><div class="wrap">
+    <span class="eyebrow">${L("دليل مجاني","Free guide")}</span>
+    <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("تحقّق من مورّدك الصيني بنفسك","Check your Chinese supplier yourself")}</h1>
+    <p class="lead">${L("سبع خطوات على سجلات حكومية صينية مفتوحة ومجانية، تكشف لك من تتعامل معه قبل أن تحوّل ريالًا واحدًا. طبّقها على أي مورد — وطبّقها علينا نحن.","Seven steps through open, free Chinese government records that show you who you are dealing with before you transfer a single riyal. Apply them to any supplier — and apply them to us.")}</p>
+    <div class="info">${L("محدَّث في سبتمبر 2026 من المصادر الرسمية المذكورة في نهاية الصفحة. السجلات الصينية بواجهة صينية فقط، وقد تكون بطيئة أو تطلب تحققًا بصريًا من خارج الصين.","Updated September 2026 from the official sources listed at the foot of this page. The Chinese registries have a Chinese-only interface, and can be slow or ask for a visual check from outside China.")}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الفحص","The check")}</span>
+      <h2>${L("سبع خطوات قبل التحويل","Seven steps before you transfer")}</h2></div>
+    <div class="steps rv" style="margin-top:36px">
+      ${steps.map((s,i)=>`<div class="step rv" data-i="${i+1}"><div class="n">${i+1}</div>
+        <h3>${s[0]}<span style="display:block;font-size:.6rem;letter-spacing:.14em;color:#9CAFC1;font-weight:500">${s[1]}</span></h3>
+        <p>${s[2]}</p><p style="margin-top:8px">${s[3]}</p></div>`).join("")}
+    </div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("سوء فهم شائع","A common misreading")}</span>
+      <h2>${L("ماذا تعني شارات علي بابا فعلًا","What the Alibaba badges actually mean")}</h2>
+      <p class="lead" style="margin:0 auto">${L("أغلب ما يُقال عن هذه الشارات في السوق العربي غير دقيق. هذا ما تقوله وثائق المنصة نفسها.","Most of what is said about these badges in the Arab market is inaccurate. This is what the platform's own documents say.")}</p></div>
+    <div class="tbl-wrap" style="margin-top:26px"><table><thead><tr>
+      <th>${L("الشارة","Badge")}</th><th>${L("ما هي","What it is")}</th><th>${L("ما تعنيه فعلًا","What it actually means")}</th>
+    </tr></thead><tbody>
+      ${badges.map(b=>`<tr><th>${b[0]}</th><td>${b[1]}</td><td>${b[2]}</td></tr>`).join("")}
+    </tbody></table></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("إشارات الخطر","Red flags")}</span>
+      <h2>${L("خمس إشارات تقدر تفحصها من مكتبك","Five signals you can check from your desk")}</h2></div>
+    <div class="acc rv" style="margin-top:26px">
+      ${flags.map(f=>`<details><summary>${f[0]}</summary><div class="a">${f[1]}</div></details>`).join("")}
+    </div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("دورنا","Our role")}</span>
+      <h2>${L("ما الذي نفحصه لك","What we check for you")}</h2></div>
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card rv"><h3>${L("الكيان والسجل","The entity and the record")}</h3><p>${L("مطابقة الاسم الصيني ورمز الائتمان الموحّد، وتاريخ التأسيس، وحالة التسجيل، ورأس المال المدفوع فعليًا، والقوائم السوداء والعقوبات الإدارية.","Matching the Chinese name and the USCC, the establishment date, the registration status, the capital actually paid in, the blacklists and the administrative penalties.")}</p></div>
+      <div class="card rv"><h3>${L("المصنع والمصدِّر","The factory and the exporter")}</h3><p>${L("هل الكيان مصنع أم وسيط، وهل يملك تسجيلًا جمركيًا يخوّله أن يكون المصدِّر في مستنداتك، ومن الكيان الذي سيظهر في بوليصة الشحن.","Whether the entity is a factory or a middleman, whether it holds the customs filing that lets it be the exporter on your documents, and which entity will appear on the bill of lading.")}</p></div>
+      <div class="card rv"><h3>${L("مسار الدفع","The payment route")}</h3><p>${L("مطابقة اسم المستفيد باسم الكيان المتعاقد، ومراجعة أي تغيير في بيانات البنك قبل التحويل — وهذه وحدها تمنع أكثر الخسائر شيوعًا.","Matching the beneficiary name to the contracting entity, and reviewing any change of bank details before the transfer — this alone prevents the most common losses.")}</p></div>
+    </div>
+    <div class="center" style="margin-top:30px">
+      <a class="btn btn-primary" href="#/qualify?type=supplier-check">${L("افحص مورّدي","Check my supplier")}</a>
+      <a class="btn btn-out" href="#/compliance">${L("متطلبات المطابقة في بلدك","Conformity in your country")}</a>
+    </div>
+  </div></section>
+
+  <section class="sec tight"><div class="wrap">
+    <h2 style="font-size:1.25rem">${L("المصادر","Sources")}</h2>
+    <p class="muted" style="font-size:.9rem">${L("كل ما في هذه الصفحة مأخوذ من أنظمة ومنصات حكومية صينية رسمية، لا من مدونات وسطاء.","Everything on this page comes from official Chinese government regulations and platforms, not from broker blogs.")}</p>
+    <ul style="font-size:.92rem;line-height:2">
+      ${src.map(x=>`<li><a href="${x[0]}" target="_blank" rel="noopener nofollow"><bdi dir="ltr">${x[1]}</bdi></a> — ${x[2]}</li>`).join("")}
+    </ul>
+    <div class="notice" style="margin-top:14px">${L("هذه الصفحة للتوعية والتخطيط، ولا تُغني عن فحص ميداني للمصنع ولا عن مراجعة قانونية قبل التعاقد. المنصات الحكومية الصينية قد تتغيّر واجهاتها.","This page is for awareness and planning. It does not replace an on-site factory audit or legal review before contracting. The Chinese government platforms may change their interfaces.")}</div>
+  </div></section>`;
+}
+
 /* ---------- CONTACT ---------- */
 function pageContact(){
   return `<section class="sec tight sand"><div class="wrap">
@@ -2651,6 +2765,8 @@ const META = {
                ["احسب تكلفة الوحدة النهائية بعد الشحن والجمارك والضريبة ورسوم الخدمة، وهامش ربحك ونقطة التعادل قبل أن تدفع.","Work out your final landed unit cost after freight, duty, VAT and service fees — plus margin and break-even — before you pay."]],
   "/passport":[["تعبئة جواز الشحنة — أداة داخلية","Shipment Passport builder — internal tool"],
                ["أداة داخلية لتجهيز جواز الشحنة وتصديره كصفحة مستقلة للعميل.","Internal tool for preparing a shipment passport and exporting it as a standalone client page."]],
+  "/supplier-check":[["تحقّق من مورّدك الصيني بنفسك — السجل الحكومي وحق التصدير وشارات علي بابا","Check your Chinese supplier yourself — the government registry, export rights and Alibaba badges"],
+               ["سبع خطوات على سجلات حكومية صينية مجانية: رمز الائتمان الموحّد، رخصة العمل ورمز QR، رأس المال المدفوع، التسجيل الجمركي، وحقيقة شارات علي بابا، وأخطر قاعدة في التحويل البنكي.","Seven steps through free Chinese government records: the Unified Social Credit Code, the business licence and its QR code, paid-in capital, the customs filing, what the Alibaba badges really mean, and the single most important rule about the bank transfer."]],
   "/compliance":[["سابر والامتثال — متطلبات استيراد الصين إلى السعودية والخليج 2026","SABER & Compliance — importing from China to Saudi Arabia and the Gulf, 2026"],
                ["مسار سابر خطوة بخطوة، رسوم شهادة المنتج والإرسالية، تواريخ 2025–2026 التي تُعطّل الشحنات، ومتطلبات المطابقة في السعودية والإمارات وعُمان وقطر والكويت والبحرين واليمن.","The SABER path step by step, Product and Shipment CoC fees, the 2025–2026 dates that stall shipments, and conformity requirements across Saudi Arabia, the UAE, Oman, Qatar, Kuwait, Bahrain and Yemen."]],
   "/deals":   [["الصفقات الجاهزة — Red Sea Business Launch","Ready Deals — Red Sea Business Launch"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
@@ -2699,6 +2815,7 @@ function render(){
   else if(base==="/about")             body=pageAbout();
   else if(base==="/faq")               body=pageFaq();
   else if(base==="/compliance")        body=pageCompliance();
+  else if(base==="/supplier-check")     body=pageVerify();
   else if(base==="/passport")          body=pagePassport();
   else if(base==="/contact")           body=pageContact();
   else if(base==="/legal")             body=pageLegal();
