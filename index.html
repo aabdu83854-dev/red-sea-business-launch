@@ -488,7 +488,14 @@ html[dir="rtl"] .cbar .seg:last-child{border-radius:6px 0 0 6px}
 .ctab .sw{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
 .ctab td:not(:first-child){text-align:end;font-variant-numeric:tabular-nums}
 .ctab th:not(:first-child){text-align:end}
-@media print{.calc{grid-template-columns:1fr}.calc-out{position:static}}
+@media print{.calc{grid-template-columns:1fr;gap:14px}.calc-out{position:static}
+  header.site,footer.site,.mbar,#prog,.wa,#o_print,#o_send,.calc-in .chint,
+  .calc-out .btns,.skip{display:none!important}
+  .calc-in .notice,#c_cnote{font-size:9pt}
+  .calc-in input,.calc-in select{border:1px solid #bbb!important;background:#fff!important}
+  .calc-in,.calc-out .card{break-inside:avoid;page-break-inside:avoid}
+  .sec{padding:0!important}
+  .cbar .seg{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 
 /* ============ premium layer ============ */
 :root{--brass:#C6A15B; --brass-2:#E7CE96}
@@ -1666,9 +1673,46 @@ const CC = [
   ["freight",L("الشحن","Freight"),                 "#D0202A","#D0202A"],
   ["duty",   L("الرسوم الجمركية","Customs duty"),  "#00A3A3","#00A3A3"],
   ["vat",    L("ضريبة القيمة المضافة","VAT"),      "#7B5FC0","#7B5FC0"],
-  ["fee",    L("رسوم الخدمة وغيرها","Service & other"),"#C98A14","#C08420"]
+  ["fee",    L("الخدمة والامتثال","Service & conformity"),"#C98A14","#C08420"]
 ];
 const money = n => (Math.round(n*100)/100).toLocaleString("en-US",{maximumFractionDigits:2});
+
+/* Destination presets. Duty/VAT are the published headline rates; conformity fees
+   are platform fees only — assessment-body and lab fees are separate. */
+const CTRY = () => ({
+  sa:{n:L("السعودية","Saudi Arabia"),body:L("سابر — الهيئة السعودية للمواصفات والمقاييس والجودة","SABER — SASO"),
+    duty:5,vat:15,comp:107,gov:{rate:3.75,pct:0.0015,min:15,max:500},
+    note:L("شهادة مطابقة الإرسالية 402.50 ريال لكل شحنة (≈ 107 $ بسعر الربط 3.75). إن كانت أول شحنة لهذا المنتج أضف شهادة مطابقة المنتج 575 ريالًا سنويًا (≈ 153 $). تُحتسب تلقائيًا رسوم الخدمة الجمركية 0.15٪ من قيمة CIF بحد أدنى 15 وأقصى 500 ريال.",
+           "The Shipment CoC is SAR 402.50 per shipment (≈ $107 at the 3.75 peg). For a product's first shipment add the Product CoC at SAR 575 per year (≈ $153). The 0.15% customs service fee on CIF, floored at SAR 15 and capped at SAR 500, is added automatically.")},
+  ae:{n:L("الإمارات","UAE"),body:L("وزارة الصناعة والتكنولوجيا المتقدمة — شهادة ECAS","MoIAT — ECAS"),
+    duty:5,vat:5,comp:0,
+    note:L("شهادة ECAS إلزامية للمنتجات المنظَّمة وتكلفتها حسب المنتج وجهة التقييم — أدخلها في خانة المطابقة. اربط رقمك الضريبي برمز المستورد الجمركي، وإلا دفعت الضريبة نقدًا عند الإفراج واستردتها لاحقًا.",
+           "ECAS is mandatory for regulated products and its cost depends on the product and the assessment body — enter it in the conformity field. Link your TRN to your customs code, otherwise you pay the VAT in cash on release and recover it later.")},
+  om:{n:L("عُمان","Oman"),body:L("وزارة التجارة والصناعة — علامة الجودة العُمانية","MoCIIP — Omani Quality Mark"),
+    duty:5,vat:5,comp:0,
+    note:L("علامة الجودة العُمانية أصبحت إلزامية من 1 مارس 2026، ويشمل نطاقها الأجهزة الكهربائية منخفضة الجهد ومستحضرات التجميل والأجهزة المستهلكة للطاقة.",
+           "The Omani Quality Mark became mandatory on 1 March 2026, covering low-voltage electrical appliances, cosmetics and energy-consuming devices.")},
+  qa:{n:L("قطر","Qatar"),body:L("الهيئة القطرية للمواصفات والتقييس","QGOSM"),
+    duty:5,vat:0,comp:0,
+    note:L("لا يوجد نظام مطابقة عام إلزامي شبيه بسابر — البرنامج خاص بمنتجات محددة فقط. ولا توجد ضريبة قيمة مضافة حتى الآن.",
+           "There is no general mandatory conformity scheme comparable to SABER — the programme covers specific products only. There is no VAT to date.")},
+  kw:{n:L("الكويت","Kuwait"),body:L("الهيئة العامة للصناعة — نظام KUCAS","Public Authority for Industry — KUCAS"),
+    duty:5,vat:0,comp:0,
+    note:L("نظام KUCAS يتطلب تقريرين معًا: تقرير الفحص الفني TIR وتقرير التقييم الفني TER. تكلفتهما حسب المنتج وجهة الفحص — أدخلها في خانة المطابقة.",
+           "KUCAS requires two reports together: a Technical Inspection Report and a Technical Evaluation Report. Their cost depends on the product and the inspection body — enter it in the conformity field.")},
+  bh:{n:L("البحرين","Bahrain"),body:L("مديرية المواصفات والمقاييس","BSMD"),
+    duty:5,vat:10,comp:0,
+    note:L("لا يوجد نظام تسجيل عام قبل الشحن لمعظم المنتجات، لكن هناك فحوصات عند المنافذ لفئات محددة مثل الإطارات والأسمنت والألعاب ومستحضرات التجميل.",
+           "There is no general pre-shipment registration for most products, but port checks apply to specific categories such as tyres, cement, toys and cosmetics.")},
+  ye:{n:L("اليمن","Yemen"),body:L("لا توجد منصة مطابقة إلكترونية موحّدة","No single electronic conformity platform"),
+    duty:null,vat:null,comp:null,
+    note:L("الرسوم تختلف بحسب جهة الاستيراد وسلطة الميناء، فأدخل نسبك يدويًا. مدة الشحن من الصين 28–45 يومًا، والحديدة أطول من عدن. ثبّت مسار الدفع قبل الشحن — الاعتمادات المستندية شبه متعذّرة.",
+           "Rates differ by importing authority and port administration, so enter your own figures. Transit from China is 28–45 days, with Hodeidah longer than Aden. Fix the payment route before shipping — letters of credit are largely unavailable.")},
+  xx:{n:L("دولة أخرى","Another country"),body:L("أدخل نسب بلدك يدويًا","Enter your own rates"),
+    duty:null,vat:null,comp:null,
+    note:L("أدخل الرسوم الجمركية ونسبة الضريبة ورسوم المطابقة في بلدك يدويًا.",
+           "Enter your country's duty, VAT and conformity fees manually.")}
+});
 
 function pageCalc(){
   const f=(k,l,v,h,step)=>`<div class="field"><label for="c_${k}">${l}</label>
@@ -1684,12 +1728,18 @@ function pageCalc(){
     <div class="calc">
       <div class="card calc-in rv">
         <h2 style="font-size:1.15rem;margin-bottom:16px">${L("مدخلاتك","Your inputs")}</h2>
+        <div class="field" style="margin-bottom:14px">
+          <label for="c_ctry">${L("بلد الوصول","Destination country")}</label>
+          <select id="c_ctry">${Object.keys(CTRY()).map(k=>`<option value="${k}"${k==="sa"?" selected":""}>${CTRY()[k].n}</option>`).join("")}</select>
+        </div>
+        <div class="info" id="c_cnote" style="margin-bottom:16px"></div>
         <div class="grid2">
           ${f("unit",L("سعر الوحدة من المصنع ($)","Factory unit price ($)"),"3.20")}
           ${f("qty",L("الكمية (وحدة)","Quantity (units)"),"400","","1")}
           ${f("frtot",L("تكلفة الشحن الإجمالية ($)","Total freight ($)"),"620",L("من عرض شركة الشحن — بحري أو جوي","From your forwarder's quote — sea or air"))}
           ${f("duty",L("الرسوم الجمركية (%)","Customs duty (%)"),"5",L("ابدأ بـ 5% وعدّلها حسب البند الجمركي ودولتك","Start at 5% and adjust for your HS code and country"))}
           ${f("vat",L("ضريبة القيمة المضافة (%)","VAT (%)"),"15",L("تختلف بين الدول — أدخل نسبة بلدك","Differs by country — enter your local rate"))}
+          ${f("comp",L("رسوم المطابقة والشهادات ($)","Conformity & certificates ($)"),"107",L("تُملأ حسب الدولة — أضف أتعاب جهة التقييم والاختبارات","Set by country — add the assessment body and lab fees"))}
           ${f("fee",L("رسوم الخدمة ($)","Service fee ($)"),"450",L("من 450 $ لباقة التوريد فقط","From $450 for Sourcing Only"))}
           ${f("other",L("تكاليف أخرى ($)","Other costs ($)"),"120",L("تخليص، نقل داخلي، تغليف، عينات","Clearance, inland transport, packaging, samples"))}
           ${f("sell",L("سعر البيع المتوقع للوحدة ($)","Expected selling price ($)"),"11.00")}
@@ -1718,10 +1768,12 @@ function pageCalc(){
           <table class="ctab"><caption class="sr">${L("جدول توزيع التكلفة","Cost breakdown table")}</caption>
             <thead><tr><th>${L("البند","Line")}</th><th>${L("المبلغ","Amount")}</th><th>${L("النسبة","Share")}</th></tr></thead>
             <tbody id="o_tab"></tbody></table>
+          <p class="muted" id="o_sub" style="font-size:.8rem;margin:10px 0 0;line-height:1.7"></p>
         </div>
 
         <div class="btns" style="margin-top:6px">
           <a class="btn btn-primary" id="o_send" href="#/qualify?type=custom">${L("أرسل هذه الحسبة لفريقنا","Send this calculation to us")}</a>
+          <button class="btn btn-out" type="button" id="o_print">${L("احفظ النتيجة PDF","Save the result as PDF")}</button>
           <a class="btn btn-out" href="#/deals">${L("شوف صفقات جاهزة بهذه الميزانية","See ready deals at this budget")}</a>
         </div>
       </div>
@@ -1734,11 +1786,16 @@ function bindCalc(){
   const el=i=>document.getElementById(i);
   const calc=()=>{
     const unit=g("unit"),qty=g("qty"),frtot=g("frtot"),dutyP=g("duty"),vatP=g("vat"),
-          fee=g("fee"),other=g("other"),sell=g("sell");
+          comp=g("comp"),fee=g("fee"),other=g("other"),sell=g("sell");
+    const ck=document.getElementById("c_ctry").value, C=CTRY()[ck]||{};
     const goods=unit*qty;
-    const duty=(goods+frtot)*dutyP/100;
-    const vat=(goods+frtot+duty)*vatP/100;
-    const svc=fee+other;
+    const cif=goods+frtot;
+    const duty=cif*dutyP/100;
+    const vat=(cif+duty)*vatP/100;
+    let gov=0;
+    if(C.gov){ const inLocal=cif*C.gov.rate*C.gov.pct;
+      gov=Math.min(Math.max(inLocal,C.gov.min),C.gov.max)/C.gov.rate; }
+    const svc=fee+other+comp+gov;
     const total=goods+frtot+duty+vat+svc;
     const per= qty>0 ? total/qty : 0;
     const rev=sell*qty, profit=rev-total;
@@ -1767,14 +1824,37 @@ function bindCalc(){
     });
     el("o_bar").innerHTML=bar; el("o_leg").innerHTML=leg;
     el("o_tab").innerHTML=tab+`<tr class="total"><td>${L("الإجمالي","Total")}</td><td>$${money(total)}</td><td>100%</td></tr>`;
+    const sub=[[L("رسوم الخدمة","Service fee"),fee],[L("رسوم المطابقة والشهادات","Conformity & certificates"),comp],
+               [L("رسوم الخدمة الجمركية","Customs service fee"),gov],[L("تكاليف أخرى","Other costs"),other]]
+      .filter(x=>x[1]>0);
+    el("o_sub").innerHTML = sub.length
+      ? L("داخل بند الخدمة والامتثال: ","Inside the service & conformity line: ")+
+        sub.map(x=>`${x[0]} $${money(x[1])}`).join(" · ")
+      : "";
 
-    const msg=L(`حسبة تقديرية من الموقع:\nالكمية: ${qty}\nسعر المصنع: ${money(unit)} $\nتكلفة الوحدة النهائية: ${money(per)} $\nرأس المال: ${money(total)} $\nهامش الربح: ${margin.toFixed(1)}%`,
-                `Estimate from the site:\nQty: ${qty}\nEx-factory: $${money(unit)}\nLanded unit cost: $${money(per)}\nCapital: $${money(total)}\nMargin: ${margin.toFixed(1)}%`);
+    const msg=L(`حسبة تقديرية من الموقع:\nبلد الوصول: ${C.n||"—"}\nالكمية: ${qty}\nسعر المصنع: ${money(unit)} $\nتكلفة الوحدة النهائية: ${money(per)} $\nرأس المال: ${money(total)} $\nهامش الربح: ${margin.toFixed(1)}%`,
+                `Estimate from the site:\nDestination: ${C.n||"—"}\nQty: ${qty}\nEx-factory: $${money(unit)}\nLanded unit cost: $${money(per)}\nCapital: $${money(total)}\nMargin: ${margin.toFixed(1)}%`);
     el("o_send").href = waLink(msg);
     el("o_send").target="_blank"; el("o_send").rel="noopener";
   };
+  const sel=document.getElementById("c_ctry");
+  const setC=(apply)=>{
+    const C=CTRY()[sel.value]||{};
+    const note=document.getElementById("c_cnote");
+    note.innerHTML = `<b>${C.body||""}</b>${C.note?" — "+C.note:""}`+
+      ` <a href="#/compliance" style="white-space:nowrap">${L("تفاصيل المطابقة ←","Conformity details →")}</a>`;
+    if(apply){
+      if(C.duty!=null) document.getElementById("c_duty").value=C.duty;
+      if(C.vat!=null)  document.getElementById("c_vat").value=C.vat;
+      if(C.comp!=null) document.getElementById("c_comp").value=C.comp;
+    }
+    calc();
+  };
+  sel.addEventListener("change",()=>setC(true));
   document.querySelectorAll(".calc-in input").forEach(i=>i.addEventListener("input",calc));
-  calc();
+  const pb=document.getElementById("o_print");
+  if(pb) pb.addEventListener("click",()=>window.print());
+  setC(false);
 }
 
 function bindFaq(){
