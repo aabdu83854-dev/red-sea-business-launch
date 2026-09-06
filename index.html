@@ -356,6 +356,18 @@ td:last-child,th:last-child{font-variant-numeric:tabular-nums}
 .filters select:focus{outline:none;border-color:var(--navy-3);box-shadow:0 0 0 4px rgba(1,124,201,.14)}
 :root[data-theme="dark"] .filters{background:var(--card)}
 
+/* --- price volatility note --- */
+.pn{display:inline-block;vertical-align:middle;margin-inline-start:6px;font-size:.6rem;font-weight:600;
+  letter-spacing:.01em;line-height:1.6;padding:1px 7px;border-radius:999px;white-space:nowrap;cursor:help;
+  background:rgba(208,32,42,.07);color:#B0242C;border:1px solid rgba(208,32,42,.20)}
+.pn:hover,.pn:focus{background:rgba(208,32,42,.13);outline:none}
+:root[data-theme="dark"] .pn{background:rgba(255,138,128,.12);color:#FF9E95;border-color:rgba(255,138,128,.28)}
+.pnote{display:block;font-size:.78rem;line-height:1.65;color:var(--muted);margin-top:10px}
+.pnote b{color:var(--navy);font-weight:600}
+:root[data-theme="dark"] .pnote b{color:var(--sky)}
+.plan .price .pn{font-size:.58rem;vertical-align:super}
+@media print{.pn{border-color:#999;color:#333;background:none}}
+
 /* --- pricing plans --- */
 .plan{position:relative}
 .plan .price{font-size:1.9rem;letter-spacing:-.02em;line-height:1.1}
@@ -1351,6 +1363,26 @@ function pageHome(){
 const CATS = ()=>[["all",L("كل الفئات","All categories")],["home",L("أدوات منزلية","Home goods")],["phone",L("إكسسوارات جوال","Mobile accessories")],["food",L("مطاعم وكافيهات","Restaurants & cafés")],["beauty",L("صالونات وعناية","Salons & care")],["stationery",L("قرطاسية ومدارس","Stationery & school")],["packaging",L("مواد تغليف","Packaging")]];
 const TIERS = ()=>[["all",L("كل المستويات","All levels")],["starter",L("مبتدئ — 2,000–3,000 $","Starter — $2,000–3,000")],["growth",L("نمو — 5,000–10,000 $","Growth — $5,000–10,000")],["wholesale",L("جملة — 15,000 $ فأكثر","Wholesale — $15,000+")]];
 const MKTS  = ()=>[["all",L("كل الأسواق","All markets")],["sa",L("السعودية","Saudi Arabia")],["ae",L("الإمارات","UAE")],["om",L("عُمان","Oman")],["qa",L("قطر","Qatar")],["kw",L("الكويت","Kuwait")],["bh",L("البحرين","Bahrain")],["ye",L("اليمن","Yemen")]];
+/* Price volatility notes. Every displayed figure carries one of these, so no
+   number on the site can be read as a fixed, guaranteed quotation. */
+const PNOTE = {
+  est: () => L("رقم تقديري وليس عرض سعر. يتغيّر بحسب سعر المصنع وقت الطلب، والكمية، والمواصفات المطلوبة، وأجرة الشحن في ذلك الموسم، وسعر الصرف، والرسوم الجمركية والضريبة في بلد الوصول. لا يُثبَّت الرقم إلا في عرض سعر مكتوب يحمل تاريخه ومدة صلاحيته.",
+            "An estimate, not a quotation. It moves with the factory price at the time of order, the quantity, the specification, the freight rate that season, the exchange rate, and the duty and tax in the destination country. A figure is only fixed in a written quotation carrying its date and validity period."),
+  svc: () => L("نطاق تقديري لأتعاب الخدمة. يُحدَّد المبلغ النهائي بعد الاستشارة بحسب نطاق العمل وعدد المنتجات والأسواق ودرجة التعقيد — وقد يقع خارج النطاق المعروض في الحالات غير الاعتيادية.",
+            "An estimated range for the service fee. The final amount is set after the consultation according to scope, number of products, markets and complexity — and may fall outside the range shown in unusual cases."),
+  off: () => L("رسوم رسمية كما كانت منشورة في تاريخ التحديث المذكور. تحدّدها الجهة المُصدِرة وحدها وقد تتغيّر دون إشعار مسبق. راجع المنصة الرسمية بتاريخ شحنتك أنت.",
+            "Official fees as published on the stated update date. They are set by the issuing authority alone and can change without prior notice. Check the official platform as at the date of your own shipment."),
+  fx:  () => L("سعر صرف سوقي غير رسمي وشديد التقلّب، وقد يتغيّر خلال اليوم الواحد. لا تبنِ عليه عقدًا ولا تسعيرة بيع.",
+            "An unofficial market exchange rate, highly volatile and liable to move within a single day. Do not base a contract or a selling price on it.")
+};
+function pn(k){
+  const t = (PNOTE[k] || PNOTE.est)();
+  return `<span class="pn" tabindex="0" role="note" title="${esc(t)}" aria-label="${esc(t)}">${L("قد يتغيّر","may change")}</span>`;
+}
+function pnote(k){
+  return `<span class="pnote"><b>${L("لماذا قد يتغيّر هذا الرقم؟","Why can this figure change?")}</b> ${(PNOTE[k]||PNOTE.est)()}</span>`;
+}
+
 const tierTag = t => ({starter:L("مبتدئ","Starter"),growth:L("نمو","Growth"),wholesale:L("جملة","Wholesale")}[t]);
 
 /* Hand-drawn line-art scene per category — original SVG, no stock imagery. */
@@ -1383,7 +1415,7 @@ function dealCard(d){
       <h3>${A(d.name)}</h3>
       <p class="muted" style="font-size:.92rem">${A(d.short)}</p>
       <div class="meta">
-        <div>${L("الميزانية","Budget")}<b>${A(d.budget)}</b></div>
+        <div>${L("الميزانية","Budget")}<b>${A(d.budget)} ${pn("est")}</b></div>
         <div>${L("عدد المنتجات","Products")}<b>${A(d.skus)}</b></div>
         <div>${L("السوق المستهدف","Target market")}<b>${d.markets.slice(0,3).map(m=>m.toUpperCase()).join(" · ")}</b></div>
         <div>${L("المستوى","Level")}<b>${A(d.level)}</b></div>
@@ -1434,7 +1466,7 @@ function pageDeal(id){
   return `
   <section class="sec tight sand"><div class="wrap">
     <a href="#/deals" class="muted" style="font-size:.9rem">← ${L("كل الصفقات","All deals")}</a>
-    <div class="tags" style="margin:14px 0 10px"><span class="tag coral">${tierTag(d.tier)}</span><span class="tag navy">${d.incoterm}</span><span class="tag">${A(d.budget)}</span></div>
+    <div class="tags" style="margin:14px 0 10px"><span class="tag coral">${tierTag(d.tier)}</span><span class="tag navy">${d.incoterm}</span><span class="tag">${A(d.budget)}</span>${pn("est")}</div>
     <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${A(d.name)}</h1>
     <p class="lead">${A(d.short)}</p>
   </div></section>
@@ -1459,7 +1491,7 @@ function pageDeal(id){
         <p class="muted">${A(d.desc)}</p>
         <div class="tbl-wrap" style="margin-top:16px"><table>
           <tbody>
-            ${row(L("الميزانية التقديرية","Estimated budget"),A(d.budget))}
+            ${row(L("الميزانية التقديرية","Estimated budget"),A(d.budget)+" "+pn("est"))}
             ${row(L("عدد المنتجات","Number of products"),A(d.skus))}
             ${row(L("المستوى المناسب","Suitable level"),A(d.level))}
             ${row(L("شرط التسليم","Incoterm"),d.incoterm)}
@@ -1499,11 +1531,12 @@ function pageDeal(id){
     <h2>${L("جدول التكاليف التقديري","Estimated cost breakdown")}</h2>
     <div class="tbl-wrap"><table><thead><tr><th>${L("البند","Line item")}</th><th class="num">${L("التكلفة التقديرية","Estimated cost")}</th></tr></thead><tbody>
       ${d.costs.map(c=>`<tr><td>${L(c[0],c[1])}</td><td class="num">${L(c[2],c[3])}</td></tr>`).join("")}
-      <tr class="total"><td>${L("إجمالي الاستثمار التقديري","Total estimated investment")}</td><td class="num">${A(d.total)}</td></tr>
+      <tr class="total"><td>${L("إجمالي الاستثمار التقديري","Total estimated investment")}</td><td class="num">${A(d.total)} ${pn("est")}</td></tr>
     </tbody></table></div>
+    ${pnote("est")}
 
     <div class="grid g2" style="margin-top:24px">
-      <div class="card"><h3>${L("سعر البيع المقترح","Suggested selling price")}</h3><p>${A(d.sell)}</p></div>
+      <div class="card"><h3>${L("سعر البيع المقترح","Suggested selling price")} ${pn("est")}</h3><p>${A(d.sell)}</p></div>
       <div class="card"><h3>${L("نقطة التعادل","Break-even point")}</h3><p>${A(d.bep)}</p></div>
     </div>
 
@@ -1558,7 +1591,7 @@ function pagePackages(){
       ${plans.map(p=>`<div class="card plan rel rv ${p.f?"featured":""}">
         ${p.f?`<span class="badge">${L("الأكثر طلبًا","Most requested")}</span>`:""}
         <h3>${p.n}</h3>
-        <div class="price">${p.p}<small>${L("السعر النهائي بعد الاستشارة","Final price set after the consultation")}</small></div>
+        <div class="price">${p.p}${pn("svc")}<small>${L("السعر النهائي بعد الاستشارة","Final price set after the consultation")}</small></div>
         <p class="muted" style="font-size:.92rem">${p.s}</p>
         <ul>${p.y.map(i=>`<li>${i}</li>`).join("")}${p.no.map(i=>`<li class="no">${i}</li>`).join("")}</ul>
         <a class="btn ${p.f?"btn-primary":"btn-out"} btn-block" href="#/qualify?pkg=${encodeURIComponent(p.n)}">${L("اطلب هذه الباقة","Request this package")}</a>
@@ -1586,7 +1619,7 @@ function pagePackages(){
     <h2>${L("الاشتراك الشهري للتشغيل والمتابعة","Monthly operations & follow-up subscription")}</h2>
     <p class="lead">${L("لمن يريد أن يستمر التشغيل بعد انتهاء فترة الإطلاق: إدارة متجر، حملات، تحسين منتجات، تقارير، إعادة طلب، وإضافة أصناف.","For anyone who wants operations to continue after the launch period ends: store management, campaigns, product optimisation, reporting, re-ordering and adding new items.")}</p>
     <div class="grid g3" style="margin-top:26px">
-      ${sub.map(s=>`<div class="card plan rv"><h3>${s[0]}</h3><div class="price">${s[1]}<small>${L("يُلغى بإشعار مسبق حسب العقد","Cancellable with notice per contract")}</small></div>
+      ${sub.map(s=>`<div class="card plan rv"><h3>${s[0]}</h3><div class="price">${s[1]}${pn("svc")}<small>${L("يُلغى بإشعار مسبق حسب العقد","Cancellable with notice per contract")}</small></div>
         <ul>${s[2].map(i=>`<li>${i}</li>`).join("")}</ul>
         <a class="btn btn-out btn-block" href="#/qualify?pkg=${encodeURIComponent(s[0])}">${L("اطلب التفاصيل","Request details")}</a></div>`).join("")}
     </div>
@@ -1752,7 +1785,7 @@ function pageCalc(){
 
       <div class="calc-out">
         <div class="card hero-num rv">
-          <span class="lbl">${L("تكلفة الوحدة النهائية","Landed cost per unit")}</span>
+          <span class="lbl">${L("تكلفة الوحدة النهائية","Landed cost per unit")} ${pn("est")}</span>
           <strong id="o_unit">—</strong>
           <span class="sub" id="o_unitsub"></span>
         </div>
@@ -1762,6 +1795,7 @@ function pageCalc(){
           <div class="tile"><span>${L("الربح المتوقع","Expected profit")}</span><b id="o_profit">—</b></div>
           <div class="tile"><span>${L("نقطة التعادل","Break-even")}</span><b id="o_be">—</b></div>
         </div>
+        ${pnote("est")}
 
         <div class="card rv">
           <h3 style="font-size:1.02rem;margin-bottom:4px">${L("مما تتكوّن التكلفة","What the cost is made of")}</h3>
@@ -2188,7 +2222,7 @@ function pageCompliance(){
 
   <section class="sec sand"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("الرسوم","Fees")}</span>
-      <h2>${L("رسوم المنصة الرسمية","The official platform fees")}</h2></div>
+      <h2>${L("رسوم المنصة الرسمية","The official platform fees")} ${pn("off")}</h2></div>
     <div class="tbl-wrap" style="margin-top:26px"><table><thead><tr>
       <th>${L("البند","Item")}</th><th class="num">${L("بدون ضريبة","Excl. VAT")}</th><th class="num">${L("شامل الضريبة","Incl. VAT")}</th><th>${L("التكرار","Frequency")}</th>
     </tr></thead><tbody>
@@ -2785,7 +2819,7 @@ function pageYemen(){
       <div class="card"><h3>${L("ما الذي حدث","What happened")}</h3>
         <p>${L("قرّر مجلس الوزراء في عدن تحرير سعر الصرف الجمركي من 750 ريالًا للدولار إلى نحو 1,550 — أي بزيادة تتجاوز 100%. الرسم الجمركي نفسه لم يُرفع؛ ما ارتفع هو سعر الصرف الذي تُحوَّل به قيمة بضاعتك إلى ريال قبل حساب الرسم.","The cabinet in Aden liberalised the customs exchange rate from 750 rial to the dollar to about 1,550 — an increase of more than 100%. The duty rate itself was not raised; what rose is the rate at which the value of your goods is converted into rial before the duty is calculated.")}</p>
         <p style="margin-top:10px">${L("وأُعفيت سلع أساسية من التغيير: القمح والأرز والسكر وحليب الأطفال والأدوية وزيت الطعام والوقود.","Essential goods were exempted from the change: wheat, rice, sugar, infant milk, medicines, cooking oil and fuel.")}</p></div>
-      <div class="card"><h3>${L("مثال محسوب","A worked example")}</h3>
+      <div class="card"><h3>${L("مثال محسوب","A worked example")} ${pn("est")}</h3>
         <p>${L("بضاعة غير معفاة قيمتها 10,000 دولار عند الوصول، وبند جمركي 5%:","Non-exempt goods valued at US$10,000 on arrival, at a 5% tariff line:")}</p>
         <ul style="margin-top:10px;line-height:1.9">
           <li>${L("قبل التغيير: الوعاء <bdi dir=\"ltr\">10,000 × 750 = 7,500,000</bdi> ريال، والرسم <bdi dir=\"ltr\">375,000</bdi> ريال.","Before: base <bdi dir=\"ltr\">10,000 × 750 = 7,500,000</bdi> rial, duty <bdi dir=\"ltr\">375,000</bdi> rial.")}</li>
@@ -2824,10 +2858,10 @@ function pageYemen(){
       <h2>${L("ريالان — وسعر بلا طبعة ومدينة سعر بلا معنى","Two rials — and a price without a series and a city means nothing")}</h2></div>
     <div class="grid g2 rv" style="margin-top:26px">
       <div class="card"><h3>${L("عدن — الطبعة الجديدة","Aden — new banknotes")}</h3>
-        <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 1,565 YER / USD</p>
+        <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 1,565 YER / USD</p>${pn("fx")}
         <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. وكان نحو 2,905 في منتصف يوليو 2025 قبل ارتفاع حاد إلى نحو 1,600 في أغسطس 2025.","On 3 September 2026. It stood at about 2,905 in mid-July 2025 before a sharp appreciation to about 1,600 in August 2025.")}</p></div>
       <div class="card"><h3>${L("صنعاء — الطبعة القديمة","Sana'a — pre-2016 banknotes")}</h3>
-        <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 533 YER / USD</p>
+        <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 533 YER / USD</p>${pn("fx")}
         <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. ومناطق صنعاء تتداول أوراق ما قبل 2016، وهي غير متبادلة مع الطبعة الجديدة.","On 3 September 2026. Sana'a areas circulate pre-2016 notes, which are not interchangeable with the new series.")}</p></div>
     </div>
     <div class="notice" style="margin-top:16px">${L("هذان السعران غير رسميين ومصدرهما متابعة يومية للسوق، وهما شديدا التقلّب — لا تبنِ عليهما عقدًا. المقصود منهما شيء واحد: أن تعرف أن الرقمين موجودان وأن الفارق بينهما يقارب ثلاثة أضعاف. وسعر الصرف الجمركي المحرَّر (نحو 1,550) قريب عمدًا من سعر السوق في عدن.","Both rates are unofficial, come from daily market tracking, and are highly volatile — do not write a contract on them. Their purpose here is one thing: to make sure you know both numbers exist and that the gap is close to threefold. The liberalised customs rate of about 1,550 is deliberately aligned near the Aden market rate.")}</div>
