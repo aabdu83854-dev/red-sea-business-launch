@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /p/
 
-Sitemap: https://deals.redseaglobal.com/sitemap.xml
+Sitemap: https://red-sea-business-launch.a-abdu83854.workers.dev/sitemap.xml
