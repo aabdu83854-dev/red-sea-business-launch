@@ -1127,6 +1127,7 @@ const NAV = () => [
   ["#/calculator",L("حاسبة التكلفة","Calculator")],
   ["#/compliance",L("الامتثال","Compliance")],
   ["#/supplier-check",L("فحص المورد","Supplier check")],
+  ["#/yemen",     L("اليمن","Yemen")],
   ["#/contact",   L("تواصل معنا","Contact")]
 ];
 
@@ -1165,6 +1166,7 @@ function footer(){
         <li><a href="#/packages">${L("باقات الإطلاق","Launch packages")}</a></li>
         <li><a href="#/compliance">${L("سابر والامتثال","SABER & compliance")}</a></li>
         <li><a href="#/supplier-check">${L("فحص المورد الصيني","Chinese supplier check")}</a></li>
+        <li><a href="#/yemen">${L("الاستيراد إلى اليمن","Importing into Yemen")}</a></li>
         <li><a href="#/consultation">${L("حجز استشارة","Book a consultation")}</a></li>
         <li><a href="#/qualify">${L("نموذج التأهيل","Qualification form")}</a></li>
       </ul></div>
@@ -2693,6 +2695,205 @@ function pageVerify(){
   </div></section>`;
 }
 
+/* ---------- YEMEN ---------- */
+function pageYemen(){
+  const AS = L("محدَّث حتى 6 سبتمبر 2026","Current as of 6 September 2026");
+  const corr=[
+    [L("السلطة على الميناء","Authority over the port"),
+     L("الحكومة المعترف بها دوليًا","The internationally recognised government"),
+     L("سلطات صنعاء","The Sana'a authorities")],
+    [L("تصريح UNVIM","UNVIM clearance"),
+     L("غير مطلوب — هذان الميناءان خارج نطاق الآلية","Not required — these ports are outside the mechanism's scope"),
+     L("مطلوب، ويُقدَّم قبل الوصول بخمسة أيام على الأقل","Required, filed at least five days before arrival")],
+    [L("الريال المتداول","The rial in circulation"),
+     L("الطبعة الجديدة — نحو 1,565 ريال للدولار","New banknotes — about 1,565 rial to the dollar"),
+     L("الطبعة القديمة — نحو 533 ريال للدولار","Pre-2016 banknotes — about 533 rial to the dollar")],
+    [L("البنك المركزي المرجعي","The reference central bank"),
+     L("مركزي عدن — احتياطي نحو 1.2 مليار دولار","CBY-Aden — reserves of about US$1.2 billion")],
+    [L("التعرّض للعقوبات","Sanctions exposure"),
+     L("لا يوجد تعرّض ناشئ عن اختيار الميناء نفسه","No exposure arising from the choice of port itself"),
+     L("تعرّض موثّق: أنصار الله مصنَّفة منظمة إرهابية أجنبية منذ 4 مارس 2025، ويواجه غير الأمريكيين احتمال عقوبات ثانوية بموجب الأمر التنفيذي 13224","Documented exposure: Ansarallah has been designated a Foreign Terrorist Organization since 4 March 2025, and non-US persons face potential secondary sanctions under Executive Order 13224")]
+  ];
+  const unv=[
+    [L("افتح حسابًا على منصة الآلية","Open an account on the mechanism's portal"),
+     L("التقديم يتم عبر موقع الآلية مباشرة، ويحتاج حساب عميل. الآلية تعمل منذ 5 مايو 2016 ولا تزال قائمة في سبتمبر 2026.","Applications go through the mechanism's own website and need a client account. It has operated since 5 May 2016 and is still running in September 2026.")],
+    [L("قدّم الطلب قبل الوصول بخمسة أيام على الأقل","File at least five days before arrival"),
+     L("المهلة تُحسب حتى وصول السفينة إلى الحدود الخارجية للميناء. والآلية تنص صراحة على أن الطلبات المتأخرة تُسبّب تأخيرًا.","The deadline runs to the vessel's arrival at the outer port limits. The mechanism states plainly that late requests will incur delays.")],
+    [L("البضائع التجارية داخلة في النطاق","Commercial cargo is in scope"),
+     L("هذه ليست آلية للمساعدات فقط. الشحنات الإنسانية معفاة منها وتمر عبر خلية تنسيق تابعة لمكتب الأمم المتحدة للشؤون الإنسانية — أما شحنتك التجارية فداخلة.","This is not a humanitarian-only mechanism. Aid vessels are exempt and go through the OCHA deconfliction cell instead — your commercial shipment is in scope.")],
+    [L("اعرف أي ميناء داخل النطاق","Know which ports are in scope"),
+     L("الحديدة والصليف. أما رأس عيسى فتصاريحها موقوفة منذ يونيو 2017. وعدن والمكلا خارج النطاق تمامًا.","Hodeidah and Saleef. Ras Isa clearances have been suspended since June 2017. Aden and Mukalla are entirely outside the scope.")],
+    [L("تصريح دخول وبثّ AIS متواصل","An entry permit and continuous AIS")," ",
+     L("بموجب تعميم وزارة النقل الصادر في 30 يناير 2026، على السفينة الحصول على تصريح دخول من لحظة مغادرة ميناء التحميل، وإبقاء جهاز التعرّف الآلي يعمل طوال الرحلة.","Under a Ministry of Transport circular of 30 January 2026, a vessel must obtain an entry permit from the moment it leaves the loading port, and keep AIS transmitting for the whole voyage.")]
+  ];
+  const myth=[
+    [L("«الريال اليمني انهار إلى 2,900 للدولار»","\"The Yemeni rial has collapsed to 2,900 per dollar\""),
+     L("رقم قديم بمقدار الضعف تقريبًا. بلغ الريال في عدن نحو 2,905 في منتصف يوليو 2025، ثم ارتفع ارتفاعًا حادًا إلى نحو 1,600 في أغسطس 2025 وبقي قريبًا من ذلك المستوى. أي محتوى كُتب في منتصف 2025 يعطيك ضعف السعر الحقيقي اليوم.","Outdated by roughly a factor of two. The Aden rate did reach about 2,905 in mid-July 2025, then appreciated sharply to about 1,600 in August 2025 and has stayed near that level since. Any content written in mid-2025 gives you double today's real rate.")],
+    [L("«سعر الريال اليمني واحد»","\"There is one Yemeni rial rate\""),
+     L("لا. الطبعة الجديدة في عدن نحو 1,565 للدولار، والطبعة القديمة في صنعاء نحو 533 — بفارق يقارب ثلاثة أضعاف، وهما عملتان ورقيتان غير متبادلتين. أي سعر بالريال بلا تحديد الطبعة والمدينة هو سعر بلا معنى.","No. New notes in Aden are about 1,565 to the dollar and pre-2016 notes in Sana'a about 533 — close to a threefold gap, and the two banknote series are not interchangeable. Any rial price that does not state the series and the city is a meaningless price.")],
+    [L("«كل شحنة إلى اليمن تحتاج تصريح UNVIM»","\"Every shipment to Yemen needs UNVIM clearance\""),
+     L("أشهر خلط هيكلي في هذا الملف. الآلية تغطي الحديدة والصليف. الشحن إلى عدن والمكلا لا يمر بها إطلاقًا.","The most common structural confusion in this file. The mechanism covers Hodeidah and Saleef. Shipping to Aden or Mukalla does not go through it at all.")],
+    [L("«اشحن عبر جبل علي — هو المحور المعتاد لليمن»","\"Ship via Jebel Ali — it is the usual hub for Yemen\""),
+     L("كان صحيحًا تاريخيًا. لكن حركة الحاويات في جبل علي كانت تعمل بنحو 10% من مستواها الطبيعي في 19 أغسطس 2026 على خلفية اضطراب مضيق هرمز، وتحوّلت البضائع إلى الفجيرة وخورفكان وعُمان والجسر البري عبر جدة. صلالة هي البديل العملي اليوم.","It was true historically. But Jebel Ali container throughput was running at roughly 10% of normal on 19 August 2026 amid the Strait of Hormuz disruption, with cargo shifting to Fujairah, Khor Fakkan, Oman and the Jeddah land bridge. Salalah is today's practical alternative.")],
+    [L("«البحر الأحمر عاد طبيعيًا» أو «البحر الأحمر مغلق»","\"The Red Sea is back to normal\" or \"The Red Sea is closed\""),
+     L("لا هذا ولا ذاك. الوضع في أغسطس 2026 عودة جزئية ومشروطة وقابلة للانعكاس: ميرسك بنحو ثلث طاقتها المعتادة، وإم إس سي عبورات اختبارية فقط، مع هجوم مميت على سفينة تجارية قبالة اليمن في أغسطس 2026 وتراجع العبور الأسبوعي من 255 إلى 222.","Neither. As of August 2026 it is a partial, conditional and reversible return: Maersk at about a third of its usual capacity, MSC running test transits only, alongside a deadly attack on a commercial vessel off Yemen in August 2026 and weekly transits falling from 255 to 222.")],
+    [L("«اليمن يطلب شهادة مطابقة مثل سابر السعودية»","\"Yemen requires a conformity certificate like Saudi SABER\""),
+     L("لم نجد ما يثبت وجود برنامج مطابقة مسبق إلزامي عام لليمن، واليمن غير مدرج في قائمة الدول ذات البرامج الحكومية الإلزامية لدى Intertek. الاستثناء الوحيد الموثّق ضيّق: تسجيل ولصق كفاءة الطاقة للمكيفات.","We found no evidence of a general mandatory pre-shipment conformity programme for Yemen, and Yemen does not appear on Intertek's list of countries operating government-mandated programmes. The one documented exception is narrow: energy-efficiency registration and labelling for air conditioners.")],
+    [L("«الرسم الجمركي 5% فالتكلفة معروفة»","\"Duty is 5%, so the landed cost is predictable\""),
+     L("النسبة نصف القصة فقط. سعر الصرف الجمركي تضاعف تقريبًا في 19 مايو 2026، فتضاعف الوعاء الذي تُحسب عليه النسبة. ثم إن متوسط 5.52% مأخوذ من بيانات 2015 والحد الأقصى 25% — فالبند الجمركي لسلعتك أنت هو ما يحكم.","The rate is only half the story. The customs exchange rate roughly doubled on 19 May 2026, so the base the rate is applied to doubled with it. And the 5.52% average comes from 2015 data with a 25% ceiling — the tariff line for your own goods is what governs.")],
+    [L("«تصنيف أنصار الله أُلغي»","\"The Ansar Allah designation was revoked\""),
+     L("تغيّر التصنيف أكثر من مرة بين 2021 و2024. لكن التصنيف كمنظمة إرهابية أجنبية صدر في 4 مارس 2025 ولا يزال قائمًا بحسب آخر تحقق، ويحمل تعرّضًا لعقوبات ثانوية على غير الأمريكيين.","The listing changed more than once between 2021 and 2024. But the Foreign Terrorist Organization designation was issued on 4 March 2025 and remains in force as of the latest verification, carrying secondary-sanctions exposure for non-US persons.")]
+  ];
+  const src=[
+    ["https://www.vimye.org/","vimye.org",L("آلية الأمم المتحدة للتحقق والتفتيش في اليمن — النطاق والمهلة وفتح الحساب","UNVIM — scope, deadline and account registration")],
+    ["https://www.aljazeera.net/ebusiness/2026/5/19/%D8%A7%D9%84%D9%8A%D9%85%D9%86-%D9%8A%D8%AD%D8%B1%D8%B1-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D8%A7%D8%B1-%D8%A7%D9%84%D8%AC%D9%85%D8%B1%D9%83%D9%8A-%D8%A8%D8%A3%D9%83%D8%AB%D8%B1-%D9%85%D9%86-100","aljazeera.net",L("تحرير الدولار الجمركي — 19 مايو 2026","Liberalisation of the customs dollar — 19 May 2026")],
+    ["https://documents1.worldbank.org/curated/en/099630405192627146/pdf/IDU-915b334e-33e9-407b-b634-2ee6167b4790.pdf","worldbank.org",L("مرصد الاقتصاد اليمني — ربيع 2026: المركزيان، أسعار الصرف، حصص الموانئ","Yemen Economic Monitor, Spring 2026 — the two central banks, exchange rates, port shares")],
+    ["https://ofac.treasury.gov/faqs/1219","ofac.treasury.gov",L("مكتب مراقبة الأصول الأجنبية — التصنيف والتراخيص العامة، ومنها الترخيص 26A","OFAC — the designation and the general licences, including GL 26A")],
+    ["https://www.ukpandi.com/news-and-resources/circulars/article/sanctions-update-yemen-trading-and-support-for-the-houthi-terrorist-network/","ukpandi.com",L("تعميم نادي الحماية والتعويض البريطاني — التعرّض للعقوبات الثانوية والعناية الواجبة","UK P&I Club circular — secondary-sanctions exposure and due diligence")],
+    ["https://sanaacenter.org/files/Trade_Finance_in_Yemen_NO36_en.pdf","sanaacenter.org",L("مركز صنعاء — تمويل التجارة في اليمن، فبراير 2026","Sana'a Center — trade finance in Yemen, February 2026")],
+    ["https://north-standard.com/insights-and-resources/resources/news/yemen-port-situation-update","north-standard.com",L("تحديث أوضاع الموانئ اليمنية وتعميم وزارة النقل — 4 فبراير 2026","Yemen port situation and the Ministry of Transport circular — 4 February 2026")],
+    ["https://www.tuv.com/market-access-services/en/certification-filter/yemen-energy-efficiency-labelling.html","tuv.com",L("لصق كفاءة الطاقة للمكيفات في اليمن — GSO 2530:2016","Yemen air-conditioner energy-efficiency labelling — GSO 2530:2016")],
+    ["https://wits.worldbank.org/CountrySnapshot/en/YEM","wits.worldbank.org",L("متوسط التعريفة الجمركية اليمنية — بيانات 2015","Yemen average applied tariff — 2015 data")],
+    ["https://yemen.yeti.acaps.org/xr-commodities/","yemen.yeti.acaps.org",L("متابعة أسعار الصرف والسلع — بيانات غير رسمية تُحدَّث يوميًا","Exchange-rate and commodity tracking — unofficial data, updated daily")]
+  ];
+  return `<section class="sec tight sand"><div class="wrap">
+    <span class="eyebrow">${L("دليل مجاني","Free guide")}</span>
+    <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("الاستيراد إلى اليمن من الصين","Importing into Yemen from China")}</h1>
+    <p class="lead">${L("ملف اليمن ليس ملفًا واحدًا، بل ممرّان مختلفان في السلطة والعملة والإجراء والمخاطر. هذه الصفحة تفصل بينهما، وتقول لك بصراحة ما نعرفه وما لا نعرفه.","Yemen is not one file but two corridors, differing in authority, currency, procedure and risk. This page separates them, and tells you plainly what we know and what we do not.")}</p>
+    <div class="info">${AS} — ${L("كل رقم في هذه الصفحة مؤرَّخ ومنسوب إلى مصدره في نهايتها. هذا ملف سريع التغيّر: ثلاث أوضاع مختلفة في البحر الأحمر خلال 2026 وحدها، واضطراب في مضيق هرمز، وتغيير في سعر الصرف الجمركي. تحقّق من التاريخ قبل أن تبني عليه قرارًا.","Every figure here is dated and attributed at the foot of the page. This file moves fast: three different Red Sea postures during 2026 alone, a Strait of Hormuz disruption, and a change in the customs exchange rate. Check the date before you build a decision on it.")}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("البنية","The structure")}</span>
+      <h2>${L("ممرّان لا ممرّ واحد","Two corridors, not one")}</h2>
+      <p class="lead" style="margin:0 auto">${L("قبل السعر وقبل المصنع، السؤال الأول هو: أي ميناء؟ الإجابة تغيّر الإجراء والعملة والمخاطر القانونية كلها.","Before the price and before the factory, the first question is which port. The answer changes the procedure, the currency and the legal risk entirely.")}</p></div>
+    <div class="tbl-wrap rv" style="margin-top:26px"><table><thead><tr>
+      <th>&nbsp;</th><th>${L("عدن والمكلا","Aden & Mukalla")}</th><th>${L("الحديدة والصليف","Hodeidah & Saleef")}</th>
+    </tr></thead><tbody>
+      ${corr.map(r=>r.length===2
+        ? `<tr><th>${r[0]}</th><td colspan="2">${r[1]}</td></tr>`
+        : `<tr><th>${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="notice" style="margin-top:16px">${L("في 4 فبراير 2026 كانت عدن والحديدة والمخا ونشطون والصليف ورأس عيسى مدرجة جميعًا كموانئ عاملة. لكن طاقة الحديدة التشغيلية قُدِّرت منخفضة بنحو 70% في تقييم يعود إلى 18 يناير 2025 مع أضرار في الرافعات والمخازن — وهو رقم صار قديمًا، ننقله بتاريخه لا كواقع اليوم. وقد تراجعت حصة الموانئ الخاضعة لسلطات صنعاء من واردات اليمن إلى 67% في 2025 بعد أن كانت 75% في 2024.","On 4 February 2026, Aden, Hodeidah, Mokha, Nishtun, Saleef and Ras Isa were all listed as operational. But Hodeidah's operating capacity was assessed as down about 70% in a review dated 18 January 2025, with crane and warehouse damage — a figure that is now dated, which we carry with its date rather than as today's reality. The share of Yemen's imports moving through Sana'a-controlled ports fell to 67% in 2025 from 75% in 2024.")}</div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("19 مايو 2026","19 May 2026")}</span>
+      <h2>${L("الدولار الجمركي تضاعف — والنسبة لم تتغيّر","The customs dollar doubled — and the rate never moved")}</h2>
+      <p class="lead" style="margin:0 auto">${L("أهم تغيير على تكلفتك خلال العام، وأقلّ ما كُتب عنه بالعربية للمستوردين.","The biggest change to your landed cost this year, and the least written about in Arabic for importers.")}</p></div>
+    <div class="grid g2 rv" style="margin-top:26px">
+      <div class="card"><h3>${L("ما الذي حدث","What happened")}</h3>
+        <p>${L("قرّر مجلس الوزراء في عدن تحرير سعر الصرف الجمركي من 750 ريالًا للدولار إلى نحو 1,550 — أي بزيادة تتجاوز 100%. الرسم الجمركي نفسه لم يُرفع؛ ما ارتفع هو سعر الصرف الذي تُحوَّل به قيمة بضاعتك إلى ريال قبل حساب الرسم.","The cabinet in Aden liberalised the customs exchange rate from 750 rial to the dollar to about 1,550 — an increase of more than 100%. The duty rate itself was not raised; what rose is the rate at which the value of your goods is converted into rial before the duty is calculated.")}</p>
+        <p style="margin-top:10px">${L("وأُعفيت سلع أساسية من التغيير: القمح والأرز والسكر وحليب الأطفال والأدوية وزيت الطعام والوقود.","Essential goods were exempted from the change: wheat, rice, sugar, infant milk, medicines, cooking oil and fuel.")}</p></div>
+      <div class="card"><h3>${L("مثال محسوب","A worked example")}</h3>
+        <p>${L("بضاعة غير معفاة قيمتها 10,000 دولار عند الوصول، وبند جمركي 5%:","Non-exempt goods valued at US$10,000 on arrival, at a 5% tariff line:")}</p>
+        <ul style="margin-top:10px;line-height:1.9">
+          <li>${L("قبل التغيير: الوعاء <bdi dir=\"ltr\">10,000 × 750 = 7,500,000</bdi> ريال، والرسم <bdi dir=\"ltr\">375,000</bdi> ريال.","Before: base <bdi dir=\"ltr\">10,000 × 750 = 7,500,000</bdi> rial, duty <bdi dir=\"ltr\">375,000</bdi> rial.")}</li>
+          <li>${L("بعده: الوعاء <bdi dir=\"ltr\">10,000 × 1,550 = 15,500,000</bdi> ريال، والرسم <bdi dir=\"ltr\">775,000</bdi> ريال.","After: base <bdi dir=\"ltr\">10,000 × 1,550 = 15,500,000</bdi> rial, duty <bdi dir=\"ltr\">775,000</bdi> rial.")}</li>
+        </ul>
+        <p style="margin-top:10px">${L("النسبة 5% كما هي. الرسم بالريال تضاعف. وأي تسعيرة بيع بُنيت على أرقام ما قبل مايو 2026 صارت خاطئة.","The 5% is unchanged. The duty in rial doubled. Any selling price built on pre-May-2026 numbers is now wrong.")}</p></div>
+    </div>
+    <div class="notice" style="margin-top:16px">${L("ثلاث ملاحظات تمنع سوء الاستخدام: أولًا، متوسط التعريفة اليمنية البسيط 5.52% والمرجَّح 5.14% والحد الأقصى 25%، وهذه بيانات 2015 من قاعدة البنك الدولي — فالبند الجمركي لسلعتك أنت هو ما يحكم لا المتوسط. ثانيًا، ضريبة المبيعات العامة 5% (و10% للاتصالات) بموجب القانون رقم 19 لسنة 2001، ويسددها المستورد عند التخليص. ثالثًا، هذه الأرقام للتخطيط لا للإقرار الجمركي — المخلّص الجمركي في ميناء الوصول هو المرجع.","Three notes that prevent misuse. First, Yemen's simple average tariff is 5.52%, weighted 5.14%, with a 25% ceiling — and that is 2015 data from the World Bank database, so the tariff line for your own goods governs, not the average. Second, General Sales Tax is 5% (10% for telecoms) under Law No. 19 of 2001, paid by the importer at clearance. Third, these figures are for planning, not for a customs declaration — your clearing agent at the port of arrival is the reference.")}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الحديدة والصليف فقط","Hodeidah & Saleef only")}</span>
+      <h2>${L("آلية UNVIM — خمس نقاط تحسم الإجراء","UNVIM — five points that settle the procedure")}</h2></div>
+    <div class="steps rv" style="margin-top:36px">
+      ${unv.map((s,i)=>`<div class="step rv" data-i="${i+1}"><div class="n">${i+1}</div>
+        <h3>${s[0]}</h3><p>${s[s.length-1]}</p></div>`).join("")}
+    </div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("خط الشحن","The routing")}</span>
+      <h2>${L("لماذا لا نكتب لك عدد الأيام","Why we will not print a transit time")}</h2>
+      <p class="lead" style="margin:0 auto">${L("كل موقع شحن تقريبًا يعطيك رقمًا واثقًا لمدة الرحلة من الصين إلى عدن. بحثنا عن مصدر واحد موثوق لذلك الرقم في 2026 فلم نجده.","Almost every freight site gives you a confident day-count from China to Aden. We looked for a single credible source for that number in 2026 and could not find one.")}</p></div>
+    <div class="grid g3 rv" style="margin-top:26px">
+      <div class="card"><div class="ico">${ICON.ship}</div><h3>${L("المحور تغيّر","The hub moved")}</h3>
+        <p>${L("جبل علي — المحور التاريخي المعتاد لليمن — كان يعمل بنحو 10% من حركته الطبيعية في 19 أغسطس 2026 على خلفية اضطراب مضيق هرمز، وتحوّلت البضائع إلى الفجيرة وخورفكان وعُمان والجسر البري عبر جدة. وأعلنت ميرسك في 31 أغسطس 2026 تعليق أغلب الحجوزات من وإلى موانئ الخليج الأعلى، بتوجيه بديل عبر صلالة والجسر البري.","Jebel Ali — the historical hub for Yemen — was running at roughly 10% of normal on 19 August 2026 amid the Strait of Hormuz disruption, with cargo shifting to Fujairah, Khor Fakkan, Oman and the Jeddah land bridge. On 31 August 2026 Maersk suspended most bookings to and from the upper Gulf ports, routing instead via Salalah and the land bridge.")}</p></div>
+      <div class="card"><div class="ico">${ICON.shield}</div><h3>${L("الممرّ متذبذب","The corridor is oscillating")}</h3>
+        <p>${L("العودة إلى البحر الأحمر في أغسطس 2026 جزئية ومشروطة: ميرسك بنحو ثلث طاقتها المعتادة، وسي إم إيه سي جي إم بعدة خدمات عبر السويس، وإم إس سي عبورات اختبارية. وفي الوقت نفسه هجوم مميت على سفينة تجارية قبالة اليمن في أغسطس 2026، وتراجع العبور الأسبوعي من 255 إلى 222. والتحويل حول رأس الرجاء الصالح يضيف من 10 إلى 14 يومًا حين يُعتمد.","The August 2026 return to the Red Sea is partial and conditional: Maersk at about a third of usual capacity, CMA CGM running several Suez services, MSC on test transits. At the same time there was a deadly attack on a commercial vessel off Yemen in August 2026, and weekly transits fell from 255 to 222. Cape of Good Hope diversion adds 10 to 14 days when it is adopted.")}</p></div>
+      <div class="card"><div class="ico">${ICON.search}</div><h3>${L("ما نفعله بدل الرقم","What we do instead")}</h3>
+        <p>${L("نسحب جدول الخط الملاحي في يوم التسعير نفسه، ونعطيك المدة مؤرَّخة باليوم الذي سُحبت فيه، مع المحور المقترح وبديله. رقم مؤرَّخ اليوم أنفع لك من رقم واثق لا يعرف أحد متى كُتب. وننبّه أيضًا أننا لم نتمكن من التثبّت من وجود خدمة رئيسية مباشرة لأي من الناقلات الكبرى إلى عدن أو الحديدة — الوصول المعتاد بالمغذّيات عبر محور.","We pull the carrier schedule on the day we quote and give you the transit stamped with the date it was pulled, along with the proposed hub and its fallback. A dated number today is worth more than a confident number nobody can date. We also note that we could not verify a direct mainline service by any of the major carriers into Aden or Hodeidah — the usual access is by feeder through a hub.")}</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("العملة","The currency")}</span>
+      <h2>${L("ريالان — وسعر بلا طبعة ومدينة سعر بلا معنى","Two rials — and a price without a series and a city means nothing")}</h2></div>
+    <div class="grid g2 rv" style="margin-top:26px">
+      <div class="card"><h3>${L("عدن — الطبعة الجديدة","Aden — new banknotes")}</h3>
+        <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 1,565 YER / USD</p>
+        <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. وكان نحو 2,905 في منتصف يوليو 2025 قبل ارتفاع حاد إلى نحو 1,600 في أغسطس 2025.","On 3 September 2026. It stood at about 2,905 in mid-July 2025 before a sharp appreciation to about 1,600 in August 2025.")}</p></div>
+      <div class="card"><h3>${L("صنعاء — الطبعة القديمة","Sana'a — pre-2016 banknotes")}</h3>
+        <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 533 YER / USD</p>
+        <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. ومناطق صنعاء تتداول أوراق ما قبل 2016، وهي غير متبادلة مع الطبعة الجديدة.","On 3 September 2026. Sana'a areas circulate pre-2016 notes, which are not interchangeable with the new series.")}</p></div>
+    </div>
+    <div class="notice" style="margin-top:16px">${L("هذان السعران غير رسميين ومصدرهما متابعة يومية للسوق، وهما شديدا التقلّب — لا تبنِ عليهما عقدًا. المقصود منهما شيء واحد: أن تعرف أن الرقمين موجودان وأن الفارق بينهما يقارب ثلاثة أضعاف. وسعر الصرف الجمركي المحرَّر (نحو 1,550) قريب عمدًا من سعر السوق في عدن.","Both rates are unofficial, come from daily market tracking, and are highly volatile — do not write a contract on them. Their purpose here is one thing: to make sure you know both numbers exist and that the gap is close to threefold. The liberalised customs rate of about 1,550 is deliberately aligned near the Aden market rate.")}</div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("المطابقة","Conformity")}</span>
+      <h2>${L("لا تنقل قواعد سابر إلى اليمن","Do not carry the SABER rules across to Yemen")}</h2></div>
+    <div class="grid g2 rv" style="margin-top:26px">
+      <div class="card"><h3>${L("ما لم نجده","What we did not find")}</h3>
+        <p>${L("لم نجد ما يثبت وجود برنامج مطابقة مسبق إلزامي عام لليمن على غرار سابر السعودي أو إيكاس الإماراتي، واليمن غير مدرج في قائمة الدول ذات البرامج الحكومية الإلزامية لدى إحدى كبرى جهات الفحص. ولم نجد كذلك نصًا يمنيًا رسميًا يفرض لصق بيانات بالعربية أو شهادة حلال أو مدة صلاحية — كل ما وجدناه في هذا الباب هو أنظمة دول خليجية أخرى. لن نقدّم لك قاعدة خليجية على أنها يمنية.","We found no evidence of a general mandatory pre-shipment conformity programme for Yemen along the lines of Saudi SABER or Emirati ECAS, and Yemen does not appear on one major inspection body's list of countries with government-mandated programmes. Nor did we find an official Yemeni text mandating Arabic labelling, halal certification or shelf-life rules — everything we found in that area belongs to other Gulf states. We will not hand you a Gulf rule dressed as a Yemeni one.")}</p>
+        <p style="margin-top:10px">${L("وأيضًا: استخدم اليمن تاريخيًا شركة فحص قبل الشحن معيَّنة رسميًا. لم نتمكن من التثبّت من وجود تعيين ساري اليوم، فلن نسمّي شركة.","Also: Yemen historically mandated an officially appointed pre-shipment inspection company. We could not verify a currently valid appointment, so we will not name one.")}</p></div>
+      <div class="card"><h3>${L("الاستثناء الموثّق الوحيد","The one documented exception")}</h3>
+        <p>${L("المكيّفات: تسجيل ولصق كفاءة الطاقة إلزاميان بموجب المواصفة الخليجية GSO 2530:2016، وتنفذهما الهيئة اليمنية للمواصفات والمقاييس وضبط الجودة، وسارٍ منذ 1 أكتوبر 2024. الشهادة صالحة سنتين، ويلزم اختبار عيّنة، ولا يُشترط تفتيش المصنع.","Air conditioners: energy-efficiency registration and labelling are mandatory under the Gulf standard GSO 2530:2016, enforced by the Yemeni Standardization, Metrology and Quality Control Organization, in force since 1 October 2024. The certificate is valid for two years, sample testing is required, and factory inspection is not.")}</p>
+        <p style="margin-top:10px">${L("لم نجد أي محتوى عربي للمستوردين يذكر هذا المتطلب إطلاقًا. إن كنت تستورد مكيفات إلى اليمن فهذه أول نقطة تسأل عنها مورّدك.","We found no Arabic importer content mentioning this requirement at all. If you are importing air conditioners into Yemen, this is the first thing to raise with your supplier.")}</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الدفع والعقوبات","Payment & sanctions")}</span>
+      <h2>${L("القسم الذي نرفض أن نكون فيه أذكياء","The section where we refuse to be clever")}</h2>
+      <p class="lead" style="margin:0 auto">${L("هنا نذكر الوقائع الموثّقة ثم نتوقف. لن نصف لك طريقًا حول الفحص البنكي، ولن نسمّي بنكًا ولا صرّافًا ولا حسابًا وسيطًا. من يفعل ذلك على صفحة عامة يعرّضك ويعرّض نفسه.","Here we state the documented facts and then stop. We will not describe a route around bank screening, and we will not name a bank, an exchange house or an intermediary account. Anyone who does that on a public page exposes both you and themselves.")}</p></div>
+    <div class="grid g2 rv" style="margin-top:26px">
+      <div class="card"><h3>${L("الوقائع","The facts")}</h3>
+        <ul style="line-height:1.95">
+          <li>${L("أنصار الله مصنَّفة منظمة إرهابية أجنبية منذ 4 مارس 2025، ولا يزال التصنيف قائمًا.","Ansarallah has been designated a Foreign Terrorist Organization since 4 March 2025, and the designation remains in force.")}</li>
+          <li>${L("الترخيص العام 26A يجيز الاستيراد والتصدير عبر موانئ ومطارات اليمن، باستثناء المنتجات النفطية المكرّرة. والترخيص 25A انتهى في 4 أبريل 2025 ولم يُجدَّد.","General Licence 26A authorises imports and exports through Yemen's ports and airports, excluding refined petroleum products. General Licence 25A expired on 4 April 2025 and was not renewed.")}</li>
+          <li>${L("يواجه غير الأمريكيين احتمال عقوبات ثانوية بموجب الأمر التنفيذي 13224 إن تبيّن تقديمهم دعمًا أو مساعدة مادية، ويُطلب توثيق العناية الواجبة بشأن ملكية الميناء وهوية المستلم.","Non-US persons face potential secondary sanctions under Executive Order 13224 if determined to have provided material support or assistance, and documented due diligence on port ownership and receiver identity is expected.")}</li>
+          <li>${L("علاقات المراسلة المصرفية اليمنية متضرّرة بشدة منذ سنوات، وتزايد انتقال المؤسسات المالية من صنعاء إلى عدن على خلفية مخاطر العقوبات.","Yemeni correspondent banking relationships have been severely impaired for years, and financial institutions have increasingly relocated from Sana'a to Aden amid sanctions risk.")}</li>
+          <li>${L("النقد المتداول خارج الجهاز المصرفي ارتفع من 811 مليار ريال في 2014 إلى نحو 3.3 تريليون ريال في 2024 — أي أن أغلب تمويل التجارة يجري خارج البنوك.","Currency circulating outside the banking system rose from 811 billion rial in 2014 to about 3.3 trillion in 2024 — meaning most trade finance runs outside the banks.")}</li>
+        </ul></div>
+      <div class="card"><h3>${L("ما نطلبه منك قبل أن نبدأ","What we ask of you before we start")}</h3>
+        <p>${L("لأن اختيار ميناء التفريغ في اليمن ليس قرارًا لوجستيًا فقط بل قرار تعرّض قانوني، فإننا نطلب هذه المعلومات في بداية أي شحنة يمنية، ونثبّتها في الملف:","Because in Yemen the choice of discharge port is not only a logistics decision but a legal-exposure one, we ask for the following at the start of any Yemeni shipment and record it in the file:")}</p>
+        <ul style="line-height:1.95;margin-top:10px">
+          <li>${L("ميناء التفريغ المقصود، محدَّدًا بالاسم لا بالبلد.","The intended discharge port, named specifically, not just the country.")}</li>
+          <li>${L("هوية المستلم النهائي وسجله التجاري.","The identity of the ultimate consignee and its commercial registration.")}</li>
+          <li>${L("طبيعة البضاعة وبندها الجمركي.","The nature of the goods and their tariff line.")}</li>
+          <li>${L("وأن تكون قد راجعت مسار الدفع مع قسم الالتزام في بنكك أنت. هذه مراجعة لا نقوم بها نيابة عنك ولا نستطيع.","And that you have reviewed the payment route with your own bank's compliance desk. That is a review we do not and cannot carry out on your behalf.")}</li>
+        </ul>
+        <p style="margin-top:10px">${L("إن كان مسار شحنتك يمسّ ميناء أو جهة تحت التصنيف، فالجواب الصحيح هو مستشار قانوني مختص بالعقوبات، لا مورّد في الصين.","If your shipment's route touches a designated port or party, the right answer is qualified sanctions counsel, not a supplier in China.")}</p></div>
+    </div>
+    <div class="notice" style="margin-top:16px">${L("هذه الصفحة معلومات عامة للتخطيط، وليست استشارة قانونية ولا مشورة في العقوبات ولا في الامتثال المصرفي. الأنظمة والتصنيفات والتراخيص العامة تتغيّر، وبعضها تغيّر أكثر من مرة خلال العامين الماضيين. راجع المصادر الرسمية المذكورة أدناه بتاريخ قرارك أنت.","This page is general planning information. It is not legal advice, nor sanctions advice, nor banking-compliance advice. Regulations, designations and general licences change, and several changed more than once in the past two years. Check the official sources below as at the date of your own decision.")}</div>
+  </div></section>
+
+  <section class="sec sand"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("تصحيح","Corrections")}</span>
+      <h2>${L("ثمانية أشياء يتكرّر قولها وهي خاطئة","Eight things repeated often and wrong")}</h2></div>
+    <div class="acc rv" style="margin-top:26px">
+      ${myth.map(m=>`<details><summary>${m[0]}</summary><div class="a">${m[1]}</div></details>`).join("")}
+    </div>
+    <div class="center" style="margin-top:30px">
+      <a class="btn btn-primary" href="#/qualify?type=yemen">${L("اطلب تسعيرة مؤرَّخة لشحنتك","Request a dated quote for your shipment")}</a>
+      <a class="btn btn-out" href="#/calculator">${L("احسب تكلفتك التقديرية","Estimate your landed cost")}</a>
+    </div>
+  </div></section>
+
+  <section class="sec tight"><div class="wrap">
+    <h2 style="font-size:1.25rem">${L("المصادر","Sources")}</h2>
+    <p class="muted" style="font-size:.9rem">${L("لم نستخدم في هذه الصفحة أي رقم من مدونات وسطاء الشحن. وحين لم نجد مصدرًا موثوقًا — كمدة الرحلة من الصين، وقسط تأمين مخاطر الحرب الخاص بالموانئ اليمنية، ومتوسط مدة تصريح UNVIM — قلنا ذلك بدل أن نملأ الفراغ برقم يبدو معقولًا.","No figure on this page comes from a freight-broker blog. And where we could not find a credible source — the transit time from China, a war-risk premium specific to Yemeni ports, the average UNVIM turnaround — we said so rather than filling the gap with a plausible-looking number.")}</p>
+    <ul style="font-size:.92rem;line-height:2">
+      ${src.map(x=>`<li><a href="${x[0]}" target="_blank" rel="noopener nofollow"><bdi dir="ltr">${x[1]}</bdi></a> — ${x[2]}</li>`).join("")}
+    </ul>
+    <div class="notice" style="margin-top:14px">${AS}. ${L("الأوضاع الأمنية وأسعار الصرف وحالة الموانئ تتغيّر أسرع من تحديث أي صفحة. إن كان قرارك قريبًا، اطلب منّا التحقّق في يومه.","Security conditions, exchange rates and port status change faster than any page is updated. If your decision is imminent, ask us to verify on the day.")}</div>
+  </div></section>`;
+}
+
 /* ---------- CONTACT ---------- */
 function pageContact(){
   return `<section class="sec tight sand"><div class="wrap">
@@ -2767,6 +2968,8 @@ const META = {
                ["أداة داخلية لتجهيز جواز الشحنة وتصديره كصفحة مستقلة للعميل.","Internal tool for preparing a shipment passport and exporting it as a standalone client page."]],
   "/supplier-check":[["تحقّق من مورّدك الصيني بنفسك — السجل الحكومي وحق التصدير وشارات علي بابا","Check your Chinese supplier yourself — the government registry, export rights and Alibaba badges"],
                ["سبع خطوات على سجلات حكومية صينية مجانية: رمز الائتمان الموحّد، رخصة العمل ورمز QR، رأس المال المدفوع، التسجيل الجمركي، وحقيقة شارات علي بابا، وأخطر قاعدة في التحويل البنكي.","Seven steps through free Chinese government records: the Unified Social Credit Code, the business licence and its QR code, paid-in capital, the customs filing, what the Alibaba badges really mean, and the single most important rule about the bank transfer."]],
+  "/yemen":[["الاستيراد إلى اليمن من الصين — الموانئ والجمارك والدفع 2026","Importing into Yemen from China — ports, customs and payment, 2026"],
+               ["ممرّا عدن والحديدة، آلية UNVIM ونطاقها، تحرير الدولار الجمركي في مايو 2026 ومثال محسوب، سعرا الريال، متطلبات المطابقة الفعلية، والتعرّض للعقوبات — بمصادر مؤرَّخة.","The Aden and Hodeidah corridors, UNVIM and its scope, the May 2026 customs-dollar liberalisation with a worked example, the two rial rates, what conformity actually requires, and sanctions exposure — with dated sources."]],
   "/compliance":[["سابر والامتثال — متطلبات استيراد الصين إلى السعودية والخليج 2026","SABER & Compliance — importing from China to Saudi Arabia and the Gulf, 2026"],
                ["مسار سابر خطوة بخطوة، رسوم شهادة المنتج والإرسالية، تواريخ 2025–2026 التي تُعطّل الشحنات، ومتطلبات المطابقة في السعودية والإمارات وعُمان وقطر والكويت والبحرين واليمن.","The SABER path step by step, Product and Shipment CoC fees, the 2025–2026 dates that stall shipments, and conformity requirements across Saudi Arabia, the UAE, Oman, Qatar, Kuwait, Bahrain and Yemen."]],
   "/deals":   [["الصفقات الجاهزة — Red Sea Business Launch","Ready Deals — Red Sea Business Launch"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
@@ -2816,6 +3019,7 @@ function render(){
   else if(base==="/faq")               body=pageFaq();
   else if(base==="/compliance")        body=pageCompliance();
   else if(base==="/supplier-check")     body=pageVerify();
+  else if(base==="/yemen")             body=pageYemen();
   else if(base==="/passport")          body=pagePassport();
   else if(base==="/contact")           body=pageContact();
   else if(base==="/legal")             body=pageLegal();
