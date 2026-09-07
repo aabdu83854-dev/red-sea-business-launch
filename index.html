@@ -134,7 +134,8 @@ p{margin:0 0 1em}
 .btn-navy:hover{background:var(--navy-2)}
 .btn-ghost{background:transparent;border-color:rgba(255,255,255,.42);color:#fff}
 .btn-ghost:hover{background:rgba(255,255,255,.11)}
-.btn-out{background:#fff;border-color:var(--line);color:var(--navy)}
+.btn-out{background:var(--card);border-color:var(--line);color:var(--navy)}
+:root[data-theme="dark"] .btn-out{background:var(--card);border-color:#2A466B;color:var(--ink)}
 .btn-out:hover{border-color:var(--navy);}
 .btn-sm{padding:9px 15px;font-size:.88rem}
 .btn-block{width:100%}
@@ -143,26 +144,29 @@ p{margin:0 0 1em}
 /* header */
 header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.hd{display:flex;align-items:center;gap:16px;height:70px}
+.hd{display:flex;align-items:center;gap:16px;min-height:70px;padding-block:8px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--navy);font-size:1.02rem}
 .logo .mark{width:42px;height:42px;border-radius:10px;background:#fff;
   display:grid;place-items:center;flex:0 0 auto;overflow:hidden;padding:1px}
 .logo .mark img{width:100%;height:100%;object-fit:contain;display:block}
 .logo small{display:block;font-size:.68rem;font-weight:500;color:var(--muted);line-height:1.2}
-nav.main{display:flex;gap:2px;margin-inline-start:auto;align-items:center;flex-wrap:wrap}
+nav.main{display:flex;gap:2px;margin-inline-start:auto;align-items:center;flex-wrap:nowrap}
 nav.main a{padding:8px 9px;border-radius:8px;font-size:.9rem;font-weight:500;color:#33465C;white-space:nowrap}
+nav.main a.btn-primary,nav.main a.hd-cta{color:#fff}
+:root[data-theme="dark"] nav.main a{color:#B7C8DC}
+:root[data-theme="dark"] nav.main a.btn-primary,:root[data-theme="dark"] nav.main a.hd-cta{color:#fff}
 nav.main a:hover{background:var(--sand);color:var(--navy)}
 nav.main a.on{color:var(--coral);font-weight:600}
 .hd-right{display:flex;gap:8px;align-items:center}
-@media(min-width:1201px){nav.main{margin-inline-end:12px}}
-@media(max-width:1200px){.hd-right{margin-inline-start:auto}}
+@media(min-width:1321px){nav.main{margin-inline-end:12px}}
+@media(max-width:1320px){.hd-right{margin-inline-start:auto}}
 nav.main .hd-cta{margin-inline-start:8px}
 .lang{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;
   font-size:.85rem;font-weight:600;cursor:pointer;color:var(--navy)}
 .lang:hover{border-color:var(--navy)}
 .burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;
   width:42px;height:38px;cursor:pointer;font-size:1.1rem}
-@media(max-width:1200px){
+@media(max-width:1320px){
   .burger{display:block}
   nav.main{display:none;position:absolute;inset-inline:0;top:70px;background:#fff;
     border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:10px 20px 18px;gap:2px;margin:0}
@@ -355,6 +359,19 @@ td:last-child,th:last-child{font-variant-numeric:tabular-nums}
 .filters select:hover{border-color:var(--navy-3)}
 .filters select:focus{outline:none;border-color:var(--navy-3);box-shadow:0 0 0 4px rgba(1,124,201,.14)}
 :root[data-theme="dark"] .filters{background:var(--card)}
+
+/* --- dark-theme contrast corrections (measured against WCAG AA) --- */
+:root[data-theme="dark"] .eyebrow{color:#FF7A6E}
+:root[data-theme="dark"] .n,:root[data-theme="dark"] .fl{color:var(--ink)}
+:root[data-theme="dark"] tr.total td{color:var(--ink)}
+:root[data-theme="dark"] .plan li,:root[data-theme="dark"] .deal li{color:var(--ink-2,#B7C8DC)}
+.deal li.no,.plan li.no,ul li.no{color:#5B6B7C}
+:root[data-theme="dark"] .deal li.no,:root[data-theme="dark"] .plan li.no,:root[data-theme="dark"] ul li.no{color:#8FA3B6}
+
+/* --- tap targets: WCAG 2.5.5 minimum 44x44 --- */
+.burger{min-width:44px;min-height:44px}
+.lang,.theme{min-height:44px;padding-inline:12px}
+footer.site ul li a{display:inline-block;padding-block:7px}
 
 /* --- price volatility note --- */
 .pn{display:inline-block;vertical-align:middle;margin-inline-start:6px;font-size:.6rem;font-weight:600;
@@ -582,7 +599,7 @@ header.site.stuck{box-shadow:0 1px 0 var(--line),0 10px 30px rgba(11,37,69,.09)}
 
 /* ============ print — deal sheets that print like a document ============ */
 @media print{
-  :root{--bg:#fff;--ink:#000;--muted:#333;--line:#bbb;--card:#fff}
+  :root,:root[data-theme="dark"]{--bg:#fff;--ink:#000;--muted:#333;--line:#bbb;--card:#fff;--sand:#fff;--sand-2:#fff;--navy:#000}
   header.site,footer.site,.wa,.mbar,.prog,.hero-bg,.skip,.fsearch,
   .filters,.btns,.more,.hd-cta,.btn{display:none!important}
   body{background:#fff;color:#000;font-size:11.5pt}
@@ -622,7 +639,7 @@ html[dir="rtl"] .prog{transform-origin:100% 50%}
 }
 
 /* tables */
-.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+/* removed: duplicate .tbl-wrap forced background:#fff over the theme-aware rule above */
 table{width:100%;border-collapse:collapse;min-width:520px;font-size:.93rem}
 th,td{padding:13px 16px;text-align:start;border-bottom:1px solid var(--line)}
 thead th{background:var(--sand);font-weight:600;color:var(--navy);white-space:nowrap}
@@ -803,6 +820,14 @@ footer.site a:hover{color:#fff;text-decoration:underline}
 <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
 <div class="prog" id="prog" aria-hidden="true"></div>
 <div id="app"></div>
+<noscript>
+  <div style="max-width:640px;margin:0 auto;padding:48px 24px;font-family:system-ui,sans-serif;line-height:1.8;text-align:right;direction:rtl">
+    <h1 style="font-size:1.5rem;margin:0 0 12px">Red Sea Business Launch</h1>
+    <p style="margin:0 0 8px">يحتاج هذا الموقع تفعيل JavaScript في متصفحك لعرض محتواه.</p>
+    <p style="margin:0 0 18px;color:#5C6B7A">This site needs JavaScript enabled in your browser.</p>
+    <p style="margin:0">للتواصل المباشر: <a href="mailto:deals@redseaglobal.com">deals@redseaglobal.com</a></p>
+  </div>
+</noscript>
 <!-- Floating WhatsApp button — number is set in CFG.whatsapp inside the script -->
 <a class="wa" id="wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
 <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1s-.5-.2-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.8 2.7 1.1 3.2.9 3.8.8.6 0 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5l-.8-.4zM12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2z"/></svg></a>
@@ -862,7 +887,7 @@ footer.site a:hover{color:#fff;text-decoration:underline}
   "level":["مبتدئ","Starter"],
   "incoterm":"CIF / DDP",
   "lead":["20 – 35 يومًا (شحن جوي أو سريع)","20 – 35 days (air or express)"],
-  "desc":["صفقة تعتمد على الوزن المنخفض مقابل القيمة، ما يجعل الشحن الجوي منطقيًا ويقصّر مدة الوصول. نركّز على أصناف بلا علامات تجارية مقلدة إطلاقًا: كوابل، شواحن، حوامل، سماعات عامة، حافظات محايدة. المواصفات الكهربائية تُراجع قبل الشراء لتجنب مشاكل الفسح الجمركي.","Built on a low weight-to-value ratio, which makes air freight sensible and shortens transit. We focus strictly on non-branded items: cables, chargers, holders, generic earphones and neutral cases. Electrical specifications are reviewed before purchase to avoid customs clearance problems."],
+  "desc":["صفقة تعتمد على الوزن المنخفض مقابل القيمة، ما يجعل الشحن الجوي منطقيًا ويقصّر مدة الوصول. نركّز على أصناف بلا أي علامة تجارية إطلاقًا: كوابل، شواحن، حوامل، سماعات عامة، حافظات محايدة. المواصفات الكهربائية تُراجع قبل الشراء لتجنب مشاكل التخليص الجمركي.","Built on a low weight-to-value ratio, which makes air freight sensible and shortens transit. We focus strictly on non-branded items: cables, chargers, holders, generic earphones and neutral cases. Electrical specifications are reviewed before purchase to avoid customs clearance problems."],
   "items":[
     ["كوابل شحن متعددة المنافذ","Multi-port charging cables","800 – 1,200 قطعة","800 – 1,200 pcs","طول 1م و2م، بدون علامات تجارية","1m and 2m, unbranded"],
     ["شواحن جدارية وسيارة","Wall & car chargers","400 – 700 قطعة","400 – 700 pcs","مطابقة لمواصفات الجهد المحلي","Compliant with local voltage specifications"],
@@ -899,10 +924,10 @@ footer.site a:hover{color:#fff;text-decoration:underline}
   "markets":["sa","ae","qa","bh","om"],
   "img":"assets/deal-resto.jpg",
   "name":["مستلزمات المطاعم والكافيهات","Restaurant & Café Supplies"],
-  "short":["توريد متكرر لمشغّلي المطاعم والكافيهات: تغليف، أدوات تقديم، مستهلكات — عقود إعادة طلب شهرية.","Repeat supply for restaurant and café operators: packaging, serving ware and consumables — with monthly re-order potential."],
+  "short":["توريد متكرر لمشغّلي المطاعم والكافيهات: تغليف، أدوات تقديم، مستهلكات — احتمال إعادة طلب شهرية.","Repeat supply for restaurant and café operators: packaging, serving ware and consumables — with monthly re-order potential."],
   "budget":["5,000 – 10,000 $","$5,000 – $10,000"],
   "skus":["12 – 20 منتجًا","12 – 20 products"],
-  "level":["متوسط","Growth"],
+  "level":["نمو","Growth"],
   "incoterm":"CIF / DDP",
   "lead":["40 – 60 يومًا (شحن بحري)","40 – 60 days (sea freight)"],
   "desc":["صفقة موجّهة للبيع بالجملة لمشغّلي المطاعم والكافيهات بدل البيع للمستهلك. ميزتها أن العميل يعيد الطلب شهريًا إذا كان السعر والجودة ثابتين، ما يجعلها أقرب لعلاقة توريد مستمرة. تتطلب مساحة تخزين وقدرة على البيع المؤسسي.","Aimed at wholesale supply to café and restaurant operators rather than end consumers. Its advantage is repeat monthly ordering when price and quality stay consistent, making it closer to an ongoing supply relationship. It requires storage space and the ability to sell B2B."],
@@ -945,10 +970,10 @@ footer.site a:hover{color:#fff;text-decoration:underline}
   "short":["أدوات ومستهلكات صالونات بهامش جيد، مع قناة بيع مزدوجة: الصالونات مباشرة والمستهلك النهائي.","Salon tools and consumables with a healthy margin and a dual channel: salons directly plus end consumers."],
   "budget":["5,000 – 9,000 $","$5,000 – $9,000"],
   "skus":["10 – 18 منتجًا","10 – 18 products"],
-  "level":["متوسط","Growth"],
+  "level":["نمو","Growth"],
   "incoterm":"CIF",
   "lead":["35 – 55 يومًا","35 – 55 days"],
-  "desc":["نركّز على الأدوات والمستهلكات غير المصنفة كمستحضرات تجميل، لأن استيراد المستحضرات يتطلب تسجيلًا وتصاريح تختلف من دولة لأخرى. هذا يقلل تعقيد الفسح الجمركي في أول شحنة ويسمح بالبدء أسرع.","We focus on tools and consumables that are not classified as cosmetics, since importing cosmetics requires registration and permits that differ by country. This reduces clearance complexity on a first shipment and allows a faster start."],
+  "desc":["نركّز على الأدوات والمستهلكات غير المصنفة كمستحضرات تجميل، لأن استيراد المستحضرات يتطلب تسجيلًا وتصاريح تختلف من دولة لأخرى. هذا يقلل تعقيد التخليص الجمركي في أول شحنة ويسمح بالبدء أسرع.","We focus on tools and consumables that are not classified as cosmetics, since importing cosmetics requires registration and permits that differ by country. This reduces clearance complexity on a first shipment and allows a faster start."],
   "items":[
     ["أدوات تصفيف وتجفيف","Styling & drying tools","300 – 600 قطعة","300 – 600 pcs","مطابقة للجهد الكهربائي المحلي","Compliant with local voltage"],
     ["أدوات عناية بالأظافر","Nail care tools","800 – 1,500 قطعة","800 – 1,500 pcs","ستانلس، تعقيم قابل للتكرار","Stainless steel, re-sterilisable"],
@@ -1058,7 +1083,7 @@ footer.site a:hover{color:#fff;text-decoration:underline}
   "risks":[
     ["رأس مال أكبر ومخاطرة أعلى مقابل هامش أقل","Higher capital and risk against a thinner margin"],
     ["الحاجة إلى مستودع ونقل محلي","A warehouse and local delivery are required"],
-    ["منافسة من موردين محليين قائمين","Competition from established local suppliers"],
+    ["منافسة من مورّدين محليين قائمين","Competition from established local suppliers"],
     ["حجم الشحن كبير مقارنة بالقيمة","Shipping volume is high relative to value"]
   ]
 }
@@ -1138,7 +1163,7 @@ const NAV = () => [
   ["#/packages",  L("باقات الإطلاق","Packages")],
   ["#/calculator",L("حاسبة التكلفة","Calculator")],
   ["#/compliance",L("الامتثال","Compliance")],
-  ["#/supplier-check",L("فحص المورد","Supplier check")],
+  ["#/supplier-check",L("فحص المورّد","Supplier check")],
   ["#/yemen",     L("اليمن","Yemen")],
   ["#/contact",   L("تواصل معنا","Contact")]
 ];
@@ -1177,7 +1202,7 @@ function footer(){
         <li><a href="#/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
         <li><a href="#/packages">${L("باقات الإطلاق","Launch packages")}</a></li>
         <li><a href="#/compliance">${L("سابر والامتثال","SABER & compliance")}</a></li>
-        <li><a href="#/supplier-check">${L("فحص المورد الصيني","Chinese supplier check")}</a></li>
+        <li><a href="#/supplier-check">${L("فحص المورّد الصيني","Chinese supplier check")}</a></li>
         <li><a href="#/yemen">${L("الاستيراد إلى اليمن","Importing into Yemen")}</a></li>
         <li><a href="#/consultation">${L("حجز استشارة","Book a consultation")}</a></li>
         <li><a href="#/qualify">${L("نموذج التأهيل","Qualification form")}</a></li>
@@ -1250,7 +1275,7 @@ function pageHome(){
   ];
   const why = [
     [ICON.shield, L("نحن في الصين فعليًا","We are physically in China"), L("فريق التوريد والفحص يعمل من الصين ويتعامل مع المصانع مباشرة، لا عبر وسيط ثالث.","Our sourcing and inspection team works from China and deals with factories directly, not through a third-party middleman.")],
-    [ICON.search, L("ثلاثة عروض مصانع لكل صفقة","Three factory quotations per deal"), L("تقارن السعر والجودة وشروط الدفع بنفسك قبل أن تعتمد المورد.","You compare price, quality and payment terms yourself before approving a supplier.")],
+    [ICON.search, L("ثلاثة عروض مصانع لكل صفقة","Three factory quotations per deal"), L("تقارن السعر والجودة وشروط الدفع بنفسك قبل أن تعتمد المورّد.","You compare price, quality and payment terms yourself before approving a supplier.")],
     [ICON.check,  L("فحص مصوّر قبل الشحن","Photographed pre-shipment inspection"), L("صور وفيديو للبضاعة الفعلية وتقرير فحص قبل مغادرة الشحنة.","Photos and video of the actual goods plus an inspection report before the shipment departs.")],
     [ICON.chart,  L("تكلفة مفصّلة بندًا ببند","Itemised, line-by-line costing"), L("تعرف تكلفة المنتج والشحن والجمارك والخدمات كلًا على حدة قبل الدفع.","You see product, freight, customs and service costs separately before you pay.")]
   ];
@@ -1310,7 +1335,7 @@ function pageHome(){
   <section class="sec sec-mesh"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("التغطية","Coverage")}</span>
       <h2>${L("الأسواق المستهدفة","Target markets")}</h2>
-      <p class="lead" style="margin:0 auto">${L("نعمل أساسًا مع تجار الخليج واليمن، وننفّذ لأسواق أخرى حسب دراسة الحالة.","We work primarily with traders in the Gulf and Yemen, and serve other markets on a case-by-case basis.")}</p></div>
+      <p class="lead" style="margin:0 auto">${L("نعمل أساسًا مع تجار الخليج واليمن، وونخدم أسواقًا أخرى حسب كل حالة.","We work primarily with traders in the Gulf and Yemen, and serve other markets on a case-by-case basis.")}</p></div>
     <div class="mq rv" role="region" aria-label="${L("الأسواق المستهدفة","Target markets")}">
       <div class="mq-track">${[0,1].map(dup=>mkts.map(m=>
         `<div class="mk"${dup?' aria-hidden="true"':''}><div class="fl">${m[0]}</div><b>${m[1]}</b><span>${L("توريد وشحن وتخليص","Sourcing, shipping & clearance")}</span></div>`
@@ -1417,7 +1442,7 @@ function dealCard(d){
       <div class="meta">
         <div>${L("الميزانية","Budget")}<b>${A(d.budget)} ${pn("est")}</b></div>
         <div>${L("عدد المنتجات","Products")}<b>${A(d.skus)}</b></div>
-        <div>${L("السوق المستهدف","Target market")}<b>${d.markets.slice(0,3).map(m=>m.toUpperCase()).join(" · ")}</b></div>
+        <div>${L("السوق المستهدف","Target market")}<b>${d.markets.map(m=>m.toUpperCase()).join(" · ")}</b></div>
         <div>${L("المستوى","Level")}<b>${A(d.level)}</b></div>
       </div>
       <a class="btn btn-primary btn-sm btn-block" href="#/deal/${d.id}">${L("اطلب التفاصيل","Request details")}</a>
@@ -1430,7 +1455,7 @@ function pageDeals(){
     <span class="eyebrow">${L("معرض الصفقات","Deal gallery")}</span>
     <h1 style="font-size:clamp(1.7rem,4vw,2.6rem)">${L("صفقات جاهزة للاعتماد","Deals ready for approval")}</h1>
     <p class="lead">${L("كل صفقة هنا نموذج عملي: قائمة منتجات، كميات، تكاليف تقديرية وسيناريوهات مالية. التفاصيل الكاملة والمواصفات النهائية تُرسل بعد تعبئة نموذج التأهيل.","Each deal here is a working model: a product list, quantities, estimated costs and financial scenarios. Full details and final specifications are sent after the qualification form is completed.")}</p>
-    <div class="info">${L("لا نعرض أسماء الموردين أو بيانات المصانع للعامة. تُشارك مع العميل بعد التأهيل واعتماد الصفقة.","We do not publish supplier names or factory details. These are shared with the client after qualification and deal approval.")}</div>
+    <div class="info">${L("لا نعرض أسماء المورّدين أو بيانات المصانع للعامة. تُشارك مع العميل بعد التأهيل واعتماد الصفقة.","We do not publish supplier names or factory details. These are shared with the client after qualification and deal approval.")}</div>
   </div></section>
   <section class="sec"><div class="wrap">
     <div class="filters">
@@ -1511,7 +1536,7 @@ function pageDeal(id){
     </tbody></table></div>
     <div class="grid g2" style="margin-top:24px">
       <div class="card"><h3>${L("ما يشمله السعر","What the price includes")}</h3><ul class="plan-list" style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem;color:#37485C">
-        <li>✓ ${L("البحث عن الموردين وثلاثة عروض مصانع على الأقل","Supplier research and at least three factory quotations")}</li>
+        <li>✓ ${L("البحث عن المورّدين وثلاثة عروض مصانع على الأقل","Supplier research and at least three factory quotations")}</li>
         <li>✓ ${L("التفاوض والشراء وتجميع البضاعة في الصين","Negotiation, purchasing and consolidation in China")}</li>
         <li>✓ ${L("فحص مصوّر قبل الشحن وتقرير فحص","Photographed pre-shipment inspection and report")}</li>
         <li>✓ ${L("تجهيز مستندات الشحن الأساسية","Preparation of core shipping documents")}</li>
@@ -1519,7 +1544,7 @@ function pageDeal(id){
       </ul></div>
       <div class="card"><h3>${L("ما لا يشمله السعر","What the price does not include")}</h3><ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem;color:#8A98A6">
         <li>× ${L("الرسوم الجمركية والضرائب في بلد الوصول","Import duties and taxes in the destination country")}</li>
-        <li>× ${L("التخزين المحلي والنقل الداخلي بعد الفسح","Local storage and inland transport after clearance")}</li>
+        <li>× ${L("التخزين المحلي والنقل الداخلي بعد التخليص","Local storage and inland transport after clearance")}</li>
         <li>× ${L("التسجيل النظامي أو الشهادات الخاصة إن طُلبت","Regulatory registration or special certificates if required")}</li>
         <li>× ${L("ميزانية الإعلانات المدفوعة","Paid advertising budget")}</li>
         <li>× ${L("رسوم التحويل البنكي وفروق أسعار الصرف","Bank transfer fees and exchange rate differences")}</li>
@@ -1533,6 +1558,7 @@ function pageDeal(id){
       ${d.costs.map(c=>`<tr><td>${L(c[0],c[1])}</td><td class="num">${L(c[2],c[3])}</td></tr>`).join("")}
       <tr class="total"><td>${L("إجمالي الاستثمار التقديري","Total estimated investment")}</td><td class="num">${A(d.total)} ${pn("est")}</td></tr>
     </tbody></table></div>
+    <div class="notice" style="margin-top:14px">${L("هذا الجدول يغطي تكلفة البضاعة والشحن والجمارك وتجهيز البيع — <b>ولا يشمل رسوم خدمتنا</b>، وهي منفصلة وتبدأ من 450 دولارًا حسب الباقة التي تختارها. أضفها إلى الإجمالي أعلاه قبل أن تبني ميزانيتك.","This table covers the goods, freight, customs and sales setup — <b>it does not include our service fee</b>, which is separate and starts at $450 depending on the package you choose. Add it to the total above before you build your budget.")}</div>
     ${pnote("est")}
 
     <div class="grid g2" style="margin-top:24px">
@@ -1567,11 +1593,11 @@ function pagePackages(){
   const plans=[
     {n:L("Sourcing Only","Sourcing Only"),p:L("من 450 $ رسوم خدمة","From $450 service fee"),
      s:L("لمن لديه قناة بيع وخبرة، ويحتاج التوريد والفحص فقط.","For someone who already has a channel and experience and needs sourcing and inspection only."),
-     y:[L("قائمة المنتجات والكميات","Product list and quantities"),L("3 عروض موردين على الأقل","At least 3 supplier quotations"),L("مقارنة سعر وجودة","Price and quality comparison"),L("فحص المورد","Supplier vetting"),L("تجميع البضاعة","Goods consolidation"),L("الشحن حتى نقطة متفق عليها","Shipping to an agreed point"),L("المستندات الأساسية","Core documentation"),L("دعم قبل الشراء","Pre-purchase support")],
+     y:[L("قائمة المنتجات والكميات","Product list and quantities"),L("3 عروض مصانع على الأقل","At least 3 factory quotations"),L("مقارنة سعر وجودة","Price and quality comparison"),L("فحص المورّد","Supplier vetting"),L("تجميع البضاعة","Goods consolidation"),L("الشحن حتى نقطة متفق عليها","Shipping to an agreed point"),L("المستندات الأساسية","Core documentation"),L("دعم قبل الشراء","Pre-purchase support")],
      no:[L("لا تشمل تجهيز المتجر","Store setup not included"),L("لا تشمل التدريب","Training not included")],f:false},
     {n:"Starter Launch",p:L("من 1,200 $ رسوم خدمة","From $1,200 service fee"),
      s:L("لمن يبدأ أول مشروع استيراد بميزانية محدودة ويريد مسارًا كاملًا مبسّطًا.","For someone starting a first import project on a limited budget who wants a complete but simplified path."),
-     y:[L("5–10 منتجات مختارة","5–10 selected products"),L("تحليل أولي للسوق","Preliminary market analysis"),L("اختيار الموردين","Supplier selection"),L("تجهيز الشحنة","Shipment preparation"),L("صفحة بيع أو متجر بسيط","A sales page or simple store"),L("صور ووصف أولي للمنتجات","Initial product photos and descriptions"),L("تدريب أساسي على التشغيل","Basic operational training"),L("خطة إطلاق 30 يومًا","A 30-day launch plan")],no:[],f:false},
+     y:[L("5–10 منتجات مختارة","5–10 selected products"),L("تحليل أولي للسوق","Preliminary market analysis"),L("اختيار المورّدين","Supplier selection"),L("تجهيز الشحنة","Shipment preparation"),L("صفحة بيع أو متجر بسيط","A sales page or simple store"),L("صور ووصف أولي للمنتجات","Initial product photos and descriptions"),L("تدريب أساسي على التشغيل","Basic operational training"),L("خطة إطلاق 30 يومًا","A 30-day launch plan")],no:[],f:false},
     {n:"Full Launch",p:L("من 3,500 $ رسوم خدمة","From $3,500 service fee"),
      s:L("الباقة الرئيسية: من دراسة السوق حتى المتابعة بعد الإطلاق.","The core package: from market study through to post-launch follow-up."),
      y:[L("دراسة سوق للفئة والدولة","Market study for the category and country"),L("اختيار المنتجات وخطة مالية","Product selection and a financial plan"),L("توريد وفحص مصوّر","Sourcing and photographed inspection"),L("شحن وتنسيق جمركي","Shipping and customs coordination"),L("متجر إلكتروني كامل","A full e-commerce store"),L("هوية بصرية أساسية","Basic visual identity"),L("خطة تسويق للإطلاق","A launch marketing plan"),L("تدريب موسّع على التشغيل","Extended operational training"),L("متابعة 60–90 يومًا","60–90 days of follow-up")],no:[],f:true}
@@ -1603,7 +1629,7 @@ function pagePackages(){
       <th>${L("البند","Item")}</th><th>Sourcing Only</th><th>Starter Launch</th><th>Full Launch</th></tr></thead><tbody>
       ${[[L("دراسة السوق","Market study"),"—",L("أولية","Preliminary"),L("كاملة","Full")],
          [L("عدد المنتجات","Number of products"),L("حسب طلبك","As requested"),"5–10","10+"],
-         [L("عروض الموردين","Supplier quotations"),"3+","3+","3+"],
+         [L("عروض المورّدين","Supplier quotations"),"3+","3+","3+"],
          [L("الفحص قبل الشحن","Pre-shipment inspection"),"✓","✓",L("✓ مصوّر وموسّع","✓ Photographed & extended")],
          [L("تنسيق الشحن","Freight coordination"),"✓","✓","✓"],
          [L("التخليص الجمركي","Customs coordination"),L("مستندات فقط","Documents only"),L("مستندات ودعم","Documents & support"),L("تنسيق كامل","Full coordination")],
@@ -1628,8 +1654,8 @@ function pagePackages(){
   <section class="sec"><div class="wrap">
     <h2>${L("نظام الدفع على مراحل","Staged payment structure")}</h2>
     <div class="steps">
-      ${[[L("رسوم دراسة","Study fee"),L("تُدفع عند بدء الدراسة وتغطي تحليل السوق وقائمة المنتجات وعروض الموردين.","Paid at the start of the study and covers market analysis, the product list and supplier quotations.")],
-         [L("اعتماد التوريد","Sourcing approval"),L("بعد موافقتك على المورد والمواصفات والسعر النهائي.","After you approve the supplier, specifications and final price.")],
+      ${[[L("رسوم دراسة","Study fee"),L("تُدفع عند بدء الدراسة وتغطي تحليل السوق وقائمة المنتجات وعروض المصانع.","Paid at the start of the study and covers market analysis, the product list and factory quotations.")],
+         [L("اعتماد التوريد","Sourcing approval"),L("بعد موافقتك على المورّد والمواصفات والسعر النهائي.","After you approve the supplier, specifications and final price.")],
          [L("دفعة المنتجات","Goods payment"),L("تُحوَّل لتغطية تكلفة البضاعة من المصنع حسب شروط الدفع المتفق عليها.","Transferred to cover the factory cost of the goods under the agreed payment terms.")],
          [L("الشحن والخدمات المتبقية","Freight & remaining services"),L("تُدفع قبل الشحن وتشمل النولون والتأمين وباقي بنود الخدمة.","Paid before shipping and covers freight, insurance and the remaining service items.")]
         ].map((s,i)=>`<div class="step rv"><div class="n">${i+1}</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")}
@@ -1671,11 +1697,13 @@ function pageQualify(){
   const ctx = p.get("deal")||p.get("pkg")||p.get("type")||"";
   const S = Q_STEPS();
   const fld = f => {
-    if(f.ty==="radio"||f.ty==="check") return `<div class="opts">${f.o.map((o,i)=>
+    const id="qf_"+f.k, req=f.req?' aria-required="true"':"", dsc=` aria-describedby="${id}_e"`;
+    if(f.ty==="radio"||f.ty==="check") return `<div class="opts" role="group" aria-labelledby="${id}_l"${dsc}>${f.o.map((o,i)=>
       `<label class="opt"><input type="${f.ty==="radio"?"radio":"checkbox"}" name="${f.k}" value="${esc(o)}"><span>${o}</span></label>`).join("")}</div>`;
-    if(f.ty==="select") return `<select name="${f.k}"><option value="">${L("اختر…","Select…")}</option>${f.o.map(o=>`<option>${o}</option>`).join("")}</select>`;
-    if(f.ty==="textarea") return `<textarea name="${f.k}" placeholder="${esc(f.h||"")}"></textarea>`;
-    return `<input type="${f.ty}" name="${f.k}">`;
+    if(f.ty==="select") return `<select id="${id}" name="${f.k}"${req}${dsc}><option value="">${L("اختر…","Select…")}</option>${f.o.map(o=>`<option>${o}</option>`).join("")}</select>`;
+    if(f.ty==="textarea") return `<textarea id="${id}" name="${f.k}"${req}${dsc} placeholder="${esc(f.h||"")}"></textarea>`;
+    const pat = f.ty==="tel" ? ' pattern="[+]?[0-9\\s()\\-]{7,}" inputmode="tel"' : "";
+    return `<input id="${id}" type="${f.ty}" name="${f.k}"${req}${dsc}${pat}>`;
   };
   return `<section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("نموذج التأهيل","Qualification form")}</span>
@@ -1689,13 +1717,14 @@ function pageQualify(){
       <form id="qform" novalidate>
         <input type="hidden" name="context" value="${esc(ctx)}">
         ${S.map((s,si)=>`<div class="fstep${si===0?" on":""}" data-s="${si}">
-          ${s.f.map(f=>`<div class="field"><label>${f.l}${f.req?"":` <span class="hint">(${L("اختياري","optional")})</span>`}</label>${fld(f)}<div class="err" data-for="${f.k}">${L("هذا الحقل مطلوب","This field is required")}</div></div>`).join("")}
+          ${s.f.map(f=>`<div class="field"><label id="qf_${f.k}_l"${(f.ty==="radio"||f.ty==="check")?"":` for="qf_${f.k}"`}>${f.l}${f.req?"":` <span class="hint">(${L("اختياري","optional")})</span>`}</label>${fld(f)}<div class="err" id="qf_${f.k}_e" data-for="${f.k}" role="alert">${L("هذا الحقل مطلوب","This field is required")}</div></div>`).join("")}
         </div>`).join("")}
         <div class="formnav">
           <button type="button" class="btn btn-out" id="prev" style="display:none">${L("السابق","Back")}</button>
           <button type="button" class="btn btn-primary" id="next">${L("التالي","Next")}</button>
           <button type="submit" class="btn btn-primary" id="send" style="display:none">${L("إرسال الطلب","Submit request")}</button>
         </div>
+        <div id="q_err" class="notice" role="alert" tabindex="-1" hidden style="margin-top:14px"></div>
       </form>
     </div>
     <p class="muted center" style="font-size:.84rem;margin-top:14px">${L("بياناتك تُستخدم للرد على طلبك فقط ولا تُشارك مع أطراف ثالثة لأغراض تسويقية.","Your details are used only to respond to your request and are not shared with third parties for marketing.")}</p>
@@ -1704,14 +1733,22 @@ function pageQualify(){
 
 
 /* ---------- COST CALCULATOR ---------- */
-const CC = [
+/* A function, not a constant: evaluated once at parse time it froze the
+   legend in whichever language loaded first. */
+const CC = () => [
   ["goods",  L("قيمة البضاعة","Goods value"),      "#1F6FB2","#1F6FB2"],
   ["freight",L("الشحن","Freight"),                 "#D0202A","#D0202A"],
   ["duty",   L("الرسوم الجمركية","Customs duty"),  "#00A3A3","#00A3A3"],
   ["vat",    L("ضريبة القيمة المضافة","VAT"),      "#7B5FC0","#7B5FC0"],
   ["fee",    L("الخدمة والامتثال","Service & conformity"),"#C98A14","#C08420"]
 ];
-const money = n => (Math.round(n*100)/100).toLocaleString("en-US",{maximumFractionDigits:2});
+const money = n => {
+  if(!Number.isFinite(n)) return "—";
+  const r = Math.round(n*100)/100;
+  return (Object.is(r,-0) ? 0 : r).toLocaleString("en-US",{maximumFractionDigits:2});
+};
+const clampPct = n => !Number.isFinite(n) ? "—"
+  : n>9999 ? ">9999%" : n<-999 ? "<-999%" : n.toFixed(1)+"%";
 
 /* Destination presets. Duty/VAT are the published headline rates; conformity fees
    are platform fees only — assessment-body and lab fees are separate. */
@@ -1752,7 +1789,7 @@ const CTRY = () => ({
 
 function pageCalc(){
   const f=(k,l,v,h,step)=>`<div class="field"><label for="c_${k}">${l}</label>
-      <input id="c_${k}" type="number" inputmode="decimal" value="${v}" min="0" step="${step||"any"}">
+      <input id="c_${k}" type="text" inputmode="decimal" autocomplete="off" value="${v}" data-step="${step||"any"}">
       ${h?`<div class="chint">${h}</div>`:""}</div>`;
   return `<section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("أداة مجانية","Free tool")}</span>
@@ -1780,7 +1817,7 @@ function pageCalc(){
           ${f("other",L("تكاليف أخرى ($)","Other costs ($)"),"120",L("تخليص، نقل داخلي، تغليف، عينات","Clearance, inland transport, packaging, samples"))}
           ${f("sell",L("سعر البيع المتوقع للوحدة ($)","Expected selling price ($)"),"11.00")}
         </div>
-        <div class="notice" style="margin-bottom:0">${L("أداة تقديرية للتخطيط. الأرقام النهائية تُحدَّد بعد عرض المورد وعرض الشحن وتقييم الجمرك في بلدك.","An estimating tool for planning. Final figures are set by the supplier quote, the freight quote and the customs valuation in your country.")}</div>
+        <div class="notice" style="margin-bottom:0">${L("أداة تقديرية للتخطيط. الأرقام النهائية تُحدَّد بعد عرض المورّد وعرض الشحن وتقييم الجمرك في بلدك.","An estimating tool for planning. Final figures are set by the supplier quote, the freight quote and the customs valuation in your country.")}</div>
       </div>
 
       <div class="calc-out">
@@ -1791,7 +1828,7 @@ function pageCalc(){
         </div>
         <div class="tiles rv">
           <div class="tile"><span>${L("رأس المال المطلوب","Capital required")}</span><b id="o_total">—</b></div>
-          <div class="tile"><span>${L("هامش الربح","Gross margin")}</span><b id="o_margin">—</b></div>
+          <div class="tile"><span>${L("هامش الربح الإجمالي","Gross margin")}</span><b id="o_margin">—</b></div>
           <div class="tile"><span>${L("الربح المتوقع","Expected profit")}</span><b id="o_profit">—</b></div>
           <div class="tile"><span>${L("نقطة التعادل","Break-even")}</span><b id="o_be">—</b></div>
         </div>
@@ -1811,7 +1848,7 @@ function pageCalc(){
         <div class="btns" style="margin-top:6px">
           <a class="btn btn-primary" id="o_send" href="#/qualify?type=custom">${L("أرسل هذه الحسبة لفريقنا","Send this calculation to us")}</a>
           <button class="btn btn-out" type="button" id="o_print">${L("احفظ النتيجة PDF","Save the result as PDF")}</button>
-          <a class="btn btn-out" href="#/deals">${L("شوف صفقات جاهزة بهذه الميزانية","See ready deals at this budget")}</a>
+          <a class="btn btn-out" href="#/deals">${L("اعرض صفقات جاهزة بهذه الميزانية","See ready deals at this budget")}</a>
         </div>
       </div>
     </div>
@@ -1819,7 +1856,19 @@ function pageCalc(){
 }
 
 function bindCalc(){
-  const g=k=>parseFloat(document.getElementById("c_"+k).value)||0;
+  /* Accepts Arabic-Indic (٠-٩) and Persian (۰-۹) digits and a comma decimal,
+     because this is an Arabic-first site and those keypads are normal here.
+     Negative values are never meaningful in a landed-cost model. */
+  const normNum = v => String(v==null?"":v)
+      .replace(/[\u0660-\u0669]/g,c=>c.charCodeAt(0)-0x0660)
+      .replace(/[\u06F0-\u06F9]/g,c=>c.charCodeAt(0)-0x06F0)
+      .replace(/[\u066B,]/g,".")
+      .replace(/[\u066C\u2066-\u2069\s]/g,"");
+  const g=k=>{
+    const e=document.getElementById("c_"+k); if(!e) return 0;
+    const n=parseFloat(normNum(e.value));
+    return Number.isFinite(n) && n>0 ? n : 0;
+  };
   const el=i=>document.getElementById(i);
   const calc=()=>{
     const unit=g("unit"),qty=g("qty"),frtot=g("frtot"),dutyP=g("duty"),vatP=g("vat"),
@@ -1830,7 +1879,7 @@ function bindCalc(){
     const duty=cif*dutyP/100;
     const vat=(cif+duty)*vatP/100;
     let gov=0;
-    if(C.gov){ const inLocal=cif*C.gov.rate*C.gov.pct;
+    if(C.gov && cif>0){ const inLocal=cif*C.gov.rate*C.gov.pct;
       gov=Math.min(Math.max(inLocal,C.gov.min),C.gov.max)/C.gov.rate; }
     const svc=fee+other+comp+gov;
     const total=goods+frtot+duty+vat+svc;
@@ -1839,23 +1888,29 @@ function bindCalc(){
     const margin= sell>0 ? (sell-per)/sell*100 : 0;
     const be= sell>0 ? Math.ceil(total/sell) : 0;
 
-    el("o_unit").textContent = qty>0 ? "$"+money(per) : "—";
-    el("o_unitsub").textContent = qty>0
-      ? L(`مقابل ${money(unit)} $ سعر المصنع — الزيادة ${qty>0&&unit>0?Math.round((per/unit-1)*100):0}%`,
-          `vs $${money(unit)} ex-factory — a ${qty>0&&unit>0?Math.round((per/unit-1)*100):0}% uplift`) : "";
-    el("o_total").textContent  = "$"+money(total);
-    el("o_margin").textContent = sell>0 ? margin.toFixed(1)+"%" : "—";
-    el("o_profit").textContent = "$"+money(profit);
-    el("o_be").textContent     = sell>0 ? be.toLocaleString("en-US")+" "+L("وحدة","units") : "—";
+    /* A quantity is required before any per-unit or margin figure means
+       anything. Without it, per-unit cost is 0 and margin reads a flattering
+       100% — the opposite of the truth on an unfinished form. */
+    const ready = qty>0 && unit>0;
+    el("o_unit").textContent = ready ? "$"+money(per) : "—";
+    el("o_unitsub").textContent = ready
+      ? L(`مقابل ${money(unit)} $ سعر المصنع — الزيادة ${Math.round((per/unit-1)*100)}%`,
+          `vs $${money(unit)} ex-factory — a ${Math.round((per/unit-1)*100)}% uplift`)
+      : L("أدخل سعر الوحدة والكمية أولًا.","Enter the unit price and quantity first.");
+    el("o_total").textContent  = ready ? "$"+money(total) : "—";
+    el("o_margin").textContent = (ready && sell>0) ? clampPct(margin) : "—";
+    el("o_profit").textContent = ready ? "$"+money(profit) : "—";
+    el("o_be").textContent     = (ready && sell>0 && total>0)
+      ? be.toLocaleString("en-US")+" "+L("وحدة","units") : "—";
     el("o_margin").className   = margin<0 ? "neg" : (margin<20 ? "warn" : "");
     el("o_profit").className   = profit<0 ? "neg" : "";
 
     const vals={goods,freight:frtot,duty,vat,fee:svc};
     const dark=document.documentElement.getAttribute("data-theme")==="dark";
     let bar="",leg="",tab="";
-    CC.forEach(([k,label,cl,cd])=>{
+    CC().forEach(([k,label,cl,cd])=>{
       const v=vals[k], pct= total>0 ? v/total*100 : 0, c= dark?cd:cl;
-      if(pct>0.05) bar+=`<span class="seg" style="width:${pct}%;background:${c}" title="${label}: $${money(v)} (${pct.toFixed(1)}%)">${pct>=8?`<i>${pct.toFixed(0)}%</i>`:""}</span>`;
+      if(pct>0.05) bar+=`<span class="seg" style="width:${pct}%;background:${c}" title="${label}: $${money(v)} (${pct.toFixed(1)}%)">${pct>=4?`<i>${pct.toFixed(0)}%</i>`:""}</span>`;
       leg+=`<span class="lg"><i style="background:${c}"></i>${label}</span>`;
       tab+=`<tr><td><i class="sw" style="background:${c}"></i>${label}</td><td>$${money(v)}</td><td>${pct.toFixed(1)}%</td></tr>`;
     });
@@ -1869,7 +1924,7 @@ function bindCalc(){
         sub.map(x=>`${x[0]} $${money(x[1])}`).join(" · ")
       : "";
 
-    const msg=L(`حسبة تقديرية من الموقع:\nبلد الوصول: ${C.n||"—"}\nالكمية: ${qty}\nسعر المصنع: ${money(unit)} $\nتكلفة الوحدة النهائية: ${money(per)} $\nرأس المال: ${money(total)} $\nهامش الربح: ${margin.toFixed(1)}%`,
+    const msg=L(`حسبة تقديرية من الموقع:\nبلد الوصول: ${C.n||"—"}\nالكمية: ${qty}\nسعر المصنع: ${money(unit)} $\nتكلفة الوحدة النهائية: ${money(per)} $\nرأس المال: ${money(total)} $\nهامش الربح الإجمالي: ${margin.toFixed(1)}%`,
                 `Estimate from the site:\nDestination: ${C.n||"—"}\nQty: ${qty}\nEx-factory: $${money(unit)}\nLanded unit cost: $${money(per)}\nCapital: $${money(total)}\nMargin: ${margin.toFixed(1)}%`);
     el("o_send").href = waLink(msg);
     el("o_send").target="_blank"; el("o_send").rel="noopener";
@@ -1881,9 +1936,15 @@ function bindCalc(){
     note.innerHTML = `<b>${C.body||""}</b>${C.note?" — "+C.note:""}`+
       ` <a href="#/compliance" style="white-space:nowrap">${L("تفاصيل المطابقة ←","Conformity details →")}</a>`;
     if(apply){
-      if(C.duty!=null) document.getElementById("c_duty").value=C.duty;
-      if(C.vat!=null)  document.getElementById("c_vat").value=C.vat;
-      if(C.comp!=null) document.getElementById("c_comp").value=C.comp;
+      /* Where a country has no published headline rate (Yemen, "another
+         country"), blank the field and ask for a figure. Leaving the previous
+         country's numbers in place shows the user someone else's rates as
+         though they were their own. */
+      [["duty",C.duty],["vat",C.vat],["comp",C.comp]].forEach(([k,v])=>{
+        const e=document.getElementById("c_"+k); if(!e) return;
+        if(v!=null){ e.value=v; e.removeAttribute("placeholder"); }
+        else { e.value=""; e.setAttribute("placeholder",L("أدخل نسبتك","Enter your own rate")); }
+      });
     }
     calc();
   };
@@ -1915,6 +1976,7 @@ function bindFaq(){
   inp.addEventListener("input",run);
 }
 
+const QKEY="rsbl_qf";
 function bindQualify(){
   const steps=[...document.querySelectorAll(".fstep")], defs=Q_STEPS();
   let i=0;
@@ -1928,16 +1990,53 @@ function bindQualify(){
     window.scrollTo({top:$("#qf").offsetTop-90,behavior:"smooth"});
   };
   const valid=()=>{
-    let ok=true;
+    let ok=true, first=null;
     defs[i].f.filter(f=>f.req).forEach(f=>{
       const els=form.querySelectorAll(`[name="${f.k}"]`);
-      let has=false;
-      els.forEach(e=>{ if(e.type==="radio"||e.type==="checkbox"){ if(e.checked) has=true; } else if(e.value.trim()) has=true; });
+      let has=false, bad=false;
+      els.forEach(e=>{
+        if(e.type==="radio"||e.type==="checkbox"){ if(e.checked) has=true; }
+        else if(e.value.trim()){ has=true; if(!e.checkValidity()) bad=true; }
+      });
       const err=form.querySelector(`.err[data-for="${f.k}"]`);
-      err.classList.toggle("on",!has); if(!has) ok=false;
+      if(err){
+        err.textContent = bad
+          ? L("تحقّق من صيغة ما كتبته.","Please check the format of what you entered.")
+          : L("هذا الحقل مطلوب.","This field is required.");
+        err.classList.toggle("on", !has || bad);
+      }
+      els.forEach(e=>e.setAttribute("aria-invalid", (!has||bad) ? "true" : "false"));
+      if((!has||bad) && !first) first = els[0];
+      if(!has||bad) ok=false;
     });
+    if(first) first.focus();
     return ok;
   };
+  /* Keep what the visitor typed across a language or theme switch, and across
+     an accidental navigation. Cleared once the request is actually received. */
+  const saveState=()=>{
+    try{
+      const o={}; new FormData(form).forEach((v,k)=>{ o[k]=o[k]?o[k]+"|"+v:v; });
+      store.s(QKEY, JSON.stringify({step:i,data:o}));
+    }catch(e){}
+  };
+  const restoreState=()=>{
+    try{
+      const raw=store.g(QKEY); if(!raw) return;
+      const {step,data}=JSON.parse(raw); if(!data) return;
+      Object.entries(data).forEach(([k,v])=>{
+        const vals=String(v).split("|");
+        form.querySelectorAll(`[name="${k}"]`).forEach(e=>{
+          if(e.type==="radio"||e.type==="checkbox") e.checked=vals.includes(e.value);
+          else e.value=vals[0];
+        });
+      });
+      if(Number.isInteger(step) && step>=0 && step<steps.length) i=step;
+    }catch(e){}
+  };
+  restoreState();
+  form.addEventListener("input",saveState);
+  form.addEventListener("change",saveState);
   form.addEventListener("change",e=>{
     const o=e.target.closest(".opt"); if(!o) return;
     if(e.target.type==="radio") o.parentElement.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel"));
@@ -1950,18 +2049,38 @@ function bindQualify(){
     const fd=new FormData(form), data={};
     for(const [k,v] of fd.entries()){ data[k]=data[k]?data[k]+" | "+v:v; }
     data.lang=LANG; data.page=location.href; data.submittedAt=new Date().toISOString();
+    const reset=()=>{ send.disabled=false; send.textContent=L("إرسال الطلب","Submit request"); };
+    const fail=(m)=>{ reset(); const b=$("#q_err"); if(b){ b.textContent=m; b.hidden=false; b.focus(); } else alert(m); };
     send.disabled=true; send.textContent=L("جارٍ الإرسال…","Sending…");
-    try{
-      if(CFG.formEndpoint){
-        await fetch(CFG.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-      }else{
-        /* Fallback while no webhook is configured: hand off to WhatsApp */
-        window.open(waLink(L("طلب تأهيل جديد:\n","New qualification request:\n")+Object.entries(data).map(([k,v])=>`${k}: ${v}`).join("\n")),"_blank");
+    const eb=$("#q_err"); if(eb) eb.hidden=true;
+
+    /* A submission counts as received only when the endpoint confirms it.
+       Never navigate to the thank-you page on an unverified hand-off. */
+    if(CFG.formEndpoint){
+      try{
+        const r=await fetch(CFG.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+        if(!r.ok) throw new Error("HTTP "+r.status);
+        try{ store.s(QKEY,""); }catch(e){}
+        location.hash="#/thanks";
+      }catch(err){
+        fail(L("تعذّر إرسال الطلب. تحقّق من اتصالك وأعد المحاولة، أو راسلنا مباشرة وسنكمل معك.",
+               "We could not send your request. Check your connection and try again, or message us directly and we will take it from there."));
       }
-      location.hash="#/thanks";
-    }catch(err){
-      send.disabled=false; send.textContent=L("إرسال الطلب","Submit request");
-      alert(L("تعذر الإرسال. تواصل معنا على واتساب من فضلك.","Sending failed. Please contact us on WhatsApp."));
+    }else{
+      /* No endpoint configured yet: hand off to WhatsApp and say so honestly.
+         We do NOT claim the request was received, because it was not. */
+      const w=window.open(waLink(L("طلب تأهيل جديد:\n","New qualification request:\n")+Object.entries(data).map(([k,v])=>`${k}: ${v}`).join("\n")),"_blank");
+      reset();
+      const b=$("#q_err");
+      if(b){
+        b.className="notice"; b.hidden=false;
+        b.innerHTML = w
+          ? L("فتحنا لك واتساب ومعه إجاباتك جاهزة. <b>أرسل الرسالة لتصلنا</b> — لم يُسجَّل طلبك بعد.",
+              "We have opened WhatsApp with your answers ready. <b>Send the message so it reaches us</b> — your request has not been recorded yet.")
+          : L("منع المتصفح فتح واتساب. افتحه يدويًا وأرسل لنا إجاباتك، أو راسلنا على البريد.",
+              "Your browser blocked WhatsApp from opening. Please open it manually and send us your answers, or email us instead.");
+        b.focus();
+      }
     }
   });
   draw();
@@ -2013,7 +2132,7 @@ function pageConsult(){
           <p class="muted" style="font-size:.92rem">${L("اختر وقتًا مناسبًا من التقويم. إن لم تكن قد ملأت نموذج التأهيل بعد، ابدأ به أولًا.","Pick a time from the calendar. If you have not completed the qualification form yet, start there first.")}</p>
           <!-- CALENDAR EMBED: set CFG.calendly to your Calendly (or equivalent) URL -->
           <div id="calbox" style="border:1px dashed var(--line);border-radius:var(--r-s);min-height:340px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-size:.9rem;background:var(--sand)">
-            ${L("مكان تضمين تقويم الحجز (Calendly أو ما يعادله).<br>ضع الرابط في <code>CFG.calendly</code> داخل الكود.","Booking calendar embed goes here (Calendly or equivalent).<br>Set the URL in <code>CFG.calendly</code> in the code.")}
+            ${L("<b style=\"display:block;font-size:1.05rem;color:var(--navy);margin-bottom:8px\">الحجز يبدأ بنموذج التأهيل</b>نحتاج معرفة سوقك وميزانيتك وفئتك قبل الجلسة، حتى تكون الساعة التي نقضيها معك مفيدة لا تعارفًا.<br>املأ النموذج ونرسل لك موعدًا خلال يوم إلى يومي عمل.","<b style=\"display:block;font-size:1.05rem;color:var(--navy);margin-bottom:8px\">Booking starts with the qualification form</b>We need to know your market, budget and category before the session, so the hour we spend together is useful rather than introductory.<br>Complete the form and we will send you a slot within one to two business days.")}
           </div>
           <div class="btns" style="margin-top:16px">
             <a class="btn btn-primary btn-block" href="#/qualify?type=consult">${L("املأ نموذج التأهيل أولًا","Complete the qualification form first")}</a>
@@ -2035,17 +2154,17 @@ function pageAbout(){
     <p class="lead">${L(`${CFG.brand} قسم تابع لـ <bdi dir="ltr">${CFG.parent}</bdi>، أُنشئ ليخدم شريحة محددة: التاجر أو رائد الأعمال الذي يريد أن يبدأ نشاط استيراد حقيقي، لكنه لا يملك الوقت ولا الشبكة ولا الخبرة الميدانية داخل الصين.`,
       `${CFG.brand} is a division of <bdi dir="ltr">${CFG.parent}</bdi>, created to serve one specific audience: the trader or entrepreneur who wants to start a real import business but lacks the time, network and on-the-ground experience inside China.`)}</p>
     <h2>${L("علاقتنا بالشركة الأم","Our relationship with the parent company")}</h2>
-    <p>${L(`<bdi dir="ltr">${CFG.parent}</bdi> تعمل في التوريد والتخليص الجمركي ولديها شبكة موردين ومصانع قائمة. هذا القسم يستخدم البنية نفسها — المستودع، فريق الفحص، علاقات الشحن، خبرة المستندات — لكنه يوجّهها لعملاء أصغر يبدأون بصفقة واحدة بدل الحاويات الكاملة.`,
+    <p>${L(`<bdi dir="ltr">${CFG.parent}</bdi> تعمل في التوريد والتخليص الجمركي ولديها شبكة مورّدين ومصانع قائمة. هذا القسم يستخدم البنية نفسها — المستودع، فريق الفحص، علاقات الشحن، خبرة المستندات — لكنه يوجّهها لعملاء أصغر يبدأون بصفقة واحدة بدل الحاويات الكاملة.`,
       `<bdi dir="ltr">${CFG.parent}</bdi> operates in sourcing and customs clearance and maintains an established network of suppliers and factories. This division uses the same infrastructure — the warehouse, the inspection team, freight relationships and documentation experience — but directs it at smaller clients starting with a single deal rather than full containers.`)}</p>
     <h2>${L("فريقنا موجود في الصين","Our team is based in China")}</h2>
-    <p>${L("وجودنا الفعلي في الصين هو الفارق العملي: نزور المصانع، نطلب عينات، نتفاوض بالسعر واللغة المحلية، ونفحص البضاعة قبل تحميلها. الوسيط الذي يعمل من خارج الصين ينقل لك ما يقوله المصنع؛ نحن نتحقق منه.",
-      "Being physically in China is the practical difference: we visit factories, request samples, negotiate in the local price and language, and inspect goods before loading. An agent working from outside China relays what the factory says; we verify it.")}</p>
+    <p>${L("وجودنا الفعلي في الصين هو الفارق العملي: نزور المصانع، نطلب عينات، نتفاوض بالأسعار المحلية وباللغة المحلية، ونفحص البضاعة قبل تحميلها. الوسيط الذي يعمل من خارج الصين ينقل لك ما يقوله المصنع؛ نحن نتحقق منه.",
+      "Being physically in China is the practical difference: we visit factories, request samples, negotiate at local prices and in the local language, and inspect goods before loading. An agent working from outside China relays what the factory says; we verify it.")}</p>
     <h2>${L("كيف نتعامل مع العميل","How we work with clients")}</h2>
     <ul>
       <li>${L("مدير حساب واحد يتابع ملفك من أول مكالمة حتى وصول الشحنة.","One account manager follows your file from the first call until the shipment arrives.")}</li>
       <li>${L("تكلفة مفصّلة بندًا ببند قبل أي تحويل مالي.","An itemised cost breakdown before any money is transferred.")}</li>
       <li>${L("لا نبدأ صفقة إن رأينا أن ميزانيتك أو سوقك لا يحتملانها — ونقول ذلك صراحة.","We do not start a deal if we judge that your budget or market cannot carry it — and we say so plainly.")}</li>
-      <li>${L("لا نعرض بيانات الموردين للعامة حمايةً لسلسلة التوريد ولعملائنا.","We do not publish supplier details, to protect the supply chain and our clients.")}</li>
+      <li>${L("لا نعرض بيانات المورّدين للعامة حمايةً لسلسلة التوريد ولعملائنا.","We do not publish supplier details, to protect the supply chain and our clients.")}</li>
     </ul>
     <h2>${L("ما لا نقوله","What we do not claim")}</h2>
     <p>${L("لا نَعِد بأرباح، ولا بمدة استرداد، ولا بأن البيع مضمون. التجارة نشاط فيه مخاطرة حقيقية: السوق قد يتغير، والطلب قد يقل، والمنافسة قد تشتد، والتنفيذ من طرفك يصنع فرقًا كبيرًا. دورنا أن نقلل المخاطر التي يمكن التحكم بها — التوريد والجودة والتكلفة والمستندات — ونعطيك أرقامًا واقعية تبني عليها قرارك.",
@@ -2062,7 +2181,7 @@ function pageFaq(){
     L("تُحتسب حسب البند الجمركي وقيمة الفاتورة وقواعد بلد الوصول، وتختلف بين دولة وأخرى. في شروط FOB و CIF يدفعها المستورد في بلده. في DDP يمكن أن نتولى تقديرها وتحصيلها ضمن الصفقة، مع توضيح أن التقدير قابل للتغير حسب تقييم الجمرك.","They are calculated from the HS code, the invoice value and the destination country's rules, and differ from country to country. Under FOB and CIF the importer pays them locally. Under DDP we can estimate and collect them within the deal, on the basis that the estimate may change according to the customs valuation.")],
    [L("كم تستغرق الشحنة حتى تصل؟","How long does a shipment take to arrive?"),
     L("الشحن البحري إلى موانئ الخليج عادة 25–40 يومًا بحريًا، ويضاف إليه وقت التجميع والفحص والتخليص، ليصبح الإجمالي غالبًا 40–60 يومًا. الشحن الجوي أسرع (7–15 يومًا) لكنه أعلى تكلفة ويناسب البضائع خفيفة الوزن عالية القيمة.","Sea freight to Gulf ports is typically 25–40 days at sea, plus consolidation, inspection and clearance time, bringing the total to roughly 40–60 days. Air freight is faster (7–15 days) but costlier and suits light, high-value goods.")],
-   [L("كيف تضمنون الجودة قبل الشحن؟","How do you check quality before shipping?"),
+   [L("كيف تفحصون الجودة قبل الشحن؟","How do you check quality before shipping?"),
     L("نطلب عينة قبل الطلب الكامل عند الحاجة، ثم نجري فحصًا في المستودع قبل التحميل: عدّ الكميات، مطابقة المواصفات، اختبار عينات عشوائية، وتصوير فوتوغرافي وفيديو يُرسل لك مع تقرير الفحص قبل مغادرة الشحنة.","We request a sample before the full order where needed, then run a warehouse inspection before loading: counting quantities, checking specifications against the order, testing random samples, and producing photos and video sent to you with the inspection report before the shipment departs.")],
    [L("ماذا لو وصلت المنتجات مخالفة للمواصفات؟","What if the goods arrive not matching specification?"),
     L("التقرير المصوّر قبل الشحن هو المرجع. إذا ثبت خلل من المصنع ضمن ما وثّقناه، نتابع المطالبة معه ونسعى لتعويض أو استبدال في الشحنة التالية. أضرار النقل تُغطى عبر بوليصة التأمين إن كانت الصفقة مؤمَّنة. لا نستطيع ضمان تعويض في كل الحالات، وهذا موضّح في العقد.","The photographed pre-shipment report is the reference. If a factory fault is established within what we documented, we pursue the claim and seek compensation or replacement in the next shipment. Transit damage is covered by the insurance policy where the shipment is insured. We cannot guarantee compensation in every case, and this is set out in the contract.")],
@@ -2080,8 +2199,8 @@ function pageFaq(){
     L("لا. لا نتعامل مع المنتجات المقلدة أو التي تحمل علامات تجارية دون ترخيص. نعمل على منتجات عامة أو منتجات يمكن تغليفها بعلامتك الخاصة عبر ترتيب OEM نظامي.","No. We do not deal in counterfeit goods or products carrying trademarks without licence. We work with generic products or products that can be packaged under your own brand through a proper OEM arrangement.")],
    [L("هل تضمنون أن المنتج سيُباع في سوقي؟","Do you guarantee the product will sell in my market?"),
     L("لا، ولا يستطيع أحد ذلك بصدق. ما نقدمه هو دراسة قبل الشراء، تكاليف واضحة، وسيناريوهات مالية متعددة تُظهر لك الحالة المتحفظة كما تُظهر المتفائلة. النتائج تتأثر بالسوق والتنفيذ والطلب والمنافسة وهي غير مضمونة.","No, and nobody honestly can. What we provide is a pre-purchase study, clear costs, and multiple financial scenarios showing the conservative case alongside the optimistic one. Results are affected by market, execution, demand and competition, and are not guaranteed.")],
-   [L("هل يمكنني زيارة المصنع أو رؤية الموردين؟","Can I visit the factory or see the suppliers?"),
-    L("بيانات الموردين لا تُعرض للعامة، لكنها تُشارك مع العميل بعد التأهيل واعتماد الصفقة ضمن اتفاقية عدم منافسة. ترتيب زيارة ميدانية ممكن للعملاء في مستوى الجملة، ويُنسَّق مسبقًا.","Supplier details are not published, but they are shared with the client after qualification and deal approval under a non-circumvention agreement. Arranging a site visit is possible for wholesale-level clients and is coordinated in advance.")]
+   [L("هل يمكنني زيارة المصنع أو رؤية المورّدين؟","Can I visit the factory or see the suppliers?"),
+    L("بيانات المورّدين لا تُعرض للعامة، لكنها تُشارك مع العميل بعد التأهيل واعتماد الصفقة ضمن اتفاقية عدم الالتفاف. ترتيب زيارة ميدانية ممكن للعملاء في مستوى الجملة، ويُنسَّق مسبقًا.","Supplier details are not published, but they are shared with the client after qualification and deal approval under a non-circumvention agreement. Arranging a site visit is possible for wholesale-level clients and is coordinated in advance.")]
   ];
   return `<section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("الأسئلة الشائعة","FAQ")}</span>
@@ -2179,11 +2298,11 @@ function pageCompliance(){
   ];
   const dates=[
     ["2024-10-06",L("6 أكتوبر 2024","6 Oct 2024"),L("رسوم الخدمة الجمركية السعودية: 0.15% من القيمة، بحد أدنى 15 ريالًا وأقصى 500 ريال، مع إلغاء رسوم التصدير.","Saudi customs service fee: 0.15% of value, minimum SAR 15 and maximum SAR 500, with export fees abolished.")],
-    ["2025-01-01",L("1 يناير 2025","1 Jan 2025"),L("بدء العمل بالتعرفة الجمركية الخليجية الموحّدة على مستوى 12 خانة.","The GCC integrated customs tariff comes into force at the 12-digit level.")],
-    ["2025-10-01",L("1 أكتوبر 2025","1 Oct 2025"),L("شهادة مطابقة الإرسالية تصبح شرطًا أساسيًا قبل تقديم أي بيان جمركي — لجميع المنتجات.","The Shipment CoC becomes a precondition for submitting any customs declaration — for all products.")],
+    ["2025-01-01",L("1 يناير 2025","1 Jan 2025"),L("بدأ العمل بالتعرفة الجمركية الخليجية الموحّدة على مستوى 12 خانة.","The GCC integrated customs tariff came into force at the 12-digit level.")],
+    ["2025-10-01",L("1 أكتوبر 2025","1 Oct 2025"),L("صارت شهادة مطابقة الإرسالية شرطًا أساسيًا قبل تقديم أي بيان جمركي — لجميع المنتجات.","The Shipment CoC becomes a precondition for submitting any customs declaration — for all products.")],
     ["2025-10-29",L("29 أكتوبر 2025","29 Oct 2025"),L("إلزام تقديم بيانات الشحنة والبيان الجمركي قبل الوصول في الموانئ البحرية السعودية.","Advance manifest and customs declaration become mandatory before arrival at Saudi seaports.")],
     ["2026-01-01",L("1 يناير 2026","1 Jan 2026"),L("تحديث رموز التعرفة الجمركية داخل سابر. الشهادات القائمة تبقى سارية حتى انتهائها، لكن عدم تطابق الرمز مع بيانات المنتج يسبب تأخيرًا في التخليص.","Customs tariff codes are updated inside SABER. Existing certificates stay valid until expiry, but a code that does not match the product data delays clearance.")],
-    ["2026-03-01",L("1 مارس 2026","1 Mar 2026"),L("علامة الجودة العُمانية تصبح إلزامية، ويشمل نطاقها الأجهزة الكهربائية ومستحضرات التجميل والأجهزة المستهلكة للطاقة.","The Omani Quality Mark becomes mandatory, covering electrical appliances, cosmetics and energy-consuming devices.")],
+    ["2026-03-01",L("1 مارس 2026","1 Mar 2026"),L("صارت علامة الجودة العُمانية إلزامية، ويشمل نطاقها الأجهزة الكهربائية ومستحضرات التجميل والأجهزة المستهلكة للطاقة.","The Omani Quality Mark becomes mandatory, covering electrical appliances, cosmetics and energy-consuming devices.")],
     ["2026-06",L("منتصف 2026","Mid-2026"),L("توسيع قائمة المنتجات التي تتطلب اعتماد نموذج إقرار المنتج أو المستورد من وزارة الصناعة — الحديد والصلب ومواد البناء وما يتصل بها. الإقرار المعتمد صالح 60 يومًا فقط.","The list of products requiring an approved Producer/Importer Declaration from the Ministry of Industry is expanded — iron, steel, building materials and related lines. The approved declaration is valid for only 60 days.")],
     ["2026-11-01",L("1 نوفمبر 2026","1 Nov 2026"),L("مواصفة SASO 3114:2026 تصبح إلزامية لأجهزة تقنية المعلومات والاتصالات، بعد انتهاء الفترة الانتقالية في 31 أكتوبر 2026.","SASO 3114:2026 becomes mandatory for ICT equipment, after the grace period ends on 31 October 2026.")],
     ["2027-03-31",L("31 مارس 2027","31 Mar 2027"),L("إيقاف العمل بالشهادات الصادرة وفق مواصفة CST رقم GEN-002.","Certificates issued under CST specification GEN-002 are discontinued.")]
@@ -2446,7 +2565,7 @@ const PP_STG = ()=>[
   ["اعتماد الطلب والعيّنة","ORDER &amp; SAMPLE APPROVAL",
    "العيّنة المعتمدة من زوايا مختلفة، وورقة المواصفات الموقّعة، ومقارنة العيّنة بالمطلوب.",
    ["العيّنة المعتمدة","ورقة المواصفات","تفصيلة قريبة","المقاس مع مسطرة"]],
-  ["المصنع والمورد","FACTORY &amp; SUPPLIER",
+  ["المصنع والمورّد","FACTORY &amp; SUPPLIER",
    "واجهة المصنع بلافتته، وخط الإنتاج، ورخصة المصنع أو شهادة النظام إن وُجدت.",
    ["واجهة المصنع","خط الإنتاج","المستودع","الرخصة أو الشهادة"]],
   ["الإنتاج","PRODUCTION",
@@ -2621,34 +2740,34 @@ function pageVerify(){
   const steps=[
     [L("السجل الحكومي الصيني","The Chinese government registry"),"NATIONAL ENTERPRISE CREDIT REGISTRY",
      L("منصة رسمية تابعة لهيئة تنظيم السوق الصينية، مجانية ومفتوحة للجميع، وفيها كل شركة مسجَّلة في الصين. الواجهة بالصينية فقط — لا توجد نسخة إنجليزية رسمية، وأي موقع يسمّي نفسه «GSXT بالإنجليزية» هو وسيط تجاري لا جهة حكومية.","An official platform of China's market regulator, free and open to anyone, covering every registered company in China. The interface is Chinese only — there is no official English version, and any site calling itself \"GSXT in English\" is a commercial reseller, not a government body."),
-     L("ابحث بالاسم الصيني للشركة أو برمز الائتمان الموحّد. اطلب من المورد اسمه الصيني كما هو في الرخصة — لا الاسم الإنجليزي التجاري.","Search by the company's Chinese name or its Unified Social Credit Code. Ask the supplier for the Chinese name exactly as it appears on the licence — not the English trading name.")],
+     L("ابحث بالاسم الصيني للشركة أو برمز الائتمان الموحّد. اطلب من المورّد اسمه الصيني كما هو في الرخصة — لا الاسم الإنجليزي التجاري.","Search by the company's Chinese name or its Unified Social Credit Code. Ask the supplier for the Chinese name exactly as it appears on the licence — not the English trading name.")],
     [L("رمز الائتمان الاجتماعي الموحّد","The Unified Social Credit Code"),"18-CHARACTER USCC",
      L("ثمانية عشر خانة من أرقام وحروف كبيرة، ولا تُستخدم فيها الحروف I و O و Z و S و V. الخانة الأولى تدل على جهة التسجيل، و«9» تعني هيئة تنظيم السوق. الخانات من الثالثة إلى الثامنة ترمز للمنطقة الإدارية.","Eighteen characters of digits and capital letters, never using I, O, Z, S or V. The first character is the registering authority, where 9 means the market regulator. Characters three to eight encode the administrative region."),
-     L("رمز يبدأ بـ 91 هو شركة عادية مسجَّلة لدى هيئة تنظيم السوق. وإن قال المورد إنه في شنتشن بينما ترمز خاناته إلى إقليم آخر، فاسأل عن السبب قبل أن تكمل.","A code starting 91 is an ordinary company registered with the market regulator. If the supplier says Shenzhen but the code encodes a different province, ask why before you go further.")],
-    [L("رخصة العمل — وامسح رمز QR","The business licence — and scan the QR code"),"BUSINESS LICENCE",
-     L("الرخصة النظامية تحمل: الاسم، رمز الائتمان الموحّد، نوع الكيان، رأس المال المسجَّل، المقر، الممثل القانوني، نطاق الأعمال، جهة التسجيل، وتاريخ التأسيس. والرخص الصادرة منذ مارس 2019 تحمل رمز QR يربط مباشرة بسجل الشركة في المنصة الحكومية.","A compliant licence carries: the name, the USCC, the entity type, registered capital, domicile, legal representative, business scope, registering authority and date of establishment. Licences issued since March 2019 carry a QR code linking directly to the company's record on the government platform."),
+     L("رمز يبدأ بـ 91 هو شركة عادية مسجَّلة لدى هيئة تنظيم السوق. وإن قال المورّد إنه في شنتشن بينما ترمز خاناته إلى إقليم آخر، فاسأل عن السبب قبل أن تكمل.","A code starting 91 is an ordinary company registered with the market regulator. If the supplier says Shenzhen but the code encodes a different province, ask why before you go further.")],
+    [L("الرخصة التجارية — وامسح رمز QR","The business licence — and scan the QR code"),"BUSINESS LICENCE",
+     L("الرخصة التجارية النظامية تحمل: الاسم، رمز الائتمان الموحّد، نوع الكيان، رأس المال المسجَّل، المقر، الممثل القانوني، نطاق الأعمال، جهة التسجيل، وتاريخ التأسيس. والرخص الصادرة منذ مارس 2019 تحمل رمز QR يربط مباشرة بسجل الشركة في المنصة الحكومية.","A compliant licence carries: the name, the USCC, the entity type, registered capital, domicile, legal representative, business scope, registering authority and date of establishment. Licences issued since March 2019 carry a QR code linking directly to the company's record on the government platform."),
      L("امسح رمز QR وقارن الاسم والرمز حرفًا بحرف مع المطبوع على الورقة — هذا أقوى فحص لديك ضد رخصة معدَّلة بالفوتوشوب. وملاحظة تمنع سوء الفهم: «مدة العمل» حُذفت من واجهة الرخص الصادرة بعد 1 سبتمبر 2022، فوجودها في رخصة لا يعني تزويرًا، بل يعني أنها رخصة أقدم.","Scan the QR code and compare the name and code character by character with what is printed on the page — this is your strongest check against a photoshopped licence. And a note that prevents a misunderstanding: the term of operation was removed from licences issued after 1 September 2022, so seeing it does not mean forgery, only that the licence is older.")],
     [L("رأس المال: انظر المدفوع لا المسجَّل","Capital: read the paid-in figure, not the registered one"),"PAID-IN vs SUBSCRIBED",
      L("منذ إصلاح 2014 صار رأس المال المسجَّل «مكتتبًا» لا «مدفوعًا» — أي وعد من الشركاء، لا مال موجود. فشركة برأس مال 50 مليون يوان قد لا يكون فيها شيء فعليًا.","Since the 2014 reform, registered capital is subscribed rather than paid in — a promise by the shareholders, not money that exists. A company showing RMB 50 million may have nothing actually paid."),
-     L("ومنذ يوليو 2024 صارت المنصة الحكومية تنشر المبلغ المدفوع فعليًا إلى جانب المكتتب. هذا هو الرقم الذي يعني شيئًا. وقانون الشركات الجديد النافذ في 1 يوليو 2024 يلزم بسداد رأس المال خلال خمس سنوات، والشركات القائمة قبله أمامها مهلة حتى 30 يونيو 2027 — فالمورد ذو الاكتتاب الضخم والسداد الصفري على ساعة تعدّ.","Since July 2024 the government platform publishes the amount actually paid in alongside the subscribed amount. That is the number that means something. The new Company Law, in force 1 July 2024, requires capital to be paid within five years, and companies formed earlier have until 30 June 2027 — so a supplier with a large subscription and nothing paid is on a clock.")],
+     L("ومنذ يوليو 2024 صارت المنصة الحكومية تنشر المبلغ المدفوع فعليًا إلى جانب المكتتب. هذا هو الرقم الذي يعني شيئًا. وقانون الشركات الجديد النافذ في 1 يوليو 2024 يلزم بسداد رأس المال خلال خمس سنوات، والشركات القائمة قبله أمامها مهلة حتى 30 يونيو 2027 — فالمورّد ذو الاكتتاب الضخم والسداد الصفري على ساعة تعدّ.","Since July 2024 the government platform publishes the amount actually paid in alongside the subscribed amount. That is the number that means something. The new Company Law, in force 1 July 2024, requires capital to be paid within five years, and companies formed earlier have until 30 June 2027 — so a supplier with a large subscription and nothing paid is on a clock.")],
     [L("مصنع أم وسيط؟","Factory or trader?"),"MANUFACTURER OR MIDDLEMAN",
      L("نطاق الأعمال إشارة تعمل في اتجاه واحد فقط: غياب أي ذكر للإنتاج أو التصنيع أو المعالجة يعني على الأرجح أنك أمام شركة تجارية. لكن وجود كلمات البيع والتجارة لا ينفي المصنع إطلاقًا — أغلب المصانع الحقيقية تسجّل التصنيع والبيع والاستيراد والتصدير معًا.","Business scope is a one-directional signal: the absence of any mention of production, manufacturing or processing usually means you are looking at a trading company. But the presence of sales and trading words does not rule out a factory at all — most real factories register manufacturing, sales and import-export together."),
      L("إشارات أفضل من نطاق الأعمال: نوع العنوان المسجَّل (مجمع صناعي أم برج مكاتب أم شقة)، وعدد الموظفين في التقرير السنوي، واسم الجهة المدوَّن على شهادات المنتج. وانتبه: من الطبيعي أن يكون المصنع كيانًا وشركة التصدير كيانًا آخر برمز مختلف — الطبيعي أن تعرف أي كيان في العقد وأي كيان يستلم المال.","Better signals than business scope: the type of registered address (industrial park, office tower or apartment), the headcount in the annual report, and which entity's name appears on the product certificates. And note: it is normal for the factory and the exporting company to be two entities with different codes — what matters is knowing which one is on the contract and which one receives the money.")],
     [L("حق التصدير — معلومة قديمة يجب تصحيحها","Export rights — an outdated instruction to unlearn"),"THE RIGHT TO EXPORT",
-     L("«تسجيل مشغّل التجارة الخارجية» الذي تطلبه أغلب الأدلة العربية أُلغي في 30 ديسمبر 2022 مع تعديل قانون التجارة الخارجية. فالشهادة القديمة إن وُجدت لدى المورد صارت وثيقة تاريخية لا تثبت شيئًا اليوم.","The foreign trade operator filing that most Arabic guides still ask for was abolished on 30 December 2022 with the amendment of the Foreign Trade Law. If a supplier still holds that old certificate, it is a historical document that proves nothing today."),
+     L("«تسجيل مشغّل التجارة الخارجية» الذي تطلبه أغلب الأدلة العربية أُلغي في 30 ديسمبر 2022 مع تعديل قانون التجارة الخارجية. فالشهادة القديمة إن وُجدت لدى المورّد صارت وثيقة تاريخية لا تثبت شيئًا اليوم.","The foreign trade operator filing that most Arabic guides still ask for was abolished on 30 December 2022 with the amendment of the Foreign Trade Law. If a supplier still holds that old certificate, it is a historical document that proves nothing today."),
      L("المطلوب في 2026: رخصة عمل سارية، وتسجيل لدى الجمارك الصينية كمرسِل للبضائع (سارٍ منذ 1 يناير 2022). ويمكنك التحقق من ذلك بنفسك على منصة الجمارك لنشر معلومات ائتمان الشركات — وهي فحص مستقل عن السجل التجاري: شركة قد تكون سليمة في السجل ولا تملك تسجيلًا جمركيًا، فلا تصلح أن تكون المصدِّر في مستنداتك.","What is required in 2026: a valid business licence, and a customs filing as a consignor of import-export goods (in force since 1 January 2022). You can check this yourself on the customs credit disclosure platform — a check separate from the business registry: a company can be perfectly valid on the registry and still have no customs filing, which means it cannot be the exporter on your documents.")],
-    [L("إن لم يكن للمورد حق تصدير","If the supplier has no export rights"),"WHO IS THE EXPORTER OF RECORD",
-     L("هذه حالة شائعة جدًا مع موردي المنصات المحلية الصينية. المسار السليم هو وكيل تصدير بعقد مكتوب، ويبقى المصنع هو المسؤول الأساسي، ويتحمل مقدّم الخدمة مسؤولية تضامنية.","This is very common with suppliers from China's domestic platforms. The sound route is an export agent under a written contract, where the manufacturer remains the primary responsible party and the service company carries joint liability."),
+    [L("إن لم يكن للمورّد حق تصدير","If the supplier has no export rights"),"WHO IS THE EXPORTER OF RECORD",
+     L("هذه حالة شائعة جدًا مع مورّدي المنصات المحلية الصينية. المسار السليم هو وكيل تصدير بعقد مكتوب، ويبقى المصنع هو المسؤول الأساسي، ويتحمل مقدّم الخدمة مسؤولية تضامنية.","This is very common with suppliers from China's domestic platforms. The sound route is an export agent under a written contract, where the manufacturer remains the primary responsible party and the service company carries joint liability."),
      L("والمسار الرمادي هو «شراء بيان جمركي» باسم شركة لا علاقة لها بصفقتك. وضرره عليك ملموس: اسم المصدِّر في بوليصة الشحن وشهادة المنشأ لن يطابق اسم من تعاقدت معه، وهذا وحده يكسر الاعتماد المستندي ويعقّد التخليص في الخليج ويضعف أي مطالبة لاحقة. اسأل دائمًا: من المصدِّر المسجَّل؟ واطلبها مكتوبة، وافحص ذلك الكيان أيضًا.","The grey route is buying a declaration in the name of a company unrelated to your deal. The damage to you is concrete: the exporter's name on the bill of lading and the certificate of origin will not match the party you contracted with, and that alone breaks a letter of credit, complicates Gulf clearance and weakens any later claim. Always ask who the exporter of record is, get it in writing, and check that entity too.")]
   ];
   const badges=[
     [L("Gold Supplier","Gold Supplier"),L("اشتراك سنوي مدفوع","A paid annual membership"),
      L("التحقق المرافق له يؤكد شيئين فقط: أن الشركة مسجَّلة، وأن الشخص الذي يراسلك مخوَّل بتمثيلها. لا يقول شيئًا عن مصنع ولا طاقة إنتاجية ولا نزاهة.","The verification attached to it confirms two things only: that the company is registered, and that the person emailing you is authorised to represent it. It says nothing about a factory, capacity or honesty.")],
     [L("Verified Supplier","Verified Supplier"),L("أعلى درجة من نفس الاشتراك المدفوع","The top tier of that same paid membership"),
-     L("الفحص الميداني حقيقي وتنفّذه جهات معروفة مثل SGS و TÜV Rheinland و Intertek — لكن المورد هو من طلبه ودفع ثمنه. الشارة ليست جائزة يفوز بها المورد الجيد، بل خدمة يشتريها.","The on-site audit is real and is carried out by well-known bodies such as SGS, TÜV Rheinland and Intertek — but the supplier commissioned it and paid for it. The badge is not a prize the good supplier wins; it is a service he buys.")],
-    [L("Trade Assurance","Trade Assurance"),L("حماية للطلب لا شهادة للمورد","Order protection, not a supplier credential"),
+     L("الفحص الميداني حقيقي وتنفّذه جهات معروفة مثل SGS و TÜV Rheinland و Intertek — لكن المورّد هو من طلبه ودفع ثمنه. الشارة ليست جائزة يفوز بها المورّد الجيد، بل خدمة يشتريها.","The on-site audit is real and is carried out by well-known bodies such as SGS, TÜV Rheinland and Intertek — but the supplier commissioned it and paid for it. The badge is not a prize the good supplier wins; it is a service he buys.")],
+    [L("Trade Assurance","Trade Assurance"),L("حماية للطلب لا شهادة للمورّد","Order protection, not a supplier credential"),
      L("تحمي طلبك من عدم الشحن أو مخالفة المواصفات أو نقص الكمية — بشرط أن تدفع داخل المنصة. أشهر طريقة يخسر بها المستورد ماله: يتفق على طلب محمي ثم يحوّل على حساب وصله عبر واتساب. ذلك الطلب غير محمي إطلاقًا.","It protects your order against non-shipment, specification mismatch or short quantity — provided you pay inside the platform. The most common way an importer loses money: agreeing a protected order and then wiring to an account received over WhatsApp. That order carries no protection at all.")],
-    [L("عدد السنوات بجانب اسم المورد","The years figure beside the supplier"),L("سنوات العضوية لا عمر الشركة","Years of membership, not the company's age"),
+    [L("عدد السنوات بجانب اسم المورّد","The years figure beside the supplier"),L("سنوات العضوية لا عمر الشركة","Years of membership, not the company's age"),
      L("قارنه بتاريخ التأسيس في السجل الحكومي. الفرق بين الرقمين يقول لك الكثير.","Compare it with the establishment date on the government registry. The gap between the two numbers tells you a lot.")]
   ];
   const flags=[
@@ -2657,7 +2776,7 @@ function pageVerify(){
     [L("اسم المستفيد لا يطابق العقد","The beneficiary name does not match the contract"),
      L("هذه أخطر نقطة في الصفحة كلها. اسم المستفيد في التحويل يجب أن يطابق حرفًا بحرف اسم الشركة في العقد وفي الرخصة. لا حساب شخصي لمدير المبيعات، ولا شركة في هونغ كونغ باسم مشابه، ولا «شركة مالية» وسيطة. وإن قيل لك إن حساب الشركة «تحت التدقيق» أو «مجمّد» أو «قيد التغيير» أو إن الحساب الشخصي «يوفّر الضريبة» — عاملها كاحتيال حتى يثبت العكس.","This is the most serious point on this page. The beneficiary name on the transfer must match, character for character, the company name on the contract and on the licence. Not the sales manager's personal account, not a Hong Kong entity with a similar name, not an intermediary finance company. And if you are told the company account is under audit, frozen or being changed, or that a personal account avoids tax, treat it as fraud until proven otherwise.")],
     [L("تغيير بيانات البنك في منتصف الطلب","Bank details changed mid-order"),
-     L("هذه بالضبط آلية أشهر جرائم الاحتيال في التجارة الدولية: يُخترق بريد المورد أو يُسجَّل نطاق شبيه، فتصلك بيانات بنكية «محدَّثة». مكتب التحقيقات الفيدرالي يوصي صراحة بالتحقق من أي تغيير في رقم الحساب أو إجراءات الدفع مع الشخص نفسه. تحقق بمكالمة صوتية على رقم كان لديك من قبل — لا رقم مكتوب في الرسالة الجديدة.","This is exactly the mechanism behind the best-known fraud in international trade: the supplier's mailbox is compromised or a lookalike domain is registered, and updated bank details arrive. The FBI recommends explicitly verifying any change of account number or payment procedure with the person making the request. Verify by voice call on a number you already had — never one written in the new message.")],
+     L("هذه بالضبط آلية أشهر جرائم الاحتيال في التجارة الدولية: يُخترق بريد المورّد أو يُسجَّل نطاق شبيه، فتصلك بيانات بنكية «محدَّثة». مكتب التحقيقات الفيدرالي يوصي صراحة بالتحقق من أي تغيير في رقم الحساب أو إجراءات الدفع مع الشخص نفسه. تحقق بمكالمة صوتية على رقم كان لديك من قبل — لا رقم مكتوب في الرسالة الجديدة.","This is exactly the mechanism behind the best-known fraud in international trade: the supplier's mailbox is compromised or a lookalike domain is registered, and updated bank details arrive. The FBI recommends explicitly verifying any change of account number or payment procedure with the person making the request. Verify by voice call on a number you already had — never one written in the new message.")],
     [L("فجوات في التقارير السنوية","Gaps in the annual filings"),
      L("كل شركة صينية ملزمة بنشر تقريرها السنوي بين 1 يناير و30 يونيو من كل عام على المنصة الحكومية. غياب التقارير في حد ذاته إشارة.","Every Chinese company must publish its annual report between 1 January and 30 June each year on the government platform. Missing filings are a signal in themselves.")],
     [L("رأس مال ضخم بلا سداد","Large subscription, nothing paid in"),
@@ -2672,7 +2791,7 @@ function pageVerify(){
   return `<section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("دليل مجاني","Free guide")}</span>
     <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("تحقّق من مورّدك الصيني بنفسك","Check your Chinese supplier yourself")}</h1>
-    <p class="lead">${L("سبع خطوات على سجلات حكومية صينية مفتوحة ومجانية، تكشف لك من تتعامل معه قبل أن تحوّل ريالًا واحدًا. طبّقها على أي مورد — وطبّقها علينا نحن.","Seven steps through open, free Chinese government records that show you who you are dealing with before you transfer a single riyal. Apply them to any supplier — and apply them to us.")}</p>
+    <p class="lead">${L("سبع خطوات على سجلات حكومية صينية مفتوحة ومجانية، تكشف لك من تتعامل معه قبل أن تحوّل ريالًا واحدًا. طبّقها على أي مورّد — وطبّقها علينا نحن.","Seven steps through open, free Chinese government records that show you who you are dealing with before you transfer a single riyal. Apply them to any supplier — and apply them to us.")}</p>
     <div class="info">${L("محدَّث في سبتمبر 2026 من المصادر الرسمية المذكورة في نهاية الصفحة. السجلات الصينية بواجهة صينية فقط، وقد تكون بطيئة أو تطلب تحققًا بصريًا من خارج الصين.","Updated September 2026 from the official sources listed at the foot of this page. The Chinese registries have a Chinese-only interface, and can be slow or ask for a visual check from outside China.")}</div>
   </div></section>
 
@@ -2699,7 +2818,7 @@ function pageVerify(){
 
   <section class="sec"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("إشارات الخطر","Red flags")}</span>
-      <h2>${L("خمس إشارات تقدر تفحصها من مكتبك","Five signals you can check from your desk")}</h2></div>
+      <h2>${L("خمس إشارات يمكنك فحصها من مكتبك","Five signals you can check from your desk")}</h2></div>
     <div class="acc rv" style="margin-top:26px">
       ${flags.map(f=>`<details><summary>${f[0]}</summary><div class="a">${f[1]}</div></details>`).join("")}
     </div>
@@ -2859,7 +2978,7 @@ function pageYemen(){
     <div class="grid g2 rv" style="margin-top:26px">
       <div class="card"><h3>${L("عدن — الطبعة الجديدة","Aden — new banknotes")}</h3>
         <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 1,565 YER / USD</p>${pn("fx")}
-        <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. وكان نحو 2,905 في منتصف يوليو 2025 قبل ارتفاع حاد إلى نحو 1,600 في أغسطس 2025.","On 3 September 2026. It stood at about 2,905 in mid-July 2025 before a sharp appreciation to about 1,600 in August 2025.")}</p></div>
+        <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. وكان نحو 2,905 في منتصف يوليو 2025 قبل تحسّن حادّ في قيمة الريال إلى نحو 1,600 في أغسطس 2025.","On 3 September 2026. It stood at about 2,905 in mid-July 2025 before a sharp appreciation to about 1,600 in August 2025.")}</p></div>
       <div class="card"><h3>${L("صنعاء — الطبعة القديمة","Sana'a — pre-2016 banknotes")}</h3>
         <p style="font-size:1.5rem;font-weight:700;direction:ltr;unicode-bidi:isolate">≈ 533 YER / USD</p>${pn("fx")}
         <p class="muted" style="font-size:.9rem">${L("في 3 سبتمبر 2026. ومناطق صنعاء تتداول أوراق ما قبل 2016، وهي غير متبادلة مع الطبعة الجديدة.","On 3 September 2026. Sana'a areas circulate pre-2016 notes, which are not interchangeable with the new series.")}</p></div>
@@ -2899,7 +3018,7 @@ function pageYemen(){
           <li>${L("ميناء التفريغ المقصود، محدَّدًا بالاسم لا بالبلد.","The intended discharge port, named specifically, not just the country.")}</li>
           <li>${L("هوية المستلم النهائي وسجله التجاري.","The identity of the ultimate consignee and its commercial registration.")}</li>
           <li>${L("طبيعة البضاعة وبندها الجمركي.","The nature of the goods and their tariff line.")}</li>
-          <li>${L("وأن تكون قد راجعت مسار الدفع مع قسم الالتزام في بنكك أنت. هذه مراجعة لا نقوم بها نيابة عنك ولا نستطيع.","And that you have reviewed the payment route with your own bank's compliance desk. That is a review we do not and cannot carry out on your behalf.")}</li>
+          <li>${L("وأن تكون قد راجعت مسار الدفع مع قسم الامتثال في بنكك أنت. هذه مراجعة لا نقوم بها نيابة عنك ولا نستطيع.","And that you have reviewed the payment route with your own bank's compliance desk. That is a review we do not and cannot carry out on your behalf.")}</li>
         </ul>
         <p style="margin-top:10px">${L("إن كان مسار شحنتك يمسّ ميناء أو جهة تحت التصنيف، فالجواب الصحيح هو مستشار قانوني مختص بالعقوبات، لا مورّد في الصين.","If your shipment's route touches a designated port or party, the right answer is qualified sanctions counsel, not a supplier in China.")}</p></div>
     </div>
@@ -2928,6 +3047,19 @@ function pageYemen(){
   </div></section>`;
 }
 
+function page404(){
+  return `<section class="sec"><div class="wrap center" style="max-width:620px">
+    <span class="eyebrow">404</span>
+    <h1 style="font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:10px">${L("هذه الصفحة غير موجودة","This page does not exist")}</h1>
+    <p class="lead">${L("قد يكون الرابط قديمًا أو فيه خطأ مطبعي. هذه أكثر الصفحات طلبًا:","The link may be outdated or contain a typo. These are the most requested pages:")}</p>
+    <div class="btns center" style="margin-top:22px;justify-content:center">
+      <a class="btn btn-primary" href="#/deals">${L("الصفقات الجاهزة","Ready deals")}</a>
+      <a class="btn btn-out" href="#/calculator">${L("حاسبة التكلفة","Cost calculator")}</a>
+      <a class="btn btn-out" href="#/contact">${L("تواصل معنا","Contact us")}</a>
+    </div>
+  </div></section>`;
+}
+
 /* ---------- CONTACT ---------- */
 function pageContact(){
   return `<section class="sec tight sand"><div class="wrap">
@@ -2953,7 +3085,7 @@ function pageLegal(){
   return `<section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("الصفحات النظامية","Legal")}</span>
     <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("السياسات والشروط","Policies & terms")}</h1>
-    <p class="lead">${L("آخر تحديث: يُحدَّث عند أي تعديل جوهري. راجع هذه الصفحة قبل الارتباط بأي صفقة.","Last updated: revised on any material change. Please review this page before committing to any deal.")}</p>
+    <p class="lead">${L("<b>الإصدار 1.0 — آخر تحديث: 7 سبتمبر 2026.</b> راجع هذه الصفحة قبل الارتباط بأي صفقة. عند أي تعديل جوهري نغيّر رقم الإصدار وتاريخه، ويُطبَّق على الصفقة الإصدار الساري وقت اعتمادها.","<b>Version 1.0 — last updated 7 September 2026.</b> Please review this page before committing to any deal. On any material change we update the version number and its date; the version in force when a deal is approved is the one that applies to it.")}</p>
   </div></section>
   <section class="sec"><div class="wrap prose">
   ${S("privacy",L("سياسة الخصوصية","Privacy policy"),`
@@ -2972,7 +3104,7 @@ function pageLegal(){
       <li>${L("المدد الزمنية المذكورة تقديرية ولا تُعد التزامًا بموعد وصول محدد؛ تتأثر بجداول الملاحة والأعياد الرسمية والتفتيش الجمركي.","Timeframes quoted are estimates and are not a commitment to a specific arrival date; they are affected by shipping schedules, public holidays and customs inspection.")}</li>
       <li>${L("العميل مسؤول عن التحقق من نظامية استيراد الأصناف في بلده والحصول على أي تراخيص أو تسجيلات مطلوبة.","The client is responsible for verifying that the items may lawfully be imported into their country and for obtaining any required licences or registrations.")}</li>
       <li>${L("لا نتعامل مع المنتجات المقلدة أو المخالفة لحقوق الملكية الفكرية، وأي طلب من هذا النوع يُرفض.","We do not deal in counterfeit goods or products infringing intellectual property rights, and any such request is declined.")}</li>
-      <li>${L("بيانات الموردين تُشارك بعد اعتماد الصفقة وتخضع لاتفاقية عدم منافسة.","Supplier details are shared after deal approval and are subject to a non-circumvention agreement.")}</li>
+      <li>${L("بيانات المورّدين تُشارك بعد اعتماد الصفقة وتخضع لاتفاقية عدم الالتفاف.","Supplier details are shared after deal approval and are subject to a non-circumvention agreement.")}</li>
       <li>${L("الجهة المتعاقدة هي الشركة الأم، وتُطبَّق أحكام العقد الموقّع بين الطرفين وتَعلو على أي نص عام في هذا الموقع.","The contracting entity is the parent company, and the terms of the signed contract between the parties prevail over any general text on this site.")}</li>
     </ul>`)}
   ${S("refund",L("سياسة الإرجاع والاسترداد","Refund & returns policy"),`
@@ -3001,7 +3133,7 @@ const META = {
   "/passport":[["تعبئة جواز الشحنة — أداة داخلية","Shipment Passport builder — internal tool"],
                ["أداة داخلية لتجهيز جواز الشحنة وتصديره كصفحة مستقلة للعميل.","Internal tool for preparing a shipment passport and exporting it as a standalone client page."]],
   "/supplier-check":[["تحقّق من مورّدك الصيني بنفسك — السجل الحكومي وحق التصدير وشارات علي بابا","Check your Chinese supplier yourself — the government registry, export rights and Alibaba badges"],
-               ["سبع خطوات على سجلات حكومية صينية مجانية: رمز الائتمان الموحّد، رخصة العمل ورمز QR، رأس المال المدفوع، التسجيل الجمركي، وحقيقة شارات علي بابا، وأخطر قاعدة في التحويل البنكي.","Seven steps through free Chinese government records: the Unified Social Credit Code, the business licence and its QR code, paid-in capital, the customs filing, what the Alibaba badges really mean, and the single most important rule about the bank transfer."]],
+               ["سبع خطوات على سجلات حكومية صينية مجانية: رمز الائتمان الموحّد، الرخصة التجارية ورمز QR، رأس المال المدفوع، التسجيل الجمركي، وحقيقة شارات علي بابا، وأخطر قاعدة في التحويل البنكي.","Seven steps through free Chinese government records: the Unified Social Credit Code, the business licence and its QR code, paid-in capital, the customs filing, what the Alibaba badges really mean, and the single most important rule about the bank transfer."]],
   "/yemen":[["الاستيراد إلى اليمن من الصين — الموانئ والجمارك والدفع 2026","Importing into Yemen from China — ports, customs and payment, 2026"],
                ["ممرّا عدن والحديدة، آلية UNVIM ونطاقها، تحرير الدولار الجمركي في مايو 2026 ومثال محسوب، سعرا الريال، متطلبات المطابقة الفعلية، والتعرّض للعقوبات — بمصادر مؤرَّخة.","The Aden and Hodeidah corridors, UNVIM and its scope, the May 2026 customs-dollar liberalisation with a worked example, the two rial rates, what conformity actually requires, and sanctions exposure — with dated sources."]],
   "/compliance":[["سابر والامتثال — متطلبات استيراد الصين إلى السعودية والخليج 2026","SABER & Compliance — importing from China to Saudi Arabia and the Gulf, 2026"],
@@ -3018,8 +3150,11 @@ const META = {
   "/thanks":  [["شكرًا لك — Red Sea Business Launch","Thank you — Red Sea Business Launch"],["وصلنا طلبك وسنتواصل معك قريبًا.","We have received your request and will be in touch shortly."]]
 };
 
+const META404 = () => [["الصفحة غير موجودة — Red Sea Business Launch","Page not found — Red Sea Business Launch"],
+                       ["الرابط الذي فتحته غير موجود. تصفّح الصفقات الجاهزة أو حاسبة التكلفة أو تواصل معنا.",
+                        "The link you opened does not exist. Browse the ready deals, the cost calculator, or get in touch."]];
 function setMeta(base){
-  const m = META[base] || META["/"];
+  const m = META[base] || (base==="/"||base==="" ? META["/"] : META404());
   document.title = A(m[0]);
   const set=(sel,val)=>{const e=document.querySelector(sel); if(e) e.setAttribute("content",val);};
   set('meta[name="description"]',A(m[1]));
@@ -3027,6 +3162,13 @@ function setMeta(base){
   set('meta[property="og:description"]',A(m[1]));
   set('meta[name="twitter:title"]',A(m[0]));
   set('meta[name="twitter:description"]',A(m[1]));
+  /* canonical and og:url were static on every route */
+  const url = "https://"+CFG.domain+"/"+(base==="/"?"":"#"+base);
+  const c=document.querySelector('link[rel="canonical"]'); if(c) c.href=url;
+  set('meta[property="og:url"]',url);
+  /* an unknown route must not be indexed as a duplicate of the homepage */
+  const rb=document.querySelector('meta[name="robots"]');
+  if(rb) rb.setAttribute("content", META[base] ? "index,follow" : "noindex,follow");
 }
 
 function reveal(){
@@ -3058,7 +3200,8 @@ function render(){
   else if(base==="/contact")           body=pageContact();
   else if(base==="/legal")             body=pageLegal();
   else if(base==="/thanks")            body=pageThanks();
-  else                                 body=pageHome();
+  else if(base==="/"||base==="")       body=pageHome();
+  else                                 body=page404();
 
   applyTheme();
   document.documentElement.lang = LANG;
@@ -3070,8 +3213,13 @@ function render(){
      </div>`;
   setMeta(base==="/deal"?"/deal":(base||"/"));
 
-  $("#lang").addEventListener("click",()=>{ LANG = LANG==="ar"?"en":"ar"; store.s("rsbl_lang",LANG); render(); });
-  $("#theme").addEventListener("click",()=>{ THEME = THEME==="dark"?"light":"dark"; store.s("rsbl_theme",THEME); applyTheme(); render(); });
+  $("#lang").addEventListener("click",()=>{ const y=window.scrollY; LANG = LANG==="ar"?"en":"ar"; store.s("rsbl_lang",LANG); render(); window.scrollTo(0,y); });
+  $("#theme").addEventListener("click",()=>{
+    /* Only the tokens change — a full render() threw away scroll position and
+       anything typed into the qualification form. */
+    THEME = THEME==="dark"?"light":"dark"; store.s("rsbl_theme",THEME); applyTheme();
+    const t=$("#theme"); if(t) t.textContent = THEME==="dark"?"☀":"☾";
+  });
   $("#burger").addEventListener("click",()=>$("#nav").classList.toggle("open"));
   if(!window.__prog){
     window.__prog=true;
