@@ -302,8 +302,8 @@ const waLink = (msg) => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent
 /* Logo: build.js inlines a data-URI into window.RSBL_LOGO for the single-file build.
    Multi-file build uses assets/logo.png — replace that file to change the logo. */
 /* Absolute: the shipment-passport export is a standalone file served from
-   /p/, where a relative path would resolve to /p/assets/logo.png. */
-const LOGO = "https://red-sea-business-launch.a-abdu83854.workers.dev/assets/logo.png";
+   /p/, where a relative path would resolve to /p/assets/logo.png?v=20345f50. */
+const LOGO = "https://red-sea-business-launch.a-abdu83854.workers.dev/assets/logo.png?v=20345f50";
 
 const ICON = {
   home:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 4l9 6.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>',
@@ -1888,7 +1888,7 @@ function ppExport(){
     '<meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<meta name="robots" content="noindex,nofollow">'+
     '<title>'+esc(title)+'</title>'+
-    '<link rel="icon" href="/assets/favicon.png">'+
+    '<link rel="icon" href="/assets/favicon.png?v=17f55204">'+
     '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'+
     '<link rel="stylesheet" href="'+FONTS+'">'+
     '<style>body{margin:0;padding:22px 14px 60px;background:#EEF2F6;'+

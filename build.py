@@ -36,6 +36,10 @@ NOINDEX   = ["/thanks", "/passport"]
 # a stale page live.
 GENERATED = ["index.html", "app.css", "app.js"]
 
+# filled in by main(): "/assets/x.png" -> content hash, used by version_assets
+ASSET_VERS = {}
+EXPECTED_ASSETS = ["logo.png", "favicon.png", "og.png"]
+
 
 def die(msg):
     sys.exit("build.py: " + msg)
@@ -83,6 +87,35 @@ def parse_meta(js):
     except Exception as e:
         die("META is not JSON-parseable (%s). Keep it to quoted keys and "
             "plain string arrays." % e)
+
+
+def asset_versions():
+    """/assets/* is cached for 30 days but the filenames are not content-hashed,
+    so every reference carries ?v=<hash>. Without this, replacing a logo would
+    leave the old one in visitors' browsers for a month."""
+    out = {}
+    d = os.path.join(ROOT, "assets")
+    for f in sorted(os.listdir(d)):
+        full = os.path.join(d, f)
+        if os.path.isfile(full):
+            out["/assets/" + f] = hashlib.sha256(
+                open(full, "rb").read()).hexdigest()[:8]
+    # A missing asset would silently produce a page whose reference carries no
+    # ?v= stamp — the build would still "succeed" but differ from every other
+    # machine's output. That already happened once; name them explicitly.
+    missing = [f for f in EXPECTED_ASSETS if "/assets/" + f not in out]
+    if missing:
+        die("assets/ is missing %s — the working copy is incomplete, so this "
+            "build would not match the committed one" % ", ".join(missing))
+    return out
+
+
+def version_assets(text, vers):
+    for path, h in vers.items():
+        text = text.replace(path + "?v=", path + "\0")      # never double-stamp
+        text = text.replace(path, path + "?v=" + h)
+        text = text.replace(path + "\0", path + "?v=")
+    return text
 
 
 def deals_from(js):
@@ -162,7 +195,7 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
         crumb_ld = ('\n<script type="application/ld+json">'
                     '{"@context":"https://schema.org","@type":"BreadcrumbList",'
                     '"itemListElement":[%s]}</script>' % items)
-    return f"""<!doctype html><html lang="ar" dir="rtl"><head>
+    return version_assets(f"""<!doctype html><html lang="ar" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
@@ -192,7 +225,7 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
 {body}
 <script src="{js_href}" defer></script>
 </body></html>
-"""
+""", ASSET_VERS)
 
 
 def main():
@@ -246,6 +279,11 @@ def main():
             die("route %s has no META entry in the source" % r)
 
     # --- fingerprint so a deploy can never serve a stale cached bundle --------
+    global ASSET_VERS
+    ASSET_VERS = asset_versions()
+    css = version_assets(css, ASSET_VERS)
+    js = version_assets(js, ASSET_VERS)
+
     css_h = hashlib.sha256(css.encode()).hexdigest()[:8]
     js_h  = hashlib.sha256(js.encode()).hexdigest()[:8]
     css_name, js_name = "app.%s.css" % css_h, "app.%s.js" % js_h
@@ -334,8 +372,10 @@ def main():
         "/app.*\n"
         "  Cache-Control: public, max-age=31536000, immutable\n"
         "\n"
+        "# every reference to these carries ?v=<content hash>, so a changed file\n"
+        "# is a changed URL and this can be cached permanently\n"
         "/assets/*\n"
-        "  Cache-Control: public, max-age=2592000\n"
+        "  Cache-Control: public, max-age=31536000, immutable\n"
         "\n"
         "# exported shipment passports are per-customer documents\n"
         "/p/*\n"

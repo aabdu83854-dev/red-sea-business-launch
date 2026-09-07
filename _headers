@@ -9,8 +9,10 @@
 /app.*
   Cache-Control: public, max-age=31536000, immutable
 
+# every reference to these carries ?v=<content hash>, so a changed file
+# is a changed URL and this can be cached permanently
 /assets/*
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=31536000, immutable
 
 # exported shipment passports are per-customer documents
 /p/*
