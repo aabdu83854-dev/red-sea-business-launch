@@ -184,7 +184,8 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
 <meta name="twitter:description" content="{esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="{css_href}">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Organization","name":"Red Sea Business Launch","url":"https://{DOMAIN}","logo":"https://{DOMAIN}/assets/logo.png","parentOrganization":{{"@type":"Organization","name":"Red Sea Global Trading Co. Ltd."}},"areaServed":["SA","AE","OM","QA","KW","BH","YE"],"address":{{"@type":"PostalAddress","addressCountry":"CN"}}}}</script>{crumb_ld}
 </head><body>

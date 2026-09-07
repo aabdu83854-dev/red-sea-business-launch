@@ -2750,7 +2750,7 @@ function ppExport(){
   c.querySelectorAll(".ppgrid").forEach(g=>{ if(!g.children.length) g.remove(); });
   c.querySelectorAll(".dt,.ppnote,.ppcap,.pplegal span").forEach(n=>{ if(!n.textContent.trim()) n.remove(); });
   const title="جواز الشحنة "+ref+(client?" — "+client:"");
-  const FONTS='https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap';
+  const FONTS='https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap';
   const ZJS='document.addEventListener("click",function(e){var z=document.getElementById("ppz");'+
     'if(e.target.closest(".ppz")){z.classList.remove("on");return;}'+
     'var i=e.target.closest(".ppdoc img");if(i&&i.src){z.querySelector("img").src=i.src;z.classList.add("on");}});'+
