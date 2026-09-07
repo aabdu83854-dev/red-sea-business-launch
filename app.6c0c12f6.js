@@ -2319,11 +2319,23 @@ const META = {
   "/thanks":  [["شكرًا لك — Red Sea Business Launch","Thank you — Red Sea Business Launch"],["وصلنا طلبك وسنتواصل معك قريبًا.","We have received your request and will be in touch shortly."]]
 };
 
+/* mirrors NOINDEX in build.py: these must never flip to index,follow after hydration */
+const NOINDEX = new Set(["/thanks","/passport"]);
+
 const META404 = () => [["الصفحة غير موجودة — Red Sea Business Launch","Page not found — Red Sea Business Launch"],
                        ["الرابط الذي فتحته غير موجود. تصفّح الصفقات الجاهزة أو حاسبة التكلفة أو تواصل معنا.",
                         "The link you opened does not exist. Browse the ready deals, the cost calculator, or get in touch."]];
-function setMeta(base){
-  const m = META[base] || (base==="/"||base==="" ? META["/"] : META404());
+function setMeta(base, slug){
+  let m = META[base] || (base==="/"||base==="" ? META["/"] : META404());
+  let url = "https://"+CFG.domain+(base==="/"?"/":base);
+  let indexable = (!!META[base] || base==="/" || base==="") && !NOINDEX.has(base);
+  /* every deal is its own page: its own title, description and canonical */
+  if(base==="/deal"){
+    const d = slug && (window.DEALS||[]).find(x=>x.id===slug);
+    if(d){ m = [[d.name[0]+" — Red Sea Business Launch", d.name[1]+" — Red Sea Business Launch"], d.short];
+           url = "https://"+CFG.domain+"/deal/"+d.id; }
+    else { m = META404(); indexable = false; }
+  }
   document.title = A(m[0]);
   const set=(sel,val)=>{const e=document.querySelector(sel); if(e) e.setAttribute("content",val);};
   set('meta[name="description"]',A(m[1]));
@@ -2332,12 +2344,11 @@ function setMeta(base){
   set('meta[name="twitter:title"]',A(m[0]));
   set('meta[name="twitter:description"]',A(m[1]));
   /* canonical and og:url were static on every route */
-  const url = "https://"+CFG.domain+(base==="/"?"/":base);
   const c=document.querySelector('link[rel="canonical"]'); if(c) c.href=url;
   set('meta[property="og:url"]',url);
   /* an unknown route must not be indexed as a duplicate of the homepage */
   const rb=document.querySelector('meta[name="robots"]');
-  if(rb) rb.setAttribute("content", META[base] ? "index,follow" : "noindex,follow");
+  if(rb) rb.setAttribute("content", indexable ? "index,follow" : "noindex,follow");
 }
 
 function reveal(){
@@ -2379,7 +2390,7 @@ function render(){
        <a class="btn btn-primary btn-sm" href="/qualify">${L("ابدأ الآن","Start now")}</a>
        <a class="btn btn-out btn-sm" href="${waLink()}" target="_blank" rel="noopener">${L("واتساب","WhatsApp")}</a>
      </div>`;
-  setMeta(base==="/deal"?"/deal":(base||"/"));
+  setMeta(base==="/deal"?"/deal":(base||"/"), parts[1]);
 
   $("#lang").addEventListener("click",()=>{ const y=window.scrollY; LANG = LANG==="ar"?"en":"ar"; store.s("rsbl_lang",LANG); render(); window.scrollTo(0,y); });
   $("#theme").addEventListener("click",()=>{

@@ -85,11 +85,26 @@ def parse_meta(js):
             "plain string arrays." % e)
 
 
-def deal_ids(js):
-    ids = re.findall(r'"id"\s*:\s*"([a-z0-9\-]+)"', js)
-    if not ids:
-        die("found no deal ids in the source")
-    return ids
+def deals_from(js):
+    """Parse window.DEALS so each deal page can carry its own title and
+    description. Returns [(id, ar_title, ar_desc), ...]."""
+    key = "window.DEALS="
+    i = js.find(key)
+    if i < 0:
+        die("found no window.DEALS in the source")
+    try:
+        data, _ = json.JSONDecoder().raw_decode(js, i + len(key))
+    except Exception as e:
+        die("window.DEALS is not JSON-parseable (%s)" % e)
+    if not data:
+        die("window.DEALS is empty")
+    out = []
+    for d in data:
+        for k in ("id", "name", "short"):
+            if k not in d:
+                die("a deal is missing %r" % k)
+        out.append((d["id"], d["name"][0], d["short"][0]))
+    return out
 
 
 def esc(t):
@@ -189,7 +204,7 @@ def main():
             die("body markup is missing " + need)
 
     meta = parse_meta(js)
-    deals = deal_ids(js)
+    deals = deals_from(js)
 
     for r in INDEXABLE:
         if r not in meta:
@@ -239,9 +254,9 @@ def main():
          "الرابط الذي فتحته غير موجود. تصفّح الصفقات الجاهزة أو حاسبة التكلفة أو تواصل معنا.",
          index_ok=False)
 
-    dm = meta.get("/deal", [["تفاصيل الصفقة"], [""]])
-    for d in deals:
-        emit("deal/%s.html" % d, "/deal/" + d, dm[0][0], dm[1][0])
+    for did, dtitle, ddesc in deals:
+        emit("deal/%s.html" % did, "/deal/" + did,
+             dtitle + " — Red Sea Business Launch", ddesc)
 
     # --- sitemap -------------------------------------------------------------
     urls = "\n".join(
@@ -252,7 +267,7 @@ def main():
         for r in INDEXABLE)
     urls += "\n" + "\n".join(
         '  <url><loc>https://%s/deal/%s</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>'
-        % (DOMAIN, d) for d in deals)
+        % (DOMAIN, d[0]) for d in deals)
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s\n</urlset>\n' % urls)
