@@ -112,7 +112,7 @@ def esc(t):
              .replace(">", "&gt;").replace('"', "&quot;"))
 
 
-def shell(route, title, desc, body, css_href, js_href, index_ok=True):
+def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=None):
     """The <body> markup is lifted verbatim from the source rather than
     re-written here: a hand-kept copy silently drifts (it already cost us the
     scroll-progress bar's id once)."""
@@ -127,7 +127,41 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True):
           'This site needs JavaScript enabled.</p>'
           '<p style="margin:8px 0 0">للتواصل: <a href="mailto:deals@redseaglobal.com">'
           'deals@redseaglobal.com</a></p></div></noscript>') % (esc(title), esc(desc))
-    body = body.replace('<div id="app"></div>', '<div id="app"></div>\n' + ns, 1)
+    # A branded placeholder inside #app, so a slow connection sees the site
+    # loading instead of a blank white page. render() overwrites #app wholesale.
+    boot = ('<div id="boot">'
+            '<div class="bh" aria-hidden="true"><span class="bm"></span>'
+            '<span class="bt">\u0631\u064a\u062f \u0633\u064a \u0628\u0632\u0646\u0633 \u0644\u0627\u0646\u0634'
+            '<small>Red Sea Business Launch</small></span></div>'
+            '<div class="bw"><div aria-hidden="true">'
+            '<div class="sk s1"></div><div class="sk s2"></div>'
+            '<div class="sk s3"></div><div class="sk s4"></div>'
+            '<div class="sg"><div class="sk sc"></div><div class="sk sc"></div>'
+            '<div class="sk sc"></div></div></div>'
+            '<p class="bfall">\u0625\u0646 \u0644\u0645 \u062a\u0638\u0647\u0631 \u0627\u0644\u0635\u0641\u062d\u0629\u060c '
+            '\u0641\u0642\u062f \u064a\u0643\u0648\u0646 \u0627\u062a\u0635\u0627\u0644\u0643 \u0628\u0637\u064a\u0626\u064b\u0627 '
+            '\u0623\u0648 \u0627\u0644\u0645\u062a\u0635\u0641\u0651\u062d \u064a\u062d\u062c\u0628 '
+            '\u0627\u0644\u0633\u0643\u0631\u0628\u062a\u0627\u062a. '
+            '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627 \u0645\u0628\u0627\u0634\u0631\u0629: '
+            '<a href="mailto:deals@redseaglobal.com">deals@redseaglobal.com</a><br>'
+            '<span dir="ltr">If this page does not appear, your connection may be slow or '
+            'scripts are blocked. Reach us at '
+            '<a href="mailto:deals@redseaglobal.com">deals@redseaglobal.com</a></span></p>'
+            '</div></div>')
+    assert '<div id="app"></div>' in body, "the #app container moved"
+    body = body.replace('<div id="app"></div>',
+                        '<div id="app">' + boot + '</div>\n' + ns, 1)
+    # Breadcrumbs are one of the structured-data types Google still renders in
+    # results, so a deal page shows a readable trail instead of a bare URL.
+    crumb_ld = ""
+    if crumbs:
+        items = ",".join(
+            '{"@type":"ListItem","position":%d,"name":%s,"item":"https://%s%s"}'
+            % (i + 1, json.dumps(n, ensure_ascii=False), DOMAIN, u)
+            for i, (n, u) in enumerate(crumbs))
+        crumb_ld = ('\n<script type="application/ld+json">'
+                    '{"@context":"https://schema.org","@type":"BreadcrumbList",'
+                    '"itemListElement":[%s]}</script>' % items)
     return f"""<!doctype html><html lang="ar" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -152,7 +186,7 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="{css_href}">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"Organization","name":"Red Sea Business Launch","url":"https://{DOMAIN}","logo":"https://{DOMAIN}/assets/logo.png","parentOrganization":{{"@type":"Organization","name":"Red Sea Global Trading Co. Ltd."}},"areaServed":["SA","AE","OM","QA","KW","BH","YE"],"address":{{"@type":"PostalAddress","addressCountry":"CN"}}}}</script>
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"Organization","name":"Red Sea Business Launch","url":"https://{DOMAIN}","logo":"https://{DOMAIN}/assets/logo.png","parentOrganization":{{"@type":"Organization","name":"Red Sea Global Trading Co. Ltd."}},"areaServed":["SA","AE","OM","QA","KW","BH","YE"],"address":{{"@type":"PostalAddress","addressCountry":"CN"}}}}</script>{crumb_ld}
 </head><body>
 {body}
 <script src="{js_href}" defer></script>
@@ -232,11 +266,11 @@ def main():
     written = [css_name, js_name]
 
     # --- one real page per route ---------------------------------------------
-    def emit(path_on_disk, route, title, desc, index_ok=True):
+    def emit(path_on_disk, route, title, desc, index_ok=True, crumbs=None):
         full = os.path.join(ROOT, path_on_disk)
         os.makedirs(os.path.dirname(full), exist_ok=True)
         open(full, "w", encoding="utf-8").write(
-            shell(route, title, desc, body, css_href, js_href, index_ok))
+            shell(route, title, desc, body, css_href, js_href, index_ok, crumbs))
         written.append(path_on_disk)
 
     for r in INDEXABLE:
@@ -254,9 +288,13 @@ def main():
          "الرابط الذي فتحته غير موجود. تصفّح الصفقات الجاهزة أو حاسبة التكلفة أو تواصل معنا.",
          index_ok=False)
 
+    deals_name = meta.get("/deals", [["الصفقات الجاهزة"]])[0][0].split(" — ")[0]
     for did, dtitle, ddesc in deals:
         emit("deal/%s.html" % did, "/deal/" + did,
-             dtitle + " — Red Sea Business Launch", ddesc)
+             dtitle + " — Red Sea Business Launch", ddesc,
+             crumbs=[("Red Sea Business Launch", "/"),
+                     (deals_name, "/deals"),
+                     (dtitle, "/deal/" + did)])
 
     # --- sitemap -------------------------------------------------------------
     urls = "\n".join(
@@ -277,6 +315,32 @@ def main():
         "User-agent: *\nAllow: /\nDisallow: /p/\nDisallow: /passport\n\n"
         "Sitemap: https://%s/sitemap.xml\n" % DOMAIN)
     written.append("robots.txt")
+
+    # --- _headers ------------------------------------------------------------
+    # Cloudflare parses this as configuration; it is never served to visitors.
+    # The app bundle is content-hashed, so it can be cached permanently: a new
+    # build produces a new filename. Without this it is revalidated on every
+    # single page view.
+    open(os.path.join(ROOT, "_headers"), "w", encoding="utf-8").write(
+        "/*\n"
+        "  X-Content-Type-Options: nosniff\n"
+        "  Referrer-Policy: strict-origin-when-cross-origin\n"
+        "  X-Frame-Options: SAMEORIGIN\n"
+        "  Content-Security-Policy: frame-ancestors 'self'\n"
+        "  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()\n"
+        "  Cross-Origin-Opener-Policy: same-origin\n"
+        "\n"
+        "/app.*\n"
+        "  Cache-Control: public, max-age=31536000, immutable\n"
+        "\n"
+        "/assets/*\n"
+        "  Cache-Control: public, max-age=2592000\n"
+        "\n"
+        "# exported shipment passports are per-customer documents\n"
+        "/p/*\n"
+        "  X-Robots-Tag: noindex, nofollow\n"
+        "  Referrer-Policy: no-referrer\n")
+    written.append("_headers")
 
     total = sum(os.path.getsize(os.path.join(ROOT, f)) for f in written)
     print("built %d files, %.0f KB total" % (len(written), total / 1024))

@@ -367,7 +367,7 @@ function footer(){
           "قسم متخصص في تجهيز صفقات توريد جاهزة وخدمات إطلاق مشاريع تجارية من الصين إلى أسواق الخليج واليمن وأسواق أخرى.",
           "A division specialising in ready supply deals and business launch services from China into the Gulf, Yemen and other markets.")}</p>
       </div>
-      <div><h4>${L("الخدمات","Services")}</h4><ul>
+      <div><h2>${L("الخدمات","Services")}</h2><ul>
         <li><a href="/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
         <li><a href="/packages">${L("باقات الإطلاق","Launch packages")}</a></li>
         <li><a href="/compliance">${L("سابر والامتثال","SABER & compliance")}</a></li>
@@ -376,7 +376,7 @@ function footer(){
         <li><a href="/consultation">${L("حجز استشارة","Book a consultation")}</a></li>
         <li><a href="/qualify">${L("نموذج التأهيل","Qualification form")}</a></li>
       </ul></div>
-      <div><h4>${L("الشركة","Company")}</h4><ul>
+      <div><h2>${L("الشركة","Company")}</h2><ul>
         <li><a href="/about">${L("من نحن","About us")}</a></li>
         <li><a href="/faq">${L("الأسئلة الشائعة","FAQ")}</a></li>
         <li><a href="/contact">${L("تواصل معنا","Contact")}</a></li>
@@ -385,7 +385,7 @@ function footer(){
         <li><a href="/legal#refund">${L("سياسة الإرجاع","Refund policy")}</a></li>
         <li><a href="/legal#disclaimer">${L("إخلاء المسؤولية","Disclaimer")}</a></li>
       </ul></div>
-      <div><h4>${L("التواصل","Get in touch")}</h4><ul>
+      <div><h2>${L("التواصل","Get in touch")}</h2><ul>
         <li><a href="mailto:${CFG.email}">${CFG.email}</a></li>
         <li><a href="${waLink()}" target="_blank" rel="noopener">${L("واتساب","WhatsApp")}</a></li>
         <li>${CFG.phone}</li>
@@ -627,10 +627,11 @@ function pageDeals(){
     <div class="info">${L("لا نعرض أسماء المورّدين أو بيانات المصانع للعامة. تُشارك مع العميل بعد التأهيل واعتماد الصفقة.","We do not publish supplier names or factory details. These are shared with the client after qualification and deal approval.")}</div>
   </div></section>
   <section class="sec"><div class="wrap">
+    <h2 class="sr">${L("تصفية الصفقات واستعراضها","Filter and browse the deals")}</h2>
     <div class="filters">
-      <select id="fcat">${CATS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
-      <select id="ftier">${TIERS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
-      <select id="fmkt">${MKTS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
+      <select id="fcat" aria-label="${L('فئة المنتج','Product category')}">${CATS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
+      <select id="ftier" aria-label="${L('مستوى الصفقة','Deal level')}">${TIERS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
+      <select id="fmkt" aria-label="${L('السوق المستهدف','Target market')}">${MKTS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
       <button class="btn btn-out btn-sm" id="freset">${L("إعادة التعيين","Reset")}</button>
     </div>
     <div class="grid g3" id="dealgrid"></div>
@@ -711,7 +712,7 @@ function pageDeal(id){
         <li>✓ ${L("تجهيز مستندات الشحن الأساسية","Preparation of core shipping documents")}</li>
         <li>✓ ${L("تنسيق الشحن حتى النقطة المتفق عليها","Freight coordination to the agreed point")}</li>
       </ul></div>
-      <div class="card"><h3>${L("ما لا يشمله السعر","What the price does not include")}</h3><ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem;color:#8A98A6">
+      <div class="card"><h3>${L("ما لا يشمله السعر","What the price does not include")}</h3><ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem;color:var(--muted)">
         <li>× ${L("الرسوم الجمركية والضرائب في بلد الوصول","Import duties and taxes in the destination country")}</li>
         <li>× ${L("التخزين المحلي والنقل الداخلي بعد التخليص","Local storage and inland transport after clearance")}</li>
         <li>× ${L("التسجيل النظامي أو الشهادات الخاصة إن طُلبت","Regulatory registration or special certificates if required")}</li>
@@ -782,6 +783,7 @@ function pagePackages(){
   </div></section>
 
   <section class="sec"><div class="wrap">
+    <h2 class="sr">${L("الباقات الثلاث","The three packages")}</h2>
     <div class="grid g3">
       ${plans.map(p=>`<div class="card plan rel rv ${p.f?"featured":""}">
         ${p.f?`<span class="badge">${L("الأكثر طلبًا","Most requested")}</span>`:""}
@@ -1301,7 +1303,7 @@ function pageConsult(){
           <p class="muted" style="font-size:.92rem">${L("اختر وقتًا مناسبًا من التقويم. إن لم تكن قد ملأت نموذج التأهيل بعد، ابدأ به أولًا.","Pick a time from the calendar. If you have not completed the qualification form yet, start there first.")}</p>
           <!-- CALENDAR EMBED: set CFG.calendly to your Calendly (or equivalent) URL -->
           <div id="calbox" style="border:1px dashed var(--line);border-radius:var(--r-s);min-height:340px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-size:.9rem;background:var(--sand)">
-            ${L("<b style=\"display:block;font-size:1.05rem;color:var(--navy);margin-bottom:8px\">الحجز يبدأ بنموذج التأهيل</b>نحتاج معرفة سوقك وميزانيتك وفئتك قبل الجلسة، حتى تكون الساعة التي نقضيها معك مفيدة لا تعارفًا.<br>املأ النموذج ونرسل لك موعدًا خلال يوم إلى يومي عمل.","<b style=\"display:block;font-size:1.05rem;color:var(--navy);margin-bottom:8px\">Booking starts with the qualification form</b>We need to know your market, budget and category before the session, so the hour we spend together is useful rather than introductory.<br>Complete the form and we will send you a slot within one to two business days.")}
+            ${L("<b class=\"hl\">الحجز يبدأ بنموذج التأهيل</b>نحتاج معرفة سوقك وميزانيتك وفئتك قبل الجلسة، حتى تكون الساعة التي نقضيها معك مفيدة لا تعارفًا.<br>املأ النموذج ونرسل لك موعدًا خلال يوم إلى يومي عمل.","<b class=\"hl\">Booking starts with the qualification form</b>We need to know your market, budget and category before the session, so the hour we spend together is useful rather than introductory.<br>Complete the form and we will send you a slot within one to two business days.")}
           </div>
           <div class="btns" style="margin-top:16px">
             <a class="btn btn-primary btn-block" href="/qualify?type=consult">${L("املأ نموذج التأهيل أولًا","Complete the qualification form first")}</a>
@@ -1603,14 +1605,15 @@ function bindCompliance(){
 
 /* ---------- SHIPMENT PASSPORT ---------- */
 const PP_CSS = `:root{--pnavy:#0B2545;--pnavy2:#14395F;--pnavy3:#1F5C8B;--pcoral:#D0202A;
---psheet:#fff;--pink:#0F2136;--pink2:#3A5068;--pmuted:#6B8098;
+--psheet:#fff;--pink:#0F2136;--pink2:#3A5068;--pmuted:#647890;
 --pline:#D9E1E9;--pline2:#EDF2F6;--pok:#0B6B57;--pokb:#E4F2EE;
 --pwip:#8A6410;--pwipb:#F8EFDB;--pna:#5C6B7C;--pnab:#ECF0F4;
 --pfd:"Reem Kufi","IBM Plex Sans Arabic",system-ui,sans-serif;
 --pfb:"IBM Plex Sans Arabic",system-ui,"Segoe UI",sans-serif;
 --pfm:"IBM Plex Mono",ui-monospace,monospace}
 .ppdoc,.ppdoc *{box-sizing:border-box}
-.ppdoc{max-width:900px;margin:0 auto;background:var(--psheet);color:var(--pink);
+.ppdoc{--ink:var(--pink);--muted:var(--pmuted);--line:var(--pline);--bg:var(--psheet);
+max-width:900px;margin:0 auto;background:var(--psheet);color:var(--pink);
 direction:rtl;text-align:right;font-family:var(--pfb);font-size:15px;line-height:1.7;
 border:1px solid var(--pline);border-radius:6px;overflow:hidden}
 .ppdoc [contenteditable]{outline:none;border-radius:3px;transition:background .12s}
@@ -1641,7 +1644,7 @@ text-align:center;direction:ltr;unicode-bidi:isolate}
 .ppsum>div:nth-child(4n){border-inline-start:0}
 .ppsum dt{margin:0;font-size:.66rem;font-weight:600;color:var(--pmuted);line-height:1.4}
 .ppsum dt i{display:block;font-style:normal;font-family:var(--pfm);font-size:.54rem;
-letter-spacing:.09em;color:#9CAFC1;direction:ltr;text-align:right}
+letter-spacing:.09em;color:#5D7994;direction:ltr;text-align:right}
 .ppsum dd{margin:2px 0 0;font-size:.9rem;font-weight:600;min-height:1.4em;font-variant-numeric:tabular-nums}
 .ppsum dd.m{font-family:var(--pfm);font-size:.83rem;direction:ltr;text-align:right;unicode-bidi:isolate}
 .pptrk{display:flex;padding:16px 34px 2px;flex-wrap:wrap}
@@ -1658,10 +1661,10 @@ font-size:.6rem;line-height:16px;color:var(--pmuted)}
 .pptrk div.w span{color:var(--pwip);font-weight:600}
 .ppstg{padding:18px 34px;border-top:1px solid var(--pline2)}
 .ppsh{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
-.ppsh .n{font-family:var(--pfm);font-size:.8rem;font-weight:600;color:var(--pcoral);direction:ltr}
+.ppdoc .ppsh .n{font-family:var(--pfm);font-size:.8rem;font-weight:600;color:var(--pcoral);direction:ltr}
 .ppsh h3{margin:0;font-family:var(--pfd);font-weight:600;font-size:1.06rem;line-height:1.35}
 .ppsh h3 i{display:block;font-style:normal;font-family:var(--pfm);font-size:.56rem;
-font-weight:500;letter-spacing:.14em;color:#9CAFC1;direction:ltr;text-align:right}
+font-weight:500;letter-spacing:.14em;color:#5D7994;direction:ltr;text-align:right}
 .ppsh .mt{margin-inline-start:auto;display:flex;align-items:center;gap:8px}
 .ppsh .dt{font-family:var(--pfm);font-size:.78rem;color:var(--pink2);min-width:86px;
 text-align:center;direction:ltr;border-bottom:1px dashed var(--pline);padding:1px 6px}
@@ -1671,14 +1674,14 @@ border:1px solid transparent;font-family:var(--pfb);user-select:none}
 .ppst[data-s=wip]{background:var(--pwipb);color:var(--pwip);border-color:#E7D3A3}
 .ppst[data-s=na]{background:var(--pnab);color:var(--pna);border-color:var(--pline)}
 .ppnote{margin:8px 0 0;font-size:.89rem;color:var(--pink2);min-height:1.5em}
-.pptip{margin:4px 0 0;font-size:.73rem;color:#93A6B8}
+.pptip{margin:4px 0 0;font-size:.73rem;color:#607992}
 .ppgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:11px}
 .ppslot{position:relative;display:block;border:1.5px dashed var(--pline);border-radius:6px;
 background:#F8FAFC;aspect-ratio:4/3;overflow:hidden;cursor:pointer}
 .ppslot:hover{border-color:var(--pnavy3);background:#F1F7FC}
 .ppslot input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
 .ppslot .p{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
-padding:7px;font-size:.7rem;color:#94A8BB;line-height:1.5}
+padding:7px;font-size:.7rem;color:#5C7690;line-height:1.5}
 .ppslot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 .ppslot.has img{display:block}.ppslot.has .p{display:none}
 .ppslot .x{position:absolute;top:5px;inset-inline-end:5px;z-index:2;display:none;
@@ -1776,6 +1779,7 @@ function ppDoc(){
   <div class="pprule"></div>
   <dl class="ppsum">${PP_SUM().map(f=>`<div><dt>${f[0]}<i>${f[1]}</i></dt><dd${f[2]?' class="m"':''} contenteditable="true" data-ph="—"></dd></div>`).join("")}</dl>
   <div class="pptrk" id="pptrk">${PP_STG().map((s,i)=>`<div class="w" data-i="${i}"><b>${i+1}</b><span>${s[0]}</span></div>`).join("")}</div>
+  <h2 class="sr">مراحل الشحنة — Shipment stages</h2>
   ${PP_STG().map((s,i)=>`<section class="ppstg" data-i="${i}">
     <div class="ppsh"><span class="n">${String(i+1).padStart(2,"0")}</span>
       <h3>${s[0]}<i>${s[1]}</i></h3>
@@ -1969,7 +1973,7 @@ function pageVerify(){
       <h2>${L("سبع خطوات قبل التحويل","Seven steps before you transfer")}</h2></div>
     <div class="steps rv" style="margin-top:36px">
       ${steps.map((s,i)=>`<div class="step rv" data-i="${i+1}"><div class="n">${i+1}</div>
-        <h3>${s[0]}<span style="display:block;font-size:.6rem;letter-spacing:.14em;color:#9CAFC1;font-weight:500">${s[1]}</span></h3>
+        <h3>${s[0]}<span style="display:block;font-size:.6rem;letter-spacing:.14em;color:#5D7994;font-weight:500">${s[1]}</span></h3>
         <p>${s[2]}</p><p style="margin-top:8px">${s[3]}</p></div>`).join("")}
     </div>
   </div></section>
@@ -2090,7 +2094,7 @@ function pageYemen(){
       <h2>${L("ممرّان لا ممرّ واحد","Two corridors, not one")}</h2>
       <p class="lead" style="margin:0 auto">${L("قبل السعر وقبل المصنع، السؤال الأول هو: أي ميناء؟ الإجابة تغيّر الإجراء والعملة والمخاطر القانونية كلها.","Before the price and before the factory, the first question is which port. The answer changes the procedure, the currency and the legal risk entirely.")}</p></div>
     <div class="tbl-wrap rv" style="margin-top:26px"><table><thead><tr>
-      <th>&nbsp;</th><th>${L("عدن والمكلا","Aden & Mukalla")}</th><th>${L("الحديدة والصليف","Hodeidah & Saleef")}</th>
+      <th>${L("البند","Item")}</th><th>${L("عدن والمكلا","Aden & Mukalla")}</th><th>${L("الحديدة والصليف","Hodeidah & Saleef")}</th>
     </tr></thead><tbody>
       ${corr.map(r=>r.length===2
         ? `<tr><th>${r[0]}</th><td colspan="2">${r[1]}</td></tr>`
@@ -2236,7 +2240,9 @@ function pageContact(){
     <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("تواصل معنا","Get in touch")}</h1>
     <p class="lead">${L("أسرع طريقة للرد هي واتساب. للطلبات الجادة، نموذج التأهيل يوفّر عليك وعلينا عدة رسائل.","The fastest route to a reply is WhatsApp. For serious enquiries, the qualification form saves both sides several messages.")}</p>
   </div></section>
-  <section class="sec"><div class="wrap"><div class="grid g3">
+  <section class="sec"><div class="wrap">
+    <h2 class="sr">${L("قنوات التواصل","Ways to reach us")}</h2>
+    <div class="grid g3">
     <div class="card"><div class="ico">${ICON.check}</div><h3>${L("واتساب","WhatsApp")}</h3><p>${L("للاستفسارات السريعة وتأكيد التفاصيل.","For quick enquiries and confirming details.")}</p>
       <a class="btn btn-primary btn-sm btn-block" style="margin-top:14px" href="${waLink()}" target="_blank" rel="noopener">${L("افتح المحادثة","Open chat")}</a></div>
     <div class="card"><div class="ico">${ICON.box}</div><h3>${L("البريد الإلكتروني","Email")}</h3><p>${CFG.email}</p>
@@ -2386,10 +2392,10 @@ function render(){
   document.documentElement.lang = LANG;
   document.documentElement.dir  = LANG==="ar" ? "rtl" : "ltr";
   $("#app").innerHTML = header() + `<main id="main">${body}</main>` + footer() +
-    `<div class="mbar">
+    `<nav class="mbar" aria-label="${L('إجراءات سريعة','Quick actions')}">
        <a class="btn btn-primary btn-sm" href="/qualify">${L("ابدأ الآن","Start now")}</a>
        <a class="btn btn-out btn-sm" href="${waLink()}" target="_blank" rel="noopener">${L("واتساب","WhatsApp")}</a>
-     </div>`;
+     </nav>`;
   setMeta(base==="/deal"?"/deal":(base||"/"), parts[1]);
 
   $("#lang").addEventListener("click",()=>{ const y=window.scrollY; LANG = LANG==="ar"?"en":"ar"; store.s("rsbl_lang",LANG); render(); window.scrollTo(0,y); });
