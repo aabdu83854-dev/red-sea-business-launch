@@ -1,7 +1,9 @@
 .git
 .github
 .gitignore
-wrangler.jsonc
+worker/
+src/
+build.py
 README.md
-worker
+wrangler.jsonc
 *.orig

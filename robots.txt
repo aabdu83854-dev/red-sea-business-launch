@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /p/
+Disallow: /passport
 
 Sitemap: https://red-sea-business-launch.a-abdu83854.workers.dev/sitemap.xml
