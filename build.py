@@ -158,14 +158,14 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
           '<h1 style="font-size:1.5rem;margin:0 0 12px">%s</h1><p style="margin:0 0 10px">%s</p>'
           '<p style="margin:18px 0 0">يحتاج هذا الموقع تفعيل JavaScript لعرض محتواه بالكامل. '
           'This site needs JavaScript enabled.</p>'
-          '<p style="margin:8px 0 0">للتواصل: <a href="mailto:deals@redseaglobal.com">'
-          'deals@redseaglobal.com</a></p></div></noscript>') % (esc(title), esc(desc))
+          '<p style="margin:8px 0 0">للتواصل: <a href="mailto:info@eternalsilk.example">'
+          'info@eternalsilk.example</a></p></div></noscript>') % (esc(title), esc(desc))
     # A branded placeholder inside #app, so a slow connection sees the site
     # loading instead of a blank white page. render() overwrites #app wholesale.
     boot = ('<div id="boot">'
             '<div class="bh" aria-hidden="true"><span class="bm"></span>'
-            '<span class="bt">\u0631\u064a\u062f \u0633\u064a \u0628\u0632\u0646\u0633 \u0644\u0627\u0646\u0634'
-            '<small>Red Sea Business Launch</small></span></div>'
+            '<span class="bt">إترنال سيلك'
+            '<small>Eternal Silk</small></span></div>'
             '<div class="bw"><div aria-hidden="true">'
             '<div class="sk s1"></div><div class="sk s2"></div>'
             '<div class="sk s3"></div><div class="sk s4"></div>'
@@ -176,10 +176,10 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
             '\u0623\u0648 \u0627\u0644\u0645\u062a\u0635\u0641\u0651\u062d \u064a\u062d\u062c\u0628 '
             '\u0627\u0644\u0633\u0643\u0631\u0628\u062a\u0627\u062a. '
             '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627 \u0645\u0628\u0627\u0634\u0631\u0629: '
-            '<a href="mailto:deals@redseaglobal.com">deals@redseaglobal.com</a><br>'
+            '<a href="mailto:info@eternalsilk.example">info@eternalsilk.example</a><br>'
             '<span dir="ltr">If this page does not appear, your connection may be slow or '
             'scripts are blocked. Reach us at '
-            '<a href="mailto:deals@redseaglobal.com">deals@redseaglobal.com</a></span></p>'
+            '<a href="mailto:info@eternalsilk.example">info@eternalsilk.example</a></span></p>'
             '</div></div>')
     assert '<div id="app"></div>' in body, "the #app container moved"
     body = body.replace('<div id="app"></div>',
@@ -206,7 +206,7 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
 <link rel="icon" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Red Sea Business Launch">
+<meta property="og:site_name" content="Eternal Silk">
 <meta property="og:locale" content="ar_SA">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
@@ -220,7 +220,7 @@ def shell(route, title, desc, body, css_href, js_href, index_ok=True, crumbs=Non
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="{css_href}">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"Organization","name":"Red Sea Business Launch","url":"https://{DOMAIN}","logo":"https://{DOMAIN}/assets/logo.png","parentOrganization":{{"@type":"Organization","name":"Red Sea Global Trading Co. Ltd."}},"areaServed":["SA","AE","OM","QA","KW","BH","YE"],"address":{{"@type":"PostalAddress","addressCountry":"CN"}}}}</script>{crumb_ld}
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"Organization","name":"Eternal Silk","url":"https://{DOMAIN}","logo":"https://{DOMAIN}/assets/logo.png","areaServed":["SA","AE","OM","QA","KW","BH","YE"],"address":{{"@type":"PostalAddress","addressCountry":"CN"}}}}</script>{crumb_ld}
 </head><body>
 {body}
 <script src="{js_href}" defer></script>
@@ -317,21 +317,21 @@ def main():
         emit(("index" if r == "/" else r.lstrip("/")) + ".html", r, m[0][0], m[1][0])
 
     for r in NOINDEX:
-        m = meta.get(r) or [["Red Sea Business Launch"], [""]]
+        m = meta.get(r) or [["Eternal Silk"], [""]]
         emit(r.lstrip("/") + ".html", r, m[0][0], m[1][0], index_ok=False)
 
     # A styled 404 for hosts configured to serve one. Harmless where the host
     # returns a bare 404 instead.
     emit("404.html", "/404",
-         "الصفحة غير موجودة — Red Sea Business Launch",
+         "الصفحة غير موجودة — Eternal Silk",
          "الرابط الذي فتحته غير موجود. تصفّح الصفقات الجاهزة أو حاسبة التكلفة أو تواصل معنا.",
          index_ok=False)
 
     deals_name = meta.get("/deals", [["الصفقات الجاهزة"]])[0][0].split(" — ")[0]
     for did, dtitle, ddesc in deals:
         emit("deal/%s.html" % did, "/deal/" + did,
-             dtitle + " — Red Sea Business Launch", ddesc,
-             crumbs=[("Red Sea Business Launch", "/"),
+             dtitle + " — Eternal Silk", ddesc,
+             crumbs=[("Eternal Silk", "/"),
                      (deals_name, "/deals"),
                      (dtitle, "/deal/" + did)])
 

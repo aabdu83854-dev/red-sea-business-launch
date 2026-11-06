@@ -1,8 +1,8 @@
-/* ===== Red Sea Business Launch — core styles ===== */
+/* ===== Eternal Silk — core styles ===== */
 :root{
-  --navy:#062B57; --navy-2:#033B76; --navy-3:#0E5AA5; --sky:#017CC9;
-  --coral:#D0202A; --coral-d:#AC1620; --art-ac:#FF7A6E;
-  --sand:#F7F3EC; --sand-2:#EFE7DA;
+  --navy:#0F2A44; --navy-2:#173C5E; --navy-3:#2A5A85; --sky:#2A6A9E;
+  --coral:#B23A2E; --coral-d:#8E2D23; --art-ac:#E3C77E;
+  --sand:#F7F3EA; --sand-2:#EFE7DA;
   --bg:#FFFFFF; --ink:#12212F; --muted:#5B6B7C; --line:#E3E8EE;
   --card:#FFFFFF; --shadow:0 1px 2px rgba(11,37,69,.06),0 8px 24px rgba(11,37,69,.07);
   --r:14px; --r-s:10px; --max:1160px;
@@ -12,7 +12,7 @@
 /* ---------- dark theme ---------- */
 :root[data-theme="dark"]{
   --bg:#0A1526; --ink:#E6EDF6; --muted:#9BAFC6; --line:#1E3350;
-  --sky:#0198F7;
+  --sky:#E3C77E;
   --card:#0F1E33; --sand:#0D1B2E; --sand-2:#152943;
   --shadow:0 1px 2px rgba(0,0,0,.45),0 12px 34px rgba(0,0,0,.45);
   color-scheme:dark}

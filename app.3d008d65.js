@@ -257,26 +257,26 @@ window.DEALS=[
 ]
 ;
 /* =====================================================================
-   Red Sea Business Launch — application script
+   Eternal Silk — application script
    ---------------------------------------------------------------------
    >>> EDIT CONTACT / INTEGRATION DETAILS IN THE CFG OBJECT BELOW <<<
    Deal content lives in  data/deals.json  (rebuild with: node build.js)
    ===================================================================== */
 
 const CFG = {
-  brand:      "Red Sea Business Launch",
-  brandAr:    "ريد سي بزنس لانش",
-  parent:     "Red Sea Global Trading Co. Ltd.",
+  brand:      "Eternal Silk",
+  brandAr:    "إترنال سيلك",
+  parent:     "Yiwu Eternal Silk International Trading Co., Ltd",
   domain:     "red-sea-business-launch.a-abdu83854.workers.dev",
 
   /* REPLACE — WhatsApp number in international format, digits only */
   whatsapp:   "8613800000000",
   /* REPLACE — public email address */
-  email:      "deals@redseaglobal.com",
+  email:      "info@eternalsilk.example",
   /* REPLACE — office phone */
   phone:      "+86 000 000 0000",
   /* REPLACE — office address */
-  addr:       ["مكتب التشغيل: قوانغتشو، الصين","Operations office: Guangzhou, China"],
+  addr:       ["مكتب التشغيل: إيوو، تشجيانغ، الصين — قرب سوق فوتيان","Operations office: Yiwu, Zhejiang, China — near Futian Market"],
 
   /* REPLACE — webhook / form endpoint (Formspree, Make, n8n, Zapier...).
      Leave empty ("") and the form will fall back to opening WhatsApp
@@ -297,13 +297,13 @@ const L  = (ar,en) => LANG === "ar" ? ar : en;
 const A  = a => Array.isArray(a) ? (LANG==="ar"?a[0]:a[1]) : a;
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const $  = s => document.querySelector(s);
-const waLink = (msg) => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg||L("مرحبًا، أود الاستفسار عن صفقات Red Sea Business Launch.","Hello, I would like to ask about Red Sea Business Launch deals."))}`;
+const waLink = (msg) => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg||L("مرحبًا، أود الاستفسار عن صفقات Eternal Silk.","Hello, I would like to ask about Eternal Silk deals."))}`;
 
 /* Logo: build.js inlines a data-URI into window.RSBL_LOGO for the single-file build.
    Multi-file build uses assets/logo.png — replace that file to change the logo. */
 /* Absolute: the shipment-passport export is a standalone file served from
-   /p/, where a relative path would resolve to /p/assets/logo.png?v=20345f50. */
-const LOGO = "https://red-sea-business-launch.a-abdu83854.workers.dev/assets/logo.png?v=20345f50";
+   /p/, where a relative path would resolve to /p/assets/logo.png?v=2f2659ea. */
+const LOGO = "https://red-sea-business-launch.a-abdu83854.workers.dev/assets/logo.png?v=2f2659ea";
 
 const ICON = {
   home:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 4l9 6.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>',
@@ -341,8 +341,8 @@ function header(){
   const cur = location.pathname.replace(/\.html$/,"").replace(/\/+$/,"") || "/";
   return `<header class="site"><div class="wrap hd">
     <a class="logo" href="/">
-      <span class="mark"><img src="${LOGO}" alt="Red Sea Global Trading" width="42" height="42"></span>
-      <span>${L(CFG.brandAr,CFG.brand)}<small>${L("قسم من","A division of")} <bdi dir="ltr">${CFG.parent}</bdi></small></span>
+      <span class="mark"><img src="${LOGO}" alt="Eternal Silk" width="42" height="42"></span>
+      <span>${L(CFG.brandAr,CFG.brand)}<small><bdi dir="ltr">${CFG.parent}</bdi></small></span>
     </a>
     <nav class="main" id="nav">${NAV().map(([h,t])=>
       `<a href="${h}" class="${cur===h||(h!=="/"&&cur.startsWith(h))?"on":""}">${t}</a>`).join("")}
@@ -361,11 +361,11 @@ function footer(){
   return `<footer class="site"><div class="wrap">
     <div class="fgrid">
       <div>
-        <div class="logo" style="color:#fff;margin-bottom:12px"><span class="mark"><img src="${LOGO}" alt="Red Sea Global Trading" width="42" height="42"></span>
-          <span style="color:#fff">${L(CFG.brandAr,CFG.brand)}<small style="color:#93A7BE">${L("قسم من","A division of")} <bdi dir="ltr">${CFG.parent}</bdi></small></span></div>
+        <div class="logo" style="color:#fff;margin-bottom:12px"><span class="mark"><img src="${LOGO}" alt="Eternal Silk" width="42" height="42"></span>
+          <span style="color:#fff">${L(CFG.brandAr,CFG.brand)}<small style="color:#93A7BE"><bdi dir="ltr">${CFG.parent}</bdi></small></span></div>
         <p style="max-width:38ch">${L(
-          "قسم متخصص في تجهيز صفقات توريد جاهزة وخدمات إطلاق مشاريع تجارية من الصين إلى أسواق الخليج واليمن وأسواق أخرى.",
-          "A division specialising in ready supply deals and business launch services from China into the Gulf, Yemen and other markets.")}</p>
+          "مكتب تجاري في إيوو متخصص في صفقات التوريد الجاهزة وإطلاق المشاريع التجارية من الصين إلى السعودية والخليج واليمن.",
+          "A Yiwu trading office specialising in ready supply deals and business launch services from China into Saudi Arabia, the Gulf and Yemen.")}</p>
       </div>
       <div><h2>${L("الخدمات","Services")}</h2><ul>
         <li><a href="/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
@@ -455,7 +455,7 @@ function pageHome(){
     ${heroBg()}
     <div class="spot" aria-hidden="true"></div>
     <div class="wrap">
-    <span class="eyebrow">${L("قسم تابع لـ","A division of")} <bdi dir="ltr">${CFG.parent}</bdi></span>
+    <span class="eyebrow"><bdi dir="ltr">${CFG.parent}</bdi></span>
     <h1>${L("أطلق مشروعك من الصين إلى سوقك","Launch your business from China to your market")}</h1>
     <p class="lead">${L("صفقات منتجات مدروسة، توريد موثوق، شحن، متجر، تدريب ومتابعة — في حل واحد.","Studied product deals, reliable sourcing, shipping, a store, training and follow-up — in one solution.")}</p>
     <ul class="specs">
@@ -476,7 +476,7 @@ function pageHome(){
   </div></section>
 
   <div class="trust"><div class="wrap"><ul>
-    <li>${L("قسم تابع لـ","A division of")} <bdi dir="ltr">${CFG.parent}</bdi></li>
+    <li>${L("شركة مسجّلة في إيوو، الصين","A company registered in Yiwu, China")}</li>
     <li>${L("شبكة توريد قائمة في الصين","An established supply network in China")}</li>
     <li>${L("فحص قبل الشحن","Pre-shipment inspection")}</li>
     <li>${L("مستندات ولوجستيات","Documentation & logistics")}</li>
@@ -603,7 +603,7 @@ function phBlock(d,title,sub,cls){
 function dealCard(d){
   return `<article class="card deal rv">
     <!-- To use real photography: replace phBlock(...) with <img src="${d.img}" alt="${esc(A(d.name))}"> -->
-    ${phBlock(d,catName(d.cat),"RED SEA BUSINESS LAUNCH")}
+    ${phBlock(d,catName(d.cat),"ETERNAL SILK")}
     <div class="body">
       <div class="tags"><span class="tag coral">${tierTag(d.tier)}</span><span class="tag navy">${d.incoterm}</span></div>
       <h3>${A(d.name)}</h3>
@@ -1319,14 +1319,13 @@ function pageConsult(){
 function pageAbout(){
   return `<section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("من نحن","About us")}</span>
-    <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("قسم متخصص داخل شركة توريد قائمة","A specialised division inside an operating trading company")}</h1>
+    <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${L("مكتب تجاري في قلب سوق إيوو","A trading office in the heart of the Yiwu market")}</h1>
   </div></section>
   <section class="sec"><div class="wrap prose">
-    <p class="lead">${L(`${CFG.brand} قسم تابع لـ <bdi dir="ltr">${CFG.parent}</bdi>، أُنشئ ليخدم شريحة محددة: التاجر أو رائد الأعمال الذي يريد أن يبدأ نشاط استيراد حقيقي، لكنه لا يملك الوقت ولا الشبكة ولا الخبرة الميدانية داخل الصين.`,
-      `${CFG.brand} is a division of <bdi dir="ltr">${CFG.parent}</bdi>, created to serve one specific audience: the trader or entrepreneur who wants to start a real import business but lacks the time, network and on-the-ground experience inside China.`)}</p>
-    <h2>${L("علاقتنا بالشركة الأم","Our relationship with the parent company")}</h2>
-    <p>${L(`<bdi dir="ltr">${CFG.parent}</bdi> تعمل في التوريد والتخليص الجمركي ولديها شبكة مورّدين ومصانع قائمة. هذا القسم يستخدم البنية نفسها — المستودع، فريق الفحص، علاقات الشحن، خبرة المستندات — لكنه يوجّهها لعملاء أصغر يبدأون بصفقة واحدة بدل الحاويات الكاملة.`,
-      `<bdi dir="ltr">${CFG.parent}</bdi> operates in sourcing and customs clearance and maintains an established network of suppliers and factories. This division uses the same infrastructure — the warehouse, the inspection team, freight relationships and documentation experience — but directs it at smaller clients starting with a single deal rather than full containers.`)}</p>
+    <p class="lead">${L(`<bdi dir="ltr">${CFG.parent}</bdi> شركة تجارة دولية في إيوو، أُنشئت لتخدم شريحة محددة: التاجر أو رائد الأعمال الذي يريد أن يبدأ نشاط استيراد حقيقي، لكنه لا يملك الوقت ولا الشبكة ولا الخبرة الميدانية داخل الصين.`,
+      `<bdi dir="ltr">${CFG.parent}</bdi> is an international trading company in Yiwu, created to serve one specific audience: the trader or entrepreneur who wants to start a real import business but lacks the time, network and on-the-ground experience inside China.`)}</p>
+    <h2>${L("لماذا إيوو","Why Yiwu")}</h2>
+    <p>${L("إيوو أكبر سوق للبضائع الصغيرة في العالم، وفيها آلاف المصانع والموردين في مكان واحد. وجود مكتبنا قرب سوق فوتيان يعني أننا نزور الموردين بأنفسنا، ونجمع طلباتك من أكثر من مورد في مستودع واحد، ونفحصها ونشحنها معًا — فتبدأ بصفقة واحدة بدل حاوية كاملة.","Yiwu is the world's largest market for small commodities, with thousands of factories and suppliers in one place. Being next to Futian Market means we visit suppliers ourselves, consolidate your orders from several suppliers in one warehouse, inspect them and ship them together — so you can start with a single deal instead of a full container.")}</p>
     <h2>${L("فريقنا موجود في الصين","Our team is based in China")}</h2>
     <p>${L("وجودنا الفعلي في الصين هو الفارق العملي: نزور المصانع، نطلب عينات، نتفاوض بالأسعار المحلية وباللغة المحلية، ونفحص البضاعة قبل تحميلها. الوسيط الذي يعمل من خارج الصين ينقل لك ما يقوله المصنع؛ نحن نتحقق منه.",
       "Being physically in China is the practical difference: we visit factories, request samples, negotiate at local prices and in the local language, and inspect goods before loading. An agent working from outside China relays what the factory says; we verify it.")}</p>
@@ -1604,7 +1603,7 @@ function bindCompliance(){
 
 
 /* ---------- SHIPMENT PASSPORT ---------- */
-const PP_CSS = `:root{--pnavy:#0B2545;--pnavy2:#14395F;--pnavy3:#1F5C8B;--pcoral:#D0202A;
+const PP_CSS = `:root{--pnavy:#0F2A44;--pnavy2:#173C5E;--pnavy3:#2A5A85;--pcoral:#B23A2E;
 --psheet:#fff;--pink:#0F2136;--pink2:#3A5068;--pmuted:#647890;
 --pline:#D9E1E9;--pline2:#EDF2F6;--pok:#0B6B57;--pokb:#E4F2EE;
 --pwip:#8A6410;--pwipb:#F8EFDB;--pna:#5C6B7C;--pnab:#ECF0F4;
@@ -1770,8 +1769,8 @@ function ppSlot(cap){
 function ppDoc(){
   return `<article class="ppdoc" id="ppdoc">
   <header class="ppmast">
-    <img src="${LOGO}" alt="Red Sea Global Trading">
-    <div class="w"><b>${CFG.brandAr}</b><span>قسم من <bdi dir="ltr">${CFG.parent}</bdi> — مكتب التشغيل: قوانغتشو، الصين</span></div>
+    <img src="${LOGO}" alt="Eternal Silk">
+    <div class="w"><b>${CFG.brandAr}</b><span>قسم من <bdi dir="ltr">${CFG.parent}</bdi> — مكتب التشغيل: إيوو، الصين</span></div>
     <div class="t"><b>جواز الشحنة</b><span>SHIPMENT PASSPORT</span>
       <div class="r">رقم <span contenteditable="true" data-ph="RSBL-0000"></span> · <span contenteditable="true" data-ph="التاريخ"></span></div>
     </div>
@@ -1888,7 +1887,7 @@ function ppExport(){
     '<meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<meta name="robots" content="noindex,nofollow">'+
     '<title>'+esc(title)+'</title>'+
-    '<link rel="icon" href="/assets/favicon.png?v=17f55204">'+
+    '<link rel="icon" href="/assets/favicon.png?v=a40626df">'+
     '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'+
     '<link rel="stylesheet" href="'+FONTS+'">'+
     '<style>body{margin:0;padding:22px 14px 60px;background:#EEF2F6;'+
@@ -2250,7 +2249,7 @@ function pageContact(){
     <div class="card"><div class="ico">${ICON.ship}</div><h3>${L("المكتب","Office")}</h3><p>${A(CFG.addr)}<br>${CFG.phone}</p>
       <a class="btn btn-out btn-sm btn-block" style="margin-top:14px" href="/qualify">${L("نموذج التأهيل","Qualification form")}</a></div>
   </div>
-  <div class="info" style="margin-top:26px">${L(`الجهة المتعاقدة رسميًا هي <bdi dir="ltr">${CFG.parent}</bdi>. ${CFG.brand} اسم تجاري لقسم داخل الشركة.`,`The contracting entity is <bdi dir="ltr">${CFG.parent}</bdi>. ${CFG.brand} is the trading name of a division within the company.`)}</div>
+  <div class="info" style="margin-top:26px">${L(`الجهة المتعاقدة رسميًا هي <bdi dir="ltr">${CFG.parent}</bdi>. ${CFG.brand} هو الاسم التجاري للشركة.`,`The contracting entity is <bdi dir="ltr">${CFG.parent}</bdi>. ${CFG.brand} is the company's trading name.`)}</div>
   </div></section>`;
 }
 
@@ -2280,7 +2279,7 @@ function pageLegal(){
       <li>${L("العميل مسؤول عن التحقق من نظامية استيراد الأصناف في بلده والحصول على أي تراخيص أو تسجيلات مطلوبة.","The client is responsible for verifying that the items may lawfully be imported into their country and for obtaining any required licences or registrations.")}</li>
       <li>${L("لا نتعامل مع المنتجات المقلدة أو المخالفة لحقوق الملكية الفكرية، وأي طلب من هذا النوع يُرفض.","We do not deal in counterfeit goods or products infringing intellectual property rights, and any such request is declined.")}</li>
       <li>${L("بيانات المورّدين تُشارك بعد اعتماد الصفقة وتخضع لاتفاقية عدم الالتفاف.","Supplier details are shared after deal approval and are subject to a non-circumvention agreement.")}</li>
-      <li>${L("الجهة المتعاقدة هي الشركة الأم، وتُطبَّق أحكام العقد الموقّع بين الطرفين وتَعلو على أي نص عام في هذا الموقع.","The contracting entity is the parent company, and the terms of the signed contract between the parties prevail over any general text on this site.")}</li>
+      <li>${L(`الجهة المتعاقدة هي ${CFG.parent}، وتُطبَّق أحكام العقد الموقّع بين الطرفين وتَعلو على أي نص عام في هذا الموقع.`,`The contracting entity is ${CFG.parent}, and the terms of the signed contract between the parties prevail over any general text on this site.`)}</li>
     </ul>`)}
   ${S("refund",L("سياسة الإرجاع والاسترداد","Refund & returns policy"),`
     <ul>
@@ -2301,9 +2300,9 @@ function pageLegal(){
 
 /* ---------- ROUTER ---------- */
 const META = {
-  "/":        [["Red Sea Business Launch — أطلق مشروعك من الصين إلى سوقك","Red Sea Business Launch — Launch your business from China to your market"],
-               ["صفقات منتجات مدروسة، توريد موثوق من الصين، شحن وتخليص، متجر، تدريب ومتابعة — قسم تابع لـ Red Sea Global Trading Co. Ltd.","Studied product deals, reliable sourcing from China, shipping and clearance, a store, training and follow-up — a division of Red Sea Global Trading Co. Ltd."]],
-  "/calculator":[["حاسبة تكلفة الاستيراد — Red Sea Business Launch","Import Cost Calculator — Red Sea Business Launch"],
+  "/":        [["Eternal Silk — أطلق مشروعك من الصين إلى سوقك","Eternal Silk — Launch your business from China to your market"],
+               ["صفقات منتجات مدروسة، توريد موثوق من الصين، شحن وتخليص، متجر، تدريب ومتابعة — مكتب تجاري في إيوو بالصين.","Studied product deals, reliable sourcing from China, shipping and clearance, a store, training and follow-up — a trading office in Yiwu, China."]],
+  "/calculator":[["حاسبة تكلفة الاستيراد — Eternal Silk","Import Cost Calculator — Eternal Silk"],
                ["احسب تكلفة الوحدة النهائية بعد الشحن والجمارك والضريبة ورسوم الخدمة، وهامش ربحك ونقطة التعادل قبل أن تدفع.","Work out your final landed unit cost after freight, duty, VAT and service fees — plus margin and break-even — before you pay."]],
   "/passport":[["تعبئة جواز الشحنة — أداة داخلية","Shipment Passport builder — internal tool"],
                ["أداة داخلية لتجهيز جواز الشحنة وتصديره كصفحة مستقلة للعميل.","Internal tool for preparing a shipment passport and exporting it as a standalone client page."]],
@@ -2313,22 +2312,22 @@ const META = {
                ["ممرّا عدن والحديدة، آلية UNVIM ونطاقها، تحرير الدولار الجمركي في مايو 2026 ومثال محسوب، سعرا الريال، متطلبات المطابقة الفعلية، والتعرّض للعقوبات — بمصادر مؤرَّخة.","The Aden and Hodeidah corridors, UNVIM and its scope, the May 2026 customs-dollar liberalisation with a worked example, the two rial rates, what conformity actually requires, and sanctions exposure — with dated sources."]],
   "/compliance":[["سابر والامتثال — متطلبات استيراد الصين إلى السعودية والخليج 2026","SABER & Compliance — importing from China to Saudi Arabia and the Gulf, 2026"],
                ["مسار سابر خطوة بخطوة، رسوم شهادة المنتج والإرسالية، تواريخ 2025–2026 التي تُعطّل الشحنات، ومتطلبات المطابقة في السعودية والإمارات وعُمان وقطر والكويت والبحرين واليمن.","The SABER path step by step, Product and Shipment CoC fees, the 2025–2026 dates that stall shipments, and conformity requirements across Saudi Arabia, the UAE, Oman, Qatar, Kuwait, Bahrain and Yemen."]],
-  "/deals":   [["الصفقات الجاهزة — Red Sea Business Launch","Ready Deals — Red Sea Business Launch"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
-  "/deal":    [["تفاصيل الصفقة — Red Sea Business Launch","Deal details — Red Sea Business Launch"],["تفاصيل المنتجات والتكاليف والسيناريوهات المالية والمخاطر لهذه الصفقة.","Products, costs, financial scenarios and risks for this deal."]],
-  "/packages":[["باقات الإطلاق — Red Sea Business Launch","Launch Packages — Red Sea Business Launch"],["Sourcing Only و Starter Launch و Full Launch واشتراك التشغيل الشهري — مقارنة كاملة ونطاقات أسعار تقديرية.","Sourcing Only, Starter Launch, Full Launch and the monthly operations subscription — a full comparison with estimated price ranges."]],
-  "/qualify": [["نموذج التأهيل — Red Sea Business Launch","Qualification Form — Red Sea Business Launch"],["املأ نموذج التأهيل لنحدد الصفقة المناسبة لسوقك وميزانيتك.","Complete the qualification form so we can identify the deal that fits your market and budget."]],
-  "/consultation":[["حجز استشارة — Red Sea Business Launch","Book a Consultation — Red Sea Business Launch"],["جلسة 45–60 دقيقة لمراجعة سوقك وميزانيتك والخروج بتوصية واضحة.","A 45–60 minute session to review your market and budget and reach a clear recommendation."]],
-  "/about":   [["من نحن — Red Sea Business Launch","About — Red Sea Business Launch"],["قسم متخصص تابع لـ Red Sea Global Trading Co. Ltd. بفريق يعمل من داخل الصين.","A specialised division of Red Sea Global Trading Co. Ltd. with a team working from inside China."]],
-  "/faq":     [["الأسئلة الشائعة — Red Sea Business Launch","FAQ — Red Sea Business Launch"],["الجمارك، الشحن، الجودة، الإرجاع، الدفع، المدة، والتأخير — إجابات صريحة.","Customs, shipping, quality, returns, payment, timelines and delays — answered plainly."]],
-  "/contact": [["تواصل معنا — Red Sea Business Launch","Contact — Red Sea Business Launch"],["واتساب وبريد إلكتروني وبيانات المكتب.","WhatsApp, email and office details."]],
-  "/legal":   [["السياسات والشروط — Red Sea Business Launch","Policies & Terms — Red Sea Business Launch"],["سياسة الخصوصية، الشروط والأحكام، سياسة الإرجاع، وإخلاء المسؤولية.","Privacy policy, terms and conditions, refund policy and disclaimer."]],
-  "/thanks":  [["شكرًا لك — Red Sea Business Launch","Thank you — Red Sea Business Launch"],["وصلنا طلبك وسنتواصل معك قريبًا.","We have received your request and will be in touch shortly."]]
+  "/deals":   [["الصفقات الجاهزة — Eternal Silk","Ready Deals — Eternal Silk"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
+  "/deal":    [["تفاصيل الصفقة — Eternal Silk","Deal details — Eternal Silk"],["تفاصيل المنتجات والتكاليف والسيناريوهات المالية والمخاطر لهذه الصفقة.","Products, costs, financial scenarios and risks for this deal."]],
+  "/packages":[["باقات الإطلاق — Eternal Silk","Launch Packages — Eternal Silk"],["Sourcing Only و Starter Launch و Full Launch واشتراك التشغيل الشهري — مقارنة كاملة ونطاقات أسعار تقديرية.","Sourcing Only, Starter Launch, Full Launch and the monthly operations subscription — a full comparison with estimated price ranges."]],
+  "/qualify": [["نموذج التأهيل — Eternal Silk","Qualification Form — Eternal Silk"],["املأ نموذج التأهيل لنحدد الصفقة المناسبة لسوقك وميزانيتك.","Complete the qualification form so we can identify the deal that fits your market and budget."]],
+  "/consultation":[["حجز استشارة — Eternal Silk","Book a Consultation — Eternal Silk"],["جلسة 45–60 دقيقة لمراجعة سوقك وميزانيتك والخروج بتوصية واضحة.","A 45–60 minute session to review your market and budget and reach a clear recommendation."]],
+  "/about":   [["من نحن — Eternal Silk","About — Eternal Silk"],["مكتب تجاري في إيوو بالصين بفريق يعمل من داخل السوق.","A trading office in Yiwu, China, with a team working from inside the market."]],
+  "/faq":     [["الأسئلة الشائعة — Eternal Silk","FAQ — Eternal Silk"],["الجمارك، الشحن، الجودة، الإرجاع، الدفع، المدة، والتأخير — إجابات صريحة.","Customs, shipping, quality, returns, payment, timelines and delays — answered plainly."]],
+  "/contact": [["تواصل معنا — Eternal Silk","Contact — Eternal Silk"],["واتساب وبريد إلكتروني وبيانات المكتب.","WhatsApp, email and office details."]],
+  "/legal":   [["السياسات والشروط — Eternal Silk","Policies & Terms — Eternal Silk"],["سياسة الخصوصية، الشروط والأحكام، سياسة الإرجاع، وإخلاء المسؤولية.","Privacy policy, terms and conditions, refund policy and disclaimer."]],
+  "/thanks":  [["شكرًا لك — Eternal Silk","Thank you — Eternal Silk"],["وصلنا طلبك وسنتواصل معك قريبًا.","We have received your request and will be in touch shortly."]]
 };
 
 /* mirrors NOINDEX in build.py: these must never flip to index,follow after hydration */
 const NOINDEX = new Set(["/thanks","/passport"]);
 
-const META404 = () => [["الصفحة غير موجودة — Red Sea Business Launch","Page not found — Red Sea Business Launch"],
+const META404 = () => [["الصفحة غير موجودة — Eternal Silk","Page not found — Eternal Silk"],
                        ["الرابط الذي فتحته غير موجود. تصفّح الصفقات الجاهزة أو حاسبة التكلفة أو تواصل معنا.",
                         "The link you opened does not exist. Browse the ready deals, the cost calculator, or get in touch."]];
 function setMeta(base, slug){
@@ -2338,7 +2337,7 @@ function setMeta(base, slug){
   /* every deal is its own page: its own title, description and canonical */
   if(base==="/deal"){
     const d = slug && (window.DEALS||[]).find(x=>x.id===slug);
-    if(d){ m = [[d.name[0]+" — Red Sea Business Launch", d.name[1]+" — Red Sea Business Launch"], d.short];
+    if(d){ m = [[d.name[0]+" — Eternal Silk", d.name[1]+" — Eternal Silk"], d.short];
            url = "https://"+CFG.domain+"/deal/"+d.id; }
     else { m = META404(); indexable = false; }
   }
