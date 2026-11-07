@@ -1,260 +1,4 @@
-window.DEALS=[
-{
-  "id":"home-essentials",
-  "cat":"home",
-  "tier":"starter",
-  "markets":["sa","ae","om","ye"],
-  "img":"/assets/deal-home.jpg",
-  "name":["صفقة الأدوات المنزلية الأساسية","Home Essentials Deal"],
-  "short":["تشكيلة أدوات منزلية سريعة الدوران بأسعار جملة، مناسبة لأول شحنة صغيرة أو لمتجر إلكتروني ناشئ.","A fast-moving selection of household tools at wholesale pricing — suited to a first small shipment or a new online store."],
-  "budget":["2,000 – 3,000 $","$2,000 – $3,000"],
-  "skus":["8 – 12 منتجًا","8 – 12 products"],
-  "level":["مبتدئ","Starter"],
-  "incoterm":"FOB / CIF",
-  "lead":["30 – 45 يومًا من اعتماد الصفقة","30 – 45 days from deal approval"],
-  "desc":["صفقة مبنية على أصناف منزلية ذات طلب مستقر وحجم شحن معقول: أدوات مطبخ، تنظيم وتخزين، مستلزمات تنظيف. اخترناها لأن هامشها يتحمل تكلفة الشحن ولا تحتاج شهادات معقدة في معظم أسواق الخليج. الكميات والمواصفات النهائية تُحدَّد بعد الاستشارة وحسب دولتك.","Built around household items with stable demand and reasonable shipping volume: kitchen tools, storage and organisation, cleaning supplies. We selected them because the margin absorbs freight cost and most Gulf markets do not require complex certification. Final quantities and specifications are set after the consultation and depend on your country."],
-  "items":[
-    ["أدوات مطبخ متعددة الاستخدام","Multi-use kitchen tools","300 – 500 قطعة","300 – 500 pcs","ستانلس / بلاستيك غذائي، تغليف مفرد","Stainless / food-grade plastic, individual packaging"],
-    ["صناديق ووحدات تنظيم","Storage & organisers","250 – 400 قطعة","250 – 400 pcs","بلاستيك PP، مقاسات متعددة","PP plastic, multiple sizes"],
-    ["مستلزمات تنظيف منزلي","Household cleaning tools","300 – 600 قطعة","300 – 600 pcs","مقابض قابلة للفك لتقليل حجم الشحن","Detachable handles to reduce shipping volume"],
-    ["إكسسوارات حمام ومطبخ","Bath & kitchen accessories","200 – 350 قطعة","200 – 350 pcs","ألوان محايدة، تغليف بسيط","Neutral colours, simple packaging"]
-  ],
-  "costs":[
-    ["تكلفة المنتجات من المصنع","Product cost (ex-works)","1,450 $","$1,450"],
-    ["الشحن الدولي والتأمين","International freight & insurance","420 $","$420"],
-    ["الجمارك والمصاريف المحلية (تقديري)","Customs & local charges (est.)","260 $","$260"],
-    ["تجهيز المتجر أو صفحة البيع","Store / sales page setup","180 $","$180"],
-    ["التسويق الأولي","Initial marketing","190 $","$190"]
-  ],
-  "total":["2,500 $ تقريبًا","≈ $2,500"],
-  "sell":["هامش بيع مقترح 55% – 90% حسب القناة والسوق","Suggested retail margin 55% – 90% depending on channel and market"],
-  "bep":["استرداد التكلفة عند بيع ما يقارب 60% من الكمية بسعر التجزئة المقترح","Cost recovery at roughly 60% of units sold at the suggested retail price"],
-  "scen":[
-    ["متحفظ","Conservative","بيع 50% خلال 90 يومًا","50% sold within 90 days","تحت التعادل — يحتاج دورة بيع ثانية","Below break-even — needs a second sales cycle"],
-    ["متوسط","Moderate","بيع 75% خلال 90 يومًا","75% sold within 90 days","تغطية التكلفة مع فائض تشغيلي محدود","Costs covered with a limited operating surplus"],
-    ["متفائل","Optimistic","بيع 95% خلال 90 يومًا","95% sold within 90 days","فائض يسمح بإعادة طلب أكبر","Surplus allowing a larger re-order"]
-  ],
-  "risks":[
-    ["تقلب أسعار الشحن البحري بين موسم وآخر","Sea freight rates fluctuate between seasons"],
-    ["اختلاف نسب الجمارك والضريبة حسب الدولة والبند الجمركي","Duty and tax rates differ by country and HS code"],
-    ["سرعة الدوران تعتمد على قناة البيع وجهد التسويق","Turnover speed depends on your sales channel and marketing effort"],
-    ["احتمال وجود نسبة هالك أو عيوب مصنعية ضمن الحدود المتعارف عليها","A normal allowance for defects or damage should be expected"]
-  ]
-},
-{
-  "id":"phone-accessories",
-  "cat":"phone",
-  "tier":"starter",
-  "markets":["sa","ae","kw","ye","qa"],
-  "img":"/assets/deal-phone.jpg",
-  "name":["صفقة إكسسوارات الجوال","Mobile Accessories Deal"],
-  "short":["أصناف خفيفة الوزن وعالية الدوران، مناسبة للشحن الجوي والبيع عبر المتاجر الصغيرة والسوشيال ميديا.","Lightweight, high-turnover items suited to air freight and selling through small shops or social channels."],
-  "budget":["2,500 – 4,000 $","$2,500 – $4,000"],
-  "skus":["10 – 15 منتجًا","10 – 15 products"],
-  "level":["مبتدئ","Starter"],
-  "incoterm":"CIF / DDP",
-  "lead":["20 – 35 يومًا (شحن جوي أو سريع)","20 – 35 days (air or express)"],
-  "desc":["صفقة تعتمد على الوزن المنخفض مقابل القيمة، ما يجعل الشحن الجوي منطقيًا ويقصّر مدة الوصول. نركّز على أصناف بلا أي علامة تجارية إطلاقًا: كوابل، شواحن، حوامل، سماعات عامة، حافظات محايدة. المواصفات الكهربائية تُراجع قبل الشراء لتجنب مشاكل التخليص الجمركي.","Built on a low weight-to-value ratio, which makes air freight sensible and shortens transit. We focus strictly on non-branded items: cables, chargers, holders, generic earphones and neutral cases. Electrical specifications are reviewed before purchase to avoid customs clearance problems."],
-  "items":[
-    ["كوابل شحن متعددة المنافذ","Multi-port charging cables","800 – 1,200 قطعة","800 – 1,200 pcs","طول 1م و2م، بدون علامات تجارية","1m and 2m, unbranded"],
-    ["شواحن جدارية وسيارة","Wall & car chargers","400 – 700 قطعة","400 – 700 pcs","مطابقة لمواصفات الجهد المحلي","Compliant with local voltage specifications"],
-    ["حوامل جوال","Phone holders","300 – 500 قطعة","300 – 500 pcs","مكتب وسيارة","Desk and car"],
-    ["سماعات سلكية ولاسلكية عامة","Generic wired & wireless earphones","250 – 400 قطعة","250 – 400 pcs","تغليف محايد قابل للتخصيص","Neutral packaging, customisable"],
-    ["حافظات وواقيات شاشة","Cases & screen protectors","600 – 1,000 قطعة","600 – 1,000 pcs","للموديلات الأكثر انتشارًا في سوقك","For the most common models in your market"]
-  ],
-  "costs":[
-    ["تكلفة المنتجات من المصنع","Product cost (ex-works)","1,900 $","$1,900"],
-    ["الشحن الدولي والتأمين","International freight & insurance","520 $","$520"],
-    ["الجمارك والمصاريف المحلية (تقديري)","Customs & local charges (est.)","310 $","$310"],
-    ["تجهيز المتجر أو صفحة البيع","Store / sales page setup","200 $","$200"],
-    ["التسويق الأولي","Initial marketing","270 $","$270"]
-  ],
-  "total":["3,200 $ تقريبًا","≈ $3,200"],
-  "sell":["هامش بيع مقترح 70% – 120% في البيع المباشر للمستهلك","Suggested margin 70% – 120% in direct-to-consumer selling"],
-  "bep":["استرداد التكلفة عند بيع ما يقارب 55% من الكمية","Cost recovery at roughly 55% of units sold"],
-  "scen":[
-    ["متحفظ","Conservative","بيع 45% خلال 90 يومًا","45% sold within 90 days","تحت التعادل — بضاعة راكدة تحتاج تصريفًا","Below break-even — slow stock needing clearance"],
-    ["متوسط","Moderate","بيع 70% خلال 90 يومًا","70% sold within 90 days","تغطية التكلفة وبداية ربح تشغيلي","Costs covered with the start of operating profit"],
-    ["متفائل","Optimistic","بيع 90%+ خلال 90 يومًا","90%+ sold within 90 days","دورة إعادة طلب أسرع","A faster re-order cycle"]
-  ],
-  "risks":[
-    ["الفئة تنافسية وحساسة للسعر","The category is competitive and price-sensitive"],
-    ["بعض الدول تشترط مطابقة للمنتجات الكهربائية","Some countries require conformity approval for electrical goods"],
-    ["تغيّر موديلات الأجهزة يؤثر على مقاسات الحافظات","Device model changes affect case sizing"],
-    ["الشحن الجوي أسرع لكنه أعلى تكلفة من البحري","Air freight is faster but costlier than sea"]
-  ]
-},
-{
-  "id":"restaurant-supplies",
-  "cat":"food",
-  "tier":"growth",
-  "markets":["sa","ae","qa","bh","om"],
-  "img":"/assets/deal-resto.jpg",
-  "name":["مستلزمات المطاعم والكافيهات","Restaurant & Café Supplies"],
-  "short":["توريد متكرر لمشغّلي المطاعم والكافيهات: تغليف، أدوات تقديم، مستهلكات — احتمال إعادة طلب شهرية.","Repeat supply for restaurant and café operators: packaging, serving ware and consumables — with monthly re-order potential."],
-  "budget":["5,000 – 10,000 $","$5,000 – $10,000"],
-  "skus":["12 – 20 منتجًا","12 – 20 products"],
-  "level":["نمو","Growth"],
-  "incoterm":"CIF / DDP",
-  "lead":["40 – 60 يومًا (شحن بحري)","40 – 60 days (sea freight)"],
-  "desc":["صفقة موجّهة للبيع بالجملة لمشغّلي المطاعم والكافيهات بدل البيع للمستهلك. ميزتها أن العميل يعيد الطلب شهريًا إذا كان السعر والجودة ثابتين، ما يجعلها أقرب لعلاقة توريد مستمرة. تتطلب مساحة تخزين وقدرة على البيع المؤسسي.","Aimed at wholesale supply to café and restaurant operators rather than end consumers. Its advantage is repeat monthly ordering when price and quality stay consistent, making it closer to an ongoing supply relationship. It requires storage space and the ability to sell B2B."],
-  "items":[
-    ["أكواب ورقية وأغطية","Paper cups & lids","20,000 – 40,000 قطعة","20,000 – 40,000 pcs","أحجام متعددة، قابلة للطباعة بشعار العميل","Multiple sizes, printable with the client's logo"],
-    ["علب تغليف طعام","Food packaging containers","15,000 – 30,000 قطعة","15,000 – 30,000 pcs","مواد آمنة غذائيًا","Food-safe materials"],
-    ["أدوات تقديم يمكن التخلص منها","Disposable serving ware","20,000 – 35,000 قطعة","20,000 – 35,000 pcs","خشب أو PP حسب توجه السوق","Wood or PP depending on market preference"],
-    ["أدوات باريستا ومستهلكات","Barista tools & consumables","300 – 600 قطعة","300 – 600 pcs","ستانلس، جودة تشغيلية","Stainless steel, operational grade"],
-    ["مستلزمات تنظيف مطابخ تجارية","Commercial kitchen cleaning supplies","400 – 800 قطعة","400 – 800 pcs","حسب اشتراطات السوق","Subject to market requirements"]
-  ],
-  "costs":[
-    ["تكلفة المنتجات من المصنع","Product cost (ex-works)","4,600 $","$4,600"],
-    ["الشحن الدولي والتأمين","International freight & insurance","1,150 $","$1,150"],
-    ["الجمارك والمصاريف المحلية (تقديري)","Customs & local charges (est.)","780 $","$780"],
-    ["تجهيز المتجر وملف المبيعات B2B","Store & B2B sales kit","420 $","$420"],
-    ["التسويق الأولي وزيارات العملاء","Initial marketing & client visits","350 $","$350"]
-  ],
-  "total":["7,300 $ تقريبًا","≈ $7,300"],
-  "sell":["هامش جملة مقترح 25% – 45% مع اعتماد على التكرار الشهري","Suggested wholesale margin 25% – 45%, relying on monthly repeat orders"],
-  "bep":["التعادل غالبًا خلال دورتي توريد إذا استقر عدد العملاء المتعاقدين","Break-even typically across two supply cycles once the contracted client base stabilises"],
-  "scen":[
-    ["متحفظ","Conservative","3 – 5 عملاء متكررين","3 – 5 repeat clients","دوران بطيء وتخزين أطول","Slow turnover and longer storage"],
-    ["متوسط","Moderate","8 – 12 عميلًا متكررًا","8 – 12 repeat clients","دورة توريد شهرية شبه منتظمة","A fairly regular monthly supply cycle"],
-    ["متفائل","Optimistic","15+ عميلًا متكررًا","15+ repeat clients","حاجة مبكرة لتوسيع الكميات","Early need to scale order volumes"]
-  ],
-  "risks":[
-    ["اشتراطات صحية وغذائية تختلف بين الدول","Food-safety requirements differ between countries"],
-    ["الحاجة إلى مساحة تخزين حقيقية","A real storage footprint is required"],
-    ["البيع المؤسسي يحتاج وقتًا أطول لبناء الثقة","B2B selling takes longer to build trust"],
-    ["ارتفاع تكلفة الشحن مع المنتجات كبيرة الحجم","Shipping cost rises with bulky items"]
-  ]
-},
-{
-  "id":"salon-supplies",
-  "cat":"beauty",
-  "tier":"growth",
-  "markets":["sa","ae","kw","qa"],
-  "img":"/assets/deal-salon.jpg",
-  "name":["مستلزمات الصالونات والعناية","Salon & Personal Care Supplies"],
-  "short":["أدوات ومستهلكات صالونات بهامش جيد، مع قناة بيع مزدوجة: الصالونات مباشرة والمستهلك النهائي.","Salon tools and consumables with a healthy margin and a dual channel: salons directly plus end consumers."],
-  "budget":["5,000 – 9,000 $","$5,000 – $9,000"],
-  "skus":["10 – 18 منتجًا","10 – 18 products"],
-  "level":["نمو","Growth"],
-  "incoterm":"CIF",
-  "lead":["35 – 55 يومًا","35 – 55 days"],
-  "desc":["نركّز على الأدوات والمستهلكات غير المصنفة كمستحضرات تجميل، لأن استيراد المستحضرات يتطلب تسجيلًا وتصاريح تختلف من دولة لأخرى. هذا يقلل تعقيد التخليص الجمركي في أول شحنة ويسمح بالبدء أسرع.","We focus on tools and consumables that are not classified as cosmetics, since importing cosmetics requires registration and permits that differ by country. This reduces clearance complexity on a first shipment and allows a faster start."],
-  "items":[
-    ["أدوات تصفيف وتجفيف","Styling & drying tools","300 – 600 قطعة","300 – 600 pcs","مطابقة للجهد الكهربائي المحلي","Compliant with local voltage"],
-    ["أدوات عناية بالأظافر","Nail care tools","800 – 1,500 قطعة","800 – 1,500 pcs","ستانلس، تعقيم قابل للتكرار","Stainless steel, re-sterilisable"],
-    ["مستهلكات صالونات","Salon consumables","3,000 – 6,000 قطعة","3,000 – 6,000 pcs","استعمال واحد، تغليف محايد","Single-use, neutral packaging"],
-    ["أثاث وإكسسوارات خفيفة","Light furniture & accessories","80 – 200 قطعة","80 – 200 pcs","قابلة للفك لتقليل حجم الشحن","Flat-packed to reduce shipping volume"]
-  ],
-  "costs":[
-    ["تكلفة المنتجات من المصنع","Product cost (ex-works)","4,100 $","$4,100"],
-    ["الشحن الدولي والتأمين","International freight & insurance","880 $","$880"],
-    ["الجمارك والمصاريف المحلية (تقديري)","Customs & local charges (est.)","620 $","$620"],
-    ["تجهيز المتجر والصور","Store setup & photography","480 $","$480"],
-    ["التسويق الأولي","Initial marketing","420 $","$420"]
-  ],
-  "total":["6,500 $ تقريبًا","≈ $6,500"],
-  "sell":["هامش مقترح 40% للصالونات و80%+ للبيع المباشر","Suggested margin 40% to salons, 80%+ direct to consumer"],
-  "bep":["التعادل عادة بعد تصريف نحو 60% من الشحنة عبر القناتين","Break-even typically after moving about 60% of the shipment across both channels"],
-  "scen":[
-    ["متحفظ","Conservative","اعتماد على قناة واحدة فقط","Reliance on a single channel","دوران أبطأ وسيولة محبوسة","Slower turnover and tied-up cash"],
-    ["متوسط","Moderate","قناتان بعملاء متكررين","Two channels with repeat clients","تغطية التكلفة خلال الدورة الأولى","Costs covered within the first cycle"],
-    ["متفائل","Optimistic","تعاقدات توريد مع صالونات","Supply agreements with salons","طلب ثانٍ أكبر وأصناف إضافية","A larger second order with added SKUs"]
-  ],
-  "risks":[
-    ["المستحضرات التجميلية تحتاج تسجيلًا نظاميًا ولا تدخل ضمن هذه الصفقة","Cosmetic preparations require regulatory registration and are excluded from this deal"],
-    ["حساسية العملاء لجودة الأدوات المعدنية","Clients are sensitive to the quality of metal tools"],
-    ["مواسم الطلب متذبذبة","Demand is seasonal"],
-    ["الأدوات الكهربائية تحتاج فحصًا وضمانًا واضحًا","Electrical tools need inspection and a clear warranty position"]
-  ]
-},
-{
-  "id":"stationery-school",
-  "cat":"stationery",
-  "tier":"starter",
-  "markets":["ye","sa","om","eg"],
-  "img":"/assets/deal-stationery.jpg",
-  "name":["صفقة القرطاسية والمدارس","Stationery & School Deal"],
-  "short":["صفقة موسمية بطلب متوقع قبل بداية العام الدراسي، مناسبة لمن يملك منفذ بيع أو شبكة توزيع محلية.","A seasonal deal with predictable demand before the school year — suited to anyone with a retail outlet or local distribution network."],
-  "budget":["2,000 – 3,500 $","$2,000 – $3,500"],
-  "skus":["15 – 25 منتجًا","15 – 25 products"],
-  "level":["مبتدئ","Starter"],
-  "incoterm":"FOB / CIF",
-  "lead":["45 – 60 يومًا — يجب الطلب قبل الموسم","45 – 60 days — must be ordered ahead of the season"],
-  "desc":["أهم ما في هذه الصفقة هو التوقيت: الطلب مرتفع لفترة محدودة، والشحنة التي تتأخر تفقد جزءًا كبيرًا من قيمتها. لذلك نضع جدولًا زمنيًا عكسيًا من تاريخ بداية الدراسة في سوقك ونعمل بالعكس حتى تاريخ اعتماد الطلب.","The critical factor here is timing: demand peaks for a limited window, and a late shipment loses much of its value. We therefore build a reverse timeline from the school start date in your market back to the order approval date."],
-  "items":[
-    ["دفاتر وكشاكيل","Notebooks","5,000 – 10,000 قطعة","5,000 – 10,000 pcs","أحجام وأوراق متعددة","Multiple sizes and paper weights"],
-    ["أقلام وأدوات كتابة","Pens & writing tools","10,000 – 20,000 قطعة","10,000 – 20,000 pcs","تغليف بالعبوة","Bulk-packed"],
-    ["حقائب مدرسية","School bags","500 – 1,200 قطعة","500 – 1,200 pcs","تصاميم محايدة بدون شخصيات مرخّصة","Neutral designs, no licensed characters"],
-    ["أدوات هندسية ومستلزمات","Geometry sets & supplies","2,000 – 5,000 قطعة","2,000 – 5,000 pcs","عبوات جاهزة للبيع","Retail-ready packs"]
-  ],
-  "costs":[
-    ["تكلفة المنتجات من المصنع","Product cost (ex-works)","1,700 $","$1,700"],
-    ["الشحن الدولي والتأمين","International freight & insurance","560 $","$560"],
-    ["الجمارك والمصاريف المحلية (تقديري)","Customs & local charges (est.)","300 $","$300"],
-    ["تجهيز المتجر أو صفحة البيع","Store / sales page setup","160 $","$160"],
-    ["التسويق الأولي","Initial marketing","180 $","$180"]
-  ],
-  "total":["2,900 $ تقريبًا","≈ $2,900"],
-  "sell":["هامش تجزئة مقترح 50% – 85% داخل الموسم","Suggested retail margin 50% – 85% within season"],
-  "bep":["التعادل عادة داخل الموسم نفسه إذا وصلت الشحنة في موعدها","Break-even usually within the season itself if the shipment arrives on time"],
-  "scen":[
-    ["متحفظ","Conservative","وصول متأخر أو تصريف جزئي","Late arrival or partial sell-through","بضاعة تُرحّل لموسم قادم","Stock carried over to the next season"],
-    ["متوسط","Moderate","تصريف 70% داخل الموسم","70% sold within season","تغطية التكلفة والباقي مخزون","Costs covered, remainder held as stock"],
-    ["متفائل","Optimistic","تصريف شبه كامل قبل نهاية الموسم","Near-complete sell-through before season end","فائض يسمح بطلب موسم أكبر","Surplus enabling a larger order next season"]
-  ],
-  "risks":[
-    ["الموسمية الحادة: التأخير يكلف كثيرًا","Sharp seasonality: delays are costly"],
-    ["منافسة سعرية قوية في القرطاسية","Strong price competition in stationery"],
-    ["ممنوع استخدام شخصيات أو علامات مرخّصة","Licensed characters or brands are not permitted"],
-    ["الأوراق حساسة للرطوبة أثناء الشحن","Paper goods are moisture-sensitive in transit"]
-  ]
-},
-{
-  "id":"packaging-smb",
-  "cat":"packaging",
-  "tier":"wholesale",
-  "markets":["sa","ae","om","kw","bh","qa"],
-  "img":"/assets/deal-packaging.jpg",
-  "name":["مواد تغليف للمشاريع الصغيرة","Packaging Materials for Small Businesses"],
-  "short":["توريد بالجملة لمواد التغليف التي تشتريها آلاف المشاريع الصغيرة شهريًا — طلب متكرر وثابت.","Wholesale supply of the packaging materials thousands of small businesses buy every month — steady, repeating demand."],
-  "budget":["15,000 $ فأكثر","$15,000+"],
-  "skus":["20 – 30 منتجًا","20 – 30 products"],
-  "level":["جملة","Wholesale"],
-  "incoterm":"CIF / DDP",
-  "lead":["45 – 70 يومًا (حاوية جزئية أو كاملة)","45 – 70 days (LCL or FCL)"],
-  "desc":["صفقة على مستوى الجملة تستهدف من يريد أن يصبح مورّدًا محليًا لا بائع تجزئة. الطلب على مواد التغليف متكرر شهريًا ولا يعتمد على موضة أو موسم، لكنه يحتاج رأس مال أكبر ومساحة تخزين وقدرة على البيع المؤسسي والتسليم.","A wholesale-level deal for someone who wants to become a local supplier rather than a retailer. Demand for packaging repeats monthly and does not follow fashion or season, but it needs more capital, storage space and the ability to sell and deliver B2B."],
-  "items":[
-    ["صناديق كرتون بمقاسات متعددة","Corrugated boxes, multiple sizes","30,000 – 60,000 قطعة","30,000 – 60,000 pcs","مسطّحة لتقليل حجم الشحن","Flat-packed to reduce volume"],
-    ["أكياس شحن وبريد","Mailing & courier bags","50,000 – 100,000 قطعة","50,000 – 100,000 pcs","سماكات متعددة","Multiple thicknesses"],
-    ["أشرطة لاصقة ومواد حماية","Tapes & protective materials","10,000 – 20,000 قطعة","10,000 – 20,000 pcs","شفاف ومطبوع","Clear and printed"],
-    ["أكياس ورقية وتغليف هدايا","Paper bags & gift packaging","20,000 – 40,000 قطعة","20,000 – 40,000 pcs","قابلة للطباعة بشعار العميل","Printable with client logos"],
-    ["ملصقات وأدوات ترقيم","Labels & marking supplies","30,000 – 60,000 قطعة","30,000 – 60,000 pcs","حراري ولاصق عادي","Thermal and standard adhesive"]
-  ],
-  "costs":[
-    ["تكلفة المنتجات من المصنع","Product cost (ex-works)","11,200 $","$11,200"],
-    ["الشحن الدولي والتأمين","International freight & insurance","2,600 $","$2,600"],
-    ["الجمارك والمصاريف المحلية (تقديري)","Customs & local charges (est.)","1,800 $","$1,800"],
-    ["تجهيز المتجر ونظام الطلبات","Store & ordering system setup","700 $","$700"],
-    ["التسويق الأولي والمبيعات الميدانية","Initial marketing & field sales","900 $","$900"]
-  ],
-  "total":["17,200 $ تقريبًا","≈ $17,200"],
-  "sell":["هامش جملة مقترح 20% – 35% مع اعتماد كامل على حجم الدوران","Suggested wholesale margin 20% – 35%, driven entirely by turnover volume"],
-  "bep":["التعادل مرتبط ببناء قاعدة عملاء متكررين خلال 3 – 6 أشهر","Break-even is tied to building a repeat client base over 3 – 6 months"],
-  "scen":[
-    ["متحفظ","Conservative","قاعدة عملاء محدودة","A limited client base","دوران بطيء ورأس مال محبوس","Slow turnover with capital tied up"],
-    ["متوسط","Moderate","قاعدة عملاء متنامية","A growing client base","دورة توريد شهرية مستقرة","A stable monthly supply cycle"],
-    ["متفائل","Optimistic","تعاقدات مع متاجر ومستودعات","Contracts with stores and warehouses","حاجة لحاوية كاملة في الطلب التالي","A full container needed on the next order"]
-  ],
-  "risks":[
-    ["رأس مال أكبر ومخاطرة أعلى مقابل هامش أقل","Higher capital and risk against a thinner margin"],
-    ["الحاجة إلى مستودع ونقل محلي","A warehouse and local delivery are required"],
-    ["منافسة من مورّدين محليين قائمين","Competition from established local suppliers"],
-    ["حجم الشحن كبير مقارنة بالقيمة","Shipping volume is high relative to value"]
-  ]
-}
-]
+window.DEALS=[{"id": "ES-001", "name": ["صفقة ES-001", "Deal ES-001"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-002", "name": ["صفقة ES-002", "Deal ES-002"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-003", "name": ["صفقة ES-003", "Deal ES-003"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-004", "name": ["صفقة ES-004", "Deal ES-004"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-005", "name": ["صفقة ES-005", "Deal ES-005"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-006", "name": ["صفقة ES-006", "Deal ES-006"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-007", "name": ["صفقة ES-007", "Deal ES-007"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-008", "name": ["صفقة ES-008", "Deal ES-008"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-009", "name": ["صفقة ES-009", "Deal ES-009"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-010", "name": ["صفقة ES-010", "Deal ES-010"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-011", "name": ["صفقة ES-011", "Deal ES-011"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-012", "name": ["صفقة ES-012", "Deal ES-012"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-013", "name": ["صفقة ES-013", "Deal ES-013"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-014", "name": ["صفقة ES-014", "Deal ES-014"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-015", "name": ["صفقة ES-015", "Deal ES-015"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-016", "name": ["صفقة ES-016", "Deal ES-016"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-017", "name": ["صفقة ES-017", "Deal ES-017"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-018", "name": ["صفقة ES-018", "Deal ES-018"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-019", "name": ["صفقة ES-019", "Deal ES-019"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-020", "name": ["صفقة ES-020", "Deal ES-020"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-021", "name": ["صفقة ES-021", "Deal ES-021"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-022", "name": ["صفقة ES-022", "Deal ES-022"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-023", "name": ["صفقة ES-023", "Deal ES-023"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-024", "name": ["صفقة ES-024", "Deal ES-024"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-025", "name": ["صفقة ES-025", "Deal ES-025"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-026", "name": ["صفقة ES-026", "Deal ES-026"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-027", "name": ["صفقة ES-027", "Deal ES-027"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-028", "name": ["صفقة ES-028", "Deal ES-028"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-029", "name": ["صفقة ES-029", "Deal ES-029"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-030", "name": ["صفقة ES-030", "Deal ES-030"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-031", "name": ["صفقة ES-031", "Deal ES-031"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-032", "name": ["صفقة ES-032", "Deal ES-032"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-033", "name": ["صفقة ES-033", "Deal ES-033"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-034", "name": ["صفقة ES-034", "Deal ES-034"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-035", "name": ["صفقة ES-035", "Deal ES-035"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-036", "name": ["صفقة ES-036", "Deal ES-036"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-037", "name": ["صفقة ES-037", "Deal ES-037"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-038", "name": ["صفقة ES-038", "Deal ES-038"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-039", "name": ["صفقة ES-039", "Deal ES-039"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-040", "name": ["صفقة ES-040", "Deal ES-040"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-041", "name": ["صفقة ES-041", "Deal ES-041"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-042", "name": ["صفقة ES-042", "Deal ES-042"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-043", "name": ["صفقة ES-043", "Deal ES-043"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-044", "name": ["صفقة ES-044", "Deal ES-044"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-045", "name": ["صفقة ES-045", "Deal ES-045"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-046", "name": ["صفقة ES-046", "Deal ES-046"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-047", "name": ["صفقة ES-047", "Deal ES-047"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-048", "name": ["صفقة ES-048", "Deal ES-048"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-049", "name": ["صفقة ES-049", "Deal ES-049"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}, {"id": "ES-050", "name": ["صفقة ES-050", "Deal ES-050"], "short": ["صفقة جاهزة بسعر ثابت من Eternal Silk في إيوو.", "A fixed-price ready deal from Eternal Silk in Yiwu."]}]
 ;
 /* =====================================================================
    Eternal Silk — application script
@@ -282,6 +26,7 @@ const CFG = {
      Leave empty ("") and the form will fall back to opening WhatsApp
      with the answers pre-filled. */
   formEndpoint: "",
+  dealsSheet: "1zKXXne9AkQanSwZHFjaJRy47ppwPzCYyvesy5_hWYow",
 
   /* REPLACE — Calendly (or equivalent) embed URL for the booking page.
      Leave empty ("") to show a styled placeholder box instead. */
@@ -520,6 +265,7 @@ function pageHome(){
     <li>${L("مستودع وتجميع","Warehouse and consolidation")}</li>
     <li>${L("مدير حساب لكل عميل","An account manager for every client")}</li>
   </ul></div></div>
+  ${featuredDeals()}
   <section class="sec sec-mesh sec-seam"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("خدماتنا","Our services")}</span>
       <h2>${L("كل خدمات المكتب التجاري في مكان واحد","Every trading-office service in one place")}</h2>
@@ -574,212 +320,206 @@ function pageHome(){
     ${DISCLAIM()}
   </div></section>`;
 }
-/* ---------- DEALS LIST ---------- */
-const CATS = ()=>[["all",L("كل الفئات","All categories")],["home",L("أدوات منزلية","Home goods")],["phone",L("إكسسوارات جوال","Mobile accessories")],["food",L("مطاعم وكافيهات","Restaurants & cafés")],["beauty",L("صالونات وعناية","Salons & care")],["stationery",L("قرطاسية ومدارس","Stationery & school")],["packaging",L("مواد تغليف","Packaging")]];
-const TIERS = ()=>[["all",L("كل المستويات","All levels")],["starter",L("مبتدئ — 2,000–3,000 $","Starter — $2,000–3,000")],["growth",L("نمو — 5,000–10,000 $","Growth — $5,000–10,000")],["wholesale",L("جملة — 15,000 $ فأكثر","Wholesale — $15,000+")]];
-const MKTS  = ()=>[["all",L("كل الأسواق","All markets")],["sa",L("السعودية","Saudi Arabia")],["ae",L("الإمارات","UAE")],["om",L("عُمان","Oman")],["qa",L("قطر","Qatar")],["kw",L("الكويت","Kuwait")],["bh",L("البحرين","Bahrain")],["ye",L("اليمن","Yemen")]];
-/* Price volatility notes. Every displayed figure carries one of these, so no
-   number on the site can be read as a fixed, guaranteed quotation. */
-const PNOTE = {
-  est: () => L("رقم تقديري وليس عرض سعر. يتغيّر بحسب سعر المصنع وقت الطلب، والكمية، والمواصفات المطلوبة، وأجرة الشحن في ذلك الموسم، وسعر الصرف، والرسوم الجمركية والضريبة في بلد الوصول. لا يُثبَّت الرقم إلا في عرض سعر مكتوب يحمل تاريخه ومدة صلاحيته.",
-            "An estimate, not a quotation. It moves with the factory price at the time of order, the quantity, the specification, the freight rate that season, the exchange rate, and the duty and tax in the destination country. A figure is only fixed in a written quotation carrying its date and validity period."),
-  svc: () => L("نطاق تقديري لأتعاب الخدمة. يُحدَّد المبلغ النهائي بعد الاستشارة بحسب نطاق العمل وعدد المنتجات والأسواق ودرجة التعقيد — وقد يقع خارج النطاق المعروض في الحالات غير الاعتيادية.",
-            "An estimated range for the service fee. The final amount is set after the consultation according to scope, number of products, markets and complexity — and may fall outside the range shown in unusual cases."),
-  off: () => L("رسوم رسمية كما كانت منشورة في تاريخ التحديث المذكور. تحدّدها الجهة المُصدِرة وحدها وقد تتغيّر دون إشعار مسبق. راجع المنصة الرسمية بتاريخ شحنتك أنت.",
-            "Official fees as published on the stated update date. They are set by the issuing authority alone and can change without prior notice. Check the official platform as at the date of your own shipment."),
-  fx:  () => L("سعر صرف سوقي غير رسمي وشديد التقلّب، وقد يتغيّر خلال اليوم الواحد. لا تبنِ عليه عقدًا ولا تسعيرة بيع.",
-            "An unofficial market exchange rate, highly volatile and liable to move within a single day. Do not base a contract or a selling price on it.")
-};
-function pn(k){
-  const t = (PNOTE[k] || PNOTE.est)();
-  return `<span class="pn" tabindex="0" role="note" title="${esc(t)}" aria-label="${esc(t)}">${L("قد يتغيّر","may change")}</span>`;
+/* ---------- LIVE DEALS (read from the Google Sheet) ----------
+   The owner edits one Google Sheet: one row per deal (ES-001 … ES-050).
+   Columns are matched by the key in brackets in each header, e.g.
+   "الحالة (status)", so columns can be reordered or relabelled freely.
+   Status: متاحة / محجوزة / نفدت / مخفية. Hidden or untitled rows never show. */
+const DEAL_STATUS = {"متاحة":"available","متاح":"available","available":"available","محجوزة":"reserved","محجوز":"reserved","reserved":"reserved","نفدت":"sold","مغلقة":"sold","مقفلة":"sold","sold":"sold","مخفية":"hidden","مسودة":"hidden","hidden":"hidden"};
+const DEAL_CATS = () => ({home:L("أدوات منزلية","Home goods"),kitchen:L("مطبخ","Kitchen"),ramadan:L("رمضان والعيد","Ramadan & Eid"),
+  fashion:L("إكسسوارات وأزياء","Accessories & fashion"),packaging:L("تغليف ومستلزمات متاجر","Packaging & shop supplies"),
+  stationery:L("قرطاسية","Stationery"),car:L("إكسسوارات سيارات","Car accessories"),gifts:L("هدايا","Gifts"),toys:L("ألعاب","Toys"),other:L("متنوعة","Assorted")});
+const DEAL_MKT = () => ({sa:L("السعودية","Saudi Arabia"),ae:L("الإمارات","UAE"),kw:L("الكويت","Kuwait"),qa:L("قطر","Qatar"),bh:L("البحرين","Bahrain"),om:L("عُمان","Oman"),ye:L("اليمن","Yemen"),eg:L("مصر","Egypt")});
+let LIVE = null;          /* null = still loading; [] = loaded */
+let LIVE_ERR = false;
+const DF = {tier:"all", cat:"all", onlyOpen:true};
+
+function parseCSV(t){
+  const rows=[]; let row=[], f="", q=false;
+  for(let i=0;i<t.length;i++){
+    const c=t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else if(c==='"') q=true;
+    else if(c===','){ row.push(f); f=""; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&t[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=""; }
+    else f+=c;
+  }
+  if(f!==""||row.length){ row.push(f); rows.push(row); }
+  return rows;
 }
-function pnote(k){
-  return `<span class="pnote"><b>${L("لماذا قد يتغيّر هذا الرقم؟","Why can this figure change?")}</b> ${(PNOTE[k]||PNOTE.est)()}</span>`;
+/* Google Drive share links -> a direct image URL */
+function imgUrl(u){
+  u=(u||"").trim(); if(!u) return "";
+  const m=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{20,})/);
+  return m ? "https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1200" : u;
+}
+const dnum = v => { const n=parseFloat(String(v||"").replace(/[^\d.]/g,"")); return isFinite(n)?n:0; };
+function toDeal(o){
+  const items=(o.items||"").split(/\n|;/).map(x=>x.trim()).filter(Boolean).map(x=>{
+    const p=x.split("|").map(y=>y.trim()); return {name:p[0]||"",qty:p[1]||"",spec:p[2]||""};});
+  const st=DEAL_STATUS[(o.status||"").trim().toLowerCase()] || DEAL_STATUS[(o.status||"").trim()] || "hidden";
+  const left=o.slots_left===""||o.slots_left==null?null:dnum(o.slots_left);
+  return {
+    id:(o.code||"").trim(), status: (st==="available" && left===0) ? "sold" : st,
+    featured:/^(نعم|yes|y|1|✓|x)$/i.test((o.featured||"").trim()), order:dnum(o.order)||999,
+    price:dnum(o.price), cat:(o.category||"").trim().toLowerCase(),
+    title:[(o.title_ar||"").trim(), (o.title_en||o.title_ar||"").trim()], hook:(o.hook_ar||"").trim(),
+    items, best:(o.best_for||"").trim(), sell:(o.sell_hint||"").trim(),
+    kg:dnum(o.weight_kg), cbm:(o.cbm||"").trim(), cartons:dnum(o.cartons), prep:(o.prep_days||"").trim(),
+    markets:(o.markets||"").split(/[,،\s]+/).map(x=>x.trim().toLowerCase()).filter(Boolean),
+    total:o.slots_total===""?null:dnum(o.slots_total), left, until:(o.valid_until||"").trim(),
+    imgs:(o.images||"").split(/[\s,،]+/).map(imgUrl).filter(Boolean), video:(o.video||"").trim(),
+    compliance:(o.compliance||"").trim()
+  };
+}
+function loadDeals(){
+  if(!CFG.dealsSheet){ LIVE=[]; return; }
+  const url="https://docs.google.com/spreadsheets/d/"+CFG.dealsSheet+"/gviz/tq?tqx=out:csv&headers=1&t="+Math.floor(Date.now()/60000);
+  fetch(url,{cache:"no-store"}).then(r=>{ if(!r.ok) throw 0; return r.text(); }).then(t=>{
+    if(/^\s*</.test(t)) throw 0;                       /* a login page: the sheet is not shared */
+    const rows=parseCSV(t); const head=(rows.shift()||[]).map(h=>{const m=h.match(/\(([a-z_]+)\)/i); return m?m[1].toLowerCase():h.trim();});
+    LIVE=rows.map(r=>{const o={}; head.forEach((k,i)=>o[k]=r[i]||""); return toDeal(o);})
+             .filter(d=>d.id && d.title[0] && d.status!=="hidden")
+             .sort((a,b)=>(b.featured-a.featured)||((a.status==="available"?0:1)-(b.status==="available"?0:1))||(a.order-b.order));
+  }).catch(()=>{ LIVE=[]; LIVE_ERR=true; }).finally(()=>{
+    window.DEALS=LIVE;
+    const base="/"+((location.pathname.replace(/\.html$/,"").split("/").filter(Boolean)[0])||"");
+    if(["/","/deals","/deal"].includes(base)){ const y=scrollY; render(); scrollTo(0,y); }
+  });
 }
 
-const tierTag = t => ({starter:L("مبتدئ","Starter"),growth:L("نمو","Growth"),wholesale:L("جملة","Wholesale")}[t]);
-
-/* Hand-drawn line-art scene per category — original SVG, no stock imagery. */
-const ART = {
-  home:`<g class="ln"><path d="M96 150 L96 96 L146 74 L196 96 L196 150 Z"/><path d="M82 96 L146 66 L210 96"/><path d="M130 150 v-30 h32 v30"/><rect x="232" y="112" width="66" height="46" rx="4"/><path d="M232 126 h66"/><path d="M258 112 v-8 h14 v8"/><path d="M316 158 v-40"/><path d="M310 118 q6 -16 12 0"/><ellipse cx="316" cy="160" rx="12" ry="4"/></g><g class="ac"><path d="M232 176 h66"/><circle cx="316" cy="104" r="5"/></g><g class="dt"><circle cx="72" cy="76" r="3"/><circle cx="344" cy="90" r="3"/><circle cx="60" cy="170" r="3"/></g>`,
-  phone:`<g class="ln"><rect x="112" y="60" width="76" height="132" rx="12"/><path d="M138 72 h24"/><path d="M142 180 h16"/><path d="M124 92 h52 v70 h-52 z"/><path d="M236 96 c34 0 34 34 0 34 c-34 0 -34 34 0 34 c22 0 30 -12 30 -12"/><circle cx="308" cy="112" r="17"/><circle cx="308" cy="112" r="6"/><path d="M291 132 q17 26 34 0"/><rect x="286" y="150" width="44" height="22" rx="8"/></g><g class="ac"><path d="M124 92 h52"/><circle cx="266" cy="164" r="5"/></g><g class="dt"><circle cx="84" cy="84" r="3"/><circle cx="352" cy="72" r="3"/><circle cx="92" cy="176" r="3"/></g>`,
-  food:`<g class="ln"><path d="M96 104 h64 v34 a32 32 0 0 1 -64 0 z"/><path d="M160 110 h16 a14 14 0 0 1 0 28 h-16"/><path d="M86 176 h84"/><circle cx="238" cy="140" r="30"/><circle cx="238" cy="140" r="18"/><path d="M300 116 h56 l-8 60 h-40 z"/><path d="M300 130 h56"/><path d="M316 116 v-14 h24 v14"/></g><g class="ac"><path d="M112 78 q6 -14 0 -22"/><path d="M132 78 q6 -14 0 -22"/><circle cx="238" cy="140" r="5"/></g><g class="dt"><circle cx="72" cy="94" r="3"/><circle cx="368" cy="96" r="3"/><circle cx="200" cy="186" r="3"/></g>`,
-  beauty:`<g class="ln"><circle cx="112" cy="164" r="13"/><circle cx="112" cy="112" r="13"/><path d="M124 120 L196 166"/><path d="M196 110 L124 156"/><rect x="228" y="104" width="42" height="70" rx="8"/><path d="M240 104 v-12 h18 v12"/><path d="M228 126 h42"/><ellipse cx="326" cy="122" rx="26" ry="32"/><path d="M326 154 v26"/><path d="M310 180 h32"/></g><g class="ac"><path d="M228 126 h42"/><ellipse cx="326" cy="122" rx="14" ry="18"/></g><g class="dt"><circle cx="82" cy="78" r="3"/><circle cx="366" cy="168" r="3"/><circle cx="176" cy="188" r="3"/></g>`,
-  stationery:`<g class="ln"><path d="M96 96 h72 v84 h-72 z"/><path d="M112 96 v84"/><path d="M126 118 h30"/><path d="M126 134 h30"/><path d="M126 150 h20"/><path d="M212 180 l6 -22 l58 -58 a10 10 0 0 1 16 16 l-58 58 z"/><path d="M266 116 l16 16"/><path d="M312 96 v84"/><path d="M312 96 h26 v84 h-26"/><path d="M312 116 h10"/><path d="M312 136 h10"/><path d="M312 156 h10"/></g><g class="ac"><path d="M212 180 l6 -22 l10 12 z"/><path d="M96 96 h72"/></g><g class="dt"><circle cx="70" cy="112" r="3"/><circle cx="370" cy="104" r="3"/><circle cx="192" cy="88" r="3"/></g>`,
-  packaging:`<g class="ln"><path d="M92 118 l44 -22 l44 22 v50 l-44 22 l-44 -22 z"/><path d="M92 118 l44 22 l44 -22"/><path d="M136 140 v52"/><path d="M214 148 l34 -17 l34 17 v38 l-34 17 l-34 -17 z"/><path d="M214 148 l34 17 l34 -17"/><path d="M248 165 v40"/><circle cx="330" cy="128" r="26"/><circle cx="330" cy="128" r="10"/><path d="M304 128 h-14"/><path d="M356 128 h14"/></g><g class="ac"><path d="M116 108 l40 20"/><path d="M330 160 v22"/><path d="M316 182 h28"/></g><g class="dt"><circle cx="72" cy="92" r="3"/><circle cx="374" cy="180" r="3"/><circle cx="196" cy="94" r="3"/></g>`
+const stBadge = d => {
+  const t={available:L("متاحة","Available"),reserved:L("محجوزة","Reserved"),sold:L("نفدت","Sold out")}[d.status];
+  const extra = d.status==="available" && d.left!=null && d.total ? ` · ${L(`متبقٍ ${d.left} من ${d.total}`,`${d.left} of ${d.total} left`)}` : "";
+  return `<span class="dst ${d.status}">${t}${extra}</span>`;
 };
-const catName = c => (CATS().find(x=>x[0]===c)||["",""])[1];
-function artScene(cat){
-  const g = ART[cat] || ART.packaging;
-  return `<svg class="art" viewBox="52 48 330 164" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet">${g}</svg>`;
-}
-/* Branded visual used until real shipment photography is published. */
-function phBlock(d,title,sub,cls){
-  return `<div class="ph${cls?" "+cls:""}">${artScene(d.cat)}<div class="ph-cap">
-    <b>${title}</b><span class="kicker">${sub}</span>
-  </div></div>`;
-}
+const usd = n => n ? `<bdi dir="ltr">$${n.toLocaleString("en-US")}</bdi>` : "";
+const dealWa = d => waLink(L(`السلام عليكم، أبغى أحجز الصفقة ${d.id} — ${d.title[0]} — $${d.price}. مدينتي: `,`Hello, I'd like to reserve deal ${d.id} — ${d.title[1]} — $${d.price}. My city: `));
+const dealPic = (d,cls) => d.imgs[0]
+  ? `<img class="${cls||"dimg"}" src="${esc(d.imgs[0])}" alt="${esc(A(d.title))}" loading="lazy" referrerpolicy="no-referrer">`
+  : `<div class="${cls||"dimg"} dnoimg" aria-hidden="true"><svg viewBox="0 0 120 64" width="96"><path d="M60 32 C60 10 98 6 106 26 C113 44 96 58 80 52 C70 48 64 40 60 32 C56 24 50 16 40 12 C24 6 7 20 14 38 C22 58 60 54 60 32Z" fill="none" stroke="#C9A24B" stroke-width="6"/></svg></div>`;
 
 function dealCard(d){
-  return `<article class="card deal rv">
-    <!-- To use real photography: replace phBlock(...) with <img src="${d.img}" alt="${esc(A(d.name))}"> -->
-    ${phBlock(d,catName(d.cat),"ETERNAL SILK")}
-    <div class="body">
-      <div class="tags"><span class="tag coral">${tierTag(d.tier)}</span><span class="tag navy">${d.incoterm}</span></div>
-      <h3>${A(d.name)}</h3>
-      <p class="muted" style="font-size:.92rem">${A(d.short)}</p>
-      <div class="meta">
-        <div>${L("الميزانية","Budget")}<b>${A(d.budget)} ${pn("est")}</b></div>
-        <div>${L("عدد المنتجات","Products")}<b>${A(d.skus)}</b></div>
-        <div>${L("السوق المستهدف","Target market")}<b>${d.markets.map(m=>m.toUpperCase()).join(" · ")}</b></div>
-        <div>${L("المستوى","Level")}<b>${A(d.level)}</b></div>
-      </div>
-      <a class="btn btn-primary btn-sm btn-block" href="/deal/${d.id}">${L("اطلب التفاصيل","Request details")}</a>
-    </div>
-  </article>`;
+  const pcs=d.items.length;
+  return `<article class="card dcard rv ${d.status!=="available"?"dim":""}">
+    <a href="/deal/${d.id}" class="dpic">${dealPic(d)}${stBadge(d)}${d.featured?`<span class="dfeat">${L("مميزة","Featured")}</span>`:""}</a>
+    <div class="dbody">
+      <div class="dmeta"><span>${d.id}</span>${d.cat&&DEAL_CATS()[d.cat]?`<span>${DEAL_CATS()[d.cat]}</span>`:""}</div>
+      <h3><a href="/deal/${d.id}">${esc(A(d.title))}</a></h3>
+      ${d.hook?`<p>${esc(d.hook)}</p>`:""}
+      <div class="dprice">${usd(d.price)}<small>${[pcs?L(`${pcs} أصناف`,`${pcs} items`):"",d.kg?L(`~${d.kg} كغ`,`~${d.kg} kg`):""].filter(Boolean).join(" · ")}</small></div>
+      <div class="dbtns"><a class="btn btn-out btn-sm" href="/deal/${d.id}">${L("التفاصيل","Details")}</a>
+      ${d.status==="available"?`<a class="btn btn-primary btn-sm" href="${dealWa(d)}" target="_blank" rel="noopener">${L("احجز واتساب","Reserve on WhatsApp")}</a>`:""}</div>
+    </div></article>`;
 }
-
+function dealsGrid(){
+  if(LIVE===null) return `<div class="grid g3">${[1,2,3].map(()=>`<div class="card dcard"><div class="dimg sk"></div><div class="dbody"><div class="sk" style="height:18px;width:70%"></div><div class="sk" style="height:14px;width:50%;margin-top:10px"></div></div></div>`).join("")}</div>`;
+  if(LIVE_ERR) return `<div class="info">${L("تعذّر تحميل الصفقات الآن. تواصل معنا على واتساب وسنرسل لك الصفقات المتاحة.","We couldn't load the deals right now. Message us on WhatsApp and we'll send you the available deals.")} <a href="${waLink()}" target="_blank" rel="noopener">${L("واتساب","WhatsApp")}</a></div>`;
+  const r=LIVE.filter(d=>(DF.tier==="all"||d.price===+DF.tier)&&(DF.cat==="all"||d.cat===DF.cat)&&(!DF.onlyOpen||d.status==="available"));
+  if(!LIVE.length) return `<div class="info center">${L("الصفقات تُنشر قريبًا. اترك رقمك على واتساب لنرسل لك أول الصفقات.","Deals are being published soon. Leave your number on WhatsApp and we'll send you the first deals.")}</div>`;
+  if(!r.length) return `<p class="center muted" style="padding:30px 0">${L("لا توجد صفقة بهذه الفلاتر.","No deal matches these filters.")}</p>`;
+  return `<div class="grid g3">${r.map(dealCard).join("")}</div>`;
+}
 function pageDeals(){
+  const open=(LIVE||[]).filter(d=>d.status==="available").length;
+  const cats=[...new Set((LIVE||[]).map(d=>d.cat).filter(c=>DEAL_CATS()[c]))];
+  const chip=(k,v,t)=>`<button class="chip ${DF[k]===v?"on":""}" data-f="${k}" data-v="${v}">${t}</button>`;
   return `<section class="sec tight sand"><div class="wrap">
-    <span class="eyebrow">${L("معرض الصفقات","Deal gallery")}</span>
-    <h1 style="font-size:clamp(1.7rem,4vw,2.6rem)">${L("صفقات جاهزة للاعتماد","Deals ready for approval")}</h1>
-    <p class="lead">${L("كل صفقة هنا نموذج عملي: قائمة منتجات، كميات، تكاليف تقديرية وسيناريوهات مالية. التفاصيل الكاملة والمواصفات النهائية تُرسل بعد تعبئة نموذج التأهيل.","Each deal here is a working model: a product list, quantities, estimated costs and financial scenarios. Full details and final specifications are sent after the qualification form is completed.")}</p>
-    <div class="info">${L("لا نعرض أسماء المورّدين أو بيانات المصانع للعامة. تُشارك مع العميل بعد التأهيل واعتماد الصفقة.","We do not publish supplier names or factory details. These are shared with the client after qualification and deal approval.")}</div>
+    <span class="eyebrow">${L("الصفقات الجاهزة","Ready deals")}</span>
+    <h1 style="font-size:clamp(1.7rem,4vw,2.6rem)">${L("صفقات جاهزة بسعر ثابت","Ready deals at a fixed price")}</h1>
+    <p class="lead">${L("تشكيلات بضاعة مختارة من سوق إيوو بسعر واضح: 2,000 و3,000 و5,000 دولار. السعر للبضاعة جاهزة في مستودعنا، والشحن منفصل حسب الوزن.","Product ranges chosen in the Yiwu market at a clear price: $2,000, $3,000 and $5,000. The price is for the goods ready at our warehouse; shipping is separate, by weight.")}</p>
+    ${LIVE&&LIVE.length?`<p class="dcount">${L(`${open} صفقة متاحة من ${LIVE.length}`,`${open} of ${LIVE.length} deals available`)}</p>`:""}
   </div></section>
   <section class="sec"><div class="wrap">
-    <h2 class="sr">${L("تصفية الصفقات واستعراضها","Filter and browse the deals")}</h2>
-    <div class="filters">
-      <select id="fcat" aria-label="${L('فئة المنتج','Product category')}">${CATS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
-      <select id="ftier" aria-label="${L('مستوى الصفقة','Deal level')}">${TIERS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
-      <select id="fmkt" aria-label="${L('السوق المستهدف','Target market')}">${MKTS().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>
-      <button class="btn btn-out btn-sm" id="freset">${L("إعادة التعيين","Reset")}</button>
-    </div>
-    <div class="grid g3" id="dealgrid"></div>
-    <p class="center muted" id="nores" style="display:none;padding:40px 0">${L("لا توجد صفقة مطابقة لهذه الفلاتر. اطلب صفقة مخصصة وسندرسها لسوقك.","No deal matches these filters. Request a custom deal and we will study it for your market.")}</p>
+    <div class="chips" role="group" aria-label="${L("السعر","Price")}">${chip("tier","all",L("كل الأسعار","All prices"))}${chip("tier","2000","$2,000")}${chip("tier","3000","$3,000")}${chip("tier","5000","$5,000")}</div>
+    ${cats.length>1?`<div class="chips">${chip("cat","all",L("كل الفئات","All categories"))}${cats.map(c=>chip("cat",c,DEAL_CATS()[c])).join("")}</div>`:""}
+    <label class="onlyopen"><input type="checkbox" id="onlyopen" ${DF.onlyOpen?"checked":""}> ${L("المتاحة فقط","Available only")}</label>
+    <div id="dealgrid" style="margin-top:18px">${dealsGrid()}</div>
     ${DISCLAIM()}
-    <div class="center" style="margin-top:20px"><a class="btn btn-navy" href="/qualify?type=custom">${L("اطلب صفقة مخصصة لسوقك","Request a custom deal for your market")}</a></div>
+    <div class="center" style="margin-top:20px"><a class="btn btn-navy" href="/qualify">${L("ما لقيت اللي تبغاه؟ اطلب صفقة مخصصة","Didn't find it? Request a custom deal")}</a></div>
   </div></section>`;
 }
-
 function bindDeals(){
-  const grid=$("#dealgrid"), no=$("#nores");
-  const draw=()=>{
-    const c=$("#fcat").value,t=$("#ftier").value,m=$("#fmkt").value;
-    const r=DEALS.filter(d=>(c==="all"||d.cat===c)&&(t==="all"||d.tier===t)&&(m==="all"||d.markets.includes(m)));
-    grid.innerHTML=r.map(dealCard).join(""); no.style.display=r.length?"none":"block"; reveal();
-  };
-  ["fcat","ftier","fmkt"].forEach(id=>$("#"+id).addEventListener("change",draw));
-  $("#freset").addEventListener("click",()=>{["fcat","ftier","fmkt"].forEach(id=>$("#"+id).value="all");draw();});
-  draw();
+  document.querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{
+    DF[b.dataset.f]=b.dataset.v; document.querySelectorAll(`[data-f="${b.dataset.f}"]`).forEach(x=>x.classList.toggle("on",x===b));
+    $("#dealgrid").innerHTML=dealsGrid(); reveal();
+  }));
+  const o=$("#onlyopen"); if(o) o.addEventListener("change",()=>{ DF.onlyOpen=o.checked; $("#dealgrid").innerHTML=dealsGrid(); reveal(); });
 }
 
 /* ---------- DEAL DETAIL ---------- */
 function pageDeal(id){
-  const d = DEALS.find(x=>x.id===id);
-  if(!d) return `<section class="sec"><div class="wrap center"><h1>${L("الصفقة غير موجودة","Deal not found")}</h1><a class="btn btn-primary" href="/deals">${L("العودة إلى الصفقات","Back to deals")}</a></div></section>`;
-  const row=(a,b)=>`<tr><td>${a}</td><td class="num">${b}</td></tr>`;
-  return `
-  <section class="sec tight sand"><div class="wrap">
-    <a href="/deals" class="muted" style="font-size:.9rem">← ${L("كل الصفقات","All deals")}</a>
-    <div class="tags" style="margin:14px 0 10px"><span class="tag coral">${tierTag(d.tier)}</span><span class="tag navy">${d.incoterm}</span><span class="tag">${A(d.budget)}</span>${pn("est")}</div>
-    <h1 style="font-size:clamp(1.6rem,4vw,2.4rem)">${A(d.name)}</h1>
-    <p class="lead">${A(d.short)}</p>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="grid g2" style="align-items:start">
-      <div>
-        <!-- To use real photography: replace phBlock(...) with <img src="${d.img}" alt="${esc(A(d.name))}"> -->
-        ${phBlock(d,A(d.name),catName(d.cat),"ph-lg")}
-      </div>
-      <div>
-        <h2>${L("عن الصفقة","About this deal")}</h2>
-        <div class="tline" aria-label="${L("مسار الشحنة","Shipment path")}">
-          ${[[L("اعتماد","Approval"),L("يوم 0","Day 0")],
-             [L("توريد","Sourcing"),L("أسبوع 1–3","Week 1–3")],
-             [L("فحص","Inspection"),L("قبل التحميل","Pre-load")],
-             [L("شحن","Shipping"),L("بحري/جوي","Sea/Air")],
-             [L("تخليص","Clearance"),L("عند الوصول","On arrival")],
-             [L("تسليم","Delivery"),A(d.lead)]].map((x,i)=>
-            `<div class="tstep"><span class="dot"></span><b>${x[0]}</b><small>${x[1]}</small></div>`).join("")}
+  if(LIVE===null) return `<section class="sec"><div class="wrap"><div class="sk" style="height:320px;border-radius:14px"></div></div></section>`;
+  const d=(LIVE||[]).find(x=>x.id===id);
+  if(!d) return `<section class="sec"><div class="wrap center" style="max-width:640px">
+    <h1 style="font-size:1.8rem">${L("هذه الصفقة غير متاحة حاليًا","This deal is not available right now")}</h1>
+    <p class="lead" style="margin:0 auto 20px">${L("ربما أُغلقت أو لم تُنشر بعد. تصفّح الصفقات المتاحة أو اطلب صفقة مشابهة.","It may have closed or not be published yet. Browse the available deals or ask for a similar one.")}</p>
+    <div class="btns" style="justify-content:center"><a class="btn btn-primary" href="/deals">${L("الصفقات المتاحة","Available deals")}</a>
+    <a class="btn btn-out" href="${waLink(L(`السلام عليكم، أبغى صفقة مشابهة للصفقة ${id}`,`Hello, I'd like a deal similar to ${id}`))}" target="_blank" rel="noopener">${L("اطلب صفقة مشابهة","Ask for a similar deal")}</a></div></div></section>`;
+  const qty=d.items.reduce((s,i)=>s+dnum(i.qty),0);
+  const inc=[L("البضاعة كاملة بالكميات المذكورة","All goods in the stated quantities"),L("الشراء والتفاوض مع الموردين","Buying and negotiating with suppliers"),L("الفحص والتصوير بالفيديو قبل الشحن","Inspection and video before shipping"),L("التجميع والكرتنة في مستودعنا بإيوو","Consolidation and cartoning at our Yiwu warehouse")];
+  const exc=[L("الشحن الدولي (يُحسب بالوزن)","International shipping (by weight)"),L("الجمارك والضريبة في بلدك","Duty and tax in your country"),L("التخليص والتوصيل الداخلي","Clearance and local delivery")];
+  const similar=LIVE.filter(x=>x.id!==d.id&&x.status==="available"&&(x.cat===d.cat||x.price===d.price)).slice(0,3);
+  const mk=DEAL_MKT();
+  return `<section class="sec tight"><div class="wrap">
+    <p class="dback"><a href="/deals">← ${L("كل الصفقات","All deals")}</a> · <span>${d.id}</span></p>
+    <div class="dgrid">
+      <div class="dgal">${d.imgs.length?d.imgs.map((u,i)=>`<img src="${esc(u)}" alt="${esc(A(d.title))} ${i+1}" loading="${i?"lazy":"eager"}" referrerpolicy="no-referrer">`).join(""):dealPic(d,"dimg big")}
+        ${d.video?`<a class="btn btn-out btn-sm" href="${esc(d.video)}" target="_blank" rel="noopener" style="margin-top:10px">${L("شاهد فيديو الصفقة","Watch the deal video")}</a>`:""}</div>
+      <div class="dside">
+        <div class="dmeta">${stBadge(d)}${d.cat&&DEAL_CATS()[d.cat]?`<span>${DEAL_CATS()[d.cat]}</span>`:""}${d.markets.filter(m=>mk[m]).map(m=>`<span>${mk[m]}</span>`).join("")}</div>
+        <h1 style="font-size:clamp(1.5rem,3.6vw,2.2rem);margin:10px 0">${esc(A(d.title))}</h1>
+        ${d.hook?`<p class="lead">${esc(d.hook)}</p>`:""}
+        <div class="dbox">
+          <div class="dprice big">${usd(d.price)}</div>
+          <small>${L("سعر ثابت للبضاعة جاهزة في مستودعنا بإيوو. الشحن منفصل حسب الوزن.","Fixed price for the goods ready at our Yiwu warehouse. Shipping is separate, by weight.")}</small>
+          ${d.until?`<small>${L("السعر ساري حتى","Price valid until")} <bdi>${esc(d.until)}</bdi></small>`:""}
+          ${d.status==="available"
+            ? `<a class="btn btn-primary btn-block" href="${dealWa(d)}" target="_blank" rel="noopener">${L("احجز هذه الصفقة عبر واتساب","Reserve this deal on WhatsApp")}</a>`
+            : `<a class="btn btn-out btn-block" href="${waLink(L(`السلام عليكم، أبغى صفقة مشابهة للصفقة ${d.id}`,`Hello, I'd like a deal similar to ${d.id}`))}" target="_blank" rel="noopener">${L("اطلب صفقة مشابهة","Ask for a similar deal")}</a>`}
+          <a class="btn btn-out btn-block" href="${waLink(L(`السلام عليكم، عندي سؤال عن الصفقة ${d.id}`,`Hello, I have a question about deal ${d.id}`))}" target="_blank" rel="noopener">${L("اسأل عن الصفقة","Ask about this deal")}</a>
         </div>
-        <p class="muted">${A(d.desc)}</p>
-        <div class="tbl-wrap" style="margin-top:16px"><table>
-          <tbody>
-            ${row(L("الميزانية التقديرية","Estimated budget"),A(d.budget)+" "+pn("est"))}
-            ${row(L("عدد المنتجات","Number of products"),A(d.skus))}
-            ${row(L("المستوى المناسب","Suitable level"),A(d.level))}
-            ${row(L("شرط التسليم","Incoterm"),d.incoterm)}
-            ${row(L("المدة التقديرية","Estimated lead time"),A(d.lead))}
-            ${row(L("الأسواق","Markets"),d.markets.map(m=>m.toUpperCase()).join(" · "))}
-          </tbody></table></div>
+        ${d.best||d.sell?`<div class="card" style="margin-top:14px">${d.best?`<p><b>${L("لمن تناسب:","Best for:")}</b> ${esc(d.best)}</p>`:""}${d.sell?`<p><b>${L("سعر البيع الاسترشادي:","Indicative selling price:")}</b> ${esc(d.sell)} <span class="muted">(${L("تقديري","estimate")})</span></p>`:""}</div>`:""}
       </div>
     </div>
   </div></section>
-
   <section class="sec sand"><div class="wrap">
-    <h2>${L("المنتجات والكميات والمواصفات","Products, quantities & specifications")}</h2>
-    <div class="tbl-wrap"><table><thead><tr>
-      <th>${L("المنتج","Product")}</th><th>${L("الكمية التقديرية","Estimated quantity")}</th><th>${L("ملاحظات المواصفات","Specification notes")}</th>
-    </tr></thead><tbody>
-      ${d.items.map(i=>`<tr><td>${L(i[0],i[1])}</td><td class="num">${L(i[2],i[3])}</td><td>${L(i[4],i[5])}</td></tr>`).join("")}
-    </tbody></table></div>
-    <div class="grid g2" style="margin-top:24px">
-      <div class="card"><h3>${L("ما يشمله السعر","What the price includes")}</h3><ul class="plan-list" style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem;color:#37485C">
-        <li>✓ ${L("البحث عن المورّدين وثلاثة عروض مصانع على الأقل","Supplier research and at least three factory quotations")}</li>
-        <li>✓ ${L("التفاوض والشراء وتجميع البضاعة في الصين","Negotiation, purchasing and consolidation in China")}</li>
-        <li>✓ ${L("فحص مصوّر قبل الشحن وتقرير فحص","Photographed pre-shipment inspection and report")}</li>
-        <li>✓ ${L("تجهيز مستندات الشحن الأساسية","Preparation of core shipping documents")}</li>
-        <li>✓ ${L("تنسيق الشحن حتى النقطة المتفق عليها","Freight coordination to the agreed point")}</li>
-      </ul></div>
-      <div class="card"><h3>${L("ما لا يشمله السعر","What the price does not include")}</h3><ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem;color:var(--muted)">
-        <li>× ${L("الرسوم الجمركية والضرائب في بلد الوصول","Import duties and taxes in the destination country")}</li>
-        <li>× ${L("التخزين المحلي والنقل الداخلي بعد التخليص","Local storage and inland transport after clearance")}</li>
-        <li>× ${L("التسجيل النظامي أو الشهادات الخاصة إن طُلبت","Regulatory registration or special certificates if required")}</li>
-        <li>× ${L("ميزانية الإعلانات المدفوعة","Paid advertising budget")}</li>
-        <li>× ${L("رسوم التحويل البنكي وفروق أسعار الصرف","Bank transfer fees and exchange rate differences")}</li>
-      </ul></div>
-    </div>
+    <h2>${L("محتوى الصفقة","What's in the deal")}</h2>
+    ${d.items.length?`<div class="tbl-wrap"><table><thead><tr><th>#</th><th>${L("الصنف","Item")}</th><th>${L("الكمية","Qty")}</th><th>${L("المواصفات","Specification")}</th></tr></thead><tbody>
+      ${d.items.map((it,i)=>`<tr><td>${i+1}</td><td>${esc(it.name)}</td><td>${esc(it.qty)}</td><td>${esc(it.spec)}</td></tr>`).join("")}
+    </tbody></table></div>`:`<p class="muted">${L("قائمة الأصناف تُرسل عند الطلب.","The item list is sent on request.")}</p>`}
+    <p class="dsum">${[d.items.length?L(`${d.items.length} أصناف`,`${d.items.length} items`):"",qty?L(`${qty.toLocaleString("en-US")} قطعة`,`${qty.toLocaleString("en-US")} pcs`):"",d.cartons?L(`${d.cartons} كرتون`,`${d.cartons} cartons`):"",d.kg?L(`~${d.kg} كغ`,`~${d.kg} kg`):"",d.cbm?L(`~${esc(d.cbm)} م³`,`~${esc(d.cbm)} m³`):""].filter(Boolean).join(" · ")}</p>
   </div></section>
-
   <section class="sec"><div class="wrap">
-    <h2>${L("جدول التكاليف التقديري","Estimated cost breakdown")}</h2>
-    <div class="tbl-wrap"><table><thead><tr><th>${L("البند","Line item")}</th><th class="num">${L("التكلفة التقديرية","Estimated cost")}</th></tr></thead><tbody>
-      ${d.costs.map(c=>`<tr><td>${L(c[0],c[1])}</td><td class="num">${L(c[2],c[3])}</td></tr>`).join("")}
-      <tr class="total"><td>${L("إجمالي الاستثمار التقديري","Total estimated investment")}</td><td class="num">${A(d.total)} ${pn("est")}</td></tr>
-    </tbody></table></div>
-    <div class="notice" style="margin-top:14px">${L("هذا الجدول يغطي تكلفة البضاعة والشحن والجمارك وتجهيز البيع — <b>ولا يشمل رسوم خدمتنا</b>، وهي منفصلة وتبدأ من 450 دولارًا حسب الباقة التي تختارها. أضفها إلى الإجمالي أعلاه قبل أن تبني ميزانيتك.","This table covers the goods, freight, customs and sales setup — <b>it does not include our service fee</b>, which is separate and starts at $450 depending on the package you choose. Add it to the total above before you build your budget.")}</div>
-    ${pnote("est")}
-
-    <div class="grid g2" style="margin-top:24px">
-      <div class="card"><h3>${L("سعر البيع المقترح","Suggested selling price")} ${pn("est")}</h3><p>${A(d.sell)}</p></div>
-      <div class="card"><h3>${L("نقطة التعادل","Break-even point")}</h3><p>${A(d.bep)}</p></div>
+    <div class="grid g2">
+      <div class="card"><h3>${L("يشمل السعر","The price includes")}</h3><ul class="ok">${inc.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="card"><h3>${L("لا يشمل","Not included")}</h3><ul class="no">${exc.map(x=>`<li>${x}</li>`).join("")}</ul><p class="muted">${L("نرسل لك عرض الشحن حسب الوزن قبل الدفع.","We send you the shipping quote by weight before you pay.")}</p></div>
     </div>
-
-    <h2 style="margin-top:40px">${L("ثلاثة سيناريوهات","Three scenarios")}</h2>
-    <div class="tbl-wrap"><table><thead><tr>
-      <th>${L("السيناريو","Scenario")}</th><th>${L("الافتراض","Assumption")}</th><th>${L("النتيجة المتوقعة","Expected outcome")}</th>
-    </tr></thead><tbody>
-      ${d.scen.map(s=>`<tr><td><b>${L(s[0],s[1])}</b></td><td>${L(s[2],s[3])}</td><td>${L(s[4],s[5])}</td></tr>`).join("")}
-    </tbody></table></div>
-
-    <h2 style="margin-top:40px">${L("المخاطر والافتراضات","Risks & assumptions")}</h2>
-    <div class="card"><ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px;color:var(--muted);font-size:.94rem">
-      ${d.risks.map(r=>`<li>• ${L(r[0],r[1])}</li>`).join("")}
-      <li>• ${L("هذه الصفقة نموذج تخطيطي وليست عرضًا ملزمًا؛ الأسعار النهائية تصدر بعد تثبيت الكمية والجودة والوجهة.","This deal is a planning model, not a binding offer; final pricing is issued once quantity, quality and destination are fixed.")}</li>
-    </ul></div>
-
+    <h2 style="margin-top:36px">${L("كيف تتم الصفقة","How the deal works")}</h2>
+    <div class="steps">${[[L("الحجز","Reserve"),L("تحجز عبر واتساب ونرسل لك الفاتورة.","You reserve on WhatsApp and we send you the invoice.")],
+      [L("التجهيز","Preparation"),d.prep?L(`${esc(d.prep)} يوم تجهيز في إيوو بعد الدفع.`,`${esc(d.prep)} days of preparation in Yiwu after payment.`):L("نشتري البضاعة ونجمعها في مستودعنا.","We buy and consolidate the goods at our warehouse.")],
+      [L("الفحص بالفيديو","Video inspection"),L("نرسل لك فيديو البضاعة باسمك ورقم الصفقة.","We send you a video of the goods with your name and deal number.")],
+      [L("الشحن","Shipping"),L("بعد موافقتك نشحن، والشحن يُحسب حسب الوزن.","Once you approve we ship; shipping is charged by weight.")]
+     ].map((s,i)=>`<div class="step" data-i="${i+1}"><div class="n">${i+1}</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")}</div>
+    ${d.compliance?`<div class="info" style="margin-top:22px"><b>${L("ملاحظة نظامية:","Regulatory note:")}</b> ${esc(d.compliance)}</div>`:""}
     ${DISCLAIM()}
+  </div></section>
+  ${similar.length?`<section class="sec sand"><div class="wrap"><h2>${L("صفقات مشابهة","Similar deals")}</h2><div class="grid g3" style="margin-top:18px">${similar.map(dealCard).join("")}</div></div></section>`:""}
+  ${d.status==="available"?`<div class="dbar"><span>${usd(d.price)}</span><a class="btn btn-primary btn-sm" href="${dealWa(d)}" target="_blank" rel="noopener">${L("احجز عبر واتساب","Reserve on WhatsApp")}</a></div>`:""}`;
+}
 
-    <div class="center" style="margin-top:24px"><div class="btns" style="justify-content:center">
-      <a class="btn btn-primary" href="/qualify?deal=${d.id}">${L("اطلب العرض لهذه الصفقة","Request a quote for this deal")}</a>
-      <a class="btn btn-out" href="${waLink(L("أرغب بتفاصيل صفقة: ","I would like details on the deal: ")+A(d.name))}" target="_blank" rel="noopener">${L("استفسار عبر واتساب","Ask on WhatsApp")}</a>
-    </div></div>
+/* Featured deals strip for the home page (empty until the sheet has deals). */
+function featuredDeals(){
+  const f=(LIVE||[]).filter(d=>d.status==="available").sort((a,b)=>b.featured-a.featured).slice(0,6);
+  if(!f.length) return "";
+  return `<section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الصفقات الجاهزة","Ready deals")}</span>
+      <h2>${L("صفقات جاهزة بسعر ثابت: 2,000 · 3,000 · 5,000 دولار","Ready deals at fixed prices: $2,000 · $3,000 · $5,000")}</h2></div>
+    <div class="grid g3" style="margin-top:28px">${f.map(dealCard).join("")}</div>
+    <div class="center" style="margin-top:22px"><a class="btn btn-navy" href="/deals">${L(`كل الصفقات (${LIVE.length})`,`All deals (${LIVE.length})`)}</a></div>
   </div></section>`;
 }
 
-/* ---------- PACKAGES ---------- */
 function pagePackages(){
   const deals=[
     [L("صفقة البداية","Starter deal"),"$2,000",L("لمن يجرّب السوق","For testing the market"),[L("منتج أو منتجان مختاران","One or two chosen products"),L("فحص وتصوير قبل الشحن","Inspection and filming before shipping"),L("تجهيز البضاعة للشحن","Goods prepared for shipping")]],
@@ -1879,9 +1619,9 @@ function setMeta(base, slug){
   /* every deal is its own page: its own title, description and canonical */
   if(base==="/deal"){
     const d = slug && (window.DEALS||[]).find(x=>x.id===slug);
-    if(d){ m = [[d.name[0]+" — Eternal Silk", d.name[1]+" — Eternal Silk"], d.short];
+    if(d && d.title){ m = [[d.title[0]+" — Eternal Silk", d.title[1]+" — Eternal Silk"], [d.hook||d.title[0], d.hook||d.title[1]]];
            url = "https://"+CFG.domain+"/deal/"+d.id; }
-    else { m = META404(); indexable = false; }
+    else if(LIVE!==null){ m = META404(); indexable = false; }
   }
   document.title = A(m[0]);
   const set=(sel,val)=>{const e=document.querySelector(sel); if(e) e.setAttribute("content",val);};
@@ -2007,5 +1747,6 @@ window.addEventListener("popstate",render);
     history.replaceState({},"",t[0]+(t[1]?"#"+t[1]:""));
   }
 })();
+loadDeals();
 document.addEventListener("DOMContentLoaded",render);
 if(document.readyState!=="loading") render();
