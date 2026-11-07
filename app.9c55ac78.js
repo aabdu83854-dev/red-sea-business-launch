@@ -27,6 +27,7 @@ const CFG = {
      with the answers pre-filled. */
   formEndpoint: "",
   dealsSheet: "1zKXXne9AkQanSwZHFjaJRy47ppwPzCYyvesy5_hWYow",
+  warehousePhone: "",
 
   /* REPLACE — Calendly (or equivalent) embed URL for the booking page.
      Leave empty ("") to show a styled placeholder box instead. */
@@ -40,7 +41,7 @@ let THEME = store.g("rsbl_theme") || "light";
 function applyTheme(){ document.documentElement.setAttribute("data-theme",THEME); }
 const L  = (ar,en) => LANG === "ar" ? ar : en;
 const A  = a => Array.isArray(a) ? (LANG==="ar"?a[0]:a[1]) : a;
-const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const $  = s => document.querySelector(s);
 const waLink = (msg) => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg||L("مرحبًا، أود الاستفسار عن صفقات Eternal Silk.","Hello, I would like to ask about Eternal Silk deals."))}`;
 
@@ -76,8 +77,8 @@ const NAV = () => [
   ["/",          L("الرئيسية","Home")],
   ["/services",  L("خدماتنا","Services")],
   ["/deals",     L("الصفقات الجاهزة","Ready deals")],
+  ["/consolidation",L("نقطة التجميع","Consolidation")],
   ["/packages",  L("تاجر جاهز","Ready Merchant")],
-  ["/supplier-check",L("فحص المورّد","Supplier check")],
   ["/about",     L("من نحن","About")],
   ["/contact",   L("تواصل معنا","Contact")]
 ];
@@ -114,6 +115,7 @@ function footer(){
       <div><h2>${L("الخدمات","Services")}</h2><ul>
         <li><a href="/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
         <li><a href="/services">${L("خدماتنا","Our services")}</a></li>
+        <li><a href="/consolidation">${L("نقطة التجميع","Consolidation point")}</a></li>
         <li><a href="/packages">${L("برنامج تاجر جاهز","Ready Merchant programme")}</a></li>
         <li><a href="/supplier-check">${L("فحص المورّد الصيني","Chinese supplier check")}</a></li>
         <li><a href="/qualify">${L("اطلب عرض سعر","Request a quote")}</a></li>
@@ -179,6 +181,8 @@ const SERVICES = () => [
    L("نفتح الكراتين ونعدّ الكميات ونفحص العينات، ونرسل لك صورًا وفيديو باسمك ورقم طلبك قبل أن تغادر البضاعة.","We open cartons, count quantities and check samples, then send you photos and a video with your name and order number before the goods leave.")],
   [ICON.shield, L("التحقق من الموردين والمصانع","Supplier and factory verification"),
    L("نتأكد من الرخصة التجارية والسجل الرسمي، ونزور المصنع عند الحاجة، قبل أن تحوّل أي مبلغ.","We check the business licence and official registry, and visit the factory when needed, before you transfer any money.")],
+  [ICON.box, L("نقطة التجميع","Consolidation point"),
+   L("اطلب بنفسك من أي متجر صيني على عنوان مستودعنا، ونحن نجمع طلباتك ونفحصها ونشحنها مرة واحدة بعمولة 5% فقط.","Order yourself from any Chinese store to our warehouse address; we collect, check and ship everything at once for just a 5% fee.")],
   [ICON.box, L("المستودع والتجميع","Warehousing and consolidation"),
    L("نستلم بضاعتك من عدة موردين، نجمعها في شحنة واحدة، ونعيد التغليف ونضع الملصقات حسب طلبك.","We receive your goods from several suppliers, combine them into one shipment, and repack and label them as you need.")],
   [ICON.cycle, L("متابعة الطلب والإنتاج","Order and production follow-up"),
@@ -240,6 +244,7 @@ function pageHome(){
     <div class="spot" aria-hidden="true"></div>
     <div class="wrap">
     <span class="eyebrow"><bdi dir="ltr">${CFG.parent}</bdi></span>
+    ${hero3d()}
     <h1>${L("مكتبك التجاري في إيوو","Your trading office in Yiwu")}</h1>
     <p class="lead">${L("نشتري لك من سوق إيوو والمصانع والمواقع الصينية، نفحص ونجمع ونشحن — ونبني لك مشروعك التجاري من الصفر إن أردت. من إيوو إلى متجرك… جاهز.","We buy for you from the Yiwu market, factories and Chinese platforms; we inspect, consolidate and ship — and build your business from scratch if you want. From Yiwu to your store — ready.")}</p>
     <ul class="specs">
@@ -255,7 +260,7 @@ function pageHome(){
     <div class="more">
       <a href="/qualify">${L("اطلب عرض سعر","Request a quote")}</a>
       <a href="/packages">${L("برنامج تاجر جاهز","The Ready Merchant programme")}</a>
-      <a href="/supplier-check">${L("افحص مورّدك","Check your supplier")}</a>
+      <a href="/consolidation">${L("نقطة التجميع: اطلب واحنا نجمع ونشحن","Consolidation: you order, we collect & ship")}</a>
     </div>
   </div></section>
   <div class="trust"><div class="wrap"><ul>
@@ -274,6 +279,15 @@ function pageHome(){
       ${sv.slice(0,6).map(c=>`<div class="card rv"><div class="ico">${c[0]}</div><h3>${c[1]}</h3><p>${c[2]}</p></div>`).join("")}
     </div>
     <div class="center" style="margin-top:26px"><a class="btn btn-navy" href="/services">${L("كل الخدمات","All services")}</a></div>
+  </div></section>
+  <section class="sec navy consol"><div class="wrap">
+    <div class="grid g2" style="align-items:center">
+      <div class="rv"><span class="eyebrow">${L("نقطة التجميع","Consolidation point")}</span>
+        <h2 style="color:#fff">${L("اطلب من تاوباو و1688 وعلي بابا… واحنا نجمع ونشحن لك مرة واحدة","Order from Taobao, 1688 and Alibaba — we collect and ship it all at once")}</h2>
+        <p style="color:#DCE7F4">${L("اكتب عنوان مستودعنا مع رقم عميلك. نستلم كل طرد، نفحصه ونصوّره، ونشحن الكل في شحنة واحدة. عمولتنا 5% فقط.","Use our warehouse address with your client code. We receive, check and photograph every parcel and ship it all as one. Our fee is just 5%.")}</p>
+        <a class="btn btn-primary" href="/consolidation">${L("كيف تعمل نقطة التجميع","How the consolidation point works")}</a></div>
+      <div class="rv stores-mini">${STORES().map(x=>`<span class="en">${x[0]}</span>`).join("")}</div>
+    </div>
   </div></section>
   <section class="sec sand"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("برنامج تاجر جاهز","The Ready Merchant programme")}</span>
@@ -348,8 +362,9 @@ function parseCSV(t){
   return rows;
 }
 /* Google Drive share links -> a direct image URL */
+const safeUrl = u => /^https:\/\/[^\s"'<>]+$/i.test((u||"").trim()) ? u.trim() : "";
 function imgUrl(u){
-  u=(u||"").trim(); if(!u) return "";
+  u=safeUrl(u); if(!u) return "";
   const m=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{20,})/);
   return m ? "https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1200" : u;
 }
@@ -360,15 +375,15 @@ function toDeal(o){
   const st=DEAL_STATUS[(o.status||"").trim().toLowerCase()] || DEAL_STATUS[(o.status||"").trim()] || "hidden";
   const left=o.slots_left===""||o.slots_left==null?null:dnum(o.slots_left);
   return {
-    id:(o.code||"").trim(), status: (st==="available" && left===0) ? "sold" : st,
+    id:((o.code||"").trim().match(/^[A-Za-z0-9-]{1,24}$/)||[""])[0], status: (st==="available" && left===0) ? "sold" : st,
     featured:/^(نعم|yes|y|1|✓|x)$/i.test((o.featured||"").trim()), order:dnum(o.order)||999,
-    price:dnum(o.price), cat:(o.category||"").trim().toLowerCase(),
+    price:dnum(o.price), cat:((o.category||"").trim().toLowerCase().match(/^[a-z-]{1,24}$/)||[""])[0],
     title:[(o.title_ar||"").trim(), (o.title_en||o.title_ar||"").trim()], hook:(o.hook_ar||"").trim(),
     items, best:(o.best_for||"").trim(), sell:(o.sell_hint||"").trim(),
     kg:dnum(o.weight_kg), cbm:(o.cbm||"").trim(), cartons:dnum(o.cartons), prep:(o.prep_days||"").trim(),
     markets:(o.markets||"").split(/[,،\s]+/).map(x=>x.trim().toLowerCase()).filter(Boolean),
     total:o.slots_total===""?null:dnum(o.slots_total), left, until:(o.valid_until||"").trim(),
-    imgs:(o.images||"").split(/[\s,،]+/).map(imgUrl).filter(Boolean), video:(o.video||"").trim(),
+    imgs:(o.images||"").split(/[\s,،]+/).map(imgUrl).filter(Boolean).slice(0,8), video:safeUrl(o.video),
     compliance:(o.compliance||"").trim()
   };
 }
@@ -518,6 +533,87 @@ function featuredDeals(){
     <div class="grid g3" style="margin-top:28px">${f.map(dealCard).join("")}</div>
     <div class="center" style="margin-top:22px"><a class="btn btn-navy" href="/deals">${L(`كل الصفقات (${LIVE.length})`,`All deals (${LIVE.length})`)}</a></div>
   </div></section>`;
+}
+
+/* ---------- CONSOLIDATION POINT (نقطة التجميع) ---------- */
+const STORES = () => [
+  ["1688","https://www.1688.com/",L("جملة من المصانع بأسعار المصدر","Wholesale straight from factories")],
+  ["Taobao","https://www.taobao.com/",L("أكبر سوق تجزئة صيني","China's largest retail marketplace")],
+  ["Tmall","https://www.tmall.com/",L("متاجر العلامات الرسمية","Official brand stores")],
+  ["Alibaba","https://www.alibaba.com/",L("موردون وطلبات جملة دولية","Suppliers and international wholesale")],
+  ["JD","https://www.jd.com/",L("إلكترونيات وأجهزة بتوصيل سريع","Electronics and appliances, fast delivery")],
+  ["Pinduoduo","https://mobile.yangkeduo.com/",L("أسعار منخفضة جدًا وعروض جماعية","Very low prices and group deals")]
+];
+const CN_ADDR = "浙江省金华市义乌市福田街道城北路699号27楼2778室";
+function pageConsolidation(){
+  const steps=[
+    [L("احصل على رقم عميلك","Get your client code"),L("راسلنا على واتساب ونعطيك رقم عميل خاص بك، مثل ES-1024.","Message us on WhatsApp and we give you your own client code, e.g. ES-1024.")],
+    [L("اطلب من أي متجر صيني","Order from any Chinese store"),L("اشترِ من 1688 أو تاوباو أو غيرها، واكتب عنوان مستودعنا مع رقمك.","Buy on 1688, Taobao or any other store, and enter our warehouse address with your code.")],
+    [L("نستلم ونفحص كل طرد","We receive and check every parcel"),L("نسجّل كل طرد باسمك ونصوّره، ونبلغك إذا وصل ناقصًا أو تالفًا.","We log and photograph every parcel under your name and tell you if anything arrives short or damaged.")],
+    [L("نجمع ونعيد التغليف","We consolidate and repack"),L("نجمع كل طلباتك في شحنة واحدة ونغلّفها بإحكام لتقليل الوزن والحجم.","We combine all your orders into one shipment and pack it tightly to cut weight and volume.")],
+    [L("نشحن لك مرة واحدة","We ship once"),L("نرسل لك عرض الشحن حسب الوزن، وبعد الدفع نشحن إلى بلدك.","We send you the shipping quote by weight; once paid, we ship to your country.")]
+  ];
+  const addr=`${CN_ADDR} (ES-XXXX)`;
+  return `
+  <section class="sec tight sand"><div class="wrap">
+    <span class="eyebrow">${L("نقطة التجميع","Consolidation point")}</span>
+    <h1 style="font-size:clamp(1.7rem,4.4vw,2.6rem)">${L("اطلب من أي متجر صيني… ونحن نجمع ونشحن لك مرة واحدة","Order from any Chinese store — we collect and ship it to you in one go")}</h1>
+    <p class="lead">${L("اكتب عنوان مستودعنا في إيوو عند الطلب. نستلم طلباتك من كل المتاجر، نفحصها ونصوّرها، نجمعها في شحنة واحدة، ونشحنها لك. عمولتنا 5% فقط من قيمة المشتريات.","Use our Yiwu warehouse address when you order. We receive your orders from every store, check and photograph them, combine them into one shipment and send it to you. Our fee is just 5% of the purchase value.")}</p>
+    <div class="btns"><a class="btn btn-primary" href="${waLink(L("السلام عليكم، أبغى رقم عميل لنقطة التجميع.","Hello, I'd like a client code for the consolidation point."))}" target="_blank" rel="noopener">${L("احصل على رقم عميلك","Get your client code")}</a>
+    <a class="btn btn-out" href="#stores">${L("المتاجر الصينية","Chinese stores")}</a></div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("الطريقة","How it works")}</span><h2>${L("خمس خطوات","Five steps")}</h2></div>
+    <div class="steps rv" style="margin-top:30px">${steps.map((s,i)=>`<div class="step rv" data-i="${i+1}"><div class="n">${i+1}</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")}</div>
+  </div></section>
+  <section class="sec sand" id="stores"><div class="wrap">
+    <div class="center rv"><span class="eyebrow">${L("اطلب منها","Order from")}</span><h2>${L("المتاجر الصينية","Chinese stores")}</h2>
+      <p class="lead" style="margin:0 auto">${L("الروابط تفتح المتجر الرسمي. تحتاج حسابًا ودفعًا صينيًا في بعضها؛ إن لم يتوفر لك، نشتري نيابةً عنك.","Links open the official store. Some need an account and a Chinese payment method; if you don't have one, we buy for you.")}</p></div>
+    <div class="grid g3 stores" style="margin-top:28px">${STORES().map(s=>`<a class="card store rv" href="${s[1]}" target="_blank" rel="noopener noreferrer nofollow"><b class="en">${s[0]}</b><span>${s[2]}</span><i aria-hidden="true">↗</i></a>`).join("")}</div>
+  </div></section>
+  <section class="sec"><div class="wrap" style="max-width:860px">
+    <h2>${L("عنوان مستودعنا","Our warehouse address")}</h2>
+    <p>${L("انسخ العنوان والصقه في خانة العنوان عند الطلب، واستبدل ES-XXXX برقم عميلك. اكتب اسمك مع رقمك في خانة اسم المستلم.","Copy the address into the store's address field and replace ES-XXXX with your client code. Put your name and code in the recipient field.")}</p>
+    <div class="addr">
+      <div><small>${L("المستلم","Recipient")} · 收货人</small><b>${L("اسمك","Your name")} + ES-XXXX</b></div>
+      <div><small>${L("الهاتف","Phone")} · 电话</small><b>${CFG.warehousePhone?`<bdi dir="ltr">${esc(CFG.warehousePhone)}</bdi>`:L("يصلك مع رقم العميل","Sent with your client code")}</b></div>
+      <div><small>${L("العنوان","Address")} · 地址</small><b lang="zh" id="cnaddr">${addr}</b></div>
+      <button class="btn btn-navy btn-sm" id="copyaddr" type="button">${L("نسخ العنوان","Copy address")}</button>
+    </div>
+    <h2 style="margin-top:40px">${L("التكلفة","Cost")}</h2>
+    <div class="grid g3">
+      <div class="card"><h3>${L("عمولة 5%","5% fee")}</h3><p>${L("من قيمة مشترياتك. تشمل الاستلام والتسجيل والتصوير والتجميع وإعادة التغليف.","Of your purchase value. Covers receiving, logging, photos, consolidation and repacking.")}</p></div>
+      <div class="card"><h3>${L("الشحن حسب الوزن","Shipping by weight")}</h3><p>${L("يُحسب بعد التجميع على الوزن الفعلي، ونرسل لك العرض قبل الدفع.","Charged on the actual weight after consolidation; you get the quote before paying.")}</p></div>
+      <div class="card"><h3>${L("تخزين مجاني","Free storage")}</h3><p>${L("نحفظ طرودك حتى يكتمل طلبك، ومدة التخزين المجانية نتفق عليها معك.","We hold your parcels until your order is complete; the free storage period is agreed with you.")}</p></div>
+    </div>
+    <div class="info" style="margin-top:22px"><b>${L("ممنوع إرسال:","Not accepted:")}</b> ${L("البضائع المقلدة، والمواد الخطرة والقابلة للاشتعال، والسوائل المضغوطة، وأي صنف يمنع بلدك استيراده. المنتجات التي فيها بطاريات تحتاج تأكيدًا قبل الشحن.","Counterfeit goods, hazardous or flammable materials, pressurised liquids, and anything your country bans. Items with batteries need confirmation before shipping.")}</div>
+    <div class="center" style="margin-top:26px"><a class="btn btn-primary" href="${waLink(L("السلام عليكم، أبغى رقم عميل لنقطة التجميع.","Hello, I'd like a client code for the consolidation point."))}" target="_blank" rel="noopener">${L("ابدأ الآن عبر واتساب","Start now on WhatsApp")}</a></div>
+    ${DISCLAIM()}
+  </div></section>`;
+}
+function bindConsolidation(){
+  const b=$("#copyaddr"); if(!b) return;
+  b.addEventListener("click",()=>{
+    const t=$("#cnaddr").textContent;
+    const done=()=>{ b.textContent=L("تم النسخ ✓","Copied ✓"); setTimeout(()=>b.textContent=L("نسخ العنوان","Copy address"),1800); };
+    if(navigator.clipboard) navigator.clipboard.writeText(t).then(done,()=>{});
+  });
+}
+
+/* ---------- 3D hero object: a rotating parcel carrying the brand ---------- */
+function hero3d(){
+  const f=["ETERNAL SILK","1688","TAOBAO","ALIBABA","YIWU","↗"];
+  return `<div class="h3d" aria-hidden="true"><div class="h3d-tilt" id="h3dt"><div class="cube">
+    ${["fr","bk","rt","lt","tp","bt"].map((c,i)=>`<div class="face ${c}">${i===0?`<svg viewBox="0 0 120 64" width="70%"><path d="M60 32 C60 10 98 6 106 26 C113 44 96 58 80 52 C70 48 64 40 60 32 C56 24 50 16 40 12 C24 6 7 20 14 38 C22 58 60 54 60 32Z" fill="none" stroke="#E3C77E" stroke-width="7" stroke-linecap="round"/></svg>`:""}<span>${f[i]}</span></div>`).join("")}
+  </div><div class="shadow"></div></div>
+  ${[1,2,3].map(i=>`<div class="parcel p${i}"></div>`).join("")}</div>`;
+}
+function bindHero3d(){
+  const t=$("#h3dt"); if(!t || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const mv=(x,y)=>{ t.style.transform=`rotateY(${x*18}deg) rotateX(${-y*14}deg)`; };
+  const hero=document.querySelector(".hero");
+  hero && hero.addEventListener("pointermove",e=>{ const r=hero.getBoundingClientRect(); mv((e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5); });
+  hero && hero.addEventListener("pointerleave",()=>mv(0,0));
 }
 
 function pagePackages(){
@@ -1595,6 +1691,7 @@ const META = {
   "/supplier-check":[["تحقّق من مورّدك الصيني بنفسك — السجل الحكومي وحق التصدير وشارات علي بابا","Check your Chinese supplier yourself — the government registry, export rights and Alibaba badges"],
                ["سبع خطوات على سجلات حكومية صينية مجانية: رمز الائتمان الموحّد، الرخصة التجارية ورمز QR، رأس المال المدفوع، التسجيل الجمركي، وحقيقة شارات علي بابا، وأخطر قاعدة في التحويل البنكي.","Seven steps through free Chinese government records: the Unified Social Credit Code, the business licence and its QR code, paid-in capital, the customs filing, what the Alibaba badges really mean, and the single most important rule about the bank transfer."]],
   "/services":[["خدماتنا — Eternal Silk","Our Services — Eternal Silk"],["وكيل شراء في إيوو، شراء من 1688 وتاوباو، فحص الجودة، التحقق من الموردين، مستودع وتجميع، متابعة الإنتاج، تنسيق الشحن، ومرافقة التجار.","Yiwu buying agent, buying on 1688 and Taobao, quality inspection, supplier verification, warehousing and consolidation, production follow-up, shipping coordination and trader escort."]],
+  "/consolidation":[["نقطة التجميع: اطلب من المتاجر الصينية ونحن نشحن — Eternal Silk","Consolidation point: order from Chinese stores, we ship — Eternal Silk"],["اطلب من تاوباو و1688 وعلي بابا على عنوان مستودعنا في إيوو. نجمع طلباتك ونفحصها ونشحنها مرة واحدة بعمولة 5%.","Order from Taobao, 1688 and Alibaba to our Yiwu warehouse address. We collect, check and ship your orders at once for a 5% fee."]],
   "/deals":   [["الصفقات الجاهزة — Eternal Silk","Ready Deals — Eternal Silk"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
   "/deal":    [["تفاصيل الصفقة — Eternal Silk","Deal details — Eternal Silk"],["تفاصيل المنتجات والتكاليف والسيناريوهات المالية والمخاطر لهذه الصفقة.","Products, costs, financial scenarios and risks for this deal."]],
   "/packages": [["برنامج تاجر جاهز — Eternal Silk","Ready Merchant Programme — Eternal Silk"],["صفقات جاهزة بـ 2,000 و3,000 و5,000 دولار، واشتراك شهري لإدارة المتجر والمتابعة والإعلانات من 200 دولار.","Ready deals at $2,000, $3,000 and $5,000, plus a monthly subscription for store management, follow-up and ads from $200."]],
@@ -1654,6 +1751,7 @@ function render(){
   else if(base==="/deals")             body=pageDeals();
   else if(base==="/deal")              body=pageDeal(parts[1]);
   else if(base==="/services")          body=pageServices();
+  else if(base==="/consolidation")     body=pageConsolidation();
   else if(base==="/packages")          body=pagePackages();
   else if(base==="/qualify")           body=pageQualify();
   else if(base==="/about")             body=pageAbout();
@@ -1703,6 +1801,8 @@ function render(){
   document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>$("#nav").classList.remove("open")));
 
   if(base==="/deals")   bindDeals();
+  if(base==="/consolidation") bindConsolidation();
+  if(base==="/"||base==="") bindHero3d();
   if(base==="/qualify") bindQualify();
   if(base==="/faq")     bindFaq();
   if(base==="/consultation" && CFG.calendly){

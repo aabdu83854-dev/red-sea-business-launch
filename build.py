@@ -27,7 +27,7 @@ DOMAIN = "red-sea-business-launch.a-abdu83854.workers.dev"
 
 # Routes that get a crawlable file. "/passport" is an internal tool: it needs to
 # work, but it must not be indexed.
-INDEXABLE = ["/", "/services", "/deals", "/packages",
+INDEXABLE = ["/", "/services", "/consolidation", "/deals", "/packages",
              "/supplier-check", "/qualify",
              "/about", "/faq", "/contact", "/legal"]
 NOINDEX   = ["/thanks"]
@@ -340,7 +340,7 @@ def main():
         '  <url><loc>https://%s%s</loc><changefreq>%s</changefreq><priority>%s</priority></url>'
         % (DOMAIN, "/" if r == "/" else r,
            "weekly" if r in ("/", "/deals") else "monthly",
-           "1.0" if r == "/" else "0.9" if r in ("/deals", "/services", "/packages") else "0.7")
+           "1.0" if r == "/" else "0.9" if r in ("/deals", "/services", "/consolidation", "/packages") else "0.7")
         for r in INDEXABLE)
     urls += "\n" + "\n".join(
         '  <url><loc>https://%s/deal/%s</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>'
@@ -364,10 +364,21 @@ def main():
         "/*\n"
         "  X-Content-Type-Options: nosniff\n"
         "  Referrer-Policy: strict-origin-when-cross-origin\n"
-        "  X-Frame-Options: SAMEORIGIN\n"
-        "  Content-Security-Policy: frame-ancestors 'self'\n"
-        "  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()\n"
+        "  X-Frame-Options: DENY\n"
+        # Scripts only from this origin (no inline code exists); data only from
+        # this origin and the deals Google Sheet; nothing may frame the site.
+        "  Content-Security-Policy: default-src 'self'; script-src 'self'; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; "
+        "connect-src 'self' https://docs.google.com https://*.googleusercontent.com https://*.workers.dev; "
+        "media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; "
+        "frame-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests\n"
+        "  Strict-Transport-Security: max-age=31536000; includeSubDomains\n"
+        "  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), "
+        "interest-cohort=(), browsing-topics=()\n"
         "  Cross-Origin-Opener-Policy: same-origin\n"
+        "  Cross-Origin-Resource-Policy: same-origin\n"
+        "  X-Permitted-Cross-Domain-Policies: none\n"
         "\n"
         "/app.*\n"
         "  Cache-Control: public, max-age=31536000, immutable\n"
@@ -377,10 +388,9 @@ def main():
         "/assets/*\n"
         "  Cache-Control: public, max-age=31536000, immutable\n"
         "\n"
-        "# exported shipment passports are per-customer documents\n"
-        "/p/*\n"
-        "  X-Robots-Tag: noindex, nofollow\n"
-        "  Referrer-Policy: no-referrer\n")
+        "# never let source or tooling paths be served, even if mis-uploaded\n"
+        "/src/*\n"
+        "  X-Robots-Tag: noindex, nofollow\n")
     written.append("_headers")
 
     total = sum(os.path.getsize(os.path.join(ROOT, f)) for f in written)
