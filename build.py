@@ -27,10 +27,10 @@ DOMAIN = "red-sea-business-launch.a-abdu83854.workers.dev"
 
 # Routes that get a crawlable file. "/passport" is an internal tool: it needs to
 # work, but it must not be indexed.
-INDEXABLE = ["/", "/deals", "/packages", "/calculator", "/compliance",
-             "/supplier-check", "/yemen", "/qualify", "/consultation",
+INDEXABLE = ["/", "/services", "/deals", "/packages",
+             "/supplier-check", "/qualify",
              "/about", "/faq", "/contact", "/legal"]
-NOINDEX   = ["/thanks", "/passport"]
+NOINDEX   = ["/thanks"]
 
 # Files the build owns. Removed before each run so a renamed route cannot leave
 # a stale page live.
@@ -339,8 +339,8 @@ def main():
     urls = "\n".join(
         '  <url><loc>https://%s%s</loc><changefreq>%s</changefreq><priority>%s</priority></url>'
         % (DOMAIN, "/" if r == "/" else r,
-           "weekly" if r in ("/", "/deals", "/compliance", "/yemen") else "monthly",
-           "1.0" if r == "/" else "0.9" if r in ("/deals", "/compliance", "/yemen", "/supplier-check") else "0.7")
+           "weekly" if r in ("/", "/deals") else "monthly",
+           "1.0" if r == "/" else "0.9" if r in ("/deals", "/services", "/packages") else "0.7")
         for r in INDEXABLE)
     urls += "\n" + "\n".join(
         '  <url><loc>https://%s/deal/%s</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>'
