@@ -680,7 +680,7 @@ function pagePackages(){
       L("متابعة طلب توريد واحد شهريًا من الصين","One sourcing order followed up from China each month"),
       L("تقرير شهري بالمبيعات والإعلانات","A monthly sales and ads report"),
       L("دعم واتساب في أيام العمل","WhatsApp support on working days")],
-      x:L("إنشاء المتجر: 750 $ مرة واحدة","Store setup: $750 one-off")},
+      x:L("إنشاء المتجر: 99 $ فقط مرة واحدة","Store setup: just $99 one-off")},
     {k:"full",n:L("الاشتراك الكامل","Full plan"),p:490,t:L("نشتغل عنك: من إنشاء المتجر إلى البيع","We run it for you: from store setup to sales"),f:[
       L("إنشاء المتجر ودراسة السوق مجانًا مع عقد 6 أشهر أو سنة","Store setup and market study free with a 6- or 12-month contract"),
       L("إدارة كاملة: المنتجات، الطلبات، خدمة العملاء والأسعار","Full management: products, orders, customer service and pricing"),
