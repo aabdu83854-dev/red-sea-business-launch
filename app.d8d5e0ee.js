@@ -11,6 +11,7 @@ const CFG = {
   brand:      "Eternal Silk",
   brandAr:    "إترنال سيلك",
   parent:     "Yiwu Eternal Silk International Trading Co., Ltd",
+  parentZh:   "义乌守海国际贸易有限公司",
   domain:     "red-sea-business-launch.a-abdu83854.workers.dev",
 
   /* REPLACE — WhatsApp number in international format, digits only */
@@ -109,8 +110,8 @@ function footer(){
         <div class="logo" style="color:#fff;margin-bottom:12px"><span class="mark"><img src="${LOGO}" alt="Eternal Silk" width="42" height="42"></span>
           <span style="color:#fff">${L(CFG.brandAr,CFG.brand)}<small style="color:#93A7BE"><bdi dir="ltr">${CFG.parent}</bdi></small></span></div>
         <p style="max-width:38ch">${L(
-          "مكتب تجاري في إيوو: شراء وفحص وتجميع وشحن، وصفقات جاهزة، وبرنامج «تاجر جاهز» لتجار الخليج واليمن.",
-          "A Yiwu trading office: buying, inspection, consolidation and shipping, ready deals, and the «Ready Merchant» programme for traders across the Gulf and Yemen.")}</p>
+          "مكتب تجاري في إيوو: شراء وفحص وتجميع وشحن، وصفقات جاهزة، وبرنامج «تاجر جاهز» للتجار في كل الدول، وتركيزنا على الخليج واليمن.",
+          "A Yiwu trading office: buying, inspection, consolidation and shipping, ready deals, and the «Ready Merchant» programme for traders everywhere, with a focus on the Gulf and Yemen.")}</p>
       </div>
       <div><h2>${L("الخدمات","Services")}</h2><ul>
         <li><a href="/deals">${L("الصفقات الجاهزة","Ready deals")}</a></li>
@@ -137,7 +138,7 @@ function footer(){
       </ul></div>
     </div>
     <div class="fbot">
-      <span>© ${new Date().getFullYear()} <bdi dir="ltr">${CFG.parent}</bdi> — ${L("جميع الحقوق محفوظة.","All rights reserved.")}</span>
+      <span>© ${new Date().getFullYear()} <bdi dir="ltr">${CFG.parent}</bdi> · <span lang="zh">${CFG.parentZh}</span> — ${L("جميع الحقوق محفوظة.","All rights reserved.")}</span>
       <span>${L("الأرقام المعروضة تقديرية وغير مضمونة.","Figures shown are estimates and are not guaranteed.")}</span>
     </div>
   </div></footer>`;
@@ -237,7 +238,7 @@ function pageHome(){
     [ICON.shield, L("أموالك بحساب الشركة","Your money goes to the company account"),L("كل التحويلات لحساب الشركة الرسمي، وكل طلب له رقم وفاتورة.","Every transfer goes to the company's official account, and every order has a number and an invoice.")],
     [ICON.chart, L("نصنع منك تاجرًا","We turn you into a merchant"),L("لا نشحن لك بضاعة فقط؛ نختار المنتج ونبني المتجر ونتابع حتى البيع.","We don't just ship goods: we pick the product, build the store and follow up until you sell.")]
   ];
-  const mkts=[["SA",L("السعودية","Saudi Arabia")],["AE",L("الإمارات","UAE")],["OM",L("عُمان","Oman")],["QA",L("قطر","Qatar")],["KW",L("الكويت","Kuwait")],["BH",L("البحرين","Bahrain")],["YE",L("اليمن","Yemen")]];
+  const mkts=[["SA",L("السعودية","Saudi Arabia")],["AE",L("الإمارات","UAE")],["OM",L("عُمان","Oman")],["QA",L("قطر","Qatar")],["KW",L("الكويت","Kuwait")],["BH",L("البحرين","Bahrain")],["YE",L("اليمن","Yemen")],["EG",L("مصر","Egypt")],["SY",L("سوريا","Syria")],["LB",L("لبنان","Lebanon")],["IQ",L("العراق","Iraq")],["JO",L("الأردن","Jordan")]];
   return `
   <section class="hero">
     ${heroBg()}
@@ -264,7 +265,7 @@ function pageHome(){
     </div>
   </div></section>
   <div class="trust"><div class="wrap"><ul>
-    <li>${L("شركة مسجّلة في إيوو، الصين","A company registered in Yiwu, China")}</li>
+    <li>${L("شركة مسجّلة في إيوو، الصين","A company registered in Yiwu, China")} · <span lang="zh">${CFG.parentZh}</span></li>
     <li>${L("شراء ودفع للموردين باليوان","Buying and paying suppliers in yuan")}</li>
     <li>${L("فحص مصوّر قبل الشحن","Filmed pre-shipment inspection")}</li>
     <li>${L("مستودع وتجميع","Warehouse and consolidation")}</li>
@@ -317,7 +318,7 @@ function pageHome(){
   <section class="sec sec-mesh"><div class="wrap">
     <div class="center rv"><span class="eyebrow">${L("التغطية","Coverage")}</span>
       <h2>${L("الأسواق التي نخدمها","Markets we serve")}</h2>
-      <p class="lead" style="margin:0 auto">${L("نخدم التجار في السعودية والكويت والإمارات وقطر والبحرين وعُمان، واليمن بصفقات جاهزة للمحلات.","We serve traders in Saudi Arabia, Kuwait, the UAE, Qatar, Bahrain and Oman — and Yemen with ready deals for shops.")}</p></div>
+      <p class="lead" style="margin:0 auto">${L("نشتغل مع التجار في كل الدول، وتركيزنا الأكبر على الخليج واليمن.","We work with traders in every country, with our main focus on the Gulf and Yemen.")}</p></div>
     <div class="mq rv" role="region" aria-label="${L("الأسواق","Markets")}">
       <div class="mq-track">${[0,1].map(dup=>mkts.map(m=>
         `<div class="mk"${dup?' aria-hidden="true"':''}><div class="fl">${m[0]}</div><b>${m[1]}</b><span>${L("شراء وفحص وشحن","Buying, inspection & shipping")}</span></div>`
@@ -343,7 +344,7 @@ const DEAL_STATUS = {"متاحة":"available","متاح":"available","available"
 const DEAL_CATS = () => ({home:L("أدوات منزلية","Home goods"),kitchen:L("مطبخ","Kitchen"),ramadan:L("رمضان والعيد","Ramadan & Eid"),
   fashion:L("إكسسوارات وأزياء","Accessories & fashion"),packaging:L("تغليف ومستلزمات متاجر","Packaging & shop supplies"),
   stationery:L("قرطاسية","Stationery"),car:L("إكسسوارات سيارات","Car accessories"),gifts:L("هدايا","Gifts"),toys:L("ألعاب","Toys"),other:L("متنوعة","Assorted")});
-const DEAL_MKT = () => ({sa:L("السعودية","Saudi Arabia"),ae:L("الإمارات","UAE"),kw:L("الكويت","Kuwait"),qa:L("قطر","Qatar"),bh:L("البحرين","Bahrain"),om:L("عُمان","Oman"),ye:L("اليمن","Yemen")});
+const DEAL_MKT = () => ({sa:L("السعودية","Saudi Arabia"),ae:L("الإمارات","UAE"),kw:L("الكويت","Kuwait"),qa:L("قطر","Qatar"),bh:L("البحرين","Bahrain"),om:L("عُمان","Oman"),ye:L("اليمن","Yemen"),eg:L("مصر","Egypt"),sy:L("سوريا","Syria"),lb:L("لبنان","Lebanon"),iq:L("العراق","Iraq"),jo:L("الأردن","Jordan")});
 let LIVE = null;          /* null = still loading; [] = loaded */
 let LIVE_ERR = false;
 const DF = {tier:"all", cat:"all", onlyOpen:true};
@@ -1090,7 +1091,8 @@ function pageFaq(){
    [L("ما هو برنامج «تاجر جاهز»؟","What is the «Ready Merchant» programme?"),L("لمن يريد أن يبدأ تجارة: ندرس سوق مدينتك، نختار المنتج، نشتريه ونفحصه، نبني متجرك على نون أو سلة أو أمازون، وندير المتجر والإعلانات باشتراك شهري.","For anyone starting a trade: we study your city's market, choose the product, buy and inspect it, build your store on Noon, Salla or Amazon, and run the store and ads on a monthly subscription.")],
    [L("هل تضمنون أن المنتج سيُباع؟","Do you guarantee the product will sell?"),L("لا أحد يستطيع ضمان المبيعات. نختار المنتج بناءً على دراسة السوق ونعطيك أفضل فرصة، لكن النتيجة تعتمد على السوق والتسعير والتشغيل.","No one can guarantee sales. We pick the product from a market study to give you the best chance, but the result depends on the market, pricing and operation.")],
    [L("هل تتعاملون مع منتجات العلامات التجارية؟","Do you handle branded products?"),L("لا نتعامل مع المنتجات المقلدة أبدًا. نساعدك في منتجات بعلامتك الخاصة (OEM) مع المصنع.","We never handle counterfeit goods. We help you make products under your own brand (OEM) with the factory.")],
-   [L("هل تعملون مع اليمن؟","Do you work with Yemen?"),L("نعم، واليمن من أهم أسواقنا. صفقاتنا الجاهزة مناسبة للمحلات ولا تحتاج متجرًا إلكترونيًا، ونجهّز الشحنة ومستنداتها حسب متطلبات اليمن.","Yes — Yemen is one of our key markets. Our ready deals suit physical shops and need no online store, and we prepare the shipment and its documents for Yemen's requirements.")]
+   [L("هل تعملون مع اليمن؟","Do you work with Yemen?"),L("نعم، واليمن من أهم أسواقنا. صفقاتنا الجاهزة مناسبة للمحلات ولا تحتاج متجرًا إلكترونيًا، ونجهّز الشحنة ومستنداتها حسب متطلبات اليمن.","Yes — Yemen is one of our key markets. Our ready deals suit physical shops and need no online store, and we prepare the shipment and its documents for Yemen's requirements.")],
+   [L("مع أي دول تشتغلون؟","Which countries do you work with?"),L("نشتغل مع التجار في كل الدول. تركيزنا الأكبر على الخليج (السعودية، الكويت، الإمارات، قطر، البحرين، عُمان) واليمن، ونخدم أيضًا مصر وسوريا ولبنان والعراق والأردن وغيرها.","We work with traders in every country. Our main focus is the Gulf (Saudi Arabia, Kuwait, UAE, Qatar, Bahrain, Oman) and Yemen, and we also serve Egypt, Syria, Lebanon, Iraq, Jordan and others.")]
   ];
   return `
   <section class="sec tight sand"><div class="wrap">
