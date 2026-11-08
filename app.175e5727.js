@@ -119,7 +119,6 @@ function footer(){
         <li><a href="/consolidation">${L("نقطة التجميع","Consolidation point")}</a></li>
         <li><a href="/packages">${L("برنامج تاجر جاهز","Ready Merchant programme")}</a></li>
         <li><a href="/supplier-check">${L("فحص المورّد الصيني","Chinese supplier check")}</a></li>
-        <li><a href="/countries">${L("شروط الاستيراد حسب الدولة","Import rules by country")}</a></li>
         <li><a href="/qualify">${L("اطلب عرض سعر","Request a quote")}</a></li>
       </ul></div>
       <div><h2>${L("الشركة","Company")}</h2><ul>
@@ -130,6 +129,7 @@ function footer(){
         <li><a href="/legal#terms">${L("الشروط والأحكام","Terms & conditions")}</a></li>
         <li><a href="/legal#refund">${L("سياسة الإرجاع","Refund policy")}</a></li>
         <li><a href="/legal#disclaimer">${L("إخلاء المسؤولية","Disclaimer")}</a></li>
+        <li><a href="/countries">${L("دليل الاستيراد","Import guide")}</a></li>
       </ul></div>
       <div><h2>${L("التواصل","Get in touch")}</h2><ul>
         <li><a href="mailto:${CFG.email}">${CFG.email}</a></li>
@@ -538,6 +538,7 @@ function featuredDeals(){
 }
 
 
+
 /* ---------- IMPORT REQUIREMENTS BY COUNTRY ----------
    Data: verified in two stages (research, then independent fact-check).
    Only facts with status verified/corrected are embedded. */
@@ -565,17 +566,13 @@ function ctryPanel(c){
 }
 function pageCountries(){
   const c=CTRYD.find(x=>x.code===CTRY_SEL)||CTRYD[0];
-  return `<section class="sec tight sand"><div class="wrap">
-    <span class="eyebrow">${L("قبل أن تطلب","Before you order")}</span>
-    <h1 style="font-size:clamp(1.7rem,4.2vw,2.5rem)">${L("شروط الاستيراد حسب الدولة","Import requirements by country")}</h1>
-    <p class="lead">${L("ملخص عام لأهم متطلبات الاستيراد في كل دولة نخدمها: الرسوم، الضريبة، شهادات المطابقة، المستندات والبطاقات. كل معلومة مأخوذة من مصادر رسمية وموثوقة، وتحقّقنا منها على مرحلتين.","A general summary of the main import requirements in each country we serve: duty, VAT, conformity, documents and labelling. Every fact comes from official or reliable sources and was checked in two stages.")}</p>
-    ${CTRY_CHECKED?`<p class="dcount">${L("آخر مراجعة:","Last reviewed:")} <bdi>${CTRY_CHECKED}</bdi></p>`:""}
-  </div></section>
-  <section class="sec"><div class="wrap" style="max-width:920px">
+  return `<section class="sec"><div class="wrap prose" style="max-width:920px">
+    <p class="muted" style="font-size:.9rem"><a href="/legal">${L("السياسات والشروط","Policies & terms")}</a> ‹ ${L("دليل الاستيراد","Import guide")}</p>
+    <h1 style="font-size:clamp(1.4rem,3.4vw,2rem)">${L("دليل الاستيراد حسب الدولة","Import guide by country")}</h1>
+    <p>${L("ملخص عام للإرشاد عن أهم متطلبات الاستيراد في الدول التي نشحن إليها، مأخوذ من مصادر رسمية وموثوقة ومراجَع على مرحلتين.","General guidance on the main import requirements in the countries we ship to, taken from official and reliable sources and reviewed in two stages.")}${CTRY_CHECKED?` ${L("آخر مراجعة:","Last reviewed:")} <bdi dir="ltr" style="white-space:nowrap">${CTRY_CHECKED}</bdi>.`:""}</p>
+    <p>${L("هذه معلومات عامة وليست استشارة قانونية أو جمركية، والأنظمة تتغير. العميل مسؤول عن الالتزام بمتطلبات بلده والتأكد منها لدى الجهات الرسمية أو مخلّصه الجمركي.","This is general information, not legal or customs advice, and rules change. The client is responsible for meeting their country's requirements and confirming them with the authorities or their customs broker.")}</p>
     <div class="chips ct-tabs" role="tablist">${CTRYD.map(x=>`<button class="chip ${x.code===c.code?"on":""}" role="tab" aria-selected="${x.code===c.code}" data-ct="${x.code}">${esc(L(x.name_ar,x.name_en||x.name_ar))}</button>`).join("")}</div>
     <div id="ctpanel">${c?ctryPanel(c):""}</div>
-    <div class="info" style="margin-top:24px"><b>${L("مهم:","Important:")}</b> ${L("هذه معلومات عامة للإرشاد وليست استشارة قانونية أو جمركية، والأنظمة تتغير. التاجر مسؤول عن الالتزام بمتطلبات بلده والتأكد منها لدى الجهات الرسمية أو مخلّصه الجمركي قبل الشحن. نساعدك في تجهيز المستندات التي تُصدر من الصين.","This is general guidance, not legal or customs advice, and rules change. The trader is responsible for meeting their country's requirements and confirming them with the authorities or their customs broker before shipping. We help prepare the documents issued in China.")}</div>
-    <div class="center" style="margin-top:22px"><a class="btn btn-primary" href="${waLink(L("السلام عليكم، عندي سؤال عن شروط الاستيراد لبلدي.","Hello, I have a question about import requirements for my country."))}" target="_blank" rel="noopener">${L("اسألنا عن بلدك","Ask us about your country")}</a></div>
   </div></section>`;
 }
 function bindCountries(){
@@ -1714,7 +1711,7 @@ function pageLegal(){
       <li>${L("لا نبدأ الشراء إلا بعد استلام الدفعة المتفق عليها. كل التحويلات لحساب الشركة الرسمي فقط، ولا نتحمل مسؤولية أي مبلغ يُحوَّل لحساب شخصي.","We start buying only after receiving the agreed payment. All transfers go to the company's official account only; we are not responsible for any amount sent to a personal account.")}</li>
       <li>${L("الاشتراك الشهري يُدفع مقدمًا ويتجدد شهريًا، ويمكن إيقافه بإشعار قبل بداية الشهر التالي. ميزانية الإعلانات تُدفع للمنصة مباشرة ولا تدخل في سعر الاشتراك.","The monthly subscription is paid in advance and renews monthly; it can be stopped with notice before the next month starts. Ad budgets are paid directly to the platform and are not part of the subscription.")}</li>
       <li>${L("المدد الزمنية تقديرية وتتأثر بالمصانع والعطل الرسمية في الصين وجداول الشحن والتفتيش الجمركي.","Timeframes are estimates and are affected by factories, Chinese public holidays, shipping schedules and customs inspection.")}</li>
-      <li>${L("العميل مسؤول عن التأكد من أن المنتج مسموح باستيراده في بلده، وعن أي تراخيص أو تسجيلات مطلوبة هناك.","The client is responsible for checking that the product may be imported into their country, and for any licences or registrations needed there.")}</li>
+      <li>${L("العميل مسؤول عن التأكد من أن المنتج مسموح باستيراده في بلده، وعن أي تراخيص أو تسجيلات مطلوبة هناك.","The client is responsible for checking that the product may be imported into their country, and for any licences or registrations needed there.")} <a href="/countries">${L("دليل الاستيراد حسب الدولة","Import guide by country")}</a></li>
       <li>${L("لا نتعامل مع المنتجات المقلدة أو المخالفة لحقوق الملكية الفكرية أو الممنوعة، ونرفض أي طلب من هذا النوع.","We do not handle counterfeit, IP-infringing or prohibited goods, and refuse any such request.")}</li>
       <li>${L("نحفظ البضاعة في مستودعنا مجانًا لمدة شهر من وصولها، وأي تخزين بعد ذلك نتفق عليه معك.","We hold goods at our warehouse free for one month from arrival; any storage beyond that is agreed with you.")}</li>
       <li>${L(`الجهة المتعاقدة هي <bdi dir="ltr">${CFG.parent}</bdi>، وأحكام العقد أو عرض السعر الموقّع بين الطرفين تَعلو على أي نص عام في هذا الموقع.`,`The contracting entity is <bdi dir="ltr">${CFG.parent}</bdi>, and the terms of the contract or quote signed by both parties prevail over any general text on this site.`)}</li>
@@ -1743,7 +1740,7 @@ const META = {
   "/supplier-check":[["تحقّق من مورّدك الصيني بنفسك — السجل الحكومي وحق التصدير وشارات علي بابا","Check your Chinese supplier yourself — the government registry, export rights and Alibaba badges"],
                ["سبع خطوات على سجلات حكومية صينية مجانية: رمز الائتمان الموحّد، الرخصة التجارية ورمز QR، رأس المال المدفوع، التسجيل الجمركي، وحقيقة شارات علي بابا، وأخطر قاعدة في التحويل البنكي.","Seven steps through free Chinese government records: the Unified Social Credit Code, the business licence and its QR code, paid-in capital, the customs filing, what the Alibaba badges really mean, and the single most important rule about the bank transfer."]],
   "/services":[["خدماتنا — Eternal Silk","Our Services — Eternal Silk"],["وكيل شراء في إيوو، شراء من 1688 وتاوباو، فحص الجودة، التحقق من الموردين، مستودع وتجميع، متابعة الإنتاج، تنسيق الشحن، ومرافقة التجار.","Yiwu buying agent, buying on 1688 and Taobao, quality inspection, supplier verification, warehousing and consolidation, production follow-up, shipping coordination and trader escort."]],
-  "/countries":[["شروط الاستيراد حسب الدولة: الخليج واليمن والدول العربية — Eternal Silk","Import requirements by country: Gulf, Yemen and Arab states — Eternal Silk"],["ملخص موثّق بمصادر رسمية لرسوم الجمارك والضريبة وشهادات المطابقة والمستندات في السعودية والكويت والإمارات وقطر والبحرين وعُمان واليمن.","A sourced summary of customs duty, VAT, conformity and documents in Saudi Arabia, Kuwait, UAE, Qatar, Bahrain, Oman and Yemen."]],
+  "/countries":[["دليل الاستيراد حسب الدولة — Eternal Silk","Import guide by country — Eternal Silk"],["ملخص موثّق بمصادر رسمية لرسوم الجمارك والضريبة وشهادات المطابقة والمستندات في السعودية والكويت والإمارات وقطر والبحرين وعُمان واليمن.","A sourced summary of customs duty, VAT, conformity and documents in Saudi Arabia, Kuwait, UAE, Qatar, Bahrain, Oman and Yemen."]],
   "/consolidation":[["نقطة التجميع: اطلب من المتاجر الصينية ونحن نشحن — Eternal Silk","Consolidation point: order from Chinese stores, we ship — Eternal Silk"],["اطلب من تاوباو و1688 وعلي بابا على عنوان مستودعنا في إيوو. نجمع طلباتك ونفحصها ونشحنها مرة واحدة بعمولة 5%.","Order from Taobao, 1688 and Alibaba to our Yiwu warehouse address. We collect, check and ship your orders at once for a 5% fee."]],
   "/deals":   [["الصفقات الجاهزة — Eternal Silk","Ready Deals — Eternal Silk"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
   "/deal":    [["تفاصيل الصفقة — Eternal Silk","Deal details — Eternal Silk"],["تفاصيل المنتجات والتكاليف والسيناريوهات المالية والمخاطر لهذه الصفقة.","Products, costs, financial scenarios and risks for this deal."]],
