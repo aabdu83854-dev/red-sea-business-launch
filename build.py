@@ -27,7 +27,7 @@ DOMAIN = "red-sea-business-launch.a-abdu83854.workers.dev"
 
 # Routes that get a crawlable file. "/passport" is an internal tool: it needs to
 # work, but it must not be indexed.
-INDEXABLE = ["/", "/services", "/consolidation", "/deals", "/packages",
+INDEXABLE = ["/", "/services", "/consolidation", "/countries", "/deals", "/packages",
              "/supplier-check", "/qualify",
              "/about", "/faq", "/contact", "/legal"]
 NOINDEX   = ["/thanks"]

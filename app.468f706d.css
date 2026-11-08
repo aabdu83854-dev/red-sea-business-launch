@@ -914,3 +914,4 @@ ul.ok li::marker{content:"✓  ";color:#2E7D4F}ul.no li::marker{content:"✕  ";
 @media (prefers-reduced-motion:reduce){.stores-mini span{animation:none}}
 [data-theme="dark"] .addr{background:transparent}
 [data-theme="dark"] .stores .store b{color:#fff}
+.ct-tabs{flex-wrap:wrap}.ct-panel{background:#fff;border:1px solid rgba(15,42,68,.12);border-radius:16px;padding:22px 22px 10px;margin-top:16px}.ct-panel h2{margin:0 0 12px}.ct-row{border-top:1px solid rgba(15,42,68,.08);padding:12px 0}.ct-row h3{font-size:1.02rem;margin:0 0 6px;color:#0F2A44}.ct-row ul{margin:0;padding-inline-start:20px}.ct-row li{margin:4px 0;line-height:1.7}.ct-row sup a{color:#8E6B24;text-decoration:none;margin-inline-start:2px}.ct-src{margin:10px 0 12px;font-size:.88rem}.ct-src summary{cursor:pointer;font-weight:700}.ct-src li{word-break:break-word;margin:4px 0}
