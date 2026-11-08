@@ -390,7 +390,12 @@ def main():
         "\n"
         "# never let source or tooling paths be served, even if mis-uploaded\n"
         "/src/*\n"
-        "  X-Robots-Tag: noindex, nofollow\n")
+        "  X-Robots-Tag: noindex, nofollow\n"
+        "\n"
+        "# brochures: the page CSP (object-src 'none') would block the browser's PDF viewer\n"
+        "/docs/*\n"
+        "  ! Content-Security-Policy\n"
+        "  Cache-Control: public, max-age=3600\n")
     written.append("_headers")
 
     total = sum(os.path.getsize(os.path.join(ROOT, f)) for f in written)

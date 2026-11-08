@@ -20,3 +20,8 @@
 # never let source or tooling paths be served, even if mis-uploaded
 /src/*
   X-Robots-Tag: noindex, nofollow
+
+# brochures: the page CSP (object-src 'none') would block the browser's PDF viewer
+/docs/*
+  ! Content-Security-Policy
+  Cache-Control: public, max-age=3600

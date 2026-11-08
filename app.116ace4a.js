@@ -216,7 +216,7 @@ function pageServices(){
     <div class="grid g3" style="margin-top:28px">
       <div class="card rv"><h3>${L("عرض سعر لكل طلب","A quote for every request")}</h3><p>${L("خدمات الشراء والفحص والتجميع تُسعَّر حسب حجم الطلب ونوع البضاعة، ونرسل لك العرض مكتوبًا قبل البدء.","Buying, inspection and consolidation are priced by order size and product type; you receive a written quote before we start.")}</p></div>
       <div class="card rv"><h3>${L("صفقات بسعر واضح","Deals at a clear price")}</h3><p>${L("الصفقات الجاهزة معلنة بأسعار ثابتة: 2,000 و3,000 و5,000 دولار، والشحن منفصل حسب الوزن.","Ready deals have fixed published prices — $2,000, $3,000 and $5,000 — with shipping charged separately by weight.")}</p></div>
-      <div class="card rv"><h3>${L("اشتراك شهري","A monthly subscription")}</h3><p>${L("إدارة المتجر والمتابعة والإعلانات باشتراك شهري من 200 دولار لكل مجال.","Store management, follow-up and ads on a monthly subscription from $200 per area.")}</p></div>
+      <div class="card rv"><h3>${L("اشتراك شهري","A monthly subscription")}</h3><p>${L("إدارة المتجر والتصاميم والإعلانات باشتراك شهري: أساسي 200 دولار أو كامل 490 دولار.","Store management, designs and ads on a monthly plan: Basic $200 or Full $490.")}</p></div>
     </div>
     <div class="btns" style="justify-content:center;margin-top:28px">
       <a class="btn btn-primary" href="/qualify">${L("اطلب عرض سعر","Request a quote")}</a>
@@ -672,11 +672,27 @@ function pagePackages(){
     [L("صفقة النمو","Growth deal"),"$3,000",L("لتاجر صغير قائم","For an existing small trader"),[L("3–4 منتجات متكاملة","3–4 complementary products"),L("دراسة سريعة للمنتج","A quick product study"),L("فحص وتصوير قبل الشحن","Inspection and filming before shipping")]],
     [L("صفقة الانطلاقة","Launch deal"),"$5,000",L("لمن يريد متجرًا كاملًا","For a complete store"),[L("تشكيلة متجر 5–8 منتجات","A 5–8 product store range"),L("دراسة سوق مدينتك","A study of your city's market"),L("صور منتجات احترافية","Professional product photos")]]
   ];
-  const subs=[
-    [L("إدارة المتجر","Store management"),L("إضافة المنتجات وتحديث المخزون","Adding products and updating stock"),L("إدارة كاملة: طلبات، خدمة عملاء، أسعار، تقارير","Full management: orders, customer service, pricing, reports")],
-    [L("المتابعة والتوريد","Follow-up & sourcing"),L("متابعة طلب واحد شهريًا","One order followed up per month"),L("توريد مستمر وإعادة طلب المنتجات الرابحة","Continuous sourcing and reordering of winning products")],
-    [L("الإعلانات والمحتوى","Ads & content"),L("حملة واحدة + 8 تصاميم","One campaign + 8 designs"),L("حملات على منصتين + محتوى أسبوعي + تقرير أداء","Campaigns on two platforms + weekly content + performance report")]
+  const plans=[
+    {k:"basic",n:L("الاشتراك الأساسي","Basic plan"),p:200,t:L("لمن عنده متجر ويبي يد تساعده","For merchants who have a store and need a helping hand"),f:[
+      L("إضافة حتى 30 منتج شهريًا وتحديث الأسعار والمخزون","Up to 30 products a month, prices and stock kept up to date"),
+      L("10 تصاميم شهريًا للمنتجات والإعلانات","10 designs a month for products and ads"),
+      L("حملة إعلانية واحدة على منصة واحدة","One ad campaign on one platform"),
+      L("متابعة طلب توريد واحد شهريًا من الصين","One sourcing order followed up from China each month"),
+      L("تقرير شهري بالمبيعات والإعلانات","A monthly sales and ads report"),
+      L("دعم واتساب في أيام العمل","WhatsApp support on working days")],
+      x:L("إنشاء المتجر: 750 $ مرة واحدة","Store setup: $750 one-off")},
+    {k:"full",n:L("الاشتراك الكامل","Full plan"),p:490,t:L("نشتغل عنك: من إنشاء المتجر إلى البيع","We run it for you: from store setup to sales"),f:[
+      L("إنشاء المتجر ودراسة السوق مجانًا مع عقد 6 أشهر أو سنة","Store setup and market study free with a 6- or 12-month contract"),
+      L("إدارة كاملة: المنتجات، الطلبات، خدمة العملاء والأسعار","Full management: products, orders, customer service and pricing"),
+      L("فتح حسابات المتجر على السوشيال ميديا وإدارتها","Opening and running the store's social media accounts"),
+      L("30 تصميمًا و4 فيديوهات قصيرة شهريًا","30 designs and 4 short videos a month"),
+      L("حملات إعلانية على منصتين وإدارتها يوميًا","Ad campaigns on two platforms, managed daily"),
+      L("توريد مستمر وإعادة طلب المنتجات الرابحة مع فحص قبل الشحن","Continuous sourcing, reorders of winners, inspection before shipping"),
+      L("تقرير أسبوعي مختصر وتقرير شهري مفصّل","A short weekly report and a detailed monthly report"),
+      L("مدير حساب خاص وأولوية في الرد","A dedicated account manager and priority replies")],
+      x:L("بدون عقد: إنشاء المتجر 750 $ مرة واحدة","Without a contract: store setup $750 one-off")}
   ];
+  const disc=p=>[[L("شهري","Monthly"),p,"—"],[L("عقد 6 أشهر","6-month contract"),Math.round(p*.9),L("خصم 10%","10% off")],[L("عقد سنة","12-month contract"),Math.round(p*.8),L("خصم 20%","20% off")]];
   return `
   <section class="sec tight sand"><div class="wrap">
     <span class="eyebrow">${L("برنامج تاجر جاهز","The Ready Merchant programme")}</span>
@@ -698,25 +714,50 @@ function pagePackages(){
   </div></section>
   <section class="sec sand"><div class="wrap">
     <h2>${L("ثانيًا: الاشتراك الشهري","Second: the monthly subscription")}</h2>
-    <p class="lead">${L("ثلاثة مجالات، لكل مجال مستويان. اشترك في مجال واحد أو في الثلاثة.","Three areas, two levels each. Subscribe to one area or all three.")}</p>
-    <div class="tbl-wrap" style="margin-top:20px"><table><thead><tr>
-      <th>${L("المجال","Area")}</th><th>${L("نصفي — 200 $ / شهر","Half — $200 / month")}</th><th>${L("كامل — 300 $ / شهر","Full — $300 / month")}</th></tr></thead><tbody>
-      ${subs.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}
+    <p class="lead">${L("نوعان: أساسي يساعدك في متجرك، وكامل ندير فيه كل شي عنك.","Two plans: Basic helps with your store; Full has us run everything for you.")}</p>
+    <div class="grid g2" style="margin-top:22px">
+      ${plans.map((p,i)=>`<div class="card plan rel rv ${i===1?"featured":""}">
+        ${i===1?`<span class="badge">${L("الأكثر قيمة","Best value")}</span>`:""}
+        <h3>${p.n}</h3>
+        <div class="price"><bdi dir="ltr">$${p.p}</bdi> <span class="muted" style="font-size:.95rem">${L("/ شهريًا","/ month")}</span><small>${p.t}</small></div>
+        <ul>${p.f.map(x=>`<li>${x}</li>`).join("")}</ul>
+        <p class="muted" style="font-size:.9rem;margin:6px 0 14px">${p.x}</p>
+        <div class="btns" style="margin:0">
+          <a class="btn ${i===1?"btn-primary":"btn-out"}" href="/qualify?pkg=${encodeURIComponent(p.n)}">${L("اشترك","Subscribe")}</a>
+          <a class="btn btn-out" href="/docs/subscription-${p.k}.pdf" target="_blank" rel="noopener">${L("تعرّف أكثر (PDF)","Learn more (PDF)")}</a>
+        </div>
+      </div>`).join("")}
+    </div>
+    <h3 style="margin-top:34px">${L("خصم العقود الطويلة","Long-contract discounts")}</h3>
+    <div class="tbl-wrap" style="margin-top:12px"><table><thead><tr>
+      <th>${L("المدة","Term")}</th><th>${L("الأساسي / شهر","Basic / month")}</th><th>${L("الكامل / شهر","Full / month")}</th><th>${L("الخصم","Discount")}</th></tr></thead><tbody>
+      ${disc(200).map((r,i)=>`<tr><td><b>${r[0]}</b></td><td><bdi dir="ltr">$${r[1]}</bdi></td><td><bdi dir="ltr">$${disc(490)[i][1]}</bdi></td><td>${r[2]}</td></tr>`).join("")}
     </tbody></table></div>
     <div class="grid g2" style="margin-top:22px">
-      <div class="card rv"><h3>${L("الباقة الكاملة: 750 $ شهريًا","Full bundle: $750 a month")}</h3><p>${L("المجالات الثلاثة بمستواها الكامل بدل 900 دولار.","All three areas at full level instead of $900.")}</p></div>
+      <div class="card rv"><h3>${L("عقد مكتوب","A written contract")}</h3><p>${L("اشتراك 6 أشهر أو سنة يكون بعقد مكتوب يحدد الخدمات والمدة وطريقة الدفع.","6- and 12-month plans come with a written contract setting out services, term and payment.")}</p></div>
       <div class="card rv"><h3>${L("ميزانية الإعلانات منفصلة","Ad budget is separate")}</h3><p>${L("تُدفع للمنصة الإعلانية مباشرة، ولا تدخل في سعر الاشتراك.","It is paid directly to the ad platform and is not part of the subscription price.")}</p></div>
     </div>
   </div></section>
   <section class="sec"><div class="wrap">
     <h2>${L("مثال: عميل معه 10,000 دولار","Example: a client with $10,000")}</h2>
+    <p class="lead">${L("نشتري له بضاعة بـ 7,000 دولار، والباقي يكفي الاشتراك الكامل بعقد 6 أشهر، وما يتبقى يكون أول ميزانية إعلانات.","We buy $7,000 of goods; the rest covers the Full plan on a 6-month contract, and what's left becomes the first ad budget.")}</p>
     <div class="tbl-wrap" style="margin-top:18px"><table><thead><tr><th>${L("البند","Item")}</th><th>${L("المبلغ","Amount")}</th></tr></thead><tbody>
       <tr><td>${L("بضاعة مختارة حسب دراسة السوق","Goods chosen from the market study")}</td><td><bdi dir="ltr">$7,000</bdi></td></tr>
-      <tr><td>${L("بناء المتجر ودراسة السوق (مرة واحدة)","Store build and market study (one-off)")}</td><td><bdi dir="ltr">$750</bdi></td></tr>
-      <tr><td>${L("الباقة الكاملة لثلاثة أشهر","Full bundle for three months")}</td><td><bdi dir="ltr">$2,250</bdi></td></tr>
+      <tr><td>${L("الاشتراك الكامل بعقد 6 أشهر (441 $ × 6)","Full plan, 6-month contract ($441 × 6)")}</td><td><bdi dir="ltr">$2,646</bdi></td></tr>
+      <tr><td>${L("أول ميزانية إعلانات (تُدفع للمنصة)","First ad budget (paid to the platform)")}</td><td><bdi dir="ltr">$354</bdi></td></tr>
       <tr><td><b>${L("الإجمالي","Total")}</b></td><td><b><bdi dir="ltr">$10,000</bdi></b></td></tr>
     </tbody></table></div>
-    <p class="muted">${L("الشحن غير مشمول ويُحسب حسب الوزن. الأرقام مثال توضيحي، والعرض النهائي يصدر مكتوبًا.","Shipping is not included and is charged by weight. Figures are an illustration; the final offer is issued in writing.")}</p>
+    <h3 style="margin-top:22px">${L("ماذا نسوي له خلال الـ 6 أشهر","What we do for him over the 6 months")}</h3>
+    <div class="grid g3" style="margin-top:12px">
+      ${[[L("دراسة السوق","Market study"),L("نعرف وش يطلب سوق مدينته وبأي سعر.","What his city's market wants, and at what price.")],
+         [L("إنشاء المتجر","Store setup"),L("متجر إلكتروني جاهز للبيع، مجانًا مع العقد.","A store ready to sell, free with the contract.")],
+         [L("قنوات السوشيال ميديا","Social media"),L("نفتح حسابات المتجر ونديرها.","We open and run the store's accounts.")],
+         [L("التصاميم","Designs"),L("صور المنتجات وتصاميم الإعلانات كل شهر.","Product photos and ad designs every month.")],
+         [L("الحملات التسويقية","Ad campaigns"),L("حملات على منصتين ونحسّنها يوميًا.","Campaigns on two platforms, improved daily.")],
+         [L("التقارير","Reports"),L("تقرير أسبوعي مختصر وتقرير شهري مفصّل.","A short weekly and a detailed monthly report.")]
+        ].map(x=>`<div class="card rv"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join("")}
+    </div>
+    <p class="muted" style="margin-top:14px">${L("الشحن غير مشمول ويُحسب حسب الوزن. الأرقام مثال توضيحي، والعرض النهائي يصدر مكتوبًا.","Shipping is not included and is charged by weight. Figures are an illustration; the final offer is issued in writing.")}</p>
     <div class="btns" style="margin-top:20px">
       <a class="btn btn-primary" href="/qualify">${L("ابدأ معنا","Start with us")}</a>
       <a class="btn btn-out" href="${waLink()}" target="_blank" rel="noopener">${L("اسألنا على واتساب","Ask us on WhatsApp")}</a>
@@ -1130,7 +1171,7 @@ function pageAbout(){
 function pageFaq(){
   const qs=[
    [L("ما هي خدماتكم بالضبط؟","What exactly do you do?"),L("نحن مكتب تجاري في إيوو: نشتري لك من السوق والمصانع والمواقع الصينية، نفحص البضاعة، نجمعها في مستودعنا، وننسّق شحنها. ونقدم صفقات جاهزة وبرنامج «تاجر جاهز» لمن يريد مشروعًا كاملًا.","We are a trading office in Yiwu: we buy for you from the market, factories and Chinese platforms, inspect the goods, consolidate them at our warehouse and coordinate shipping. We also offer ready deals and the «Ready Merchant» programme for a full business.")],
-   [L("كم رسوم خدمتكم؟","What are your fees?"),L("خدمات الشراء والفحص والتجميع بعرض سعر مكتوب لكل طلب. الصفقات الجاهزة بأسعار ثابتة (2,000 و3,000 و5,000 دولار)، والاشتراك الشهري من 200 دولار لكل مجال.","Buying, inspection and consolidation are quoted in writing per request. Ready deals have fixed prices ($2,000, $3,000 and $5,000), and the monthly subscription starts at $200 per area.")],
+   [L("كم رسوم خدمتكم؟","What are your fees?"),L("خدمات الشراء والفحص والتجميع بعرض سعر مكتوب لكل طلب. الصفقات الجاهزة بأسعار ثابتة (2,000 و3,000 و5,000 دولار)، والاشتراك الشهري أساسي 200 دولار أو كامل 490 دولار، مع خصم للعقود الطويلة.","Buying, inspection and consolidation are quoted in writing per request. Ready deals have fixed prices ($2,000, $3,000 and $5,000), and the monthly plan is Basic $200 or Full $490, with discounts on longer contracts.")],
    [L("هل الشحن داخل السعر؟","Is shipping included in the price?"),L("لا. الشحن يُحسب منفصلًا حسب الوزن وطريقة الشحن، ونرسل لك عرضه قبل الدفع.","No. Shipping is charged separately by weight and method, and we send you the quote before you pay.")],
    [L("كيف أتأكد من جودة البضاعة؟","How can I be sure of the quality?"),L("نفحص البضاعة في مستودعنا قبل الشحن، ونرسل لك صورًا وفيديو باسمك ورقم طلبك. إذا وُجد عيب نتفاوض مع المورد على الاستبدال قبل أن تُشحن.","We inspect the goods at our warehouse before shipping and send you photos and a video with your name and order number. If there is a defect, we negotiate a replacement with the supplier before it ships.")],
    [L("هل يمكن شراء كميات صغيرة؟","Can I buy small quantities?"),L("نعم. نجمع طلبك من عدة موردين في شحنة واحدة، فتبدأ بصفقة صغيرة بدل حاوية كاملة. بعض الموردين لهم حد أدنى، ونخبرك به قبل الشراء.","Yes. We consolidate your order from several suppliers into one shipment, so you can start small instead of a full container. Some suppliers have a minimum, and we tell you before buying.")],
@@ -1711,7 +1752,7 @@ function pageLegal(){
       <li>${L("أسعار الصفقات الجاهزة ورسوم الاشتراك المعلنة بالدولار. أسعار المنتجات من الموردين قد تتغير مع السوق وسعر الصرف حتى لحظة الدفع للمورد.","Ready-deal prices and subscription fees are published in US dollars. Supplier product prices may change with the market and exchange rate until the supplier is paid.")}</li>
       <li>${L("الشحن غير مشمول في سعر الصفقات أو الخدمات، ويُحسب منفصلًا حسب الوزن وطريقة الشحن، ويُرسل عرضه للعميل قبل الدفع.","Shipping is not included in deal or service prices; it is charged separately by weight and method, and the quote is sent to the client before payment.")}</li>
       <li>${L("لا نبدأ الشراء إلا بعد استلام الدفعة المتفق عليها. كل التحويلات لحساب الشركة الرسمي فقط، ولا نتحمل مسؤولية أي مبلغ يُحوَّل لحساب شخصي.","We start buying only after receiving the agreed payment. All transfers go to the company's official account only; we are not responsible for any amount sent to a personal account.")}</li>
-      <li>${L("الاشتراك الشهري يُدفع مقدمًا ويتجدد شهريًا، ويمكن إيقافه بإشعار قبل بداية الشهر التالي. ميزانية الإعلانات تُدفع للمنصة مباشرة ولا تدخل في سعر الاشتراك.","The monthly subscription is paid in advance and renews monthly; it can be stopped with notice before the next month starts. Ad budgets are paid directly to the platform and are not part of the subscription.")}</li>
+      <li>${L("الاشتراك الشهري يُدفع مقدمًا ويتجدد شهريًا، ويمكن إيقافه بإشعار قبل بداية الشهر التالي. اشتراك 6 أشهر أو سنة يكون بعقد مكتوب وبالخصم المذكور فيه، ويخضع إنهاؤه المبكر لشروط العقد. ميزانية الإعلانات تُدفع للمنصة مباشرة ولا تدخل في سعر الاشتراك.","The monthly subscription is paid in advance and renews monthly; it can be stopped with notice before the next month starts. 6- and 12-month plans are under a written contract at the discount it states, and early termination follows the contract. Ad budgets are paid directly to the platform and are not part of the subscription.")}</li>
       <li>${L("المدد الزمنية تقديرية وتتأثر بالمصانع والعطل الرسمية في الصين وجداول الشحن والتفتيش الجمركي.","Timeframes are estimates and are affected by factories, Chinese public holidays, shipping schedules and customs inspection.")}</li>
       <li>${L("العميل مسؤول عن التأكد من أن المنتج مسموح باستيراده في بلده، وعن أي تراخيص أو تسجيلات مطلوبة هناك.","The client is responsible for checking that the product may be imported into their country, and for any licences or registrations needed there.")} <a href="/countries">${L("دليل الاستيراد حسب الدولة","Import guide by country")}</a></li>
       <li>${L("لا نتعامل مع المنتجات المقلدة أو المخالفة لحقوق الملكية الفكرية أو الممنوعة، ونرفض أي طلب من هذا النوع.","We do not handle counterfeit, IP-infringing or prohibited goods, and refuse any such request.")}</li>
@@ -1746,7 +1787,7 @@ const META = {
   "/consolidation":[["نقطة التجميع: اطلب من المتاجر الصينية ونحن نشحن — Eternal Silk","Consolidation point: order from Chinese stores, we ship — Eternal Silk"],["اطلب من تاوباو و1688 وعلي بابا على عنوان مستودعنا في إيوو. نجمع طلباتك ونفحصها ونشحنها مرة واحدة بعمولة 5%.","Order from Taobao, 1688 and Alibaba to our Yiwu warehouse address. We collect, check and ship your orders at once for a 5% fee."]],
   "/deals":   [["الصفقات الجاهزة — Eternal Silk","Ready Deals — Eternal Silk"],["صفقات توريد جاهزة بقوائم منتجات وكميات وتكاليف تقديرية واضحة لأسواق الخليج واليمن.","Ready supply deals with product lists, quantities and clear estimated costs for Gulf and Yemen markets."]],
   "/deal":    [["تفاصيل الصفقة — Eternal Silk","Deal details — Eternal Silk"],["تفاصيل المنتجات والتكاليف والسيناريوهات المالية والمخاطر لهذه الصفقة.","Products, costs, financial scenarios and risks for this deal."]],
-  "/packages": [["برنامج تاجر جاهز — Eternal Silk","Ready Merchant Programme — Eternal Silk"],["صفقات جاهزة بـ 2,000 و3,000 و5,000 دولار، واشتراك شهري لإدارة المتجر والمتابعة والإعلانات من 200 دولار.","Ready deals at $2,000, $3,000 and $5,000, plus a monthly subscription for store management, follow-up and ads from $200."]],
+  "/packages": [["برنامج تاجر جاهز — Eternal Silk","Ready Merchant Programme — Eternal Silk"],["صفقات جاهزة بـ 2,000 و3,000 و5,000 دولار، واشتراك شهري أساسي 200 دولار أو كامل 490 دولار.","Ready deals at $2,000, $3,000 and $5,000, plus a monthly subscription for store management, follow-up and ads from $200."]],
   "/qualify": [["نموذج التأهيل — Eternal Silk","Qualification Form — Eternal Silk"],["املأ نموذج التأهيل لنحدد الصفقة المناسبة لسوقك وميزانيتك.","Complete the qualification form so we can identify the deal that fits your market and budget."]],
   "/about":   [["من نحن — Eternal Silk","About — Eternal Silk"],["مكتب تجاري في إيوو بالصين بفريق يعمل من داخل السوق.","A trading office in Yiwu, China, with a team working from inside the market."]],
   "/faq": [["الأسئلة الشائعة — Eternal Silk","FAQ — Eternal Silk"],["الرسوم، الشحن، الفحص، الدفع، الكميات الصغيرة، وبرنامج تاجر جاهز — إجابات واضحة.","Fees, shipping, inspection, payment, small quantities and the Ready Merchant programme — answered plainly."]],
