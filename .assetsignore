@@ -7,3 +7,4 @@ build.py
 README.md
 wrangler.jsonc
 *.orig
+serve.py
